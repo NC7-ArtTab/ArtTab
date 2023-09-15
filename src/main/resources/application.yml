@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local
+  mvc:
+    static-path-pattern: static/**
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: null
+    call-setters-on-nulls: true
+    multiple-result-sets-enabled: false
+  mapper-locations: classpath:sql/**.xml
