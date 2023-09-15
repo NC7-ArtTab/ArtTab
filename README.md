@@ -11,4 +11,3 @@ Original Repository는 스터디가 끝나고 다시 Sync fork해주세요. iml,
 4. 스터디하기 전에 Original Repository / Main으로 PR을 작성
 5. 레포장이 PR을 확인하고 Merge
 
-푸시를 막았나 확인합니다
