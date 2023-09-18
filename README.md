@@ -1,7 +1,5 @@
-## Waving <a id="waving">
+## 미술품 경매 사이트 개발 프로젝트 <a id="waving">
 ![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=ArtTab!&fontAlign=80&fontAlignY=40&color=gradient)
-
-## 미술품 경매 사이트 개발 프로젝트
 
 ## Git
 Original Repository는 스터디가 끝나고 다시 Sync fork해주세요. iml, .vscode 등의 설정파일이 레포에 업로드 되지 않도록 IDE에서 직접 작업이 아닌 파일만 가져오는 형식으로 문제 풀이 진행해주시기 바랍니다.
