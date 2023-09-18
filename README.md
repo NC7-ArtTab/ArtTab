@@ -1,4 +1,5 @@
-# NC7-ArtTab
+## Waving <a id="waving">
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=ArtTab!&fontAlign=80&fontAlignY=40&color=gradient)
 
 ## 미술품 경매 사이트 개발 프로젝트
 
