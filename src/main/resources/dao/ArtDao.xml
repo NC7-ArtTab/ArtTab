@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.ArtDao">
+
+    <!-- 결과 레코드의 컬럼 값을 자바 객체에 어떻게 담을 것인지 설정한다. -->
+    <resultMap type="art" id="artMap">
+        <id column="art_no" property="artNo"/>
+        <result column="art_title" property="artTitle"/>
+        <result column="art_category" property="artCategory"/>
+        <result column="art_writer" property="artWriter"/>
+        <result column="art_content" property="artContent"/>
+        <result column="art_detail" property="artDetail"/>
+        <result column="start_price" property="startPrice"/>
+        <result column="buy_now_price" property="buyNowPrice"/>
+        <result column="bid_price_per" property="bidPricePer"/>
+        <result column="start_datetime" property="startDatetime"/>
+        <result column="end_datetime" property="endDatetime"/>
+        <result column="art_reg_datetime" property="artRegDatetime"/>
+        <result column="art_status" property="artStatus"/>
+
+        <collection property="attachedFiles" ofType="attachedFile">
+            <id column="board_file_no" property="no"/>
+            <result column="filepath" property="filePath"/>
+        </collection>
+
+    </resultMap>
+
+    <resultMap type="attachedFile" id="attachedFileMap">
+        <id column="board_file_no" property="no"/>
+        <result column="filepath" property="filePath"/>
+        <result column="board_no" property="boardNo"/>
+    </resultMap>
+
+
+
+    <select id="findAll" resultMap="artMap">
+        select
+        art_title,
+        art_writer,
+        start_datetime
+        from
+        art
+    </select>
+
+
+</mapper>

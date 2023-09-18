@@ -10,4 +10,5 @@ mybatis:
     jdbc-type-for-null: null
     call-setters-on-nulls: true
     multiple-result-sets-enabled: false
-  mapper-locations: classpath:sql/**.xml
+  mapper-locations: classpath:dao/**.xml
+  type-aliases-package: arttab.server.vo
