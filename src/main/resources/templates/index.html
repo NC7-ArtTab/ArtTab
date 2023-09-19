@@ -1,11 +1,54 @@
+<!--회원가입 페이지-->
+<!--signup.html-->
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-<head th:replace="~{fragment/config :: configFragment}"></head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
 <body>
-인덱스냐옹
+<form method="post" action="/signup">
+  <div class="container">
+    <h1>회원가입</h1>
+    <div class="form-group">
+      <label for="inputEmail4">memberEmail</label>
+      <input type="text" class="form-control" id="inputEmail4" name="memberEmail" placeholder="이메일">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword4">memberPwd</label>
+      <input type="password" class="form-control" id="inputPassword4" name="memberPwd" placeholder="비밀번호">
+    </div>
+    <div class="form-group">
+      <label for="inputName">memberName</label>
+      <input type="text" class="form-control" id="inputName" name="memberName" placeholder="이름">
+    </div>
+    <div class="form-group">
+      <label for="inputPhone4">memberPhone</label>
+      <input type="text" class="form-control" id="inputPhone4" name="memberPhone" placeholder="휴대폰">
+    </div>
+    <div class="form-group">
+      <label for="inputZipcode">memberZipcode</label>
+      <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" placeholder="우편번호">
+    </div>
+    <div class="form-group">
+      <label for="inputAddr">memberAddr</label>
+      <input type="text" class="form-control" id="inputAddr" name="memberAddr" placeholder="기본주소">
+    </div>
+    <div class="form-group">
+      <label for="inputDetailAddr">memberDetailAddr</label>
+      <input type="text" class="form-control" id="inputDetailAddr" name="memberDetailAddr" placeholder="상세주소">
+    </div>
+    <div class="form-group">
+      <label for="inputBank">memberBank</label>
+      <input type="text" class="form-control" id="inputBank" name="memberBank" placeholder="은행명">
+    </div>
+    <div class="form-group">
+      <label for="inputAcc">memberAcc</label>
+      <input type="text" class="form-control" id="inputAcc" name="memberAcc" placeholder="계좌번호">
+    </div>
+    <button type="submit" class="btn btn-primary">가입 완료</button>
+  </div>
+</form>
 </body>
 </html>

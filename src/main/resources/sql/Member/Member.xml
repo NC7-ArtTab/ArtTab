@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="arttab.server.Auth.mapper.MemberMapper">
+  <insert id="saveMember" parameterType="arttab.server.Auth.vo.Member">
+  INSERT INTO member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr, mem_detail_addr, mem_bank, mem_acc, mem_auth, mem_createdDate, mem_status)
+  VALUES(#{memberEmail}, #{memberPwd}, #{memberName}, #{memberPhone}, #{memberZipcode}, #{memberAddr}, #{memberDetailAddr}, #{memberBank}, #{memberAcc}, #{memberAuth}, #{createdDate}, #{memberStatus});
+  </insert>
+ </mapper>
+
+
