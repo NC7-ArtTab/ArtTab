@@ -5,7 +5,29 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head th:replace="~{fragment/config :: configFragment}"></head>
-<body>
-인덱스냐옹
+<body style="margin-left: 40px;">
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<br>
+<br>
+인덱스냐옹!
+메인페이쥐
+<img style="filter: saturate(70%);" src="/static/images/back.jpg">
+
+<div class="input-group">
+    <form action="searchlist" name="search-form">
+        <select name="option">
+            <option selected value ="">검색 내용 선택</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="writer">작가</option>
+        </select>
+        <input type="text" name="keyword" value="", placeholder="키워드를 입력하세요" ></input>
+
+        <input type="submit" value="검색"></input>
+    </form>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
 </body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
 </html>
