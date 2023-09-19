@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        .clear {
+            clear: both;
+        }
+        body {
+            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
+            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
+            margin: 0; /* 기본 마진을 제거합니다. */
+            padding: 0; /* 기본 패딩을 제거합니다. */
+            background-color: #F4F7F8; /* 배경색을 설정합니다. */
+        }
+    </style>
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">기현님 My page</li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/modification}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/rule}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/intro}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
+    </ul>
+</div>
+
+<hr>
+<br>
+
+
+<img style="filter: saturate(70%);" src="/static/images/back.jpg">
+
+<br><br><br><br><br><br><br><br><br>
+
+
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

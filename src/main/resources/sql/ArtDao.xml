@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.ArtDao">
+
+    <select id="searchlist">
+        select
+        art_no,
+        art_title,
+        art_writer,
+        art_conent
+        from
+        art
+        <where>
+            <if test="option != null and option.equals('title')">
+                AND art_title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="option != null and option.equals('content')">
+                AND art_conent LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="option != null and option.equals('writer')">
+                AND art_writer LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+        order by
+        art_reg_datetime
+    </select>
+
+    <select id="findAll">
+        select
+        art_no,
+        art_title,
+        art_writer,
+        art_conent
+        from
+        art
+        order by
+        art_no
+    </select>
+
+</mapper>

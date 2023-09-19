@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<footer th:fragment="footerFragment">
-  <div style="background-color: rgba(61,255,37,0.41)">
-    footer.html
+<footer th:fragment="footerFragment" >
+
+  <img src="/static/images/logo.JPG" style="float:left; width: 250px; height: 250px; margin-right: 40px">
+  <div style="margin-left: 40px;">
+    <br>
+    <div class="main">
+      <h2 style='color: #F86338;'>ArtTab</h2>
+      <ul style='font-size:x-small'>
+        <li style="display: inline; margin-left: -40; margin-right: 20px;"><a data-th-href="@{/terms}">이용약관</a></li>
+        <li style="display: inline; margin-right: 20px;"><a data-th-href="@{/rule}">개인정보 처리방침</a></li>
+        <li style="display: inline; margin-right: 10px;"><a data-th-href="@{/intro}">회사소개</a></li>
+      </ul>
+    </div>
+
+    <div style='font-size:x-small;'>
+      <div style="display: flex;">
+        <div>
+          <h4 style='font-size:small;'>주식회사 아트탭</h4>
+          <p>대표 주현욱</p>
+          <p>사업자 등록번호 888-81-7777</p>
+          <p>사업장 소재지 서울시 강남구 강남대로94길 20, 삼오빌딩 6층</p>
+          <p>국민은행 530402-01-219444</p>
+        </div>
+        <div style="margin-left: 80px;">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <p>고객센터</p>
+          <p>대표전화 : 1577-8888</p>
+          <p>E-mail : arttab@gmail.com</p>
+        </div>
+      </div>
+    </div>
   </div>
+
+
+
+
 </footer>
 
 </html>
