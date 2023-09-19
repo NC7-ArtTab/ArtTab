@@ -5,20 +5,52 @@ spring:
   devtools:
     livereload:
       enabled: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        web-allow-others: true
+  #  h2:
+  #    console:
+  #      enabled: true
+  #      path: /h2-console
+  #      settings:
+  #        web-allow-others: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:arttab;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
     username: sa
     password:
-  sql:
-    init:
-      mode: always
+    initialization-mode: always
+#  schema: classpath:schema.sql
+#  data: classpath:data.sql
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/studydb
+#    username: study
+#    password: 1111
+sql:
+  always:
+    init: true
+
+#mybatis:
+#  type-aliases-package: arttab.server.vo
+#  mapper-locations: /arttab/dao/*.xml
+
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          kakao:
+#            client-id: 90cc967145c8ee90974854fc3e8a9059
+#            client-secret: 9sbZCudqqxTfwZLNFY5rqJRBa0mQX8iM
+#            scope: profile_nickname, account_email
+#            client-name: Kakao
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#            client-authentication-method: POST
+#
+#        provider:
+#          kakao:
+#            authorization-uri: https://kauth.kakao.com/oauth/authorize
+#            token-uri: https://kauth.kakao.com/oauth/token
+#            user-info-uri: https://kapi.kakao.com/v2/user/me
+#            user-name-attribute: id
 
 server:
   port: 8080

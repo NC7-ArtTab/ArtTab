@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta data-th-content="${refresh}" data-th-if="${refresh}" http-equiv="Refresh">
+    <title>error</title>
+</head>
+<body>
+<h1>실행 오류!</h1>
+
+<p data-th-text="${message} ?: '예외 발생!'">예외 발생!</p>
+
+<hr>
+<p data-th-text="${exception} ?: _">예외 상세 내용</p>
+
+<script>
+    setTimeout(function () {
+        history.back();
+    }, 2000);
+</script>
+
+</body>
+</html>

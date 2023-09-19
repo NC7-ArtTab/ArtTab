@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="arttab.server.auth.mapper.MemberMapper">
+    <!-- 로그인 -->
+    <select id="getMemberAccount" resultType="arttab.server.auth.vo.Member">
+        SELECT * FROM member
+        WHERE mem_email = #{memEmail}
+    </select>
+
+    <insert id="saveMember" parameterType="arttab.server.auth.vo.Member">
+        INSERT INTO member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr,
+                            mem_detail_addr, mem_bank, mem_acc, mem_auth, mem_createdDate,
+                            mem_status)
+        VALUES (#{memEmail}, #{memPwd}, #{memName}, #{memPhone}, #{memZipcode},
+                #{memAddr}, #{memDetailAddr}, #{memBank}, #{memAcc}, #{memAuth},
+                #{memDatetime}, #{memberStatus});
+    </insert>
+</mapper>

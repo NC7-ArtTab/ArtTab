@@ -1,0 +1,54 @@
+<!--회원가입 페이지-->
+<!--signup.html-->
+<!DOCTYPE html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<form method="post" action="/signup">
+  <div class="container">
+    <h1>회원가입</h1>
+    <div class="form-group">
+      <label for="inputEmail4">memberEmail</label>
+      <input type="text" class="form-control" id="inputEmail4" name="memEmail" placeholder="이메일">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword4">memberPwd</label>
+      <input type="password" class="form-control" id="inputPassword4" name="memPwd" placeholder="비밀번호">
+    </div>
+    <div class="form-group">
+      <label for="inputName">memberName</label>
+      <input type="text" class="form-control" id="inputName" name="memName" placeholder="이름">
+    </div>
+    <div class="form-group">
+      <label for="inputPhone4">memberPhone</label>
+      <input type="text" class="form-control" id="inputPhone4" name="memPhone" placeholder="휴대폰">
+    </div>
+    <div class="form-group">
+      <label for="inputZipcode">memberZipcode</label>
+      <input type="text" class="form-control" id="inputZipcode" name="memZipcode" placeholder="우편번호">
+    </div>
+    <div class="form-group">
+      <label for="inputAddr">memberAddr</label>
+      <input type="text" class="form-control" id="inputAddr" name="memAddr" placeholder="기본주소">
+    </div>
+    <div class="form-group">
+      <label for="inputDetailAddr">memberDetailAddr</label>
+      <input type="text" class="form-control" id="inputDetailAddr" name="memDetailAddr" placeholder="상세주소">
+    </div>
+    <div class="form-group">
+      <label for="inputBank">memberBank</label>
+      <input type="text" class="form-control" id="inputBank" name="memBank" placeholder="은행명">
+    </div>
+    <div class="form-group">
+      <label for="inputAcc">memberAcc</label>
+      <input type="text" class="form-control" id="inputAcc" name="memAcc" placeholder="계좌번호">
+    </div>
+    <button type="submit" class="btn btn-primary">가입 완료</button>
+  </div>
+</form>
+</body>
+</html>
