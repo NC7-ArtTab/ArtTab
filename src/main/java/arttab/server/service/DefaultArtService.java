@@ -22,6 +22,11 @@ public class DefaultArtService implements ArtService {
 
   }
 
+  @Override
+  public Art get(int artNo) throws Exception {
+    System.out.println(artDao.findBy(artNo));
+    return artDao.findBy(artNo);
+  }
 
   @Override
   public List<Art> list(Art art) throws Exception {

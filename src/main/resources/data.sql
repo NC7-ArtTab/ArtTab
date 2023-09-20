@@ -15,9 +15,7 @@ VALUES
     ('서양화2', '서작가', 'W', 15000, 25000, 5000, NOW(), NOW(), 'R'),
     ('공예품2', '공작가', 'P', 15000, 25000, 6000, NOW(), NOW(), 'R'),
     ('기타작품2', '작자미상', 'X', 15000, 25000, 7000, NOW(), NOW(), 'R'),
-    서양화2', '서작가', 'W', 15000, 25000, 5000, NOW(), NOW(), 'R'),
-    ('공예품2', '공작가', 'P', 15000, 25000, 6000, NOW(), NOW(), 'R'),
-    ('기타작품2    ('동양화3', '동작가', 'E', 15000, 25000, 4000, NOW(), NOW(), 'R'),
+    ('동양화3', '동작가', 'E', 15000, 25000, 4000, NOW(), NOW(), 'R'),
     ('서양화3', '서작가', 'W', 15000, 25000, 5000, NOW(), NOW(), 'R'),
     ('공예품3', '공작가', 'P', 15000, 25000, 6000, NOW(), NOW(), 'R'),
     ('기타작품3', '기작가', 'X', 15000, 25000, 7000, NOW(), NOW(), 'R'),
@@ -71,7 +69,7 @@ VALUES
     (2, 1, 16000);
 
 -- 파일 테이블에 테스트 데이터 삽입
-INSERT INTO `file` (`art_no`, `file_path`, `origin_file_name`, `save_file_name`)
+INSERT INTO `attach` (`art_no`, `file_path`, `origin_file_name`, `save_file_name`)
 VALUES
     (1, '/path/to/file1.jpg', 'file1.jpg', 'file1_saved.jpg'),
     (2, '/path/to/file2.jpg', 'file2.jpg', 'file2_saved.jpg');

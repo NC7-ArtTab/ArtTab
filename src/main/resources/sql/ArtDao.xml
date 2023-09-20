@@ -18,7 +18,7 @@
         <result column="art_reg_datetime"       property="artRegDatetime"/>
         <result column="art_status"       property="artStatus"/>
 
-        <collection property="artFiles" ofType="arttab.server.vo.File">
+        <collection property="artAttaches" ofType="arttab.server.vo.Attach">
             <id column="file_no" property="fileNo"/>
             <result column="art_no" property="artNo"/>
             <result column="file_path" property="filePath"/>
@@ -43,15 +43,18 @@
         a.art_no,
         a.art_title,
         a.start_price,
+        b.bid_price,
         a.art_content,
         a.start_datetime,
         a.end_datetime,
         a.art_detail,
-        b.bid_no,
-        b.bid_price
+        f.file_no,
+        f.file_path
         from art a inner join bid b on a.art_no=b.art_no
-        where a.art_no=#{artNo}
-
+        left outer join file f on a.art_no=f.art_no
+        where
+        a.art_no=#{artNo}
+        order by b.bid_price desc
     </select>
 
 

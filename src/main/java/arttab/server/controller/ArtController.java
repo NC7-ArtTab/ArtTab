@@ -2,11 +2,13 @@ package arttab.server.controller;
 
 import arttab.server.service.ArtService;
 import arttab.server.vo.Art;
+import arttab.server.vo.Bid;
 import arttab.server.vo.PageNation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,14 +24,23 @@ public class ArtController {
     System.out.println("ArtController 생성됨");
   }
 
-
   @Autowired
   ArtService artService;
 
-  @GetMapping("form")
-  public void form() {
-  }
+  @GetMapping("detail/{artNo}")
+  public String detail(
+          @PathVariable int artNo,
+          Model model) throws Exception {
 
+    Art art = artService.get(artNo);
+    List<Bid> list = art.getArtBids();
+
+    if (art != null) {
+      model.addAttribute("art", art);
+      model.addAttribute("list", list);
+    }
+    return "art/detail";
+  }
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name="pageNo", defaultValue = "1") int pageNo,
