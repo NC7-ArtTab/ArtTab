@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+    lang="ko"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}"></head>
+<body>
+<div class="container">
+  <header th:replace="~{fragment/header :: headerFragment}"></header>
+  <div layout:fragment="content"></div>
+
+  <h1 th:text="${art.artTitle}">동양화></h1>
+
+
+  <form>
+    <table border='1'>
+      <thead>
+      <tr>
+        <th>작품명</th>
+        <th>시작가</th>
+        <th>입찰가</th>
+        <th>내용</th>
+        <th>기간</th>
+        <th>세부내용</th>
+        <th>파일</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td data-th-text="${art.artTitle}">100</td>
+        <td data-th-text="${art.startPrice}">게시글 제목</td>
+        <td data-th-text="${#lists.last(art.artBids).bidPrice}">100</td>
+        <td data-th-text="|${art.startDatetime} ~ ${art.endDatetime}|">홍길동</td>
+        <td data-th-text="${art.artContent}">홍길동</td>
+        <td data-th-text="${art.artDetail}">홍길동</td>
+        <td>
+          <div data-th-each="file : ${art.artFiles}">
+            <a data-th-text="${file.filePath}">ohora.gif</a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+</body>
+<script layout:fragment="script"></script>
+</html>

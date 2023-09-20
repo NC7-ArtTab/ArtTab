@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,5 +27,8 @@ public class Art implements Serializable {
   private Timestamp endDatetime;  // 경매종료일시
   private Timestamp artRegDatetime; // 작품등록일시
   private char artStatus; // 작품경매현황 ex) Y:낙찰 건, P:경매진행중인 건, R:경매준비중인 건, F:경매종료 건
+
+  private List<File> artFiles; // 작품 첨부파일 목록
+  private List<Bid> artBids;  // 작품 입찰가 목록
 
 }

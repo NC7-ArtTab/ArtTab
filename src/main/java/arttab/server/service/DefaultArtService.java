@@ -18,7 +18,16 @@ ArtDao artDao;
     this.artDao = artDao;
   }
 
+  @Override
   public List<Art> list() throws Exception {
     return artDao.findAll();
   }
+
+  @Override
+  public Art get(int artNo) {
+    System.out.println(artDao.findBy(artNo));
+    return artDao.findBy(artNo);
+  }
+
+
 }

@@ -7,4 +7,8 @@ import java.util.List;
 public interface ArtService {
 
   List<Art> list() throws Exception;
+
+  Art get(int artNo);
+
+
 }

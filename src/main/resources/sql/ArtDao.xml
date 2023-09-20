@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.ArtDao">
+
+    <!-- 결과 레코드의 컬럼 값을 자바 객체에 어떻게 담을 것인지 설정한다. -->
+    <resultMap type="art" id="artMap">
+        <id column="art_no" property="artNo"/>
+        <result column="art_title" property="artTitle"/>
+        <result column="art_category" property="artCategory"/>
+        <result column="art_writer" property="artWriter"/>
+        <result column="art_content" property="artContent"/>
+        <result column="art_detail" property="artDetail"/>
+        <result column="start_price" property="startPrice"/>
+        <result column="buy_now_price" property="buyNowPrice"/>
+        <result column="bid_price_per" property="bidPricePer"/>
+        <result column="start_datetime" property="startDatetime"/>
+        <result column="end_datetime" property="endDatetime"/>
+        <result column="art_reg_datetime" property="artRegDatetime"/>
+        <result column="art_status" property="artStatus"/>
+
+
+        <collection property="artFiles" ofType="File">
+            <id column="file_no" property="fileNo"/>
+            <result column="art_no" property="artNo"/>
+            <result column="file_path" property="filePath"/>
+            <result column="origin_file_name" property="originFileName"/>
+            <result column="save_file_name" property="saveFileName"/>
+            <result column="file_reg_datetime" property="fileRegDatetime"/>
+            <result column="file_status" property="fileStatus"/>
+        </collection>
+
+        <collection property="artBids" ofType="Bid">
+            <id column="bid_no" property="bidNo"/>
+            <result column="art_no" property="artNo"/>
+            <result column="mem_no" property="memNo"/>
+            <result column="bid_price" property="bidPrice"/>
+            <result column="bid_datetime" property="bidDatetime"/>
+        </collection>
+
+    </resultMap>
+
+    <resultMap type="file" id="fileMap">
+        <id column="file_no" property="fileNo"/>
+        <result column="art_no" property="artNo"/>
+        <result column="file_path" property="filePath"/>
+        <result column="origin_file_name" property="originFileName"/>
+        <result column="save_file_name" property="saveFileName"/>
+        <result column="file_reg_datetime" property="fileRegDatetime"/>
+        <result column="file_status" property="fileStatus"/>
+    </resultMap>
+
+    <resultMap type="bid" id="bidMap">
+        <id column="bid_no" property="bidNo"/>
+        <result column="art_no" property="artNo"/>
+        <result column="mem_no" property="memNo"/>
+        <result column="bid_price" property="bidPrice"/>
+        <result column="bid_datetime" property="bidDatetime"/>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="artMap">
+        select
+        art_title,
+        art_writer,
+        start_datetime
+        from
+        art
+    </select>
+
+    <select id="findBy" resultMap="artMap" parameterType="int">
+        select
+        a.art_no,
+        a.art_title,
+        a.start_price,
+        b.bid_price,
+        a.art_content,
+        a.start_datetime,
+        a.end_datetime,
+        a.art_detail,
+        f.file_no,
+        f.file_path
+        from art a inner join bid b on a.art_no=b.art_no
+        left outer join file f on a.art_no=f.art_no
+        where
+        a.art_no=#{artNo}
+
+    </select>
+
+
+</mapper>

@@ -26,11 +26,11 @@
     <tr data-th-each="art : ${list}">
       <td data-th-text="${art.artNo}">100</td>
       <td>
-        <a data-th-href="@{'/art/detail/' + ${art.category} + '/' + ${art.no}}"
+        <a data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
            data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목</a>
       </td>
       <td data-th-text="${art.artWriter}">홍길동</td>
-      <td data-th-text="${#dates.format(art.startDateTime, 'yyyy-MM-dd')}">2021-09-14</td>
+      <td data-th-text="${#dates.format(art.startDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
     </tr>
     </tbody>
   </table>

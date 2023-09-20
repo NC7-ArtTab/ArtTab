@@ -11,7 +11,7 @@ public interface ArtDao {
 
   List<Art> findAll();
 
-//  Art findBy(int artNo);
+  Art findBy(int artNo);
 //
 //  int update(Art art);
 //
