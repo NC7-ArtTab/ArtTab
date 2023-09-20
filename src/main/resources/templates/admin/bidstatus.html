@@ -23,7 +23,7 @@
 <br>
 
 <div style="text-align: center;">
-<h2>입찰 구매 현황</h2>
+    <h2>입찰 구매 현황</h2>
     <form action="/art/searchlist" name="search-form" style="display: inline-block;  margin-left: 400px;">
         <select name="option">
             <option selected value ="">선택</option>
@@ -34,25 +34,27 @@
         <input type="text" name="keyword" style="width: 400px;"value="" placeholder="키워드를 입력하세요" />
         <input type="submit" value="검색">
     </form>
-<hr>
-    <table class="center-table" style="margin: auto;">
+    <hr>
+    <table style="margin: auto;">
 
         <thead>
         <tr><th>작가명</th> <th>작품명</th> <th>경매시작</th>  <th>경매마감</th> <th>현재최고입찰가</th><th>즉시구매가</th><th>상태</th></tr>
         </thead>
         <td colspan="6"><hr></td>
-        <tbody>
 
-        <tr data-th-each="art : ${list}" style='margin:5px; text-align:center'>
-            <td data-th-text="${art.artWriter}">작가명</td>
-            <td><a data-th-href="@{'/art/detail/' + ${art.no}}"
-                   data-th-text="${art.artTitle} ?: '제목없음'">작품명</a>
-            </td>
-            <td data-th-text="${art.startDatetime}">경매시작</td>
-            <td data-th-text="${art.endDatetime}">경매마감</td>
-            <td data-th-text="${art.bidPrice}">현재최고입찰가</td>
-            <td data-th-text="${art.buyNowPrice}">즉시구매가</td>
-            <td data-th-text="${art.artStatus}">상태</td>
+        <br>
+        <a data-th-href="@{/admin/auction}"> 작품 등록하기</a>
+        <br>
+        <br>
+        <tbody>
+        <tr data-th-each="bid : ${bidstatus}" style='margin:5px; text-align:center'>
+            <td data-th-text="${bid.artNo.artWriter}">작가명</td>
+            <td data-th-text="${bid.artNo.artTitle} ?: '제목없음'">작품명</td>
+            <td data-th-text="${#dates.format(bid.artNo.startDatetime, 'yyyy-MM-dd')}">경매시작</td>
+            <td data-th-text="${#dates.format(bid.artNo.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
+            <td data-th-text="${bid.bidPrice}">현재최고입찰가</td>
+            <td data-th-text="${bid.artNo.buyNowPrice}">즉시구매가</td>
+            <td data-th-text="${bid.artNo.artStatus}">상태</td>
         <tr>
             <td colspan="6"><hr></td>
         </tr>

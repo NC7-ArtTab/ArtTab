@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        /* 원하는 스타일을 추가하세요 */
+        .orange-text {
+            color: #FF7A00; /* 주황색 글자 색상 설정 */
+            font-weight: bold;
+        }
+
+        /* 표 스타일링 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #FF7A00; /* 표 테두리 스타일 설정 */
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #FF7A00; /* 표 헤더 배경색 설정 */
+            color: white;
+        }
+
+        /* 삭제 버튼 스타일링 */
+        .delete-button {
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px; /* 버튼 모서리를 둥글게 설정 */
+        }
+
+        /* 삭제 버튼에 마우스 호버 시 스타일링 */
+        .delete-button:hover {
+            background-color: #FF5600;
+        }
+    </style>
+</head>
+<body style="margin-left: 40px;">
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<p style='color: #F86338; font-weight: bold;'>Arttab</p>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">기현님 My page</li>
+        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypage/profile}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
+        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypage/mybid}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
+        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/intro}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
+    </ul>
+</div>
+<hr>
+<br>
+
+<div style="max-width: 900px; margin: 0 auto;">
+    <h1 class="orange-text">입찰 정보</h1>
+    <table>
+        <thead>
+        <tr>
+            <th class="orange-text">작품 번호</th>
+            <th class="orange-text">입찰 가격</th>
+            <th class="orange-text">삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 입찰 내역을 동적으로 표시하는 부분 -->
+        <tr th:each="myBid : ${myBids}">
+            <td th:text="${myBid.artNo}"></td>
+            <td th:text="${myBid.bidPrice}"></td>
+            <td><a class="delete-button" th:href="@{'/deleteBid/' + ${myBid.memNo} + '/' + ${myBid.artNo}}">삭제</a></td> <!-- 삭제 버튼 추가 -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.BidDao">
+
+    <resultMap type="arttab.server.vo.Bid" id="bidMap">
+        <id column="bid_no" property="bidNo"/>
+        <result column="bid_price" property="bidPrice"/>
+        <result column="bid_datetime" property="bidDatetime"/>
+
+        <association property="artNo" javaType="arttab.server.vo.Art">
+            <id column="art_no" property="artNo"/>
+            <result column="art_title" property="artTitle"/>
+            <result column="art_writer" property="artWriter"/>
+            <result column="art_content" property="artContent"/>
+            <result column="start_price" property="startPrice"/>
+            <result column="buy_now_price" property="buyNowPrice"/>
+            <result column="bid_price_per" property="bidPricePer"/>
+            <result column="start_datetime" property="startDatetime"/>
+            <result column="end_datetime" property="endDatetime"/>
+            <result column="art_reg_datetime" property="artRegDatetime"/>
+            <result column="art_status" property="artStatus"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="bidMap">
+        SELECT
+        a.art_writer,
+        a.art_title,
+        a.start_datetime,
+        a.end_datetime,
+        MAX(b.bid_price) as bid_price,
+        a.buy_now_price,
+        a.art_status
+        FROM
+        bid b
+        inner join
+        art a ON b.art_no = a.art_no
+        GROUP BY
+        a.art_no
+        ORDER BY
+        a.art_no;
+    </select>
+</mapper>

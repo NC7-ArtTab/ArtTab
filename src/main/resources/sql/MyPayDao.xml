@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.MyPayDao">
+    <select id="getPurchaseHistory" resultType="arttab.server.vo.Pay">
+        SELECT art_no, pay_price
+        FROM pay
+        WHERE mem_no = #{memNo}
+    </select>
+</mapper>

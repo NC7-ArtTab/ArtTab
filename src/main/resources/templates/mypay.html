@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>구매 현황</title>
+</head>
+<body>
+<h1>구매 현황</h1>
+<table>
+  <thead>
+  <tr>
+    <th>작품 번호</th>
+    <th>결제 가격</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- 구매 현황 데이터를 반복해서 출력 -->
+  <tr th:each="purchase : ${purchaseHistory}">
+    <td th:text="${purchase.artNo}"></td>
+    <td th:text="${purchase.payPrice}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
