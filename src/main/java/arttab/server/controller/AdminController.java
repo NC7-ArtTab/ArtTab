@@ -3,9 +3,8 @@ package arttab.server.controller;
 
 import arttab.server.service.ArtService;
 import arttab.server.service.BidService;
-import arttab.server.service.FAQService;
-import arttab.server.vo.FAQ;
 import arttab.server.vo.Art;
+import arttab.server.vo.Bid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 
 @Slf4j
@@ -25,11 +27,10 @@ import java.util.ArrayList;
 public class AdminController {
 
     @Autowired
-    FAQService faqService;
-    @Autowired
     ArtService artService;
     @Autowired
     BidService bidService;
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     //admin
 
@@ -43,15 +44,6 @@ public class AdminController {
     public String adminfaq() {
         log.info("Call other/faq.html");
         return "/other/faq";
-    }
-
-    @PostMapping("/addfaq")
-    public String addfaq(FAQ faq, HttpSession session) throws Exception{
-        log.info("addfaq");
-        //Member loginUser = (Member) session.getAttribute("loginUser");
-
-        //faqService.add(faq);
-        return "redirect:/admin/main";
     }
 
     @GetMapping("/faqform")
@@ -83,7 +75,12 @@ public class AdminController {
     public String bidstatus(Model model) throws Exception {
         log.info("Call /admin/bidstatus.html");
 
-        model.addAttribute("bidstatus", bidService.list());
+        //model.addAttribute("bidstatus", bidService.list());
+
+        List<Bid> bidStatusList = bidService.list();
+        model.addAttribute("bidstatus", bidStatusList);
+
+        log.info("bidstatus data: {}", bidStatusList);
 
         return "/admin/bidstatus";
     }

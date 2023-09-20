@@ -29,7 +29,3 @@ spring:
 server:
   port: 8080
   shutdown: graceful
-  
- ## 개인 로컬 이미지 업로드 경로 
-upload:
-  path: classpath:/templates/static/asset/

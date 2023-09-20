@@ -5,18 +5,21 @@
 <mapper namespace="arttab.server.dao.BidDao">
 
     <resultMap type="arttab.server.vo.Bid" id="bidMap">
-        <id column="art_no" property="artNo"/>
-        <result column="art_title" property="artTitle"/>
-        <result column="art_writer" property="artWriter"/>
-        <result column="art_content" property="artContent"/>
+        <id column="bid_no" property="bidNo"/>
+        <result column="bid_price" property="bidPrice"/>
+        <result column="bid_datetime" property="bidDatetime"/>
         
         <association property="artNo" javaType="arttab.server.vo.Art">
             <id column="art_no" property="artNo"/>
-            <result column="art_writer" property="artWriter"/>
             <result column="art_title" property="artTitle"/>
+            <result column="art_writer" property="artWriter"/>
+            <result column="art_content" property="artContent"/>
+            <result column="start_price" property="startPrice"/>
+            <result column="buy_now_price" property="buyNowPrice"/>
+            <result column="bid_price_per" property="bidPricePer"/>
             <result column="start_datetime" property="startDatetime"/>
             <result column="end_datetime" property="endDatetime"/>
-            <result column="buy_now_price" property="buyNowPrice"/>
+            <result column="art_reg_datetime" property="artRegDatetime"/>
             <result column="art_status" property="artStatus"/>
         </association>
     </resultMap>
@@ -32,11 +35,11 @@
         a.buy_now_price,
         a.art_status
         FROM
-        art a
-        LEFT JOIN
-        bid b ON a.art_no = b.art_no
+        bid b
+        inner join
+        art a ON b.art_no = a.art_no
         GROUP BY
-        a.art_no, a.art_writer, a.art_title, a.start_datetime, a.end_datetime, a.buy_now_price, a.art_status
+        a.art_no
         ORDER BY
         a.art_no;
     </select>
