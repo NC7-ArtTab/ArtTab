@@ -21,7 +21,7 @@
         <result column="art_status" property="artStatus"/>
 
 
-        <collection property="artFiles" ofType="File">
+        <collection property="artAttaches" ofType="arttab.server.vo.Attach">
             <id column="file_no" property="fileNo"/>
             <result column="art_no" property="artNo"/>
             <result column="file_path" property="filePath"/>
@@ -41,7 +41,7 @@
 
     </resultMap>
 
-    <resultMap type="file" id="fileMap">
+    <resultMap type="Attach" id="fileMap">
         <id column="file_no" property="fileNo"/>
         <result column="art_no" property="artNo"/>
         <result column="file_path" property="filePath"/>
@@ -58,6 +58,13 @@
         <result column="bid_price" property="bidPrice"/>
         <result column="bid_datetime" property="bidDatetime"/>
     </resultMap>
+
+    <insert id="insert" parameterType="art"
+            useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
+        insert into art(art_category,art_title,art_writer,bid_price_per,start_price,buy_now_price,start_datetime,end_datetime,art_content,art_detail)
+        values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
+    </insert>
+
 
 
     <select id="findAll" resultMap="artMap">
@@ -82,10 +89,10 @@
         f.file_no,
         f.file_path
         from art a inner join bid b on a.art_no=b.art_no
-        left outer join file f on a.art_no=f.art_no
+        left outer join attach f on a.art_no=f.art_no
         where
         a.art_no=#{artNo}
-
+        order by b.bid_price desc, f.file_no
     </select>
 
 

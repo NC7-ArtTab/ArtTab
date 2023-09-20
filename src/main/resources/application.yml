@@ -3,6 +3,13 @@ spring:
     active: local
   mvc:
     static-path-pattern: static/**
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+      cache-period: 0
+
 
 mybatis:
   configuration:

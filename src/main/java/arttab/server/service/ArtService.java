@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface ArtService {
 
+  int add(Art art) throws Exception;
+
   List<Art> list() throws Exception;
 
-  Art get(int artNo);
-
+  Art get(int artNo) throws Exception;
 
 }

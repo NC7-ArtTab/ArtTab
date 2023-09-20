@@ -7,7 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface ArtDao {
-//  int insert(Art art);
+
+  int insert(Art art);
 
   List<Art> findAll();
 

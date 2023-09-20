@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @NoArgsConstructor // 기본생성자 생성
-public class File implements Serializable {
+public class Attach implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private int fileNo;  //  파일번호
