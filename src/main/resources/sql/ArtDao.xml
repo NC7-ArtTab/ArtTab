@@ -40,21 +40,35 @@
 
     <select id="findBy" resultMap="artMap" parameterType="int">
         select
-        a.art_no,
-        a.art_title,
-        a.start_price,
-        b.bid_price,
-        a.art_content,
-        a.start_datetime,
-        a.end_datetime,
-        a.art_detail,
-        f.file_no,
-        f.file_path
+            a.art_no,
+            a.art_title,
+            a.art_category,
+            a.art_writer,
+            a.art_content,
+            a.art_detail,
+            a.start_price,
+            a.buy_now_price,
+            a.bid_price_per,
+            a.start_datetime,
+            a.end_datetime,
+            a.art_reg_datetime,
+            a.art_status,
+            b.bid_no,
+            b.art_no,
+            b.mem_no,
+            b.bid_price,
+            b.bid_datetime,
+            f.file_no,
+            f.art_no,
+            f.file_path,
+            f.origin_file_name,
+            f.save_file_name,
+            f.file_reg_datetime,
+            f.file_status
         from art a inner join bid b on a.art_no=b.art_no
-        left outer join attach f on a.art_no=f.art_no
-        where
-        a.art_no=#{artNo}
-        order by b.bid_price desc
+            left outer join attach f on a.art_no=f.art_no
+        where a.art_no=#{artNo}
+        order by b.bid_price desc, file_no;
     </select>
 
 
@@ -71,6 +85,11 @@
         </where>
         order by art_no desc
     </select>
+
+    <update id="update" parameterType="int">
+        update art set art_status = 'F'
+        where art_status = 'R' and art_no= #{artNo}
+    </update>
 </mapper>
 
 
