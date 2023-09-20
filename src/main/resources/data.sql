@@ -75,10 +75,10 @@ VALUES
     (2, '/path/to/file2.jpg', 'file2.jpg', 'file2_saved.jpg');
 
 -- FAQ 테이블에 테스트 데이터 삽입
-INSERT INTO `faq` (`mem_no`, `faq_title`, `faq_content`, `faq_writer`)
+INSERT INTO `faq` (`mem_no`, `faq_title`, `faq_content`)
 VALUES
-    (1, 'FAQ 1', 'FAQ 내용 1', 2),
-    (2, 'FAQ 2', 'FAQ 내용 2', 2);
+    (1, 'FAQ 1', 'FAQ 내용 1'),
+    (2, 'FAQ 2', 'FAQ 내용 2');
 
 -- 결제 테이블에 테스트 데이터 삽입
 INSERT INTO `pay` (`mem_no`, `art_no`, `pay_price`)

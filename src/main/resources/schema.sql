@@ -68,7 +68,6 @@ CREATE TABLE `faq` (
                        `mem_no` INT NOT NULL COMMENT '회원번호',
                        `faq_title` VARCHAR(255) NOT NULL COMMENT 'faq제목',
                        `faq_content` MEDIUMTEXT NOT NULL COMMENT 'faq내용',
-                       `faq_writer` INT NOT NULL COMMENT 'faq작가',
                        `faq_reg_datetime` DATETIME NULL DEFAULT NOW() COMMENT 'faq등록일시',
                        `faq_status` VARCHAR(1) NULL DEFAULT 'Y' COMMENT 'faq사용여부 => Y:사용중(게시중), N:미사용(삭제건)',
                        PRIMARY KEY (`faq_no`),
