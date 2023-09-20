@@ -51,7 +51,7 @@
         f.file_no,
         f.file_path
         from art a inner join bid b on a.art_no=b.art_no
-        left outer join file f on a.art_no=f.art_no
+        left outer join attach f on a.art_no=f.art_no
         where
         a.art_no=#{artNo}
         order by b.bid_price desc
