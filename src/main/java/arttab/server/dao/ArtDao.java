@@ -11,6 +11,7 @@ public interface ArtDao {
 
     int insert(Art art);
 
+    int insertFiles(Art art);
     List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword);
 
     List<Art> findAll();

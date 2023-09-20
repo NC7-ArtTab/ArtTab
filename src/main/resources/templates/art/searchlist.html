@@ -25,6 +25,11 @@
     <tr data-th-each="art : ${searchResult}" style='margin:5px; text-align:center'>
         <td data-th-text="${art != null ? art.artTitle : 'N/A'}">게시글 제목</td>
         <td data-th-text="${art != null ? art.artWriter : 'N/A'}">작가</td>
+
+        <td>
+            <img src="${art != null ? art.imagePath : 'N/A'}" alt="게시글 이미지" width="100">
+        </td>
+
     </tr>
     <br>
     <br>

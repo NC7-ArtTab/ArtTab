@@ -11,3 +11,4 @@ mybatis:
     call-setters-on-nulls: true
     multiple-result-sets-enabled: false
   mapper-locations: classpath:sql/**.xml
+

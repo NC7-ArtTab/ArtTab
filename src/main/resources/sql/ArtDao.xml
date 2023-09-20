@@ -5,10 +5,27 @@
 <mapper namespace="arttab.server.dao.ArtDao">
 
     <resultMap type="arttab.server.vo.Art" id="artMap">
-    <id column="art_no" property="artNo"/>
-    <result column="art_title" property="artTitle"/>
-    <result column="art_writer" property="artWriter"/>
-    <result column="art_content" property="artContent"/>
+        <id column="art_no" property="artNo"/>
+        <result column="art_title" property="artTitle"/>
+        <result column="art_writer" property="artWriter"/>
+        <result column="art_content" property="artContent"/>
+
+        <collection property="artFiles" ofType="arttab.server.vo.File">
+            <id column="file_no" property="fileNo"/>
+            <result column="file_path" property="filePath"/>
+            <result column="origin_file_name" property="originFileName"/>
+            <result column="save_file_name" property="saveFileName"/>
+            <result column="file_status" property="fileStatus"/>
+        </collection>
+    </resultMap>
+
+    <resultMap type="arttab.server.vo.File" id="fileMap">
+        <id column="file_no" property="fileNo"/>
+        <result column="file_path" property="filePath"/>
+        <result column="art_no" property="artNo"/>
+        <result column="origin_file_name" property="originFileName"/>
+        <result column="save_file_name" property="saveFileName"/>
+        <result column="file_status" property="fileStatus"/>
     </resultMap>
 
     <parameterMap type="java.util.Map" id="searchParams">
@@ -28,9 +45,6 @@
             <if test="option != null and option.equals('title')">
                 AND art_title LIKE CONCAT('%', #{keyword}, '%')
             </if>
-            <if test="option != null and option.equals('content')">
-                AND art_content LIKE CONCAT('%', #{keyword}, '%')
-            </if>
             <if test="option != null and option.equals('writer')">
                 AND art_writer LIKE CONCAT('%', #{keyword}, '%')
             </if>
@@ -40,8 +54,7 @@
     <select id="findAll" resultMap="artMap">
         select
         art_no,
-        art_title,
-        art_writer,
+        art_title, art_writer,
         art_content
         from
         art
@@ -53,6 +66,12 @@
             useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
         insert into art(art_category,art_title,art_writer,bid_price_per,start_price,buy_now_price,start_datetime,end_datetime,art_content,art_detail)
         values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
+    </insert>
+
+    <insert id="insertFiles" parameterType="arttab.server.vo.Art">
+        insert into file(file_path,art_no)
+        values
+        <foreach collection="artFiles" item="file" separator=",">(#{file.filePath},#{no})</foreach>
     </insert>
 
 

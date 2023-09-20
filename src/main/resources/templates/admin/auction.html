@@ -28,7 +28,7 @@
 <hr>
 <form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
     <label for="artCategory">카테고리</label>
-    <input type="text" id="artCategory" name="artTitle" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
+    <input type="text" id="artCategory" name="artCategory" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
 
     <label for="artTitle">작품명</label>
     <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
@@ -57,7 +57,7 @@
     <label for="artDetail">작품 상세 설명</label>
     <input type="text" id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요" required><br><br>
 
-<!--    <label for="files">이미지 등록</label>
+    <label for="files">이미지 등록</label>
     <input type="file" id="files" name="files" multiple><br><br>-->
 
     <input type="submit" value="제출">
