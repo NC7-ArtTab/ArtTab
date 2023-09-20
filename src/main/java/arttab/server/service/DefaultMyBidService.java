@@ -1,17 +1,16 @@
+// DefaultMyBidService.java
 package arttab.server.service;
 
 import arttab.server.dao.MyBidDao;
-import arttab.server.vo.MyBid;
+import arttab.server.vo.Bid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class DefaultMyBidService implements MyBidService {
-
-    private MyBidDao myBidDao;
+    private final MyBidDao myBidDao;
 
     @Autowired
     public DefaultMyBidService(MyBidDao myBidDao) {
@@ -19,8 +18,7 @@ public class DefaultMyBidService implements MyBidService {
     }
 
     @Override
-    @Transactional
-    public List<MyBid> findByMemNo(int memNo) {
-        return myBidDao.findByMemNo(memNo);
+    public List<Bid> getMyBidList(int memNo) {
+        return myBidDao.getMyBidList(memNo);
     }
 }

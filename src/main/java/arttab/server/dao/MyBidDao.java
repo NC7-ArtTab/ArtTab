@@ -1,13 +1,12 @@
+// MyBidMapper.java
 package arttab.server.dao;
 
-import arttab.server.vo.MyBid;
+import arttab.server.vo.Bid;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-@Repository
 public interface MyBidDao {
-    List<MyBid> findByMemNo(int memNo);
+    List<Bid> getMyBidList(@Param("memNo") int memNo);
 }

@@ -4,11 +4,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="arttab.server.dao.MyBidDao">
 
-    <!-- findByMemNo 메서드의 SQL 쿼리 정의 -->
-    <select id="findByMemNo" parameterType="int" resultType="arttab.server.vo.MyBid">
-        SELECT b.bid_no, b.art_no, b.mem_no, b.bid_price, b.bid_datetime
-        FROM bid b
-        WHERE b.mem_no = #{memNo}
+    <!-- getMyBidList 메서드의 SQL 쿼리 정의 -->
+    <select id="getMyBidList"  resultType="arttab.server.vo.Bid">
+        SELECT art_no, bid_price
+        FROM bid
+        WHERE mem_no = #{memNo}
     </select>
 
 </mapper>

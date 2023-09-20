@@ -11,8 +11,8 @@ public class DefaultMyPayService implements MyPayService {
     private final MyPayDao myPayDao;
 
     @Autowired
-    public DefaultMyPayService(MyPayDao myPayMapper) {
-        this.myPayDao = myPayMapper;
+    public DefaultMyPayService(MyPayDao myPayDao) {
+        this.myPayDao = myPayDao;
     }
 
     @Override

@@ -1,19 +1,18 @@
+// MyBidController.java
 package arttab.server.controller;
 
 import arttab.server.service.MyBidService;
-import arttab.server.vo.MyBid;
+import arttab.server.vo.Bid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/mypage")
+@Controller
 public class MyBidController {
-
     private final MyBidService myBidService;
 
     @Autowired
@@ -22,16 +21,8 @@ public class MyBidController {
     }
 
     @GetMapping("/mybid")
-    public List<MyBid> findByMemNo(Model model) {
-        int memNo = 1; // 예시로 멤버 번호를 지정, 로그인한 정보를 가져와야 합니다.
-
-        try {
-            List<MyBid> myBids = myBidService.findByMemNo(memNo);
-            model.addAttribute("myBids", myBids);
-            return myBids;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public String showMyBidPage(@RequestParam(value = "memNo", defaultValue = "1") int memNo, Model model) {
+        model.addAttribute("getMyBidList", myBidService.getMyBidList(memNo));
+        return "mybid"; // mybid.html 템플릿을 사용
     }
 }

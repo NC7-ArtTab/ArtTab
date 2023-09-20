@@ -1,9 +1,10 @@
+// MyBidService.java
 package arttab.server.service;
 
-import arttab.server.vo.MyBid;
+import arttab.server.vo.Bid;
 
 import java.util.List;
 
 public interface MyBidService {
-    List<MyBid> findByMemNo(int memNo);
+    List<Bid> getMyBidList(int memNo);
 }
