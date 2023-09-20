@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <meta charset="UTF-8">
+    <title>검색</title>
+</head>
+<body>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+
+<table>
+
+    <thead>
+    <tr> <th>제목</th> <th>작가</th></tr>
+    </thead>
+
+    <tr data-th-if="${searchResult == null or searchResult.isEmpty()}">
+        <td colspan="2">검색 결과가 없습니다.</td>
+    </tr>
+
+    <!-- 검색 결과인 경우 -->
+
+    <tr data-th-each="art : ${searchResult}" style='margin:5px; text-align:center'>
+        <td data-th-text="${art != null ? art.artTitle : 'N/A'}">게시글 제목</td>
+        <td data-th-text="${art != null ? art.artWriter : 'N/A'}">작가</td>
+    </tr>
+    <br>
+    <br>
+    <br>
+
+
+
+</table>
+<br>
+<br>
+<br>
+
+</body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

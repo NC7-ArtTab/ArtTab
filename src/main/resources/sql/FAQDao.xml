@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.FAQDao">
+
+    <resultMap type="arttab.server.vo.FAQ" id="faqMap">
+    <id column="faq_no" property="faqNo"/>
+    <result column="faq_title" property="faqTitle"/>
+    <result column="faq_content" property="faqContent"/>
+    <result column="faq_writer" property="faqWriter"/>
+    <result column="faq_reg_datetime" property="faqRegDatetime"/>
+    <result column="faq_status" property="faqStatus"/>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="arttab.server.vo.FAQ">
+        insert into faq(faq_title,faq_content)
+        values(#{title},#{content})
+    </insert>
+
+    <select id="findAll" parameterType="int" resultMap="faqMap">
+        select
+        faq_no,
+        faq_title,
+        faq_content,
+        faq_writer,
+        faq_reg_datetime,
+        faq_status
+        from
+        faq
+        order by
+        faq_no
+    </select>
+
+</mapper>

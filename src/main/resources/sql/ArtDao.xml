@@ -4,12 +4,24 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="arttab.server.dao.ArtDao">
 
-    <select id="searchlist">
+    <resultMap type="arttab.server.vo.Art" id="artMap">
+    <id column="art_no" property="artNo"/>
+    <result column="art_title" property="artTitle"/>
+    <result column="art_writer" property="artWriter"/>
+    <result column="art_content" property="artContent"/>
+    </resultMap>
+
+    <parameterMap type="java.util.Map" id="searchParams">
+        <parameter property="option" />
+        <parameter property="keyword" />
+    </parameterMap>
+
+    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
         select
         art_no,
         art_title,
         art_writer,
-        art_conent
+        art_content
         from
         art
         <where>
@@ -17,26 +29,32 @@
                 AND art_title LIKE CONCAT('%', #{keyword}, '%')
             </if>
             <if test="option != null and option.equals('content')">
-                AND art_conent LIKE CONCAT('%', #{keyword}, '%')
+                AND art_content LIKE CONCAT('%', #{keyword}, '%')
             </if>
             <if test="option != null and option.equals('writer')">
                 AND art_writer LIKE CONCAT('%', #{keyword}, '%')
             </if>
         </where>
-        order by
-        art_reg_datetime
     </select>
 
-    <select id="findAll">
+    <select id="findAll" resultMap="artMap">
         select
         art_no,
         art_title,
         art_writer,
-        art_conent
+        art_content
         from
         art
         order by
         art_no
     </select>
+
+    <insert id="insert" parameterType="arttab.server.vo.Art"
+            useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
+        insert into art(art_category,art_title,art_writer,bid_price_per,start_price,buy_now_price,start_datetime,end_datetime,art_content,art_detail)
+        values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
+    </insert>
+
+
 
 </mapper>

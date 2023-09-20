@@ -25,14 +25,12 @@
 <div style="text-align: center;">
 <h2>FAQ 등록하기</h2>
 <hr>
-<form>
+<form data-th-action="@{/admin/addfaq}" method='post'>
     <label for="faqTitle">제목</label>
     <input type="text" id="faqTitle" name="faqTitle" placeholder="제목을 입력하세요" required><br><br>
 
-    <label for="faqContent">이름:</label>
+    <label for="faqContent">내용</label>
     <input type="text" id="faqContent" name="faqContent" placeholder="내용을 입력하세요" required><br><br>
-
-    사용여부는 빼도 될 듯
 
     <input type="submit" value="제출">
 </form>

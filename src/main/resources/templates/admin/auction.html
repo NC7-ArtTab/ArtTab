@@ -26,24 +26,30 @@
 <div style="text-align: center;">
 <h2>경매 등록하기</h2>
 <hr>
-<form>
+<form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
+    <label for="artCategory">카테고리</label>
+    <input type="text" id="artCategory" name="artTitle" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
+
     <label for="artTitle">작품명</label>
     <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
 
     <label for="artWriter">작가명</label>
     <input type="text" id="artWriter" name="artWriter" placeholder="작가을 입력하세요" required><br><br>
 
+    <label for="bidPricePer">입찰가격단위</label>
+    <input type="text" id="bidPricePer" name="bidPricePer" placeholder="입찰가격단위" required><br><br>
+
     <label for="startPrice">경매 시작가</label>
-    <input type="text" id="startPrice" name="faqContent" placeholder="경매 시작가" required><br><br>
+    <input type="text" id="startPrice" name="startPrice" placeholder="경매 시작가" required><br><br>
 
     <label for="buyNowPrice">즉시 구매가</label>
     <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
 
     <label for="startDatetime">경매시작일시</label>
-    <input type="text" id="startDatetime" name="startDatetime" placeholder="경매 기간" required><br><br>
+    <input type="text" id="startDatetime" name="startDatetime" placeholder="경매시작일시 2023-10-15" required><br><br>
 
     <label for="endDatetime">경매종료일시</label>
-    <input type="text" id="endDatetime" name="endDatetime" placeholder="경매 기간" required><br><br>
+    <input type="text" id="endDatetime" name="endDatetime" placeholder="경매종료일시" required><br><br>
 
     <label for="artContent">작품 설명</label>
     <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
@@ -51,8 +57,8 @@
     <label for="artDetail">작품 상세 설명</label>
     <input type="text" id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요" required><br><br>
 
-    <label for="faqContent">이미지 등록</label>
-    <input type="text" id="faqContent" name="faqContent" placeholder="사진" required><br><br>
+<!--    <label for="files">이미지 등록</label>
+    <input type="file" id="files" name="files" multiple><br><br>-->
 
     <input type="submit" value="제출">
 </form>

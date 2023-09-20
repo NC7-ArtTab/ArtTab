@@ -1,17 +1,15 @@
 package arttab.server.dao;
 
 import arttab.server.vo.Art;
+import arttab.server.vo.FAQ;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface ArtDao {
+public interface FAQDao {
 
-    int insert(Art art);
-
-    List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword);
-
-    List<Art> findAll();
+    int insert(FAQ faq);
+    List<FAQ> findAll();
 }
