@@ -14,11 +14,11 @@ public interface ArtDao {
 
   Art findBy(int artNo);
 //
-//  int update(Art art);
+  int update(Art art);
 //
 //  int updateCount(int artNo);
 //
-//  int delete(int artNo);
+  int delete(int artNo);
 //
 //  int insertFiles(Art art);
 //

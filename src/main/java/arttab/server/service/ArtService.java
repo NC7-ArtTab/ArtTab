@@ -12,4 +12,10 @@ public interface ArtService {
 
   Art get(int artNo) throws Exception;
 
+  int update(Art art) throws Exception;
+
+  void delete(int artNo) throws Exception;
+
+
+
 }

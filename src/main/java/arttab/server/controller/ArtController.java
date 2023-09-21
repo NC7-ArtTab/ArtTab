@@ -6,10 +6,7 @@ import arttab.server.vo.Bid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -21,11 +18,6 @@ public class ArtController {
   @Autowired
   ArtService artService;
 
-  @GetMapping("auction")
-  public String auction() throws Exception {
-    return "art/auction";
-  }
-
   @PostMapping("/add")
   public String add(Art art) throws Exception{
     //Member loginUser = (Member) session.getAttribute("loginUser");
@@ -33,10 +25,10 @@ public class ArtController {
     //**이미지 업로드
 
     artService.add(art);
-    return "redirect:/art/list";
+    return "redirect:/admin/main";
   }
 
-  @GetMapping("list")
+  @GetMapping("/list")
   public String list(Model model) throws Exception {
     model.addAttribute("list", artService.list());
     return "art/list";
@@ -56,4 +48,17 @@ public class ArtController {
     }
     return "art/tdetail";
   }
+
+  @PostMapping("/update")
+  public String update(Art art, @RequestParam ("artNo") int artNo) throws Exception {
+    //Member loginUser = (Member) session.getAttribute("loginUser");
+    //    Art a = artService.get(art.getArtNo());
+    //**이미지 업로드
+    art.setArtNo(artNo);
+
+    artService.update(art);
+    return "redirect:../admin/main";
+  }
+
+
 }

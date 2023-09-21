@@ -59,6 +59,8 @@
         <result column="bid_datetime" property="bidDatetime"/>
     </resultMap>
 
+
+
     <insert id="insert" parameterType="art"
             useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
         insert into art(art_category,art_title,art_writer,bid_price_per,start_price,buy_now_price,start_datetime,end_datetime,art_content,art_detail)
@@ -66,9 +68,9 @@
     </insert>
 
 
-
     <select id="findAll" resultMap="artMap">
         select
+        art_no,
         art_title,
         art_writer,
         start_datetime
@@ -80,20 +82,57 @@
         select
         a.art_no,
         a.art_title,
-        a.start_price,
-        b.bid_price,
+        a.art_category,
+        a.art_writer,
         a.art_content,
+        a.art_detail,
+        a.start_price,
+        a.buy_now_price,
+        a.bid_price_per,
         a.start_datetime,
         a.end_datetime,
-        a.art_detail,
+        a.art_reg_datetime,
+        a.art_status,
+        b.bid_no,
+        b.art_no,
+        b.mem_no,
+        b.bid_price,
+        b.bid_datetime,
         f.file_no,
-        f.file_path
+        f.art_no,
+        f.file_path,
+        f.origin_file_name,
+        f.save_file_name,
+        f.file_reg_datetime,
+        f.file_status
         from art a inner join bid b on a.art_no=b.art_no
         left outer join attach f on a.art_no=f.art_no
-        where
-        a.art_no=#{artNo}
-        order by b.bid_price desc, f.file_no
+        where a.art_no=#{artNo}
+        order by b.bid_price desc, file_no;
     </select>
+
+    <insert id="update" parameterType="art">
+        update art set
+        art_title=#{artTitle},
+        art_category=#{artCategory},
+        art_writer=#{artWriter},
+        art_content=#{artContent},
+        art_detail=#{artDetail},
+        start_price=#{startPrice},
+        buy_now_price=#{buyNowPrice},
+        bid_price_per=#{bidPricePer},
+        start_datetime=#{startDatetime},
+        end_datetime=#{endDatetime},
+        art_status=#{artStatus}
+        where
+        art_no=#{artNo}
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from art
+        where
+        art_no=#{artNo}
+    </delete>
 
 
 </mapper>

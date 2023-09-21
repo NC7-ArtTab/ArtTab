@@ -25,7 +25,7 @@ ArtDao artDao;
   public int add(Art art) throws Exception{
     int count = artDao.insert(art);
     //사진 추가
-//        if (art.getAttachedFiles().size() > 0) {
+//        if (art.getAttaches().size() > 0) {
 //            artDao.insertFiles(art);
 //        }
     return count;
@@ -41,5 +41,23 @@ ArtDao artDao;
     return artDao.findBy(artNo);
   }
 
+  @Transactional
+  @Override
+  public int update(Art art) throws Exception {
+    System.out.println(art.toString() + "dkdkdk");
+    int count = artDao.update(art);
+//    if (count > 0 && art.getArtAttaches().size() > 0) {
+//      artDao.insertFiles(art);
+//    }
+
+    System.out.println(count + "dkdkdk");
+    return count;
+  }
+
+  @Transactional
+  @Override
+  public void delete(int artNo) throws Exception {
+    artDao.delete(artNo);
+  }
 
 }
