@@ -1,46 +1,33 @@
-// FAQ 목록 데이터 (이 예제에서는 임의의 데이터를 사용합니다)
-const faqs = [
-    {
-        faqNo: 1,
-        faqTitle: 'FAQ 제목 1',
-        faqContent: 'FAQ 내용 1',
-    },
-    {
-        faqNo: 2,
-        faqTitle: 'FAQ 제목 2',
-        faqContent: 'FAQ 내용 2',
-    },
-    // 추가 FAQ 항목들...
-];
-
-document.addEventListener('DOMContentLoaded', function () {
-    const faqList = document.querySelector('#faq-list');
-
-    // FAQ 목록을 렌더링하는 함수
-    function renderFAQList() {
-        faqs.forEach(function (faq) {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <div class="faq-question" data-faq-no="${faq.faqNo}">
-                    ${faq.faqTitle}
-                </div>
-                <div class="faq-answer" data-faq-no="${faq.faqNo}">
-                    ${faq.faqContent}
-                </div>
-            `;
-            faqList.appendChild(li);
-        });
-
-        // FAQ 질문 클릭 시 답변 펼치기/접기
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(function (question) {
-            question.addEventListener('click', function () {
-                const faqNo = this.getAttribute('data-faq-no');
-                const answer = document.querySelector(`.faq-answer[data-faq-no="${faqNo}"]`);
-                answer.classList.toggle('expanded');
-            });
-        });
-    }
-
-    renderFAQList();
+document.addEventListener("DOMContentLoaded", function () {
+    console.log(document.getElementById("faq-list"))
+    // 서버에서 FAQ 목록을 가져오는 함수를 호출하고 목록을 생성합니다.
+    loadFAQList();
 });
+
+function loadFAQList() {
+    // 서버에서 FAQ 목록을 가져오는 비동기 요청을 보냅니다.
+    fetch("/api/faq")
+        .then(response => response.json())
+        .then(data => {
+            const faqList = document.getElementById("faq-list");
+
+            // FAQ 목록을 순회하며 각 항목을 생성합니다.
+            data.forEach(faq => {
+                const faqItem = document.createElement("li");
+                faqItem.classList.add("faq-item");
+                faqItem.textContent = faq.faqTitle;
+                faqItem.dataset.content = faq.faqContent;
+
+                // FAQ 항목을 클릭할 때 이벤트 리스너를 추가합니다.
+                faqItem.addEventListener("click", function () {
+                    const content = this.dataset.content;
+                    alert(content); // 나중에는 모달 또는 다른 방법으로 표시할 수 있습니다.
+                });
+
+                faqList.appendChild(faqItem);
+            });
+        })
+        .catch(error => {
+            console.error("FAQ 데이터를 가져오는 중 오류 발생:", error);
+        });
+}

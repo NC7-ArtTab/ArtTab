@@ -1,27 +1,10 @@
 <!DOCTYPE html>
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/faq.css">
 </head>
-<div data-th-replace="fragment/header :: headerFragment"></div>
-<body style="margin-left: 40px;">
-
-<p style='color: #F86338; font-weight: bold;'>FAQ</p>
+<body>
+<p style="color: #F86338; font-weight: bold;">FAQ</p>
 <h1>자주 묻는 질문</h1>
 <hr>
 <br>
@@ -33,28 +16,14 @@
     <li style="display: inline-block; margin-bottom: 15px;">작품 구매</li><br>
 </div>
 
-
+<!-- FAQ 목록을 표시할 위치 -->
 <div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
-    <ul>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">회원가입은 어떻게 하나요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">비밀번호를 잊어버렸어요. 어떻게 찾을 수 있나요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">어떤 작품을 리셀할 수 있나요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">시작가는 무엇인가요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">즉시구매는 무엇인가요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">옥션은 제한된 시간 내에서만 가능한가요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">낙찰 후 결제는 어떻게 하나요?</a></li>
-        <hr>
-        <li style="margin-bottom: 10px;"><a href="#">진품인가요?</a></li>
-        <hr>
-        <!-- 다른 질문들 추가 -->
-    </ul>
+    <h2>FAQ 목록</h2>
+    <div id="faq-list">
+        <ul>
+            <!-- FAQ 목록은 JavaScript로 동적으로 생성됩니다. -->
+        </ul>
+    </div>
 </div>
 
 <div class="clear"></div>
@@ -62,16 +31,13 @@
 
 <p style="width: 50%; margin: 0 auto;">
     원하시는 답변을 찾지 못하셨다면 고객센터로 문의해 주세요.<br>
-    대표전화 : 1577-8888<br>
-    E-mail : arttab@gmail.com
+    대표전화: 1577-8888<br>
+    E-mail: arttab@gmail.com
 </p>
 
 <br><br><br><br><br><br><br><br>
 
-
-
-
+<!-- JavaScript 파일 스크립트 -->
+<script src="/js/faq.js"></script>
 </body>
-
-<div data-th-replace="fragment/footer :: footerFragment"></div>
 </html>

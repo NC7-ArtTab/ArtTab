@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FAQService {
     List<FAQ> getAllFAQs();
-    FAQ getFAQById(Long faqNo);
+    void addFAQ(String faqTitle, String faqContent);
 }

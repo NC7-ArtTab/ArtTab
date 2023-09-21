@@ -29,11 +29,11 @@ public class TestController {
     }
 
     //other
-    @GetMapping("/faq")
-    public String faqTest() {
-        log.info("Call faq.html");
-        return "/other/faq";
-    }
+//    @GetMapping("/faq")
+//    public String faqTest() {
+//        log.info("Call faq.html");
+//        return "/other/faq";
+//    }
 
     @GetMapping("/rule")
     public String rule() {

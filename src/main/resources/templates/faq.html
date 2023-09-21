@@ -1,23 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/faq.css">
 </head>
-<div data-th-replace="fragment/header :: headerFragment"></div>
-<body style="margin-left: 40px;">
-
-<p style='color: #F86338; font-weight: bold;'>FAQ</p>
+<body>
+<p style="color: #F86338; font-weight: bold;">FAQ</p>
 <h1>자주 묻는 질문</h1>
 <hr>
 <br>
@@ -31,6 +18,7 @@
 
 <!-- FAQ 목록을 표시할 위치 -->
 <div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <h2>FAQ 목록</h2>
     <ul id="faq-list">
         <!-- FAQ 목록은 JavaScript로 동적으로 생성됩니다. -->
     </ul>
@@ -41,16 +29,13 @@
 
 <p style="width: 50%; margin: 0 auto;">
     원하시는 답변을 찾지 못하셨다면 고객센터로 문의해 주세요.<br>
-    대표전화 : 1577-8888<br>
-    E-mail : arttab@gmail.com
+    대표전화: 1577-8888<br>
+    E-mail: arttab@gmail.com
 </p>
 
 <br><br><br><br><br><br><br><br>
 
-<script src="faq.js"></script>
-<link rel="stylesheet" type="text/css" href="faq.css">
-
+<!-- JavaScript 파일 스크립트 -->
+<script src="/static/js/faq.js"></script>
 </body>
-
-<div data-th-replace="fragment/footer :: footerFragment"></div>
 </html>

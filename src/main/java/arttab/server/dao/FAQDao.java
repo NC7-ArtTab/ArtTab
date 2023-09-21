@@ -1,10 +1,13 @@
 package arttab.server.dao;
 
 import arttab.server.vo.FAQ;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface FAQDao {
     List<FAQ> getAllFAQs();
-    FAQ getFAQById(Long faqNo);
+
+    void addFAQ(FAQ faq);
 }
