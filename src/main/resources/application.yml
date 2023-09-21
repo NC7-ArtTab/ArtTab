@@ -21,3 +21,4 @@ mybatis:
   mapper-locations: classpath:sql/**.xml
 
   type-aliases-package: arttab.server.vo # 별칭(alias)이 사용될 패키지 경로
+

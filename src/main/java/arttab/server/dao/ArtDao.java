@@ -3,15 +3,24 @@ package arttab.server.dao;
 import arttab.server.vo.Art;
 import org.apache.ibatis.annotations.Mapper;
 
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.session.RowBounds;
+
 
 
 import java.util.List;
 
 @Mapper
 public interface ArtDao {
+
+
+
+
+  
+    List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword);
+
 
 
   int insert(Art art);

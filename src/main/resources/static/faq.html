@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        .category {
+            float: left;
+            width: 30%;
+        }
+
+        .content {
+            float: left;
+            width: 70%;
+        }
+
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+
+<p>FAQ</p>
+<h1>자주 묻는 질문</h1>
+<hr>
+<br>
+
+<div class="category">
+    <li>전체</li><br>
+    <li>이용 정책</li><br>
+    <li>작품 판매/리셀</li><br>
+    <li>작품 구매</li><br>
+</div>
+
+<div class="content">
+    <ul>
+        <li><a href="#">회원가입은 어떻게 하나요?</a></li>
+        <li><a href="#">비밀번호를 잊어버렸어요. 어떻게 찾을 수 있나요?</a></li>
+        <!-- 다른 질문들 추가 -->
+    </ul>
+</div>
+
+<div class="clear"></div>
+
+<p>
+    원하시는 답변을 찾지 못하셨다면 고객센터로 문의해 주세요.<br>
+    대표전화 : 1577-8888<br>
+    E-mail : arttab@gmail.com
+</p>
+
+</body>
+
+
+
+</body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

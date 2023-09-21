@@ -5,7 +5,7 @@
 <mapper namespace="arttab.server.dao.ArtDao">
 
     <resultMap type="arttab.server.vo.Art" id="artMap">
-        <id     column="art_no"       property="artNo"/>
+         <id     column="art_no"       property="artNo"/>
         <result column="art_title"          property="artTitle"/>
         <result column="art_category"        property="artCategory"/>
         <result column="art_writer"     property="artWriter"/>
@@ -39,6 +39,58 @@
         </collection>
 
     </resultMap>
+<!--        <collection property="artFiles" ofType="arttab.server.vo.Attach">
+            <id column="file_no" property="fileNo"/>
+            <result column="file_path" property="filePath"/>
+            <result column="origin_file_name" property="originFileName"/>
+            <result column="save_file_name" property="saveFileName"/>
+            <result column="file_status" property="fileStatus"/>
+        </collection>
+    </resultMap>
+
+    <resultMap type="arttab.server.vo.Attach" id="attachMap">
+        <id column="file_no" property="fileNo"/>
+        <result column="file_path" property="filePath"/>
+        <result column="art_no" property="artNo"/>
+        <result column="origin_file_name" property="originFileName"/>
+        <result column="save_file_name" property="saveFileName"/>
+        <result column="faq_reg_datetime" property="fileRegDatetime"/>
+        <result column="file_status" property="fileStatus"/>
+    </resultMap>-->
+
+    <parameterMap type="java.util.Map" id="searchParams">
+        <parameter property="option" />
+        <parameter property="keyword" />
+    </parameterMap>
+
+    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
+        select
+        art_no,
+        art_title,
+        art_writer,
+        art_content
+        from
+        art
+        <where>
+            <if test="option != null and option.equals('title')">
+                AND art_title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="option != null and option.equals('writer')">
+                AND art_writer LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+ 
+
+    <insert id="insert" parameterType="arttab.server.vo.Art"
+            useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
+        insert into art(art_category,art_title,art_writer,bid_price_per,start_price,buy_now_price,start_datetime,end_datetime,art_content,art_detail)
+        values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
+    </insert>
+
+
+
 
 
     <select id="findBy" resultMap="artMap" parameterType="int">

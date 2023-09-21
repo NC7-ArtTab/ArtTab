@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회사소개</title>
+
+</head>
+<body style="margin-left: 40px;">
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<h1>about ArtTab</h1>
+<hr>
+<br>
+<br>
+<br>
+
+<h1>"Art Tab - ,  예술의 탭을 열어보세요."</h1>
+<br>
+<br>
+<br>
+
+
+<div style="display: flex;">
+    <div>
+        <h4>HISTORY</h4>
+    </div>
+    <div style="margin-left: 100px;">
+        <p>2023.04 학원개강</p>
+        <p>2023.06 xxxxx</p>
+        <p>2023.09 팀 결성</p>
+        <p>2023.09 정식 서비스 론칭</p>
+    </div>
+</div>
+<br>
+<hr>
+<br>
+<div style="display: flex;">
+    <div>
+        <h4>CONTACT US</h4>
+    </div>
+    <div style="margin-left: 100px;">
+        <p>서울시 강남구 강남대로94길 20, 삼오빌딩 6층</p>
+        <p>대표전화: 1577-8888</p>
+        <p>E-mail: arttab@arttab.com</p>
+    </div>
+</div>
+<br>
+<div id="map" style="width: 500px; height: 400px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe3b2bb769bf51a607e3feeb9dee3c0c"></script>
+<script type="text/javascript">
+
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(37.49941192249955, 127.02901574173119), //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng(37.49941192249955, 127.02901574173119);
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+</script>
+<br><br><br><br><br>
+
+</body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>
+

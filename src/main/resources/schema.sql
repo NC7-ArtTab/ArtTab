@@ -83,4 +83,6 @@ CREATE TABLE `pay` (
                        PRIMARY KEY (`mem_no`, `art_no`),
                        FOREIGN KEY (`mem_no`) REFERENCES `member` (`mem_no`),
                        FOREIGN KEY (`art_no`) REFERENCES `art` (`art_no`)
+
 );
+

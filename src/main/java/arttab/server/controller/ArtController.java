@@ -1,5 +1,9 @@
 package arttab.server.controller;
 
+
+import arttab.server.service.DefaultArtService;
+
+
 import arttab.server.service.ArtService;
 import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
@@ -7,22 +11,41 @@ import arttab.server.vo.MailSender;
 import arttab.server.vo.PageNation;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
+
+
+@Slf4j
 @Controller
 @RequestMapping("/art")
+@RequiredArgsConstructor
+
 public class ArtController {
 
-  @Autowired
-  ArtService artService;
 
-  @PostMapping("/add")
+    @Autowired
+    DefaultArtService artService;
+     @Autowired
+    ArtService artService;
+    
+    private final ArtService artService;
+  private final MailSender mailSender;
+
+
+
+    
+     @PostMapping("/add")
   public String add(Art art) throws Exception{
     //Member loginUser = (Member) session.getAttribute("loginUser");
 
@@ -32,25 +55,25 @@ public class ArtController {
     return "redirect:/admin/main";
   }
 
-  @GetMapping("/list")
-  public String list(Model model) throws Exception {
-    model.addAttribute("list", artService.list());
-    return "art/list";
-  }
+    @GetMapping("searchlist")
+    public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+        model.addAttribute("option", option);
+        model.addAttribute("keyword", keyword);
+
+        System.out.println(option + " " + keyword);
+
+        List<Art> searchResult = artService.searchlist(option, keyword);
+        model.addAttribute("searchResult", searchResult);
+        System.out.println("Search List: " + searchResult);
+
+        return "art/searchlist";
+    }
+
+}
 
 
-@Slf4j
-@Controller
-@RequestMapping("/art")
-@RequiredArgsConstructor
-public class ArtController {
-  private final ArtService artService;
-  private final MailSender mailSender;
+  
 
   @GetMapping("detail/{artNo}")
   public String detail(
@@ -69,6 +92,7 @@ public class ArtController {
     return "art/detail";
   }
 
+//hyun
   @PostMapping("/update")
   public String update(Art art, @RequestParam ("artNo") int artNo) throws Exception {
     //Member loginUser = (Member) session.getAttribute("loginUser");
@@ -80,10 +104,7 @@ public class ArtController {
     return "redirect:../admin/main";
   }
 
-
-}
-    return "art/detail";
-  }
+  
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name="pageNo", defaultValue = "1") int pageNo,
@@ -117,6 +138,8 @@ public class ArtController {
     }
   }
 
+
+//sungjoo
   @PostMapping("/update")
   @ResponseBody
   public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo, @RequestParam(name = "artTitle") String artTitle,@RequestParam(name = "bidPrice", defaultValue = "0") int bidPrice) throws Exception {
@@ -172,4 +195,5 @@ public class ArtController {
     }
   }
 }
+
 
