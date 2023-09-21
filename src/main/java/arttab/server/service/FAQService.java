@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface FAQService {
     List<FAQ> getAllFAQs();
-    void addFAQ(String faqTitle, String faqContent);
 }
