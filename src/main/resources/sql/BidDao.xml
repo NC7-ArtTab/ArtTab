@@ -8,7 +8,7 @@
         <id column="bid_no" property="bidNo"/>
         <result column="bid_price" property="bidPrice"/>
         <result column="bid_datetime" property="bidDatetime"/>
-        
+
         <association property="artNo" javaType="arttab.server.vo.Art">
             <id column="art_no" property="artNo"/>
             <result column="art_title" property="artTitle"/>

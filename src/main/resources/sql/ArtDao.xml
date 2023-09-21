@@ -81,7 +81,7 @@
         </where>
     </select>
 
- 
+
 
     <insert id="insert" parameterType="arttab.server.vo.Art"
             useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
