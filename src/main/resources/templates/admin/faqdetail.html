@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        .clear {
+            clear: both;
+        }
+        body {
+            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
+            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
+            margin: 0; /* 기본 마진을 제거합니다. */
+            padding: 0; /* 기본 패딩을 제거합니다. */
+            background-color: #F4F7F8; /* 배경색을 설정합니다. */
+        }
+    </style>
+    <title>FAQ List</title>
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>FAQ</p>
+<h1>FAQ List</h1>
+<hr>
+<br>
+
+<a data-th-href="@{/admin/faqform}"> 추가하기</a>
+
+
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+<form data-th-if="${faq}" data-th-action="@{/admin/faqupdate}" method='post' enctype="multipart/form-data">
+ <hr>
+    <br>
+        <table>
+            <tr>
+                <th>번호</th>
+                <td style="width:300px;"><input type="text" name="faqNo" data-th-value="${faq.faqNo}" readonly></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td style="width:300px;"><input type="text" name="faqTitle" data-th-value="${faq.faqTitle}"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><textarea name="faqContent" style="height:300px; width:500px;" data-th-text="${faq.faqContent}"></textarea></td>
+            </tr>
+            <tr>
+                <th>사용여부</th>
+                <td>
+                    <label>
+                        <input type="radio" name="faqStatus" value="Y" data-th-checked="${faq.faqStatus == 'Y'}"> Y
+                    </label>
+                    <label>
+                        <input type="radio" name="faqStatus" value="N" data-th-checked="${faq.faqStatus == 'N'}"> N
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit">변경</button>
+        <button type="reset">초기화</button>
+        <a data-th-href="@{/admin/faqlist}">목록</a>
+    </form>
+</div>
+
+<div class="clear"></div>
+
+<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

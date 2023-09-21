@@ -10,11 +10,11 @@
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
 
-<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<p style='color: #F86338; font-weight: bold;'>작품 관리</p>
 <div class="main">
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
-        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faq}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
@@ -25,7 +25,9 @@
 
 <div style="text-align: center;">
 <h2>경매 등록하기</h2>
+    <br>
 <hr>
+    <br>
 <form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
     <label for="artCategory">카테고리</label>
     <input type="text" id="artCategory" name="artCategory" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>

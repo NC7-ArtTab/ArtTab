@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @NoArgsConstructor // 기본생성자 생성
-public class File implements Serializable {
+public class Attach implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int fileNo;  //  파일번호
@@ -21,6 +21,6 @@ public class File implements Serializable {
     private String originFileName;  // 원래파일명
     private String saveFileName;  //  저장파일명
     private Timestamp fileRegDatetime;  //  파일등록일시
-    private char fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
+    private String fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
 
 }

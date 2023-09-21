@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        .clear {
+            clear: both;
+        }
+        body {
+            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
+            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
+            margin: 0; /* 기본 마진을 제거합니다. */
+            padding: 0; /* 기본 패딩을 제거합니다. */
+            background-color: #F4F7F8; /* 배경색을 설정합니다. */
+        }
+    </style>
+    <title>작품 List & 수정하기</title>
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>작품 관리</p>
+<h1>작품 List & 수정하기</h1>
+<hr>
+<br>
+
+<a th:href="@{/admin/auction}">추가하기</a>
+
+
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <tr><th>번호</th> <th>제목</th> <th>상태</th> </tr>
+    </thead>
+    <td colspan="6"><hr></td>
+
+    <br>
+    <tbody>
+    <tr data-th-each="art : ${artist}" style='margin:5px; text-align:center'>
+        <td data-th-text="${art.artNo}">번호</td>
+        <td><a data-th-href="@{'/admin/auction/' + ${art.artNo}}"
+                data-th-text="${art.artTitle}">제목</a> </td>
+        <td data-th-text="${art.artWriter}">작가</td>
+        <td data-th-text="${art.artRegDatetime}">작품등록일</td>
+        <td data-th-text="${art.artStatus}">상태</td>
+
+        <td colspan="6"><hr></td>
+    </tr>
+
+    </tr>
+    </tbody>
+</div>
+
+<div class="clear"></div>
+
+<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>
