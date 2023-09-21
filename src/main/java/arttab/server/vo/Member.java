@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor // 기본생성자 생성
 public class Member implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private int memNo;  //  회원번호
@@ -28,5 +29,6 @@ public class Member implements Serializable {
     private char memAuth;  //  회원권한 => A:관리자, M:일반회원
     private Timestamp memDatetime;  // 회원등록일시
     private char memStatus;  //  사용여부 => Y:회원, N:탈퇴회원
+
 
 }

@@ -25,14 +25,48 @@
 <div class="main">
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
+
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리(수정필요)</a></li>
+
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
 
 <hr>
 <br>
+<!-- 
+// sungjoo 경매품 목록 수정
+<table border='1'>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>시작일</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr data-th-each="art : ${list}">
+        <td data-th-text="${art.artNo}">100</td>
+        <td>
+            <a data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
+               data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목</a>
+        </td>
+        <td data-th-text="${art.artWriter}">홍길동</td>
+        <td data-th-text="${#dates.format(art.startDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
+        <td>
+            <a data-th-href="@{'/admin/detail?artNo='} + ${art.artNo}">수정</a>
+        </td>
+        <td>
+            <a data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
+        </td>
+    </tr>
+    </tbody>
+</table> -->
 
 
 <img style="filter: saturate(70%);" src="/static/images/back.jpg">

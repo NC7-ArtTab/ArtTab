@@ -1,27 +1,31 @@
 package arttab.server.controller;
 
 
-import arttab.server.service.ArtService;
 import arttab.server.service.BidService;
 import arttab.server.service.FAQService;
-import arttab.server.vo.Art;
-import arttab.server.vo.Bid;
+
 import arttab.server.vo.FAQ;
 import lombok.extern.slf4j.Slf4j;
+
+import arttab.server.service.ArtService;
+import arttab.server.vo.Art;
+import arttab.server.vo.Bid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+
 
 
 @Slf4j
@@ -33,9 +37,9 @@ public class AdminController {
     ArtService artService;
     @Autowired
     BidService bidService;
-
     @Autowired
     FAQService faqService;
+  
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     //admin
@@ -130,6 +134,30 @@ public class AdminController {
         return "/admin/bidstatus";
     }
 
+
+
+
+  @GetMapping("detail") //작품수정성주
+  public String detail(
+          @RequestParam int artNo,
+          Model model) throws Exception {
+
+    Art art = artService.get(artNo);
+    List<Bid> list = art.getArtBids();
+
+    if (art != null) {
+      model.addAttribute("art", art);
+      model.addAttribute("list", list);
+    }
+    return "admin/detail";
+  }
+
+  @GetMapping("delete") //작품삭제
+  public String delete(Art art, @RequestParam ("artNo") int artNo) throws Exception {
+
+    artService.delete(artNo);
+    return "redirect:../admin/main";
+  }
 
 
 }

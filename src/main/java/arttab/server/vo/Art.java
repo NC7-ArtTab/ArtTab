@@ -6,12 +6,13 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Getter
-@Setter
+
+@Data
 @ToString
 @NoArgsConstructor // 기본생성자 생성
 @AllArgsConstructor // 모든 필드를 파라미터로 받는 생성자 생성
 public class Art implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
 

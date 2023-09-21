@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor // 기본생성자 생성
 public class FAQ implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private int faqNo;  //  faq번호
@@ -22,5 +23,6 @@ public class FAQ implements Serializable {
     private String faqWriter;  //  faq작성자
     private Timestamp faqRegDatetime;  //  faq등록일시
     private char faqStatus;  //  faq사용여부 => Y:사용중(게시중), N:미사용(삭제건)
+
 
 }

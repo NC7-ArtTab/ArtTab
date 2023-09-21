@@ -7,7 +7,6 @@ VALUES
 -- 작품 테이블에 테스트 데이터 삽입
 INSERT INTO `art` (`art_title`, `art_writer`, `art_category`, `start_price`, `buy_now_price`, `bid_price_per`, `start_datetime`, `end_datetime`, `art_status`)
 VALUES
-
     ('동양화1', '동작가', 'E', 10000, 20000, 1000, NOW(), NOW(), 'R'),
     ('서양화1', '서작가', 'W', 15000, 25000, 2000, NOW(), NOW(), 'R'),
     ('공예품1', '공작가', 'P', 15000, 25000, 3000, NOW(), NOW(), 'R'),
@@ -62,7 +61,6 @@ VALUES
     ('기타작품12', '기작가', 'X', 15000, 25000, 7000, NOW(), NOW(), 'R');
 
 
-
 -- 경매 입찰 테이블에 테스트 데이터 삽입
 INSERT INTO `bid` (`art_no`, `mem_no`, `bid_price`)
 VALUES
@@ -77,14 +75,13 @@ VALUES
     (2, '/path/to/file2.jpg', 'file2.jpg', 'file2_saved.jpg');
 
 -- FAQ 테이블에 테스트 데이터 삽입
-INSERT INTO `faq` (`mem_no`, `faq_title`, `faq_content`)
+INSERT INTO `faq` (`mem_no`, `faq_title`, `faq_content`, `faq_writer`)
 VALUES
-    (1, 'FAQ 1', 'FAQ 내용 1'),
-    (2, 'FAQ 2', 'FAQ 내용 2');
+    (1, 'FAQ 1', 'FAQ 내용 1', 2),
+    (2, 'FAQ 2', 'FAQ 내용 2', 2);
 
 -- 결제 테이블에 테스트 데이터 삽입
 INSERT INTO `pay` (`mem_no`, `art_no`, `pay_price`)
 VALUES
     (1, 1, 20000),
     (2, 2, 25000);
-
