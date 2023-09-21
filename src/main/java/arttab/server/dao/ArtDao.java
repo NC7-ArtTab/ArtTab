@@ -11,7 +11,8 @@ import java.util.List;
 @Mapper
 public interface ArtDao {
   List<Art> findAll(Art art);
-
   Art findBy(int artNo);
+  int update(Art art);
+
 }
 

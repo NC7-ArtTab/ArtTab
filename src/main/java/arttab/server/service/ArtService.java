@@ -12,4 +12,6 @@ public interface ArtService {
     List<Art> list(Art art) throws Exception;
 
     Art art(int artNo) throws Exception;
+
+    int update(Art art) throws Exception;
 }

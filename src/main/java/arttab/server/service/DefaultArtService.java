@@ -37,4 +37,10 @@ public class DefaultArtService implements ArtService {
   public Art art(int artNo) throws Exception {
     return artDao.findBy(artNo);
   }
+
+  @Override
+  public int update(Art art) throws Exception {
+    return artDao.update(art);
+  }
+
 }

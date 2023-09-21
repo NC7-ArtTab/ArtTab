@@ -1,9 +1,6 @@
 package arttab.server.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -12,6 +9,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @NoArgsConstructor // 기본생성자 생성
+@AllArgsConstructor // 모든 필드를 파라미터로 받는 생성자 생성
 public class Attach implements Serializable {
   private static final long serialVersionUID = 1L;
 

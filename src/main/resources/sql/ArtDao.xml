@@ -86,9 +86,9 @@
         order by art_no desc
     </select>
 
-    <update id="update" parameterType="int">
-        update art set art_status = 'F'
-        where art_status = 'R' and art_no= #{artNo}
+    <update id="update" parameterType="art">
+        update art set art_status = #{artStatus}
+        where art_status = 'P' and art_no= #{artNo}
     </update>
 </mapper>
 

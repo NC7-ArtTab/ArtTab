@@ -5,7 +5,12 @@ spring:
   devtools:
     livereload:
       enabled: true
-#  h2:
+#      sender:
+#        user: "hoseu12345@gmail.com"
+#        pw: "cfshivnomffusalt"
+
+
+  #  h2:
 #    console:
 #      enabled: true
 #      path: /h2-console
