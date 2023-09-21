@@ -1,5 +1,5 @@
 drop all objects;
-CREATE TABLE member (
+CREATE TABLE arttab_member (
   `mem_no` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT ,
   `mem_email` varchar(50) NOT NULL ,
   `mem_pwd` varchar(100) DEFAULT NULL ,
@@ -15,6 +15,6 @@ CREATE TABLE member (
   `mem_status` char(1) DEFAULT NULL
 ) ;
 
-CREATE TABLE test (
-  id varchar(50)
-);
+--CREATE TABLE test (
+--  id varchar(50)
+--);

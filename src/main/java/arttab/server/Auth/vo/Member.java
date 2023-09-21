@@ -20,5 +20,5 @@ public class Member {
     private String memberAuth;
     private Timestamp createdDate;
     private String memberStatus;
-
+    private String memberBack;
 }

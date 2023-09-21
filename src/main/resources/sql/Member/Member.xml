@@ -1,13 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="arttab.server.Auth.mapper.MemberMapper">
-  <insert id="saveMember" parameterType="arttab.server.Auth.vo.Member">
-  INSERT INTO member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr, mem_detail_addr, mem_bank, mem_acc, mem_auth, mem_createdDate, mem_status)
-  VALUES(#{memberEmail}, #{memberPwd}, #{memberName}, #{memberPhone}, #{memberZipcode}, #{memberAddr}, #{memberDetailAddr}, #{memberBank}, #{memberAcc}, #{memberAuth}, #{createdDate}, #{memberStatus});
+
+  <!-- 결과 레코드의 컬럼 값을 자바 객체에 어떻게 담을 것인지 설정한다. -->
+  <resultMap type="member" id="memberMap">
+    <id column="mem_no" property="memberNo"/>
+    <result column="mem_email" property="memberEmail"/>
+    <result column="mem_pwd" property="memberPwd"/>
+    <result column="mem_name" property="memberName"/>
+    <result column="mem_phone" property="memberPhone"/>
+    <result column="mem_zipcode" property="memberZipcode"/>
+    <result column="mem_addr" property="memberAddr"/>
+    <result column="mem_detail_addr" property="memberDetailAddr"/>
+    <result column="mem_bank" property="memberBack"/>
+    <result column="mem_acc" property="memberAcc"/>
+    <result column="mem_detail_addr" property="memberDetailAddr"/>
+    <result column="mem_auth" property="memberAuth"/>
+    <result column="mem_createdDate" property="createdDate"/>
+    <result column="mem_status" property="memberStatus"/>
+  </resultMap>
+
+  <insert id="insertMember" parameterType="arttab.server.Auth.vo.Member">
+    INSERT INTO arttab_member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr,
+    mem_detail_addr, mem_bank, mem_acc, mem_auth, mem_createdDate, mem_status)
+    VALUES(#{memberEmail}, sha1(#{memberPwd}), #{memberName}, #{memberPhone}, #{memberZipcode},
+    #{memberAddr}, #{memberDetailAddr}, #{memberBank}, #{memberAcc}, #{memberAuth}, #{createdDate},
+    #{memberStatus});
   </insert>
- </mapper>
+
+  <select id="findAll" resultMap="memberMap">
+    select
+    mem_no,
+    mem_email,
+    mem_name,
+    mem_phone,
+    mem_zipcode,
+    mem_addr,
+    mem_detail_addr,
+    mem_bank,
+    mem_acc
+    from
+    arttab_member
+    order by
+    mem_no asc
+  </select>
+
+  <select id="findBy" parameterType="int" resultMap="memberMap">
+    select
+    mem_no,
+    mem_email,
+    mem_name,
+    mem_phone,
+    mem_zipcode,
+    mem_addr,
+    mem_detail_addr,
+    mem_bank,
+    mem_acc,
+    mem_createdDate
+    from
+    arttab_member
+    where
+    mem_no=#{memberNo}
+  </select>
+
+  <select id="findByEmailAndPassword" resultMap="memberMap">
+    select
+    mem_no,
+    mem_name,
+    mem_email,
+    mem_createdDate
+    from
+    arttab_member
+    where
+    mem_email=#{memberEmail}
+    and mem_pwd=sha1(#{memberPwd})
+  </select>
+
+  <update id="update" parameterType="member">
+    update arttab_member set
+    mem_name=#{memberName}
+    ,mem_email=#{memberEmail}
+    ,mem_pwd=#{memberPwd}
+    ,mem_phone=#{memberPhone}
+    ,mem_addr=#{memberAddr}
+    ,mem_bank=#{memberBank}
+    ,mem_acc=#{memberAcc}
+    where
+    mem_no=#{memberNo}
+  </update>
+  <delete id="delete" parameterType="int">
+    delete from arttab_member
+    where
+    mem_no=#{memberNo}
+  </delete>
+</mapper>
 
 
