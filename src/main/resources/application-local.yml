@@ -5,6 +5,7 @@ spring:
   devtools:
     livereload:
       enabled: true
+
 #      sender:
 #        user: "hoseu12345@gmail.com"
 #        pw: "cfshivnomffusalt"

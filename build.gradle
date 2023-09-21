@@ -27,9 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	implementation 'com.google.code.gson:gson:2.8.9'
-
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
 	implementation 'mysql:mysql-connector-java:8.0.33'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -51,5 +49,4 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
-}
+	useJUnitPlatform();}

@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="arttab.server.dao.ArtDao">
+
     <resultMap type="arttab.server.vo.Art" id="artMap">
         <id     column="art_no"       property="artNo"/>
         <result column="art_title"          property="artTitle"/>
@@ -28,6 +29,7 @@
             <result column="file_status" property="fileStatus"/>
         </collection>
 
+
         <collection property="artBids" ofType="arttab.server.vo.Bid">
             <id column="bid_no" property="bidNo"/>
             <result column="art_no" property="artNo"/>
@@ -35,6 +37,7 @@
             <result column="bid_price" property="bidPrice"/>
             <result column="bid_datetime" property="bidDatetime"/>
         </collection>
+
     </resultMap>
 
 
@@ -72,6 +75,7 @@
     </select>
 
 
+
     <select id="findAll" parameterType="art" resultMap="artMap">
         select art_no, art_title, art_category, art_writer, art_content, art_detail, start_price, buy_now_price, bid_price_per, start_datetime, end_datetime, art_reg_datetime, art_status
         from art
@@ -91,7 +95,6 @@
         where art_status = 'P' and art_no= #{artNo}
     </update>
 </mapper>
-
 
 
 
