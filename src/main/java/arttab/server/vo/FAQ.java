@@ -1,9 +1,6 @@
 package arttab.server.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -11,7 +8,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor // 기본생성자 생성
+@NoArgsConstructor
+@AllArgsConstructor
 public class FAQ implements Serializable {
 
     private static final long serialVersionUID = 1L;

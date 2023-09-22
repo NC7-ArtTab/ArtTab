@@ -5,12 +5,12 @@ import arttab.server.service.BidService;
 import arttab.server.service.FAQService;
 
 import arttab.server.vo.FAQ;
-import lombok.extern.slf4j.Slf4j;
 
 import arttab.server.service.ArtService;
 import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 
+import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

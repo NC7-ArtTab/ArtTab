@@ -16,9 +16,12 @@ import java.util.List;
 @Service
 public class DefaultArtService implements ArtService {
 
+  {
+    System.out.println("DefaultArtService 생성됨!");
+  }
 
 
-ArtDao artDao;
+  ArtDao artDao;
 
   public DefaultArtService(ArtDao artDao) {
     this.artDao = artDao;
@@ -27,6 +30,7 @@ ArtDao artDao;
   public List<Art> searchlist(String option, String keyword) throws Exception {
      return artDao.searchlist(option, keyword);
     }
+
 
   @Transactional
   @Override
@@ -44,7 +48,14 @@ ArtDao artDao;
     return artDao.findAll();
   }
 
-
+  //성주
+  public List<Art> list(Art art) throws Exception {
+      return artDao.findAll(art);
+    }
+  @Override
+  public Art art(int artNo) throws Exception {
+    return artDao.findBy(artNo);
+  }
   @Transactional
   @Override
   public void delete(int artNo) throws Exception {
@@ -61,12 +72,4 @@ ArtDao artDao;
   public int update(Art art) throws Exception {
     return artDao.update(art);
   }
-
-
-
-  //성주
-  public List<Art> list(Art art) throws Exception {
-    return artDao.findAll(art);
-  }
-
 }

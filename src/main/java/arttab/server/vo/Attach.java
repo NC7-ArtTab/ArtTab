@@ -10,10 +10,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor // 모든 필드를 파라미터로 받는 생성자 생성
-
-
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class Attach implements Serializable {
   private static final long serialVersionUID = 1L;
 

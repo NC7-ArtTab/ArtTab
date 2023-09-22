@@ -6,13 +6,12 @@ import org.apache.ibatis.session.RowBounds;
 import java.util.List;
 
 public interface ArtService {
-
-
-  int add(Art art) throws Exception;
-
-  List<Art> list() throws Exception;
-
+  public int add(Art art) throws Exception;
   Art get(int artNo) throws Exception;
+  public List<Art> list() throws Exception;
+  List<Art> list(Art art) throws Exception;
+
+    Art art(int artNo) throws Exception;
 
   int update(Art art) throws Exception;
 

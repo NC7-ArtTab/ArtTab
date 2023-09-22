@@ -8,8 +8,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor // 기본생성자 생성
-@AllArgsConstructor // 모든 필드를 파라미터로 받는 생성자 생성
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageNation {
   public static final int PAGE_PER_ART_CNT = 6; // 페이지 당 보여줄 작품 수
   public static final int PAGE_BTN_COUNT = 5; // 선택할 수 있는 페이징 버튼 수

@@ -30,17 +30,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/art")
 @RequiredArgsConstructor
-
 public class ArtController {
-
-     @Autowired
-    ArtService artService;
-
+  private final ArtService artService;
   private final MailSender mailSender;
 
 
-
-    
      @PostMapping("/add")
   public String add(Art art) throws Exception{
     //Member loginUser = (Member) session.getAttribute("loginUser");
@@ -68,7 +62,7 @@ public class ArtController {
 
 
 
-  
+
 
   @GetMapping("detail/{artNo}")
   public String detail(
@@ -83,13 +77,8 @@ public class ArtController {
       model.addAttribute("art", art);
       model.addAttribute("list", list);
     }
-
     return "art/detail";
   }
-
-
-
-  
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name="pageNo", defaultValue = "1") int pageNo,
@@ -101,7 +90,7 @@ public class ArtController {
       art.setArtCategory(artCategory);
       art.setArtStatus(artStatus);
 
-      List<Art> artList = artService.list(); // artCategory와 artStatus를 담아 넘김
+      List<Art> artList = artService.list(art); // artCategory와 artStatus를 담아 넘김
 
       if (artList != null && artList.size() > 0) { // 조회된 전체 경매작품이 0 개 이상이면
         PageNation pageNation = new PageNation(pageNo);
@@ -123,40 +112,41 @@ public class ArtController {
     }
   }
 
-
-//sungjoo
   @PostMapping("/update")
   @ResponseBody
-  public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo, @RequestParam(name = "artTitle") String artTitle,@RequestParam(name = "bidPrice", defaultValue = "0") int bidPrice) throws Exception {
+  public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo) throws Exception {
     try {
-      Art art = artService.get(artNo);
-      System.out.println(art.toString());
+      int bidMaxPirce = 0;
+      Art art = artService.get(artNo);  // 경매작품 데이터 한번 더
+
+      if (art.getArtBids() != null && art.getArtBids().size() > 0) { // 해당 경매작품의 입찰기록이 1개 이상 존재하면
+        bidMaxPirce = art.getArtBids().get(0).getBidPrice(); // 가격을 최신화
+      }
+
       if (!"P".equals(art.getArtStatus())) { // 작품의 상태가 이미 취소인 상태이면 에러페이지로 이동
         throw new Exception();
       }
 
-      System.out.println("작품상태 변경!!!!!!");
-      
-      if("P".equals(art.getArtStatus()) && bidPrice == 0) { // 진행중인 경매건이면서 아무도 입찰을 안했으면
+
+      if("P".equals(art.getArtStatus()) && bidMaxPirce == 0) { // 진행중인 경매건이면서 아무도 입찰을 안했으면
         art.setArtStatus("F"); // 그냥 종료로 변경
         artService.update(art);
-      } else if("P".equals(art.getArtStatus()) && bidPrice > 0) { // 진행중인 경매건이면서 현재 입찰가(최고입찰가)가 있으면
+      } else if("P".equals(art.getArtStatus()) && bidMaxPirce > 0) { // 진행중인 경매건이면서 현재 입찰가(최고입찰가)가 있으면
         art.setArtStatus("Y"); // 낙찰 처리
         artService.update(art);
+
+        // 최고 입찰자의 메일로 낙찰 메일 전송<수정해야함!!!>
         mailSender.sendMail(art, "itkw87@naver.com");
 
         System.out.println(mailSender.toString());
       }
 
-
-      Map<String, Object> data = new HashMap<String, Object>();
-
-      data.put("artTitle", artTitle);
       Gson gson = new Gson();
-
+      Map<String, Object> data = new HashMap<String, Object>();
+      data.put("artTitle", art.getArtTitle());
       response.setContentType("application/json; charset=UTF-8");
-
       response.getWriter().print(gson.toJson(data));
+
     } catch (Exception e) {
       throw e;
     }
@@ -180,5 +170,3 @@ public class ArtController {
     }
   }
 }
-
-
