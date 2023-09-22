@@ -54,7 +54,7 @@ public class AuthController {
 
         session.setAttribute("loginUser", loginUser);
         log.info("Call login");
-        return "redirect:index";
+        return "index";
     }
 
     @GetMapping("/logout")
