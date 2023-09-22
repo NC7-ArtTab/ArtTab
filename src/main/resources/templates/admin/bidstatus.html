@@ -5,43 +5,7 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .won {
-            background-color: green; /* 낙찰 건의 배경색을 녹색으로 지정 */
-            color: white; /* 텍스트 색상을 흰색으로 지정 */
-        }
-
-        .in-progress {
-            background-color: yellow; /* 경매 진행 중인 건의 배경색을 노란색으로 지정 */
-            color: black; /* 텍스트 색상을 검정색으로 지정 */
-        }
-
-        .preparation {
-            background-color: blue; /* 경매 준비 중인 건의 배경색을 파란색으로 지정 */
-            color: white; /* 텍스트 색상을 흰색으로 지정 */
-        }
-
-        .finished {
-            background-color: gray; /* 경매 종료 건의 배경색을 회색으로 지정 */
-            color: white; /* 텍스트 색상을 흰색으로 지정 */
-        }
-
-        .deleted {
-            background-color: red; /* 삭제 건의 배경색을 빨간색으로 지정 */
-            color: white; /* 텍스트 색상을 흰색으로 지정 */
-        }
-        .table-header {
-        padding: 30px; /* 원하는 여백 크기로 조정할 수 있습니다. */
-        margin-right: 20px;
-    }
-        th {
-    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
-}
-
-td {
-    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
-}
-    </style>
+<link rel="stylesheet" type="text/css" href="../../static/css/bidstatus.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -51,7 +15,7 @@ td {
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
-        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리(수정필요)</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
@@ -82,29 +46,36 @@ td {
         <br>
         <tbody>
         <tr data-th-each="bid : ${bidstatus}" style='margin:5px; text-align:center'>
-            <td data-th-text="${bid.artNo.artWriter}">작가명</td>
-            <td data-th-text="${bid.artNo.artTitle} ?: '제목없음'">작품명</td>
-            <td data-th-text="${#dates.format(bid.artNo.startDatetime, 'yyyy-MM-dd')}">경매시작</td>
-            <td data-th-text="${#dates.format(bid.artNo.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
+            <td data-th-text="${bid.art.artWriter}">작가명</td>
+            <td data-th-text="${bid.art.artTitle} ?: '제목없음'">작품명</td>
+            <td data-th-text="${#dates.format(bid.art.startDatetime, 'yyyy-MM-dd')}">경매시작</td>
+            <td data-th-text="${#dates.format(bid.art.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
             <td data-th-text="${bid.bidPrice}">현재최고입찰가</td>
-            <td data-th-text="${bid.artNo.buyNowPrice}">즉시구매가</td>
+            <td data-th-text="${bid.art.buyNowPrice}">즉시구매가</td>
             <!--<td data-th-text="${bid.artNo.artStatus}">상태</td>-->
-            <td>
-                <th:block th:if="${bid.artNo.artStatus == 'Y'}">
+<!--            <td>
+                <th:block th:if="${bid.art.artStatus == 'Y'}">
                     낙찰 완료
                 </th:block>
-                <th:block th:if="${bid.artNo.artStatus == 'P'}">
+                <th:block th:if="${bid.art.artStatus == 'P'}">
                     진행중
                 </th:block>
-                <th:block th:if="${bid.artNo.artStatus == 'R'}">
+                <th:block th:if="${bid.art.artStatus == 'R'}">
                     준비중
                 </th:block>
-                <th:block th:if="${bid.artNo.artStatus == 'F'}">
+                <th:block th:if="${bid.art.artStatus == 'F'}">
                     경매 종료
                 </th:block>
-                <th:block th:if="${bid.artNo.artStatus == 'D'}">
+                <th:block th:if="${bid.art.artStatus == 'D'}">
                     삭제
                 </th:block>
+            </td>-->
+            <td>
+                <span class="won" th:if="${bid.art.artStatus == 'Y'}">낙찰 완료</span>
+                <span class="in-progress" th:if="${bid.art.artStatus == 'P'}">진행중</span>
+                <span class="preparation" th:if="${bid.art.artStatus == 'R'}">준비중</span>
+                <span class="finished" th:if="${bid.art.artStatus == 'F'}">경매 종료</span>
+                <span class="deleted" th:if="${bid.art.artStatus == 'D'}">삭제</span>
             </td>
             <td colspan="7"><hr></td>
         </tr>

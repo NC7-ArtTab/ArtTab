@@ -100,10 +100,7 @@ public class AdminController {
 
 
     // 작품 관리
-    @GetMapping("/artist")
-    public void artlist(Model model) throws Exception {
-        model.addAttribute("artlist", adminService.list());
-    }
+
 
     @PostMapping("/addart")
     public String addart(Art art, HttpSession session) throws Exception{
@@ -133,6 +130,8 @@ public class AdminController {
   }
 
 
+
+
     //입찰현황
     @GetMapping("/bidstatus")
     public String bidstatus(Model model) throws Exception {
@@ -148,22 +147,24 @@ public class AdminController {
         return "/admin/bidstatus";
     }
 
+    @GetMapping("/artlist")
+    public void artlist(Model model) throws Exception {
+        model.addAttribute("artlist", adminService.list());
+    }
 
 
-
-  @GetMapping("detail") //작품수정성주
-  public String detail(
+  @GetMapping("artdetail") //작품수정성주
+  public String artdetail(
           @RequestParam int artNo,
           Model model) throws Exception {
 
     Art art = artService.get(artNo);
-    List<Bid> list = art.getArtBids();
 
     if (art != null) {
       model.addAttribute("art", art);
-      model.addAttribute("list", list);
+
     }
-    return "admin/detail";
+    return "admin/artdetail";
   }
 
   @GetMapping("delete") //작품삭제
@@ -196,6 +197,7 @@ public class AdminController {
         model.addAttribute("searchResult", searchResult);
         System.out.println("Search List: " + searchResult);
 
+//        return "admin/searchlist";
         return "admin/searchlist";
     }
 

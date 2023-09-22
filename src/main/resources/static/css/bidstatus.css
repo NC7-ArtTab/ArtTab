@@ -1,0 +1,37 @@
+ .won {
+            background-color: green; /* 낙찰 건의 배경색을 녹색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .in-progress {
+            background-color: yellow; /* 경매 진행 중인 건의 배경색을 노란색으로 지정 */
+            color: black; /* 텍스트 색상을 검정색으로 지정 */
+        }
+
+        .preparation {
+            background-color: blue; /* 경매 준비 중인 건의 배경색을 파란색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .finished {
+            background-color: gray; /* 경매 종료 건의 배경색을 회색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .deleted {
+            background-color: red; /* 삭제 건의 배경색을 빨간색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+        .table-header {
+        padding: 30px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+        margin-right: 20px;
+    }
+        th {
+    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+}
+
+td {
+    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+}
+
+p{color : blue;}

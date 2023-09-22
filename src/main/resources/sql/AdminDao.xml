@@ -55,6 +55,7 @@
 
     <select id="findAll" resultMap="artMap" parameterType="int">
         select
+        art_no,
         art_title,
         art_category,
         art_writer,
@@ -64,6 +65,7 @@
         buy_now_price,
         bid_price_per,
         start_datetime,
+        art_reg_datetime,
         end_datetime,
         art_status
         from art
@@ -151,7 +153,14 @@
         art_no,
         art_title,
         art_writer,
-        art_content
+        art_content,
+        start_price,
+        buy_now_price,
+        bid_price_per,
+        art_reg_datetime,
+        start_datetime,
+        end_datetime,
+        art_status
         from
         art
         <where>

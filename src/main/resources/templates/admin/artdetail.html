@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>경매 수정</title>
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>작품 수정</p>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리(수정필요)</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
+    </ul>
+</div>
+
+
+<hr>
+<br>
+
+<div style="text-align: center;">
+
+    <h2>경매 수정하기</h2>
+    <br>
+    <hr>
+    <br>
+    <form data-th-action="@{'/admin/update?artNo='}+${art.artNo}" method='post' enctype='multipart/form-data'>
+        <label for="artCategory">카테고리</label>
+        <input type="radio" id="artCategoryE" name="artCategory" value="E" required>
+        <label for="artCategoryE">동양화</label>
+        <input type="radio" id="artCategoryW" name="artCategory" value="W" required>
+        <label for="artCategoryW">서양화</label>
+        <input type="radio" id="artCategoryP" name="artCategory" value="P" required>
+        <label for="artCategoryP">공예품</label><br><br>
+
+        <label for="artTitle">작품명</label>
+        <input type="text" id="artTitle" name="artTitle" data-th-value="${art.artTitle}" required><br><br>
+
+        <label for="artWriter">작가명</label>
+        <input type="text" id="artWriter" name="artWriter" data-th-value="${art.artWriter}" required><br><br>
+
+        <label for="bidPricePer">입찰가격단위</label>
+        <input type="text" id="bidPricePer" name="bidPricePer" data-th-value="${art.bidPricePer}" required><br><br>
+
+        <label for="startPrice">경매 시작가</label>
+        <input type="text" id="startPrice" name="startPrice" data-th-value="${art.startPrice}" required><br><br>
+
+        <label for="buyNowPrice">즉시 구매가</label>
+        <input type="text" id="buyNowPrice" name="buyNowPrice" data-th-value="${art.buyNowPrice}" required><br><br>
+
+        <label for="startDatetime">경매시작일시</label>
+        <input type="text" id="startDatetime" name="startDatetime" data-th-value="${art.startDatetime}" required><br><br>
+
+        <label for="endDatetime">경매종료일시</label>
+        <input type="text" id="endDatetime" name="endDatetime" data-th-value="${art.endDatetime}" required><br><br>
+
+        <label for="artContent">작품 설명</label>
+        <input type="text" id="artContent" name="artContent" data-th-value="${art.artContent}" required style="width: 20%;"><br><br>
+
+        <label for="artDetail">작품 상세 설명</label>
+        <textarea id="artDetail" name="artDetail" data-th-value="${art.artDetail}" rows="8" cols="60" required></textarea><br><br>
+
+        <label for="files">이미지 등록</label>
+        <!--        <div data-th-each="file : ${art.artAttaches}">-->
+        <!--            <a data-th-href="|https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-06/board/${file.filePath}|"-->
+        <!--               data-th-text="${file.filePath}">ohora.gif</a>-->
+        <!--            [<a data-th-href="|/board/fileDelete/attachedFile;no=${file.no}|">삭제</a>]<br>-->
+        <!--        </div>-->
+        <input type="file" id="files" name="files" multiple><br><br>-->
+
+        <button>수정</button>
+        <!--        <input type="submit" value="제출">-->
+    </form>
+</div>
+
+</body>
+</html>
