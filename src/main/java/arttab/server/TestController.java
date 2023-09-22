@@ -20,7 +20,7 @@ public class TestController {
     @GetMapping("/")
     public String index() {
         log.info("Call index.html");
-        return "list";
+        return "index";
     }
     @GetMapping("/layout-test")
     public String layoutTest() {

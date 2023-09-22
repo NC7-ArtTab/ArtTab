@@ -25,7 +25,7 @@ public class Attach implements Serializable {
   private Timestamp fileRegDatetime;  //  파일등록일시
 
   private char fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
-  private String fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
+  //private String fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
 
 
 }
