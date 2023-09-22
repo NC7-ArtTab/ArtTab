@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @NoArgsConstructor // 기본생성자 생성
+
 public class Bid implements Serializable {
   private static final long serialVersionUID = 1L;
 

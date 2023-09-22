@@ -28,4 +28,5 @@ public class Art implements Serializable {
 
   private List<Attach> artAttaches; // 작품 첨부파일 목록
   private List<Bid> artBids;  // 작품 입찰가 목록
+
 }

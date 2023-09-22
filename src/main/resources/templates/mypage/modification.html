@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">기현님 My page</li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/modification}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/modification}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/modification}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
+    </ul>
+</div>
+
+<hr>
+<br>
+
+<div style="text-align: center;">
+<h2>회원 정보 수정</h2>
+<hr>
+<form>
+    <label for="email">이메일:</label>
+    <input type="email" id="email" name="memEmail" placeholder="이메일을 입력하세요" required><br><br>
+
+    <label for="name">이름:</label>
+    <input type="text" id="name" name="memName" placeholder="이름을 입력하세요" required><br><br>
+
+    <label for="account">계좌:</label>
+    <input type="text" id="account" name="memAcc" placeholder="계좌를 입력하세요" required><br><br>
+
+    <input type="submit" value="제출">
+</form>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+
+
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

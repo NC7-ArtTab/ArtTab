@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 @NoArgsConstructor // 기본생성자 생성
+
 public class Attach implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -22,4 +23,5 @@ public class Attach implements Serializable {
   private String saveFileName;  //  저장파일명
   private Timestamp fileRegDatetime;  //  파일등록일시
   private String fileStatus;  //  파일사용여부 => 사용중(게시건), N:미사용(삭제건)
+
 }

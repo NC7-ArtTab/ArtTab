@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:https="http://www.w3.org/1999/xhtml">
+<head th:replace="~{fragment/config :: configFragment}">
+</head>
+<body>
+<div class="container">
+    <header th:replace="~{fragment/header :: headerFragment}"></header>
+
+
+    <div>
+        <a data-th-href="@{/art/list}" data-th-text="${art.artStatus}">상태 </a>
+        <a data-th-href="@{/art/list/동양화}" data-th-text="${art.artCategory}">카테고리 </a>
+        <a data-th-text="${art.artTitle}">제목 </a>
+
+    </div>
+
+    <div layout:fragment="content">
+        <div>
+            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+                 width="50" height="70">
+            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+                 width="50" height="70">
+            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+                 width="50" height="70">
+            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+                 width="50" height="70">
+        </div>
+
+        <div>
+            <input id="artNo" type='text' data-th-value="${art.artNo}"/>
+            <input id="artTitle" type='text' data-th-value="${art.artTitle}"/>
+            <input id="bidPrice" type='text' value="10000"/>
+            <h2 th:text="${art.artTitle}">제목</h2>
+            <h4>경매 시작가</h4>
+            <h4 th:text="${art.startPrice}">시작가</h4>
+            <h4>현재 입찰 최고가 </h4>
+            <h4 th:text="${list[0].bidPrice}">현재 입찰 최고가</h4>
+            <h4>작품 설명</h4>
+            <p th:text="${art.artContent}">내용</p>
+            <div>
+                <h5>경매 기간</h5>
+                <span data-th-text="${art.startDatetime + '~' + art.endDatetime}"></span>
+                <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
+
+                <div class="sec7-text-box">
+                    <hr>
+                    <p class="time-title">경매 마감까지 남은 시간</p>
+                    <div class="time">
+                        <span id="d-day-hour">00</span>
+                        <span class="col">:</span>
+                        <span id="d-day-min">00</span>
+                        <span class="col">:</span>
+                        <span id="d-day-sec">00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="max-height: 100px; overflow-y:scroll; text-align: center;">
+        <table id="bidPriceTable" style="width:100%; border: 1px solid black;">
+            <th style="padding-right: 20px;">입찰가</th><th>입찰일시</th>
+            <!-- 실시간 경매정보 영역 -->
+
+        </table>
+    </div>
+    <button id="text_btn" ;>Ajax테스트용</button>
+    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var remaindTimeId; // remaindTime()의 setInterval의 ID를 저장할 변수
+        var realTimeInfoId; // realTimeInfo()의 setInterval의 ID를 저장할 변수
+        var artNo = $("#artNo").val();
+        var artTitle = $("#artTitle").val();
+        var bidPrice = $("#bidPrice").val();
+
+        function remaindTime() {
+            var now = new Date(); //현재시간을 구한다.
+
+            // var open = new Date($("#end_datetime").val());
+            var open = new Date(2023, 8, 22, 19, 15, 0); // 테스트용 경매 마감시간 설정
+
+            var nowTime = now.getTime(); // 현재의 시간만 가져온다
+            var finishTime = open.getTime(); // 경매마감 시간만 가져온다
+
+            if (nowTime < finishTime) { //현재시간이 경매마감시간 보다 이르면 오픈시간까지의 남은 시간을 구한다.
+                sec = parseInt(finishTime - nowTime) / 1000;
+                hour = parseInt(sec / 60 / 60);
+                sec = (sec - (hour * 60 * 60));
+                min = parseInt(sec / 60);
+                sec = parseInt(sec - (min * 60));
+
+                if (hour < 10) {
+                    hour = "0" + hour;
+                }
+                if (min < 10) {
+                    min = "0" + min;
+                }
+                if (sec < 10) {
+                    sec = "0" + sec;
+                }
+                $("#d-day-hour").html(hour);
+                $("#d-day-min").html(min);
+                $("#d-day-sec").html(sec);
+
+            } else { //현재시간이 종료시간보다 크면
+                $("#d-day-hour").html('00');
+                $("#d-day-min").html('00');
+                $("#d-day-sec").html('00');
+
+                // 남은 시간이 0초면 Ajax호출
+                endTheAuction();
+
+                // setInterval 종료
+                clearInterval(remaindTimeId);
+                clearInterval(realTimeInfoId);
+            }
+        }
+
+        function endTheAuction() {
+            // AJAX 요청 생성
+            $.ajax({
+                url: "/art/update", // 데이터를 가져올 URL
+                method: "POST",
+                data: {artNo: artNo, artTitle: artTitle, bidPrice: bidPrice},
+                success: function (data) {
+                    // 요청이 성공했을 때 실행할 코드
+                    console.log(data)
+                    console.log("요청 성공:", data.artTitle);
+                    alert("<" + data.artTitle + "> 작품의 경매가 종료 되었습니다!");
+                },
+                error: function (xhr, status, error) {
+                    // 요청이 실패했을 때 실행할 코드
+                    if (xhr.status === 400) { // 유효하지 않은 경매품에 대해서는 상태코드 400으로 응답
+                        alert("종료된 경매건 입니다!");
+                        console.log("정상 오류!");
+                    } else {
+                        console.log("의도하지 않은 다른 오류 발생!:", error);
+                    }
+
+                }
+            }).always(function () {
+                // 요청이 성공하든 실패하든 작품 리스트로 이동
+                // window.location.href = "/art/list";
+            });
+        }
+        realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
+        remaindTimeId = setInterval(remaindTime, 1000);
+        realTimeInfoId = setInterval(realTimeInfo, 5000);
+
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        function realTimeInfo() {
+            // AJAX 요청 생성
+            $.ajax({
+                url: "/art/realTimeInfo", // 데이터를 가져올 URL
+                method: "POST",
+                data: {artNo: artNo},
+                success: function (data) {
+                    console.log(data.art);
+                    console.log(data.art.artBids);
+                    console.log(data.art.artBids[0]);
+
+                    let newRow;
+                    const bidList = data.art.artBids;
+
+                    if ($(".artInfo_row").length > 0) {
+                        $(".artInfo_row").remove();
+                    }
+
+                    for (let i = 0; i < bidList.length; i++) {
+                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidList[i].bidPrice + " (원)")).append($("<td>").text(formatDate(bidList[i].bidDatetime)));
+                        $("#bidPriceTable").append(newRow);
+                    }
+                },
+                error: function () {
+                    console.error();
+                }
+            });
+            clearInterval(realTimeInfoId);
+        }
+    });
+</script>
+</html>

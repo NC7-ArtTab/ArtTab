@@ -1,13 +1,11 @@
 package arttab.server.dao;
 
 import arttab.server.dto.ArtDetailDto;
-import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper

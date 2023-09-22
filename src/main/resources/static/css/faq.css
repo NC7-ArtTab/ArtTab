@@ -1,0 +1,25 @@
+.clear {
+    clear: both;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #F4F7F8;
+}
+
+.faq-item {
+    cursor: pointer;
+    margin-bottom: 10px; /* 각 FAQ 항목 간의 간격 조정 */
+    padding: 10px; /* FAQ 항목의 패딩 추가 */
+    background-color: #fff; /* FAQ 항목 배경색 추가 */
+    border-radius: 5px; /* FAQ 항목 모서리 둥글게 만듦 */
+    transition: background-color 0.3s ease; /* 부드러운 배경색 전환 효과 */
+}
+
+.faq-item:hover {
+    background-color: #F86338; /* FAQ 항목을 호버할 때 배경색 변경 */
+    color: #fff; /* 글자색 변경 */
+}

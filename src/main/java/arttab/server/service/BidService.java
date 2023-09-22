@@ -6,6 +6,7 @@ import arttab.server.vo.Bid;
 import java.util.List;
 
 public interface BidService {
+
   // 경매 상품 상세 정보 조회
   ArtDetailDto artDetail(int artNo);
 

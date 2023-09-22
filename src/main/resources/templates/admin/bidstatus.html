@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        .won {
+            background-color: green; /* 낙찰 건의 배경색을 녹색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .in-progress {
+            background-color: yellow; /* 경매 진행 중인 건의 배경색을 노란색으로 지정 */
+            color: black; /* 텍스트 색상을 검정색으로 지정 */
+        }
+
+        .preparation {
+            background-color: blue; /* 경매 준비 중인 건의 배경색을 파란색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .finished {
+            background-color: gray; /* 경매 종료 건의 배경색을 회색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+
+        .deleted {
+            background-color: red; /* 삭제 건의 배경색을 빨간색으로 지정 */
+            color: white; /* 텍스트 색상을 흰색으로 지정 */
+        }
+        .table-header {
+        padding: 30px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+        margin-right: 20px;
+    }
+        th {
+    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+}
+
+td {
+    padding: 10px; /* 원하는 여백 크기로 조정할 수 있습니다. */
+}
+    </style>
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
+    </ul>
+</div>
+
+<hr>
+<br>
+
+<div style="text-align: center;">
+<h2>입찰 구매 현황</h2>
+<br>
+<hr>
+    <a data-th-href="@{/admin/auction}"> 작품 등록하기</a>
+    </div>
+
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+        <thead>
+        <tr><th class="table-header;">작가명</th>
+            <th class="table-header">작품명</th>
+            <th class="table-header">경매시작</th>
+            <th class="table-header">경매마감</th>
+            <th class="table-header">현재최고입찰가</th>
+            <th class="table-header">즉시구매가</th>
+            <th class="table-header">상태</th>
+        </tr>
+        </thead>
+        <td colspan="10"><hr></td>
+        <br>
+        <br>
+        <tbody>
+        <tr data-th-each="bid : ${bidstatus}" style='margin:5px; text-align:center'>
+            <td data-th-text="${bid.artNo.artWriter}">작가명</td>
+            <td data-th-text="${bid.artNo.artTitle} ?: '제목없음'">작품명</td>
+            <td data-th-text="${#dates.format(bid.artNo.startDatetime, 'yyyy-MM-dd')}">경매시작</td>
+            <td data-th-text="${#dates.format(bid.artNo.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
+            <td data-th-text="${bid.bidPrice}">현재최고입찰가</td>
+            <td data-th-text="${bid.artNo.buyNowPrice}">즉시구매가</td>
+            <!--<td data-th-text="${bid.artNo.artStatus}">상태</td>-->
+            <td>
+                <th:block th:if="${bid.artNo.artStatus == 'Y'}">
+                    낙찰 완료
+                </th:block>
+                <th:block th:if="${bid.artNo.artStatus == 'P'}">
+                    진행중
+                </th:block>
+                <th:block th:if="${bid.artNo.artStatus == 'R'}">
+                    준비중
+                </th:block>
+                <th:block th:if="${bid.artNo.artStatus == 'F'}">
+                    경매 종료
+                </th:block>
+                <th:block th:if="${bid.artNo.artStatus == 'D'}">
+                    삭제
+                </th:block>
+            </td>
+            <td colspan="7"><hr></td>
+        </tr>
+        </tbody>
+
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

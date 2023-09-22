@@ -1,8 +1,16 @@
 spring:
   profiles:
     active: local
+    include: sender
   mvc:
     static-path-pattern: static/**
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+  web:
+    resources:
+      static-locations: file:src/main/resources/static/
+      cache-period: 0
+
 
 mybatis:
   configuration:
@@ -11,4 +19,7 @@ mybatis:
     call-setters-on-nulls: true
     multiple-result-sets-enabled: false
   mapper-locations: classpath:sql/**.xml
+
+
   type-aliases-package: arttab.server.vo # 별칭(alias)이 사용될 패키지 경로
+
