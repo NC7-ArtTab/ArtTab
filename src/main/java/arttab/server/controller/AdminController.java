@@ -1,16 +1,17 @@
 package arttab.server.controller;
 
 
+import arttab.server.service.AdminService;
 import arttab.server.service.BidService;
 import arttab.server.service.FAQService;
 
 import arttab.server.vo.FAQ;
-import lombok.extern.slf4j.Slf4j;
 
 import arttab.server.service.ArtService;
 import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 
+import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,9 @@ public class AdminController {
 
     @Autowired
     ArtService artService;
+
+    @Autowired
+    AdminService adminService;
     @Autowired
     BidService bidService;
     @Autowired
@@ -95,12 +99,10 @@ public class AdminController {
     }
 
 
-
-
     // 작품 관리
     @GetMapping("/artist")
     public void artlist(Model model) throws Exception {
-        model.addAttribute("artlist", artService.list());
+        model.addAttribute("artlist", adminService.list());
     }
 
     @PostMapping("/addart")
@@ -108,7 +110,7 @@ public class AdminController {
         log.info("addart");
         //Member loginUser = (Member) session.getAttribute("loginUser");
         //**이미지 업로드
-        artService.add(art);
+        adminService.add(art);
         return "redirect:/admin/main";
     }
 
@@ -126,7 +128,7 @@ public class AdminController {
     //**이미지 업로드
     art.setArtNo(artNo);
 
-    artService.update(art);
+      adminService.update(art);
     return "redirect:../admin/main";
   }
 
@@ -167,9 +169,34 @@ public class AdminController {
   @GetMapping("delete") //작품삭제
   public String delete(Art art, @RequestParam ("artNo") int artNo) throws Exception {
 
-    artService.delete(artNo);
+    adminService.delete(artNo);
     return "redirect:../admin/main";
   }
 
+    @PostMapping("/add")
+    public String add(Art art) throws Exception {
+        //Member loginUser = (Member) session.getAttribute("loginUser");
+
+        //**이미지 업로드
+
+        adminService.add(art);
+        return "redirect:/admin/main";
+    }
+
+
+    @GetMapping("/searchlist")
+    public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
+
+        model.addAttribute("option", option);
+        model.addAttribute("keyword", keyword);
+
+        System.out.println(option + " " + keyword);
+
+        List<Art> searchResult = adminService.searchlist(option, keyword);
+        model.addAttribute("searchResult", searchResult);
+        System.out.println("Search List: " + searchResult);
+
+        return "admin/searchlist";
+    }
 
 }

@@ -9,9 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface FAQDao {
-
     int insert(FAQ faq);
-
     List<FAQ> findAll();
     int update(FAQ faq);
     FAQ findBy(int no);

@@ -48,10 +48,8 @@
                 <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
 
                 <div class="sec7-text-box">
-                    <p>오픈날짜</p>
-                    <p class="runTimeCon">오픈날짜를 작성해주세요</p>
-                    <hr/>
-                    <p class="time-title">남은 시간</p>
+                    <hr>
+                    <p class="time-title">경매 마감까지 남은 시간</p>
                     <div class="time">
                         <span id="d-day-hour">00</span>
                         <span class="col">:</span>
@@ -63,10 +61,11 @@
             </div>
         </div>
     </div>
-    <div style="max-height: 100px; overflow-y:scroll;">
+    <div style="max-height: 100px; overflow-y:scroll; text-align: center;">
         <table id="bidPriceTable" style="width:100%; border: 1px solid black;">
-            <th style="padding-right: 20px;">최고 입찰가</th><th>입찰일시</th>
-            <!-- 정보추가 -->
+            <th style="padding-right: 20px;">입찰가</th><th>입찰일시</th>
+            <!-- 실시간 경매정보 영역 -->
+
         </table>
     </div>
     <button id="text_btn" ;>Ajax테스트용</button>
@@ -75,7 +74,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-
     $(document).ready(function () {
         var remaindTimeId; // remaindTime()의 setInterval의 ID를 저장할 변수
         var realTimeInfoId; // realTimeInfo()의 setInterval의 ID를 저장할 변수
@@ -87,7 +85,7 @@
             var now = new Date(); //현재시간을 구한다.
 
             // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 21, 19, 15, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date(2023, 8, 22, 19, 15, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -150,9 +148,10 @@
                 }
             }).always(function () {
                 // 요청이 성공하든 실패하든 작품 리스트로 이동
-                window.location.href = "/art/list";
+                // window.location.href = "/art/list";
             });
         }
+        realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
         remaindTimeId = setInterval(remaindTime, 1000);
         realTimeInfoId = setInterval(realTimeInfo, 5000);
 
@@ -176,20 +175,27 @@
                 data: {artNo: artNo},
                 success: function (data) {
                     console.log(data.art);
+                    console.log(data.art.artBids);
                     console.log(data.art.artBids[0]);
-                    const bidPrice = data.art.artBids[0].bidPrice;
-                    const bidDateTime = data.art.artBids[0].bidDatetime;
-                    const formattedDateString = formatDate(bidDateTime);
-                    const newRow = $("<tr>").append($("<td>").text(bidPrice + " (원)")).append($("<td>").text(formattedDateString));
-                    $("#bidPriceTable").append(newRow);
+
+                    let newRow;
+                    const bidList = data.art.artBids;
+
+                    if ($(".artInfo_row").length > 0) {
+                        $(".artInfo_row").remove();
+                    }
+
+                    for (let i = 0; i < bidList.length; i++) {
+                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidList[i].bidPrice + " (원)")).append($("<td>").text(formatDate(bidList[i].bidDatetime)));
+                        $("#bidPriceTable").append(newRow);
+                    }
                 },
                 error: function () {
                     console.error();
                 }
             });
+            clearInterval(realTimeInfoId);
         }
-
-
     });
 </script>
 </html>

@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper
 public interface BidDao {
 
-
     //List<Bid> searchlist(@Param("option") String option, @Param("keyword") String keyword);
 
     List<Bid> findAll();
