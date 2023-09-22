@@ -66,7 +66,6 @@ public class ArtController {
         return "art/searchlist";
     }
 
-}
 
 
   
@@ -88,17 +87,7 @@ public class ArtController {
     return "art/detail";
   }
 
-//hyun
-  @PostMapping("/update")
-  public String update(Art art, @RequestParam ("artNo") int artNo) throws Exception {
-    //Member loginUser = (Member) session.getAttribute("loginUser");
-    //    Art a = artService.get(art.getArtNo());
-    //**이미지 업로드
-    art.setArtNo(artNo);
 
-    artService.update(art);
-    return "redirect:../admin/main";
-  }
 
   
   @GetMapping("list")

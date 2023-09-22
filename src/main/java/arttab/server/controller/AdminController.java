@@ -118,6 +118,18 @@ public class AdminController {
         return "/admin/auction";
     }
 
+//작품 수정하기 체크
+  @PostMapping("/update")
+  public String update(Art art, @RequestParam ("artNo") int artNo) throws Exception {
+    //Member loginUser = (Member) session.getAttribute("loginUser");
+    //    Art a = artService.get(art.getArtNo());
+    //**이미지 업로드
+    art.setArtNo(artNo);
+
+    artService.update(art);
+    return "redirect:../admin/main";
+  }
+
 
     //입찰현황
     @GetMapping("/bidstatus")
