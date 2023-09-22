@@ -12,15 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/art")
 public class ArtController {
 
-  @Autowired
-  ArtService artService;
+private final ArtService artService;
+private final MailSender mailSender;
 
   @PostMapping("/add")
   public String add(Art art) throws Exception{
@@ -37,20 +43,6 @@ public class ArtController {
     model.addAttribute("list", artService.list());
     return "art/list";
   }
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-@Slf4j
-@Controller
-@RequestMapping("/art")
-@RequiredArgsConstructor
-public class ArtController {
-  private final ArtService artService;
-  private final MailSender mailSender;
 
   @GetMapping("detail/{artNo}")
   public String detail(
@@ -81,9 +73,6 @@ public class ArtController {
   }
 
 
-}
-    return "art/detail";
-  }
   @GetMapping("list")
   public String list(Model model,
                      @RequestParam(name="pageNo", defaultValue = "1") int pageNo,
@@ -119,7 +108,7 @@ public class ArtController {
 
   @PostMapping("/update")
   @ResponseBody
-  public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo, @RequestParam(name = "artTitle") String artTitle,@RequestParam(name = "bidPrice", defaultValue = "0") int bidPrice) throws Exception {
+  public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo, @RequestParam(name = "artTitle") String artTitle, @RequestParam(name = "bidPrice", defaultValue = "0") int bidPrice) throws Exception {
     try {
       Art art = artService.get(artNo);
       System.out.println(art.toString());

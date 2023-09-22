@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 public class DefaultArtService implements ArtService {
 
-
 ArtDao artDao;
 
   public DefaultArtService(ArtDao artDao) {
@@ -60,25 +59,9 @@ ArtDao artDao;
   @Override
   public void delete(int artNo) throws Exception {
     artDao.delete(artNo);
-
-
-  {
-    System.out.println("DefaultArtService 생성됨!");
   }
 
 
-  ArtDao artDao;
-
-  public DefaultArtService(ArtDao artDao) {
-    this.artDao = artDao;
-
-  }
-
-  @Override
-  public Art get(int artNo) throws Exception {
-    System.out.println(artDao.findBy(artNo));
-    return artDao.findBy(artNo);
-  }
 
   @Override
   public List<Art> list(Art art) throws Exception {
@@ -90,10 +73,5 @@ ArtDao artDao;
     return artDao.findBy(artNo);
   }
 
-  @Override
-  public int update(Art art) throws Exception {
-    return artDao.update(art);
-
-  }
 
 }

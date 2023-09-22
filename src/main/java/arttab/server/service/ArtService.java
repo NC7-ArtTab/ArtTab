@@ -21,13 +21,9 @@ public interface ArtService {
 
   void delete(int artNo) throws Exception;
 
+  List<Art> list(Art art) throws Exception;
 
-    public Art get(int artNo) throws Exception;
+  Art art(int artNo) throws Exception;
 
-    List<Art> list(Art art) throws Exception;
-
-    Art art(int artNo) throws Exception;
-
-    int update(Art art) throws Exception;
 
 }

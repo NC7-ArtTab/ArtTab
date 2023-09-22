@@ -21,6 +21,7 @@ public interface ArtDao {
   Art findBy(int artNo);
 
   int update(Art art);
+
  int updateCount(int artNo);
 
   int delete(int artNo);
@@ -30,9 +31,6 @@ int insertFiles(Art art);
 int deleteFile(int fileNo);
 
  int deleteFiles(int artNo);
-}
   List<Art> findAll(Art art);
-  Art findBy(int artNo);
-  int update(Art art);
 
 }
