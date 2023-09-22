@@ -120,8 +120,8 @@
             f.save_file_name,
             f.file_reg_datetime,
             f.file_status
-        from art a inner join bid b on a.art_no=b.art_no
-            left outer join attach f on a.art_no=f.art_no
+        from art a left join bid b on a.art_no=b.art_no
+            left join attach f on a.art_no=f.art_no
         where a.art_no=#{artNo}
         order by b.bid_price desc, file_no;
     </select>

@@ -34,11 +34,12 @@ public class ArtController {
 
     @GetMapping("detail")
     public String detail(
-            @RequestParam int artNo,
+            @RequestParam(name="artNo") int artNo,
             Model model) throws Exception {
 
 
         Art art = artService.get(artNo);
+
         List<Bid> list = art.getArtBids();
 
         if (art != null) {
@@ -82,7 +83,7 @@ public class ArtController {
         }
     }
 
-    @PostMapping("/statusUpdate")
+    @PostMapping("/update")
     @ResponseBody
     public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo) throws Exception {
         try {
