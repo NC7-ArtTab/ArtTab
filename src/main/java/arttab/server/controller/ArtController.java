@@ -33,13 +33,9 @@ import javax.servlet.http.HttpSession;
 
 public class ArtController {
 
-
-    @Autowired
-    DefaultArtService artService;
      @Autowired
     ArtService artService;
-    
-    private final ArtService artService;
+
   private final MailSender mailSender;
 
 
@@ -116,7 +112,7 @@ public class ArtController {
       art.setArtCategory(artCategory);
       art.setArtStatus(artStatus);
 
-      List<Art> artList = artService.list(art); // artCategory와 artStatus를 담아 넘김
+      List<Art> artList = artService.list(); // artCategory와 artStatus를 담아 넘김
 
       if (artList != null && artList.size() > 0) { // 조회된 전체 경매작품이 0 개 이상이면
         PageNation pageNation = new PageNation(pageNo);
