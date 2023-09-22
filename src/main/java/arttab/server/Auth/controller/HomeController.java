@@ -1,4 +1,4 @@
-package arttab.server;
+package arttab.server.Auth.controller;
 
 
 import arttab.server.service.DefaultArtService;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @Slf4j
 @Controller
-public class TestController {
+public class HomeController {
     @GetMapping("/")
-    public String index() {
+    public String home() {
         log.info("Call index.html");
         return "index";
     }

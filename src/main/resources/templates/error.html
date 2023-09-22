@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='UTF-8'>
+    <title>실행오류</title>
+</head>
+<body>
+<div data-th-replace="header :: header"></div>
+<div>
+    서버에서 문제가 발생했습니다.<br />
+    관리자에게 문의해주세요.
+    <p>경로: [[${path}]]</p>
+    <p>오류: [[${error}]]</p>
+    <p>메시지: [[${message}]]</p>
+    <p>오류 목록(BindingResult): [[${errors}]]</p>
+    <p>상태: [[${status}]]</p>
+    <p>발생 시간: [[${timestamp}]]</p>
+    <p>예외 클래스: [[${exception}]]</p>
+</div>
+<div data-th-replace="footer :: footer"></div>
+<script>
+    setTimeout(function() {
+        history.back();
+    }, 6000);
+</script>
+
+</body>
+</html>
+
+
+
