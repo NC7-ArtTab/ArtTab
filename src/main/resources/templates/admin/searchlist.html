@@ -35,8 +35,8 @@
     <!-- 검색 결과인 경우 -->
 
     <tr data-th-each="art : ${searchResult}" style='margin:5px; text-align:center'>
-        <td data-th-text="${art != null ? art.art_title : 'N/A'}">게시글 제목</td>
-        <td data-th-text="${art != null ? art.writer : 'N/A'}">작가</td>
+        <td data-th-text="${art != null ? art.artTitle : 'N/A'}">게시글 제목</td>
+        <td data-th-text="${art != null ? art.artWriter : 'N/A'}">작가</td>
     </tr>
 
 
