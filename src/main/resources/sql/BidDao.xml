@@ -27,11 +27,11 @@
             <result property="saveFileName" column="attach_save_file_name"/>
         </collection>
 
-        <collection property="bids" ofType="arttab.server.vo.Bid">
+        <collection property="artBids" ofType="arttab.server.vo.Bid">
             <id property="bidNo" column="bid_no"/>
             <result property="bidPrice" column="bid_price"/>
             <result property="bidDatetime" column="bid_datetime"/>
-            <association property="member" resultMap="memMap"/>
+            <result property="memNo" column="mem_no"/>
         </collection>
     </resultMap>
 
@@ -50,26 +50,47 @@
         <result property="memDatetime" column="mem_datetime"/>
         <result property="memStatus" column="mem_status"/>
 
-        <collection property="bids" ofType="arttab.server.vo.Bid">
+        <collection property="memBids" ofType="arttab.server.vo.Bid">
             <id property="bidNo" column="bid_no"/>
             <result property="bidPrice" column="bid_price"/>
             <result property="bidDatetime" column="bid_datetime"/>
-            <association property="art" resultMap="artMap"/>
+            <result property="artNo" column="art_no"/>
         </collection>
     </resultMap>
 
     <resultMap id="bidMap" type="arttab.server.vo.Bid">
         <id property="bidNo" column="bid_no"/>
+        <result property="artNo" column="art_no"/>
         <result property="bidPrice" column="bid_price"/>
         <result property="bidDatetime" column="bid_datetime"/>
-        <association property="member" resultMap="memMap"/>
+        <result property="memNo" column="mem_no"/>
+    </resultMap>
+
+    <resultMap id="artDetailMap" type="arttab.server.dto.ArtDetailDto">
+        <id property="artNo" column="art_no"/>
+        <result property="artTitle" column="art_title"/>
+        <result property="artCategory" column="art_category"/>
+        <result property="artWriter" column="art_writer"/>
+        <result property="artContent" column="art_content"/>
+        <result property="artDetail" column="art_detail"/>
+        <result property="startPrice" column="start_price"/>
+        <result property="buyNowPrice" column="buy_now_price"/>
+        <result property="bidPricePer" column="bid_price_per"/>
+        <result property="startDatetime" column="start_datetime"/>
+        <result property="endDatetime" column="end_datetime"/>
+        <result property="artRegDatetime" column="art_reg_datetime"/>
+        <result property="artStatus" column="art_status"/>
+        <result property="maxBidPrice" column="max_bid_price"/>
+        <result property="nextBidPrice" column="next_bid_price"/>
+        <result property="memNo" column="mem_no"/>
     </resultMap>
 
     <!-- 경매 상품 상세 정보 조회 -->
-    <select id="artDetail" resultMap="artMap">
+    <select id="artDetail" resultMap="artDetailMap">
         SELECT a.*,
         (SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}) AS max_bid_price,
-        IFNULL((SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}), 0) + a.bid_price_per AS next_bid_price,
+        COALESCE((SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}), a.start_price) +
+        a.bid_price_per AS next_bid_price,
         m.mem_no
         FROM art a
         LEFT JOIN bid b ON a.art_no = b.art_no
@@ -88,7 +109,7 @@
     </select>
 
     <!-- 입찰하기 -->
-    <insert id="insertBid" parameterType="arttab.server.vo.Bid">
+    <insert id="insertBid" parameterMap="bidMap">
         INSERT INTO bid (art_no, mem_no, bid_price, bid_datetime)
         VALUES (#{artNo}, #{memNo}, #{bidPrice}, NOW());
     </insert>

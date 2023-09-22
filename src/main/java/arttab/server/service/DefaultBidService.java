@@ -1,9 +1,8 @@
 package arttab.server.service;
 
 import arttab.server.dao.BidDao;
-import arttab.server.vo.Art;
+import arttab.server.dto.ArtDetailDto;
 import arttab.server.vo.Bid;
-import arttab.server.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class DefaultBidService implements BidService {
   }
 
   @Override
-  public Art artDetail(int artNo) {
+  public ArtDetailDto artDetail(int artNo) {
     return bidDao.artDetail(artNo);
   }
 
