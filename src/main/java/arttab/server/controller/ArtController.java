@@ -36,11 +36,9 @@ public class ArtController {
 
     @Autowired
     DefaultArtService artService;
-     @Autowired
-    ArtService artService;
-    
+
     private final ArtService artService;
-  private final MailSender mailSender;
+    private final MailSender mailSender;
 
 
 
