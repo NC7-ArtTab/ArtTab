@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 public class OtherController {
 
 
-    //other
     @GetMapping("/faq")
     public String faqTest() {
         log.info("Call faq.html");

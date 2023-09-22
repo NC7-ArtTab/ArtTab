@@ -16,7 +16,7 @@ public class DefaultMyPayService implements MyPayService {
     }
 
     @Override
-    public List<Pay> getPurchaseHistory(int memNo) {
-        return myPayDao.getPurchaseHistory(memNo);
+    public List<Pay> getPurchaseHistory(int memberNo) {
+        return myPayDao.getPurchaseHistory(memberNo);
     }
 }

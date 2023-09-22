@@ -8,7 +8,7 @@
     <select id="getMyBidList"  resultType="arttab.server.vo.Bid">
         SELECT art_no, bid_price
         FROM bid
-        WHERE mem_no = #{memNo}
+        WHERE mem_no = #{memberNo}
     </select>
 
 </mapper>
