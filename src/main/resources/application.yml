@@ -11,13 +11,3 @@ mybatis:
     call-setters-on-nulls: true
     multiple-result-sets-enabled: false
   mapper-locations: classpath:sql/**/**.xml
-
-ncp:
-  end:
-    point: https://kr.object.ncloudstorage.com
-  region:
-    name: kr-standard
-  access:
-    key: 76nZbCgEGrJWIt72Sduf
-  secret:
-    key: NuGLWQXQW9t69dCfRHwvuo5nsvGitpcE2BbufNMr
