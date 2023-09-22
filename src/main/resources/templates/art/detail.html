@@ -6,13 +6,28 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragment/config :: configFragment}">
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f5f5f5;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            background-color: #1f1f1f;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
-<div class="container">
+<div>
     <header th:replace="~{fragment/header :: headerFragment}"></header>
 
 
-    <div>
+    <div class="container">
         <a data-th-href="@{/art/list}" data-th-text="${art.artStatus}">상태 </a>
         <a data-th-href="@{/art/list/동양화}" data-th-text="${art.artCategory}">카테고리 </a>
         <a data-th-text="${art.artTitle}">제목 </a>
