@@ -14,14 +14,8 @@ import java.util.List;
 
 @Mapper
 public interface ArtDao {
-
-
-
-
   
     List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword);
-
-
 
   int insert(Art art);
 
@@ -39,9 +33,8 @@ int insertFiles(Art art);
 int deleteFile(int fileNo);
 
  int deleteFiles(int artNo);
-}
+
   List<Art> findAll(Art art);
-  Art findBy(int artNo);
-  int update(Art art);
+
 
 }

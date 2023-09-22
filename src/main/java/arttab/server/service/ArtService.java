@@ -18,6 +18,8 @@ public interface ArtService {
 
   void delete(int artNo) throws Exception;
 
+  List<Art> searchlist(String option, String keyword) throws Exception;
+
 
 
  
