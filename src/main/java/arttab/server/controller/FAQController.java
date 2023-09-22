@@ -21,10 +21,9 @@ public class FAQController {
 
     @GetMapping("/faq")
     public String showFAQPage(Model model) {
-        List<FAQ> faqList;
         try {
-            faqList = faqService.list();
-            model.addAttribute("faq-list", faqList);
+            List<FAQ> faqList = faqService.list();
+            model.addAttribute("faqList", faqList);
         } catch (Exception e) {
             e.printStackTrace();
         }
