@@ -6,13 +6,11 @@ import arttab.server.vo.Bid;
 import arttab.server.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class DefaultBidService implements BidService {
-
   private final BidDao bidDao;
 
   @Autowired
@@ -21,19 +19,16 @@ public class DefaultBidService implements BidService {
   }
 
   @Override
-  @Transactional(readOnly = true)
-  public List<Member> getMemberWithBids(int memNo) {
-    return bidDao.memberWithBids(memNo);
+  public Art artDetail(int artNo) {
+    return bidDao.artDetail(artNo);
   }
 
   @Override
-  @Transactional(readOnly = true)
-  public List<Art> getArtWithBids(int artNo) {
-    return bidDao.artWithBids(artNo);
+  public List<Bid> bidRank(int artNo) {
+    return bidDao.bidRank(artNo);
   }
 
   @Override
-  @Transactional
   public void insertBid(Bid bid) {
     bidDao.insertBid(bid);
   }

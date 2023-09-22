@@ -7,9 +7,7 @@ import arttab.server.vo.Member;
 import java.util.List;
 
 public interface BidService {
-  List<Member> getMemberWithBids(int memNo) throws Exception;
-
-  List<Art> getArtWithBids(int artNo) throws Exception;
-
-  void insertBid(Bid bid) throws Exception;
+  Art artDetail(int artNo);
+  List<Bid> bidRank(int artNo);
+  void insertBid(Bid bid);
 }

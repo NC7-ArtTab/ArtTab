@@ -2,87 +2,95 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="arttab.server.dao.BidDao">
-    <resultMap type="member" id="memberBidMap">
-        <id column="mem_no" property="memNo"/>
-        <result column="mem_email" property="memEmail"/>
-        <result column="mem_pwd" property="memPwd"/>
-        <result column="mem_name" property="memName"/>
-        <result column="mem_phone" property="memPhone"/>
-        <result column="mem_zipcode" property="memZipcode"/>
-        <result column="mem_addr" property="memAddr"/>
-        <result column="mem_detail_addr" property="memDetailAddr"/>
-        <result column="mem_bank" property="memBank"/>
-        <result column="mem_acc" property="memAcc"/>
-        <result column="mem_auth" property="memAuth"/>
-        <result column="mem_datetime" property="memDatetime"/>
-        <result column="mem_status" property="memStatus"/>
 
-        <collection property="bids" ofType="memBids">
-            <id column="bid_no" property="bidNo"/>
-            <result column="art_no" property="artNo"/>
-            <result column="mem_no" property="memNo"/>
-            <result column="bid_price" property="bidPrice"/>
-            <result column="bid_datetime" property="bidDatetime"/>
+    <resultMap id="artMap" type="arttab.server.vo.Art">
+        <id property="artNo" column="art_no"/>
+        <result property="artTitle" column="art_title"/>
+        <result property="artCategory" column="art_category"/>
+        <result property="artWriter" column="art_writer"/>
+        <result property="artContent" column="art_content"/>
+        <result property="artDetail" column="art_detail"/>
+        <result property="startPrice" column="start_price"/>
+        <result property="buyNowPrice" column="buy_now_price"/>
+        <result property="bidPricePer" column="bid_price_per"/>
+        <result property="startDatetime" column="start_datetime"/>
+        <result property="endDatetime" column="end_datetime"/>
+        <result property="artRegDatetime" column="art_reg_datetime"/>
+        <result property="artStatus" column="art_status"/>
+
+        <collection property="artAttaches" ofType="arttab.server.vo.Attach">
+            <result property="fileNo" column="attach_file_no"/>
+            <result property="filePath" column="attach_file_path"/>
+            <result property="originFileName" column="attach_origin_file_name"/>
+            <result property="saveFileName" column="attach_save_file_name"/>
+        </collection>
+
+        <collection property="bids" ofType="arttab.server.vo.Bid">
+            <id property="bidNo" column="bid_no"/>
+            <result property="bidPrice" column="bid_price"/>
+            <result property="bidDatetime" column="bid_datetime"/>
+            <association property="member" resultMap="memMap"/>
         </collection>
     </resultMap>
 
-    <resultMap type="art" id="artBidMap">
-        <id column="art_no" property="artNo"/>
-        <result column="art_title" property="artTitle"/>
-        <result column="art_category" property="artCategory"/>
-        <result column="art_writer" property="artWriter"/>
-        <result column="art_content" property="artContent"/>
-        <result column="art_detail" property="artDetail"/>
-        <result column="start_price" property="startPrice"/>
-        <result column="buy_now_price" property="buyNowPrice"/>
-        <result column="bid_price_per" property="bidPricePer"/>
-        <result column="start_datetime" property="startDatetime"/>
-        <result column="end_datetime" property="endDatetime"/>
-        <result column="art_reg_datetime" property="artRegDatetime"/>
-        <result column="art_status" property="artStatus"/>
+    <resultMap id="memMap" type="arttab.server.vo.Member">
+        <id property="memNo" column="mem_no"/>
+        <result property="memEmail" column="mem_email"/>
+        <result property="memPwd" column="mem_pwd"/>
+        <result property="memName" column="mem_name"/>
+        <result property="memPhone" column="mem_phone"/>
+        <result property="memZipcode" column="mem_zipcode"/>
+        <result property="memAddr" column="mem_addr"/>
+        <result property="memDetailAddr" column="mem_detail_addr"/>
+        <result property="memBank" column="mem_bank"/>
+        <result property="memAcc" column="mem_acc"/>
+        <result property="memAuth" column="mem_auth"/>
+        <result property="memDatetime" column="mem_datetime"/>
+        <result property="memStatus" column="mem_status"/>
 
-        <collection property="bids" ofType="artBids">
-            <id column="bid_no" property="bidNo"/>
-            <result column="art_no" property="artNo"/>
-            <result column="mem_no" property="memNo"/>
-            <result column="bid_price" property="bidPrice"/>
-            <result column="bid_datetime" property="bidDatetime"/>
+        <collection property="bids" ofType="arttab.server.vo.Bid">
+            <id property="bidNo" column="bid_no"/>
+            <result property="bidPrice" column="bid_price"/>
+            <result property="bidDatetime" column="bid_datetime"/>
+            <association property="art" resultMap="artMap"/>
         </collection>
     </resultMap>
 
-    <!-- member 테이블과 bid 테이블 간의 1대M 관계를 사용하는 쿼리 -->
-    <select id="memberWithBids" resultMap="memberBidMap">
-        select
-        m.*,
-        b.*
-        from
-        member m
-        left join
-        bid b on m.mem_no = b.mem_no
-        where
-        m.mem_no = #{mem_no}
+    <resultMap id="bidMap" type="arttab.server.vo.Bid">
+        <id property="bidNo" column="bid_no"/>
+        <result property="bidPrice" column="bid_price"/>
+        <result property="bidDatetime" column="bid_datetime"/>
+        <association property="member" resultMap="memMap"/>
+    </resultMap>
+
+    <!-- 경매 상품 상세 정보 조회 -->
+    <select id="artDetail" resultMap="artMap">
+        SELECT a.*,
+        (SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}) AS max_bid_price,
+        IFNULL((SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}), 0) + a.bid_price_per AS next_bid_price,
+        m.mem_no
+        FROM art a
+        LEFT JOIN bid b ON a.art_no = b.art_no
+        LEFT JOIN member m ON b.mem_no = m.mem_no
+        WHERE a.art_no = #{artNo}
+        GROUP BY a.art_no, m.mem_no;
     </select>
 
-    <!-- art 테이블과 bid 테이블 간의 1대M 관계를 사용하는 쿼리 -->
-    <select id="artWithBids" resultMap="artBidMap">
-        select
-        a.*,
-        b.*
-        from
-        art a
-        left join
-        bid b on a.art_no = b.art_no
-        where
-        a.art_no = #{art_no}
+    <!-- 현재까지의 입찰 순위 조회 -->
+    <select id="bidRank" resultMap="bidMap">
+        SELECT b.bid_no, b.mem_no, b.bid_price, b.bid_datetime, m.mem_name
+        FROM bid b
+        INNER JOIN member m ON b.mem_no = m.mem_no
+        WHERE b.art_no = #{artNo}
+        ORDER BY b.bid_price DESC, b.bid_datetime ASC;
     </select>
 
-    <insert id="insertBid" parameterType="bid">
-        insert into bid (
-        art_no, mem_no, bid_price, bid_datetime
-        )
-        values (
-        #{artNo}, #{memNo}, #{bidPrice}, #{bidDatetime}
-        )
+    <!-- 입찰하기 -->
+    <insert id="insertBid" parameterType="arttab.server.vo.Bid">
+        INSERT INTO bid (art_no, mem_no, bid_price, bid_datetime)
+        VALUES (#{artNo}, #{memNo}, #{bidPrice}, NOW());
     </insert>
+
 </mapper>

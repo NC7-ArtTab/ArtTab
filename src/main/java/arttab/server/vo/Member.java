@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,5 +29,7 @@ public class Member implements Serializable {
   private char memAuth;  //  회원권한 => A:관리자, M:일반회원
   private Timestamp memDatetime;  // 회원등록일시
   private char memStatus;  //  사용여부 => Y:회원, N:탈퇴회원
+
+  private List<Bid> memBids;
 
 }
