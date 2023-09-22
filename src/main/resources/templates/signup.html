@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
 </head>
 <body>
-<header th:replace="~{header :: headerFragment}"></header>
+<div data-th-replace="fragment/header :: headerFragment"></div>
 <form method="post" action="/signup">
   <div class="container">
     <h1>회원가입</h1>
@@ -51,7 +51,7 @@
     <button type="submit" class="btn btn-primary">가입 완료</button>
   </div>
 </form>
-<footer th:replace="~{footer:: footerFragment}"></footer>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

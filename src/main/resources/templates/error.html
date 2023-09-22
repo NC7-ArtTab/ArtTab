@@ -4,8 +4,9 @@
     <meta charset='UTF-8'>
     <title>실행오류</title>
 </head>
+<head th:replace="~{fragment/config :: configFragment}"></head>
 <body>
-<div data-th-replace="header :: header"></div>
+<div data-th-replace="fragment/header :: headerFragment"></div>
 <div>
     서버에서 문제가 발생했습니다.<br />
     관리자에게 문의해주세요.
@@ -17,7 +18,7 @@
     <p>발생 시간: [[${timestamp}]]</p>
     <p>예외 클래스: [[${exception}]]</p>
 </div>
-<div data-th-replace="footer :: footer"></div>
+<footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 <script>
     setTimeout(function() {
         history.back();

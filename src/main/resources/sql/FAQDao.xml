@@ -16,7 +16,7 @@
 
     <insert id="insert" parameterType="arttab.server.vo.FAQ">
         insert into faq(mem_no,faq_title,faq_content)
-        values(#{memNo},#{faqTitle},#{faqContent})
+        values(#{memberNo},#{faqTitle},#{faqContent})
     </insert>
 
     <select id="findAll" parameterType="int" resultMap="faqMap">

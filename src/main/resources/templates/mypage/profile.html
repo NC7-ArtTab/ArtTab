@@ -9,7 +9,7 @@
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
 
-<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<!--<p style='color: #F86338; font-weight: bold;'>ArtTab</p>-->
 <div class="main">
   <ul>
     <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">기현님 My page</li>
@@ -19,7 +19,7 @@
   </ul>
 </div>
 
-<hr>
+<!--<hr>-->
 <br>
 
 <div style="text-align: center;">
@@ -28,24 +28,24 @@
   <form method="POST" action="/mypage/update-profile">
     <div style="text-align: left; margin: 0 auto; width: 300px;">
       <label for="email" style="display: block; font-size: 16px; margin-bottom: 8px;">이메일:</label>
-      <input type="email" id="email" name="memEmail" th:field="${member.memEmail}" placeholder="이메일을 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="email" id="email" name="memberEmail" th:field="${member.memberEmail}" placeholder="이메일을 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
       <label for="name" style="display: block; font-size: 16px; margin-bottom: 8px;">이름:</label>
-      <input type="text" id="name" name="memName" th:field="${member.memName}" placeholder="이름을 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="text" id="name" name="memberName" th:field="${member.memberName}" placeholder="이름을 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
       <label for="account" style="display: block; font-size: 16px; margin-bottom: 8px;">계좌:</label>
-      <input type="text" id="account" name="memAcc" th:field="${member.memAcc}" placeholder="계좌를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="text" id="account" name="memberAcc" th:field="${member.memberAcc}" placeholder="계좌를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
       <label for="phone" style="display: block; font-size: 16px; margin-bottom: 8px;">전화번호:</label>
-      <input type="text" id="phone" name="memPhone" th:field="${member.memPhone}" placeholder="전화번호를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="text" id="phone" name="memberPhone" th:field="${member.memberPhone}" placeholder="전화번호를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
       <label for="address" style="display: block; font-size: 16px; margin-bottom: 8px;">주소:</label>
-      <input type="text" id="address" name="memAddr" th:field="${member.memAddr}" placeholder="주소를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="text" id="address" name="memberAddr" th:field="${member.memberAddr}" placeholder="주소를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
       <label for="detailAddress" style="display: block; font-size: 16px; margin-bottom: 8px;">상세 주소:</label>
-      <input type="text" id="detailAddress" name="memDetailAddr" th:field="${member.memDetailAddr}" placeholder="상세 주소를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
+      <input type="text" id="detailAddress" name="memberDetailAddr" th:field="${member.memberDetailAddr}" placeholder="상세 주소를 입력하세요" required style="width: 100%; padding: 8px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
 
-      <input type="hidden" th:field="${member.memNo}" /> <!-- memNo를 숨겨진 필드로 전송 -->
+      <input type="hidden" th:field="${member.memberNo}" /> <!-- memberNo를 숨겨진 필드로 전송 -->
 
       <button type="submit" style="background-color: #333; color: #fff; font-size: 16px; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">수정완료</button>
     </div>
@@ -59,7 +59,6 @@
 
 <br><br><br><br><br><br><br><br>
 
-</body>
-
 <div data-th-replace="fragment/footer :: footerFragment"></div>
+</body>
 </html>

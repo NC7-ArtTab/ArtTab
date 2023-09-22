@@ -1,15 +1,15 @@
-package arttab.server.Auth.controller;
+package arttab.server.controller;
 
-import arttab.server.Auth.vo.Member;
 import arttab.server.service.MemberService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import arttab.server.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthController {
 
-    @Autowired
     MemberService memberService;
+
+    public AuthController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/form")

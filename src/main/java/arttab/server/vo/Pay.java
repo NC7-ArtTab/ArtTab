@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class Pay implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private int memNo;  //  회원번호
+  private int memberNo;  //  회원번호
   private int artNo;  //  작품번호
   private int payPrice;  //  결제가격
   private Timestamp payDatetime;  // 결제일시

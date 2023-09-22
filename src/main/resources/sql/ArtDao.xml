@@ -33,7 +33,7 @@
         <collection property="artBids" ofType="arttab.server.vo.Bid">
             <id column="bid_no" property="bidNo"/>
             <result column="art_no" property="artNo"/>
-            <result column="mem_no" property="memNo"/>
+            <result column="mem_no" property="memberNo"/>
             <result column="bid_price" property="bidPrice"/>
             <result column="bid_datetime" property="bidDatetime"/>
         </collection>

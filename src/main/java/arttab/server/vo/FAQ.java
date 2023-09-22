@@ -15,7 +15,7 @@ public class FAQ implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int faqNo;  //  faq번호
-    private int memNo;  //  회원번호
+    private int memberNo;  //  회원번호
     private String faqTitle;  //  faq제목
     private String faqContent;  // faq내용
     private String faqWriter;  //  faq작성자

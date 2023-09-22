@@ -18,7 +18,7 @@ public class DefaultMyBidService implements MyBidService {
     }
 
     @Override
-    public List<Bid> getMyBidList(int memNo) {
-        return myBidDao.getMyBidList(memNo);
+    public List<Bid> getMyBidList(int memberNo) {
+        return myBidDao.getMyBidList(memberNo);
     }
 }

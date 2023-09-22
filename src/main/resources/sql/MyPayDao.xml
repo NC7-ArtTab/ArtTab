@@ -6,6 +6,6 @@
     <select id="getPurchaseHistory" resultType="arttab.server.vo.Pay">
         SELECT art_no, pay_price
         FROM pay
-        WHERE mem_no = #{memNo}
+        WHERE mem_no = #{memberNo}
     </select>
 </mapper>

@@ -8,7 +8,7 @@
 <head th:replace="~{fragment/config :: configFragment}">
 </head>
 <body>
-<div class="container">
+
     <header th:replace="~{fragment/header :: headerFragment}"></header>
 
 
@@ -69,8 +69,8 @@
         </table>
     </div>
     <button id="text_btn">Ajax테스트용</button>
-    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
-</div>
+
+<footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -188,9 +188,10 @@
                     }
 
                     for (let i = 0; i < bidList.length; i++) {
-                        bidPrice = bidList[i].bidPrice > 0 ? bidList[i].bidPrice > 0 + " (원)" : ;
+                        // bidPrice = bidList.length > 0 ? bidList[i].bidPrice + " (원)" : "현재 입찰없음";
+                        // bidDatetime = bidList.length > 0 ? formatDate(bidList[i].bidDatetime)  : "현재 입찰없음";
 
-                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text()).append($("<td>").text(formatDate(bidList[i].bidDatetime)));
+                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidPrice)).append($("<td>").text(bidDatetime));
                         $("#bidPriceTable").append(newRow);
                     }
                 },

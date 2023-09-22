@@ -17,7 +17,6 @@ public class Art implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-
     private int artNo;  // 작품번호
     private String artTitle;  // 작품명
     private String artCategory;   // 작품구분 ex) 동양화:E, 서양화:W, 공예품:P

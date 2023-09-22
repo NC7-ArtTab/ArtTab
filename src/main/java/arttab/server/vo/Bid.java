@@ -15,7 +15,7 @@ public class Bid implements Serializable {
 
   private int bidNo;  //  입찰번호
   private int artNo;  //  작품번호
-  private int memNo;  //  회원번호
+  private int memberNo;  //  회원번호
   private int bidPrice;  // 입찰가격
   private Timestamp bidDatetime;  //  입찰일시
 

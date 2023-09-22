@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface MyBidDao {
-    List<Bid> getMyBidList(@Param("memNo") int memNo);
+    List<Bid> getMyBidList(@Param("memberNo") int memberNo);
 }

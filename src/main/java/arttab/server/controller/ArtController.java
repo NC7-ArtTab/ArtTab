@@ -26,11 +26,15 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequestMapping("/art")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ArtController {
     private final ArtService artService;
     private final MailSender mailSender;
 
+    public ArtController(ArtService artService, MailSender mailSender) {
+        this.artService = artService;
+        this.mailSender = mailSender;
+    }
 
     @GetMapping("detail")
     public String detail(

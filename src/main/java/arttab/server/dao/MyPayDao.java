@@ -7,5 +7,5 @@ import arttab.server.vo.Pay;
 
 @Mapper
 public interface MyPayDao {
-    List<Pay> getPurchaseHistory(@Param("memNo") int memNo);
+    List<Pay> getPurchaseHistory(@Param("memberNo") int memberNo);
 }

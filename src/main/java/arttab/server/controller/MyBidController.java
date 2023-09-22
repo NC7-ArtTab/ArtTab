@@ -15,14 +15,13 @@ import java.util.List;
 public class MyBidController {
     private final MyBidService myBidService;
 
-    @Autowired
     public MyBidController(MyBidService myBidService) {
         this.myBidService = myBidService;
     }
 
     @GetMapping("/mybid")
-    public String showMyBidPage(@RequestParam(value = "memNo", defaultValue = "1") int memNo, Model model) {
-        model.addAttribute("getMyBidList", myBidService.getMyBidList(memNo));
+    public String showMyBidPage(@RequestParam(value = "memberNo", defaultValue = "1") int memberNo, Model model) {
+        model.addAttribute("getMyBidList", myBidService.getMyBidList(memberNo));
         return "mybid"; // mybid.html 템플릿을 사용
     }
 }
