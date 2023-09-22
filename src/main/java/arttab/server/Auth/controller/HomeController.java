@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    public String index() {
-        log.info("Call signup.html");
+    public String home() {
+        log.info("Call index.html");
         return "index";
     }
     @GetMapping("/layout-test")

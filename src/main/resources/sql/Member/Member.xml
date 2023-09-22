@@ -23,9 +23,9 @@
   </resultMap>
 
   <insert id="insertMember" parameterType="arttab.server.Auth.vo.Member">
-    INSERT INTO arttab_member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr,
+    INSERT INTO member (mem_email, mem_pwd, mem_name, mem_phone, mem_zipcode, mem_addr,
     mem_detail_addr, mem_bank, mem_acc, mem_auth, mem_createdDate, mem_status)
-    VALUES(#{memberEmail}, sha1(#{memberPwd}), #{memberName}, #{memberPhone}, #{memberZipcode},
+    VALUES(#{memberEmail}, #{memberPwd}, #{memberName}, #{memberPhone}, #{memberZipcode},
     #{memberAddr}, #{memberDetailAddr}, #{memberBank}, #{memberAcc}, #{memberAuth}, #{createdDate},
     #{memberStatus});
   </insert>
@@ -42,7 +42,7 @@
     mem_bank,
     mem_acc
     from
-    arttab_member
+    member
     order by
     mem_no asc
   </select>
@@ -60,26 +60,36 @@
     mem_acc,
     mem_createdDate
     from
-    arttab_member
+    member
     where
     mem_no=#{memberNo}
   </select>
 
-  <select id="findByEmailAndPassword" resultMap="memberMap">
+  <select id="findByEmailAndPassword" parameterType="member" resultMap="memberMap">
     select
     mem_no,
     mem_name,
+    mem_pwd,
     mem_email,
     mem_createdDate
     from
-    arttab_member
+    member
     where
     mem_email=#{memberEmail}
-    and mem_pwd=sha1(#{memberPwd})
+<!--    and mem_pwd=#{memberPwd}-->
+  </select>
+
+  <select id="findPasswordByEmail" parameterType="String" resultType="String">
+    select
+      mem_pwd
+    from
+      member
+    where
+      mem_email=#{memberEmail}
   </select>
 
   <update id="update" parameterType="member">
-    update arttab_member set
+    update member set
     mem_name=#{memberName}
     ,mem_email=#{memberEmail}
     ,mem_pwd=#{memberPwd}
@@ -91,7 +101,7 @@
     mem_no=#{memberNo}
   </update>
   <delete id="delete" parameterType="int">
-    delete from arttab_member
+    delete from member
     where
     mem_no=#{memberNo}
   </delete>

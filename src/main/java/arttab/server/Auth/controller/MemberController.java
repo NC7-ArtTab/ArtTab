@@ -3,6 +3,7 @@ package arttab.server.Auth.controller;
 import arttab.server.Auth.vo.Member;
 import arttab.server.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
@@ -22,15 +24,15 @@ public class MemberController {
 //    NcpObjectStorageService ncpObjectStorageService;
 
     @GetMapping("/signup")
-    public String signUpForm() {
-        return "signup";
+    public void signUpForm() {
+
     }
 
     @PostMapping("/signup")
     public String signUp(Member member, MultipartFile photofile) throws  Exception {
-        System.out.println(member);
+        log.error("Email:[{}], Password:[{}]", member.getMemberEmail(),member.getMemberPwd());
         memberService.add(member);
-        return "redirect:list";
+        return "redirect:form";
     }
 
     @GetMapping("delete")
@@ -38,7 +40,7 @@ public class MemberController {
         if (memberService.delete(memberNo) == 0) {
             throw new Exception("해당 번호의 회원이 없습니다.");
         } else {
-            return "redirect:list";
+            return "redirect:index";
         }
     }
 

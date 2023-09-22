@@ -12,10 +12,14 @@ public interface MemberService {
     Date time = new Date();
     String localTime = format.format(time);
 
+    String getEncryptPassword(String password);
     void add(Member member) throws Exception;
     List<Member> list() throws Exception;
     Member get(int memberNo) throws Exception;
     Member get(String memberEmail, String memberPwd) throws Exception;
-    int update(Member member) throws Exception;
+    void update(Member member) throws Exception;
+
+    String findPasswordByEmail(String memberEmail);
+
     int delete(int memberNo) throws Exception;
 }

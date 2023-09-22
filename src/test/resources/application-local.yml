@@ -1,0 +1,44 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  devtools:
+    livereload:
+      enabled: true
+  #  h2:
+  #    console:
+  #      enabled: true
+  #      path: /h2-console
+  #      settings:
+  #        web-allow-others: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/studydb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: study
+    password: 1111
+#  schema: classpath:schema.sql
+#  data: classpath:data.sql
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/studydb
+#    username: study
+#    password: 1111
+sql:
+  always:
+    init: true
+server:
+  port: 8080
+  shutdown: graceful
+
+mybatis:
+  type-aliases-package: arttab.server.Auth.vo
+  mapper-locations: classpath:sql/Member/*.xml
+
+ncp:
+  end:
+    point: https://kr.object.ncloudstorage.com
+  region:
+    name: kr-standard
+  access:
+    key: 76nZbCgEGrJWIt72Sduf
+  secret:
+    key: NuGLWQXQW9t69dCfRHwvuo5nsvGitpcE2BbufNMr

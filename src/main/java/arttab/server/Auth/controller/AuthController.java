@@ -6,6 +6,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ public class AuthController {
 
     @Autowired
     MemberService memberService;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/form")
     public void form(@CookieValue(required = false) String memberEmail, Model model) {
@@ -28,32 +31,30 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(
-            @RequestParam(name="memberEmail") String memberEmail,
-            @RequestParam(name="memberPwd") String memberPwd,
-            @RequestParam(name="saveEmail") String saveEmail,
+            @RequestParam("memberEmail") String memberEmail,
+            @RequestParam("memberPwd") String memberPwd,
             HttpSession session,
             Model model,
             HttpServletResponse response) throws Exception {
-
-        if (saveEmail != null) {
+        if (memberEmail != null && !memberEmail.isEmpty()) {  // null 또는 비어 있는지 확인
             Cookie cookie = new Cookie("memberEmail", memberEmail);
             response.addCookie(cookie);
         } else {
-            Cookie cookie = new Cookie("memberEmail", "memberNo");
+            Cookie cookie = new Cookie("memberEmail", "");  // 빈 문자열로 설정
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
-
-        Member loginUser = memberService.get(memberEmail, memberPwd);
-        log.info(loginUser.toString());
-        if (loginUser == null) {
+        Member loginUser = memberService.get(memberEmail, memberService.getEncryptPassword(memberPwd));
+        log.error("사용자 정보는 있나? >>> {}", loginUser.toString());
+        log.error("동일 한가 ? >>>{}}" , passwordEncoder.matches(memberPwd, loginUser.getMemberPwd()));
+        if (!passwordEncoder.matches(memberPwd, loginUser.getMemberPwd())) {
             model.addAttribute("refresh", "2;url=/form");
             throw new Exception("회원 정보가 일치하지 않습니다.");
         }
 
         session.setAttribute("loginUser", loginUser);
         log.info("Call login");
-        return "redirect:/";
+        return "redirect:index";
     }
 
     @GetMapping("/logout")
