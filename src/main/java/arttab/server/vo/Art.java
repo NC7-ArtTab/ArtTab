@@ -39,6 +39,6 @@ public class Art implements Serializable {
     private String option;
     private String keyword;
 
-
-
 }
+
+
