@@ -1,9 +1,9 @@
 package arttab.server.vo;
 
 import lombok.*;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +28,5 @@ public class Member implements Serializable {
     private Timestamp memberDatetime;  // 회원등록일시
     private String memberStatus;
     private String memberBack;
+    private List<Bid> memberBids;
 }

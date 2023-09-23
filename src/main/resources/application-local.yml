@@ -6,7 +6,6 @@ spring:
     livereload:
       enabled: true
 
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://db-inv5u-kr.vpc-pub-cdb.ntruss.com:3306/arttabdb

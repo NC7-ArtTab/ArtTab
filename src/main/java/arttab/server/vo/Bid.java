@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor // 기본생성자 생성
 public class Bid implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -19,5 +19,9 @@ public class Bid implements Serializable {
   private int bidPrice;  // 입찰가격
   private Timestamp bidDatetime;  //  입찰일시
 
-
+  public Bid(int artNo, int memberNo, int bidPrice) {
+    this.artNo = artNo;
+    this.memberNo = memberNo;
+    this.bidPrice = bidPrice;
+  }
 }
