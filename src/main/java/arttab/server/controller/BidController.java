@@ -2,10 +2,9 @@ package arttab.server.controller;
 
 import arttab.server.dto.ArtDetailDto;
 import arttab.server.service.BidService;
-import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
-import arttab.server.vo.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

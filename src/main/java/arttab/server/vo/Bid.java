@@ -18,6 +18,8 @@ public class Bid implements Serializable {
   private int bidPrice;  // 입찰가격
   private Timestamp bidDatetime;  //  입찰일시
 
+  private Art art;
+
   public Bid(int artNo, int memNo, int bidPrice) {
     this.artNo = artNo;
     this.memNo = memNo;
