@@ -4,7 +4,9 @@ package arttab.server.controller;
 import arttab.server.service.AdminService;
 import arttab.server.service.BidService;
 import arttab.server.service.FAQService;
+import arttab.server.service.NcpObjectStorageService;
 
+import arttab.server.vo.Attach;
 import arttab.server.vo.FAQ;
 
 import arttab.server.service.ArtService;
@@ -25,6 +27,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import java.util.List;
 
 
@@ -36,13 +45,14 @@ public class AdminController {
 
     @Autowired
     ArtService artService;
-
     @Autowired
     AdminService adminService;
     @Autowired
     BidService bidService;
     @Autowired
     FAQService faqService;
+    @Autowired
+    NcpObjectStorageService ncpObjectStorageService;
   
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
@@ -100,17 +110,6 @@ public class AdminController {
 
 
     // 작품 관리
-
-
-    @PostMapping("/addart")
-    public String addart(Art art, HttpSession session) throws Exception{
-        log.info("addart");
-        //Member loginUser = (Member) session.getAttribute("loginUser");
-        //**이미지 업로드
-        adminService.add(art);
-        return "redirect:/admin/artlist";
-    }
-
     @GetMapping("/auction")
     public String auction() {
         log.info("Call admin/auction.html");
@@ -166,19 +165,39 @@ public class AdminController {
   public String delete(@RequestParam ("artNo") int artNo) throws Exception {
 
     adminService.delete(artNo);
-    return "redirect:../admin/main";
+    return "redirect:../admin/artlist";
   }
 
-    @PostMapping("/add")
-    public String add(Art art) throws Exception {
-        //Member loginUser = (Member) session.getAttribute("loginUser");
+    @PostMapping("/addart")
+    public String add(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime) throws Exception {
+//    Member loginUser = (Member) session.getAttribute("loginUser");
+//    if (loginUser == null) {
+//      return "redirect:/auth/form";
+//    }
 
-        //**이미지 업로드
+        // 날짜 및 시간 문자열의 형식을 변경
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedStartDatetime = targetFormat.format(sourceFormat.parse(strStartDatetime));
+        String formattedEndDatetime = targetFormat.format(sourceFormat.parse(strEndDatetime));
 
+
+        art.setStartDatetime(Timestamp.valueOf(formattedStartDatetime));
+        art.setEndDatetime(Timestamp.valueOf(formattedEndDatetime));
+
+        ArrayList<Attach> attaches = new ArrayList<>();
+        for (MultipartFile part : files) {
+            if (part.getSize() > 0) {
+                Attach attach = ncpObjectStorageService.uploadFile(new Attach(),
+                        "arttab-bucket", "art/", part);
+                attaches.add(attach);
+            }
+        }
+        art.setArtAttaches(attaches);
         adminService.add(art);
-        return "redirect:/admin/artlist";
-    }
 
+        return "redirect:/admin/main";
+    }
 
     @GetMapping("/searchlist")
     public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {

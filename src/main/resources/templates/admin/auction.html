@@ -42,7 +42,9 @@
             <input type="radio" id="artCategoryW" name="artCategory" value="W" required>
             <label for="artCategoryW">서양화</label>
             <input type="radio" id="artCategoryP" name="artCategory" value="P" required>
-            <label for="artCategoryP">공예품</label><br><br>
+            <label for="artCategoryP">공예품</label>
+            <input type="radio" id="artCategoryX" name="artCategory" value="X" required>
+            <label for="artCategoryP">기타</label><br><br><br><br>
         </div>
 
         <label for="artTitle">작품명</label>
@@ -60,11 +62,11 @@
         <label for="buyNowPrice">즉시 구매가</label>
         <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
 
-        <label for="startDatetime">경매시작일시 예)2023-10-19 00:00:02</label>
-        <input type="text" id="startDatetime" name="startDatetime" placeholder="경매시작일시 2023-10-15" required><br><br>
+        <label for="startDatetime">경매시작일시</label>
+        <input type="datetime-local" id="startDatetime" name="strStartDatetime" required><br><br>
 
-        <label for="endDatetime">경매종료일시 예)2023-10-19 00:00:02</label>
-        <input type="text" id="endDatetime" name="endDatetime" placeholder="경매종료일시" required><br><br>
+        <label for="endDatetime">경매종료일시</label>
+        <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
 
         <label for="artContent">작품 설명</label>
         <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required style="width: 20%;"><br><br>

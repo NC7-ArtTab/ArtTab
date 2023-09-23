@@ -124,7 +124,18 @@
         values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
     </insert>
 
-
+    <insert id="insertFiles" parameterType="arttab.server.vo.Attach">
+        insert
+        into attach( file_no
+        , art_no
+        , file_path
+        , origin_file_name
+        , save_file_name)
+        values
+        <foreach collection="artAttaches" item="attach" separator=",">
+            (#{attach.fileNo}, #{artNo},  #{attach.filePath}, #{attach.originFileName}, #{attach.saveFileName})
+        </foreach>
+    </insert>
 
     <insert id="update" parameterType="art">
         update art set

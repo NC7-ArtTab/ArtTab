@@ -46,6 +46,9 @@ dependencies {
 
 	// 이메일 라이브러리
 	implementation 'com.sun.mail:javax.mail:1.6.2'
+
+	// Amazon AWS Java SDK s3
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.530'
 }
 
 tasks.named('test') {
