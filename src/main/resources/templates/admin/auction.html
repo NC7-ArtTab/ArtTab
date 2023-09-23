@@ -36,7 +36,14 @@
     <br>
 <form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
     <label for="artCategory">카테고리</label>
-    <input type="text" id="artCategory" name="artCategory" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
+    <select id="artCategory" name="artCategory" required>
+    <option value="E">동양화</option>
+    <option value="W">서양화</option>
+    <option value="P">공예품</option>
+    <option value="X">기타</option>
+    </select>
+
+    <br><br>
 
     <label for="artTitle">작품명</label>
     <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
@@ -54,10 +61,10 @@
     <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
 
     <label for="startDatetime">경매시작일시</label>
-    <input type="text" id="startDatetime" name="startDatetime" placeholder="경매시작일시 2023-10-15" required><br><br>
+    <input type="datetime-local" id="startDatetime" name="strStartDatetime" required><br><br>
 
     <label for="endDatetime">경매종료일시</label>
-    <input type="text" id="endDatetime" name="endDatetime" placeholder="경매종료일시" required><br><br>
+    <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
 
     <label for="artContent">작품 설명</label>
     <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>

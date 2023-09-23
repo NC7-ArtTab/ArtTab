@@ -30,10 +30,9 @@ public class DefaultAdminService implements AdminService {
     @Override
     public int add(Art art) throws Exception {
         int count = adminDao.insert(art);
-        //사진 추가
-//        if (art.getAttaches().size() > 0) {
-//            artDao.insertFiles(art);
-//        }
+        if (art.getArtAttaches().size() > 0) {
+            adminDao.insertFiles(art);
+        }
         return count;
     }
 

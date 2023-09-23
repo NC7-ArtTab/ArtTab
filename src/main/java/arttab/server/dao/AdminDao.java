@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface AdminDao {
 
-//    int insertFiles(Art art) throws Exception;
+    int insertFiles(Art art) throws Exception;
 //
 //    int deleteFile(int fileNo) throws Exception;
 //

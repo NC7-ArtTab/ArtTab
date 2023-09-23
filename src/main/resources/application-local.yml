@@ -13,6 +13,12 @@ spring:
     username: arttab
     password: bitcamp!@#123
 
+ncp:
+  endPoint: https://kr.object.ncloudstorage.com
+  regionName: kr-standard
+  accessKey: aYDzbuluiQM2eCQIDmsd
+  secretKey: BTwWtRIJlCJZSLtCxNx9zWi3S4xFUDVm9VtE0ynW
+
 
 server:
   port: 8080
