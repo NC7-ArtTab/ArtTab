@@ -4,8 +4,9 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
-<link rel="stylesheet" type="text/css" href="../../static/css/bidstatus.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/list.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -31,6 +32,7 @@
     </div>
 
 <div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <table>
         <thead>
         <tr><th class="table-header;">작가명</th>
             <th class="table-header">작품명</th>
@@ -52,24 +54,6 @@
             <td data-th-text="${#dates.format(bid.art.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
             <td data-th-text="${bid.bidPrice}">현재최고입찰가</td>
             <td data-th-text="${bid.art.buyNowPrice}">즉시구매가</td>
-            <!--<td data-th-text="${bid.artNo.artStatus}">상태</td>-->
-<!--            <td>
-                <th:block th:if="${bid.art.artStatus == 'Y'}">
-                    낙찰 완료
-                </th:block>
-                <th:block th:if="${bid.art.artStatus == 'P'}">
-                    진행중
-                </th:block>
-                <th:block th:if="${bid.art.artStatus == 'R'}">
-                    준비중
-                </th:block>
-                <th:block th:if="${bid.art.artStatus == 'F'}">
-                    경매 종료
-                </th:block>
-                <th:block th:if="${bid.art.artStatus == 'D'}">
-                    삭제
-                </th:block>
-            </td>-->
             <td>
                 <span class="won" th:if="${bid.art.artStatus == 'Y'}">낙찰 완료</span>
                 <span class="in-progress" th:if="${bid.art.artStatus == 'P'}">진행중</span>
@@ -80,7 +64,10 @@
             <td colspan="7"><hr></td>
         </tr>
         </tbody>
-
+        </td>
+        <td colspan="7"><hr></td>
+        </tr>
+    </table>
 </div>
 
 <br><br><br><br><br><br><br><br><br>

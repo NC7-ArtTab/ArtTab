@@ -33,14 +33,20 @@
     <br>
     <hr>
     <br>
-    <form data-th-action="@{'/admin/update?artNo='}+${art.artNo}" method='post' enctype='multipart/form-data'>
+    <form data-th-action="@{/admin/update}" method="post" enctype="multipart/form-data">
+
+        <label for="artNo">작품 번호</label>
+        <input type="text" id="artNo" name="artNo" data-th-value="${art.artNo}" readonly><br><br>
+
         <label for="artCategory">카테고리</label>
         <input type="radio" id="artCategoryE" name="artCategory" value="E" required>
         <label for="artCategoryE">동양화</label>
         <input type="radio" id="artCategoryW" name="artCategory" value="W" required>
         <label for="artCategoryW">서양화</label>
         <input type="radio" id="artCategoryP" name="artCategory" value="P" required>
-        <label for="artCategoryP">공예품</label><br><br>
+        <label for="artCategoryP">공예품</label>
+        <input type="radio" id="artCategoryX" name="artCategory" value="X" required>
+        <label for="artCategoryP">기타</label><br><br>
 
         <label for="artTitle">작품명</label>
         <input type="text" id="artTitle" name="artTitle" data-th-value="${art.artTitle}" required><br><br>
@@ -78,9 +84,10 @@
         <input type="file" id="files" name="files" multiple><br><br>-->
 
         <button>수정</button>
-        <!--        <input type="submit" value="제출">-->
+
     </form>
 </div>
 
 </body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
 </html>

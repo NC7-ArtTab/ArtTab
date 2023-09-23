@@ -14,4 +14,6 @@ public interface AdminService {
     int delete(int artNo) throws Exception;
 
     List<Art> searchlist(String option, String keyword) throws Exception;
+
+    Art get(int artNo) throws Exception;
 }

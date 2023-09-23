@@ -48,5 +48,10 @@ public class DefaultAdminService implements AdminService {
     public List<Art> list() throws Exception {
         return adminDao.findAll();
     }
+
+    @Override
+    public Art get(int artNo) throws Exception {
+        return adminDao.findBy(artNo);
+    }
 }
 

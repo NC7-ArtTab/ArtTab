@@ -3,11 +3,12 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
 >
-<head th:replace="~{fragment/config :: configFragment}">
+<head>
     <meta charset="UTF-8">
     <title>검색</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/artlist.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/list.css">
 </head>
+
 <div data-th-replace="fragment/header :: headerFragment"></div>
 
 <body style="margin-left: 40px;">
@@ -26,6 +27,8 @@
 <br>
 <div style="text-align: center;">
     <h2>등록작품 현황 & 추가하기</h2>
+    <br>
+
     <a th:href="@{/admin/auction}">추가하기</a>
 
     <form action="/admin/searchlist" name="search-form" style="display: inline-block;  margin-left: 400px;">
@@ -39,11 +42,9 @@
     </form>
 </div>
 
-<div style="text-align: center;">
-<table style="margin: 20px auto; /* 수직 가운데 정렬 및 위 아래 여백 추가 */
-width: 80%; /* 테이블 너비를 조절할 수 있습니다. */
-border-collapse: collapse; /* 테이블 셀 경계를 병합하여 여백 없애기 */
-">
+
+    <br>
+<table>
     <thead>
     <tr>
         <th>번호</th>
@@ -65,7 +66,7 @@ border-collapse: collapse; /* 테이블 셀 경계를 병합하여 여백 없애
         <td data-th-text="${art.artWriter}">홍길동</td>
         <td data-th-text="${#dates.format(art.artRegDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
         <td>
-            <a data-th-href="@{'/admin/artdetail?artNo='} + ${art.artNo}">수정</a>
+            <a data-th-href="@{'/admin/artdetail/' + ${art.artNo}}">수정</a>
         </td>
         <td>
             <a data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
@@ -79,4 +80,5 @@ border-collapse: collapse; /* 테이블 셀 경계를 병합하여 여백 없애
 
 </div>
 </body>
+<div data-th-replace="fragment/footer :: footerFragment"></div>
 </html>

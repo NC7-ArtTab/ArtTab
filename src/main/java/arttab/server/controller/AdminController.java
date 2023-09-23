@@ -67,7 +67,7 @@ public class AdminController {
         log.info("addfaq");
 
         faqService.add(faq);
-        return "redirect:/admin/main";
+        return "redirect:/admin/faqlist";
     }
 
     @GetMapping("faqlist")
@@ -108,7 +108,7 @@ public class AdminController {
         //Member loginUser = (Member) session.getAttribute("loginUser");
         //**이미지 업로드
         adminService.add(art);
-        return "redirect:/admin/main";
+        return "redirect:/admin/artlist";
     }
 
     @GetMapping("/auction")
@@ -124,9 +124,8 @@ public class AdminController {
     //    Art a = artService.get(art.getArtNo());
     //**이미지 업로드
     art.setArtNo(artNo);
-
       adminService.update(art);
-    return "redirect:../admin/main";
+    return "redirect:../admin/artlist";
   }
 
 
@@ -136,8 +135,6 @@ public class AdminController {
     @GetMapping("/bidstatus")
     public String bidstatus(Model model) throws Exception {
         log.info("Call /admin/bidstatus.html");
-
-        //model.addAttribute("bidstatus", bidService.list());
 
         List<Bid> bidStatusList = bidService.list();
         model.addAttribute("bidstatus", bidStatusList);
@@ -153,22 +150,20 @@ public class AdminController {
     }
 
 
-  @GetMapping("artdetail") //작품수정성주
-  public String artdetail(
-          @RequestParam int artNo,
-          Model model) throws Exception {
 
-    Art art = artService.get(artNo);
+        @GetMapping("/artdetail/{No}")
+        public String artdetail(
+                @PathVariable int No,
+                Model model) throws Exception {
 
-    if (art != null) {
-      model.addAttribute("art", art);
+            model.addAttribute("art", adminService.get(No));
+            System.out.println("Received request for art with no: " + No);
 
-    }
-    return "admin/artdetail";
-  }
+            return "admin/artdetail";
+        }
 
   @GetMapping("delete") //작품삭제
-  public String delete(Art art, @RequestParam ("artNo") int artNo) throws Exception {
+  public String delete(@RequestParam ("artNo") int artNo) throws Exception {
 
     adminService.delete(artNo);
     return "redirect:../admin/main";
@@ -181,7 +176,7 @@ public class AdminController {
         //**이미지 업로드
 
         adminService.add(art);
-        return "redirect:/admin/main";
+        return "redirect:/admin/artlist";
     }
 
 

@@ -4,9 +4,11 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
+<head>
+    <meta charset="UTF-8">
     <title>FAQ List</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/list.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -24,8 +26,7 @@
 <br>
 <div style="text-align: center;">
 <h2 style="text-align: center;">FAQ List</h2>
-<br>
-<hr>
+
 <br>
 
 <a th:href="@{/admin/faqform}">추가하기</a>
@@ -46,7 +47,15 @@
         <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqNo}">번호</td>
         <td style="padding: 10px;  text-align: center;"><a data-th-href="@{'/admin/faqdetail/' + ${faq.faqNo}}"
                 data-th-text="${faq.faqTitle}">제목</a> </td>
-        <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqStatus}">상태</td>
+      <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqStatus}">상태</td>
+
+
+
+
+
+    </tr>
+    <tr>
+        <td colspan="6"><hr></td>
     </tr>
     </tbody>
     </table>
