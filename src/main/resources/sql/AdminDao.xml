@@ -47,11 +47,20 @@
         <result column="file_status" property="fileStatus"/>
     </resultMap>
 
-
     <parameterMap type="java.util.Map" id="searchParams">
         <parameter property="option" />
         <parameter property="keyword" />
     </parameterMap>
+
+    <resultMap id="FileMap" type="arttab.server.vo.Attach">
+        <id column="file_no" property="fileNo"/>
+        <id column="art_no" property="artNo"/>
+        <id column="file_path" property="filePath"/>
+        <id column="origin_file_name" property="originFileName"/>
+        <id column="save_file_name" property="saveFileName"/>
+        <id column="file_reg_datetime" property="fileRegDatetime"/>
+        <id column="file_status" property="fileStatus"/>
+    </resultMap>
 
     <select id="findAll" resultMap="artMap" parameterType="int">
         select
@@ -107,6 +116,8 @@
         order by b.bid_price desc, file_no;
     </select>
 
+
+
     <insert id="insert" parameterType="arttab.server.vo.Art"
             useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
         insert into art
@@ -136,6 +147,12 @@
             (#{attach.fileNo}, #{artNo},  #{attach.filePath}, #{attach.originFileName}, #{attach.saveFileName})
         </foreach>
     </insert>
+
+    <select id="findAttach" parameterType="int" resultMap="FileMap">
+        select *
+        from Attach
+        where file_no
+    </select>
 
     <insert id="update" parameterType="art">
         update art set

@@ -109,64 +109,14 @@ public class AdminController {
     }
 
 
-    // 작품 관리
+
+
+    // art
     @GetMapping("/auction")
     public String auction() {
         log.info("Call admin/auction.html");
         return "/admin/auction";
     }
-
-//작품 수정하기 체크
-  @PostMapping("/update")
-  public String update(Art art, @RequestParam ("artNo") int artNo) throws Exception {
-    //Member loginUser = (Member) session.getAttribute("loginUser");
-    //    Art a = artService.get(art.getArtNo());
-    //**이미지 업로드
-    art.setArtNo(artNo);
-      adminService.update(art);
-    return "redirect:../admin/artlist";
-  }
-
-
-
-
-    //입찰현황
-    @GetMapping("/bidstatus")
-    public String bidstatus(Model model) throws Exception {
-        log.info("Call /admin/bidstatus.html");
-
-        List<Bid> bidStatusList = bidService.list();
-        model.addAttribute("bidstatus", bidStatusList);
-
-        log.info("bidstatus data: {}", bidStatusList);
-
-        return "/admin/bidstatus";
-    }
-
-    @GetMapping("/artlist")
-    public void artlist(Model model) throws Exception {
-        model.addAttribute("artlist", adminService.list());
-    }
-
-
-
-        @GetMapping("/artdetail/{No}")
-        public String artdetail(
-                @PathVariable int No,
-                Model model) throws Exception {
-
-            model.addAttribute("art", adminService.get(No));
-            System.out.println("Received request for art with no: " + No);
-
-            return "admin/artdetail";
-        }
-
-  @GetMapping("delete") //작품삭제
-  public String delete(@RequestParam ("artNo") int artNo) throws Exception {
-
-    adminService.delete(artNo);
-    return "redirect:../admin/artlist";
-  }
 
     @PostMapping("/addart")
     public String add(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime) throws Exception {
@@ -174,6 +124,40 @@ public class AdminController {
 //    if (loginUser == null) {
 //      return "redirect:/auth/form";
 //    }
+        // 날짜 및 시간 문자열의 형식을 변경
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedStartDatetime = targetFormat.format(sourceFormat.parse(strStartDatetime));
+        String formattedEndDatetime = targetFormat.format(sourceFormat.parse(strEndDatetime));
+
+
+        art.setStartDatetime(Timestamp.valueOf(formattedStartDatetime));
+        art.setEndDatetime(Timestamp.valueOf(formattedEndDatetime));
+
+        ArrayList<Attach> attaches = new ArrayList<>();
+        for (MultipartFile part : files) {
+            if (part.getSize() > 0) {
+                Attach attach = ncpObjectStorageService.uploadFile(new Attach(),
+                        "arttab-bucket", "art/", part);
+                attaches.add(attach);
+            }
+        }
+        art.setArtAttaches(attaches);
+
+        adminService.add(art);
+
+        return "redirect:/admin/main";
+    }
+    //작품 수정하기
+    @PostMapping("/update")
+    public String update(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime)  throws Exception {
+    //Member loginUser = (Member) session.getAttribute("loginUser");
+    //    Art a = artService.get(art.getArtNo());
+        //**이미지 업로드
+        //기존
+//        art.setArtNo(artNo);
+//        adminService.update(art);
+//        return "redirect:../admin/artlist";
 
         // 날짜 및 시간 문자열의 형식을 변경
         SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
@@ -194,10 +178,37 @@ public class AdminController {
             }
         }
         art.setArtAttaches(attaches);
-        adminService.add(art);
+
+        adminService.update(art);
 
         return "redirect:/admin/main";
     }
+
+
+      @GetMapping("/artlist")
+      public void artlist(Model model) throws Exception {
+          model.addAttribute("artlist", adminService.list());
+      }
+
+
+
+    @GetMapping("/artdetail/{No}")
+    public String artdetail(
+            @PathVariable int No,
+            Model model) throws Exception {
+
+        model.addAttribute("art", adminService.get(No));
+        System.out.println("Received request for art with no: " + No);
+
+        return "admin/artdetail";
+    }
+
+  @GetMapping("delete") //작품삭제
+  public String delete(@RequestParam ("artNo") int artNo) throws Exception {
+
+    adminService.delete(artNo);
+    return "redirect:../admin/artlist";
+  }
 
     @GetMapping("/searchlist")
     public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
@@ -211,8 +222,19 @@ public class AdminController {
         model.addAttribute("searchResult", searchResult);
         System.out.println("Search List: " + searchResult);
 
-//        return "admin/searchlist";
         return "admin/searchlist";
     }
 
+    //입찰현황
+    @GetMapping("/bidstatus")
+    public String bidstatus(Model model) throws Exception {
+        log.info("Call /admin/bidstatus.html");
+
+        List<Bid> bidStatusList = bidService.list();
+        model.addAttribute("bidstatus", bidStatusList);
+
+        log.info("bidstatus data: {}", bidStatusList);
+
+        return "/admin/bidstatus";
+    }
 }

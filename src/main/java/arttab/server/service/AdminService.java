@@ -1,6 +1,7 @@
 package arttab.server.service;
 
 import arttab.server.vo.Art;
+import arttab.server.vo.Attach;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface AdminService {
     List<Art> searchlist(String option, String keyword) throws Exception;
 
     Art get(int artNo) throws Exception;
+
+    Attach getFile(int fileNo) throws Exception;
 }
