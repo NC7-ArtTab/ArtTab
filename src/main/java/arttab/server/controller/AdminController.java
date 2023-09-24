@@ -143,7 +143,7 @@ public class AdminController {
 
         adminService.add(art);
 
-        return "redirect:/admin/main";
+        return "redirect:/admin/artlist";
     }
     //작품 수정하기
     @PostMapping("/update")

@@ -30,6 +30,7 @@
   border-radius: 5px; /* 둥근 모서리 설정 */
 }
 
+
 /* 삭제 상태 스타일 */
 .deleted {
   background-color: #9E9E9E; /* 배경색: 회색 */
@@ -37,6 +38,7 @@
   padding: 5px 10px; /* 내부 여백 설정 */
   border-radius: 5px; /* 둥근 모서리 설정 */
 }
+
 
 
 /*faq 상태 */
@@ -60,11 +62,5 @@
       text-align: center;
 }
 
-.content {
-    width: 50%;
-    margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 
 

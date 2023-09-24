@@ -196,6 +196,7 @@
     <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
         select
         art_no,
+        art_category,
         art_title,
         art_writer,
         art_content,

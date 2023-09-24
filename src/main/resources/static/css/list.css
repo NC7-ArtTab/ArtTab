@@ -6,13 +6,23 @@ table {
 
 /* 테이블 셀 여백 */
 table td {
-    padding: 10px; /* 셀 내부 여백 설정 */
+    padding: 25px; /* 셀 내부 여백 설정 */
     text-align: center; /* 셀 내부 텍스트 가운데 정렬 */
 }
 
 /* 테이블 행 사이 여백 */
 table tbody tr {
     margin-bottom: 10px; /* 행 사이에 여백 추가 */
+}
+
+/* 각 셀의 너비를 조정합니다. */
+th.table-header,
+td {
+  width: auto; /* 셀의 너비를 자동으로 설정합니다. */
+  /* 또는 원하는 픽셀값으로 설정할 수 있습니다. 예: width: 150px; */
+  white-space: nowrap; /* 글자 줄 바꿈을 방지합니다. */
+  overflow: hidden; /* 셀 내용이 넘칠 경우 숨깁니다. */
+  text-overflow: ellipsis; /* 셀 내용이 넘칠 경우 "..."으로 대체합니다. */
 }
 
 a {
@@ -92,4 +102,43 @@ a {
   color: FFFFFF; /* 글자색: 흰색 */
   padding: 5px 10px; /* 내부 여백 설정 */
   border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 검색 폼 스타일 */
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* 간격을 조절할 값 */
+}
+
+.search-select {
+    width: 100px; /* 선택 상자의 너비 조절 */
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+
+}
+
+.search-input {
+    flex-grow: 1; /* 입력 상자가 남은 공간을 채우도록 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 400px; /* 가로 크기 조절 */
+    margin-right: 10px;
+
+
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #A9A9A9 !important; /* 검색 버튼 배경색 설정 */
+    color: #fff !important; /* 검색 버튼 텍스트 색상 설정 */
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
 }
