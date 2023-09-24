@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <title>FAQ List</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/list.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -26,18 +25,20 @@
 <br>
 <div style="text-align: center;">
 <h2 style="text-align: center;">FAQ List</h2>
-    <hr>
+
 <br>
 
-<a th:href="@{/admin/faqform}">추가하기</a>
+<a class="custom-button-a" style="margin-left: 800px;" th:href="@{/admin/faqform}">추가하기</a>
 </div>
+<br>
+<hr>
 
 
 <div style="margin: 0 auto;
             width: 80%;">
     <table style="text-align:center;">
     <thead>
-    <tr><th>번호</th> <th>제목</th> <th>상태</th> </tr>
+    <tr><th>번호</th> <th>제목</th> <th>공개여부</th> <th>관리</th></tr>
     </thead>
     <td colspan="6"><hr></td>
 
@@ -45,9 +46,11 @@
     <tbody>
     <tr data-th-each="faq : ${faqlist}" style='margin:5px; text-align:center'>
         <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqNo}">번호</td>
-        <td style="padding: 10px;  text-align: center;"><a data-th-href="@{'/admin/faqdetail/' + ${faq.faqNo}}"
-                data-th-text="${faq.faqTitle}">제목</a> </td>
+        <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqTitle}">제목</td>
       <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqStatus}">상태</td>
+    <td>
+        <a class="custom-button" data-th-href="@{'/admin/faqdetail/' + ${faq.faqNo}}">수정</a>
+    </td>
     </tr>
     <tr>
         <td colspan="6"><hr></td>

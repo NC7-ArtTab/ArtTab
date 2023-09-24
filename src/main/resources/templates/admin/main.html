@@ -4,19 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
+<head>
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -30,52 +18,13 @@
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
-
 <hr>
 <br>
-<!--
-// sungjoo 경매품 목록 수정
-<table border='1'>
-    <thead>
-    <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>시작일</th>
-        <th>수정</th>
-        <th>삭제</th>
-    </tr>
-    </thead>
 
-    <tbody>
-    <tr data-th-each="art : ${list}">
-        <td data-th-text="${art.artNo}">100</td>
-        <td>
-            <a data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
-               data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목</a>
-        </td>
-        <td data-th-text="${art.artWriter}">홍길동</td>
-        <td data-th-text="${#dates.format(art.startDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
-        <td>
-            <a data-th-href="@{'/admin/detail?artNo='} + ${art.artNo}">수정</a>
-        </td>
-        <td>
-            <a data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
-        </td>
-    </tr>
-    </tbody>
-</table> -->
-
-
-<img style="filter: saturate(70%);" src="/static/images/back.jpg">
-
+<div style="text-align: center;">
+    <img style="width: 95%; height: 800px;" src="/static/images/film1.jpg" alt="이미지 설명">
+</div>
 <br><br><br><br><br><br><br><br><br>
-
-
-<br><br><br><br><br><br><br><br>
-
-
-
 
 </body>
 

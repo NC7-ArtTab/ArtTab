@@ -35,14 +35,14 @@
     <form action="/admin/searchlist" name="search-form" style="display: inline-block;  margin-left: 50px;">
         <select name="option">
             <option disabled selected value ="" >선택</option>
-            <option value="title">제목</option>
+            <option value="title">작품명</option>
             <option value="writer">작가</option>
         </select>
         <input type="text" name="keyword" style="width: 400px;"value="" placeholder="키워드를 입력하세요" />
         <input type="submit" value="검색">
     </form>
 
-    <a class="custom-button" style="margin-left: 100px;" th:href="@{/admin/auction}">추가하기</a>
+    <a class="custom-button-a" style="margin-left: 100px;" th:href="@{/admin/auction}">추가하기</a>
 </div>
 
 <br>
@@ -53,17 +53,24 @@
     <thead>
     <tr>
         <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
+        <th>카테고리</th>
+        <th>작품명</th>
+        <th>작가명</th>
         <th>작품등록일</th>
         <th>수정</th>
         <th>삭제</th>
     </tr>
     </thead>
-    <td colspan="6"><hr></td>
+    <td colspan="8"><hr></td>
     <tbody>
     <tr data-th-each="art : ${artlist}">
         <td data-th-text="${art.artNo}">100</td>
+        <td>
+            <span class="east" th:if="${art.artCategory == 'E'}">동양화</span>
+            <span class="west" th:if="${art.artCategory == 'W'}">서양화</span>
+            <span class="ppp" th:if="${art.artCategory == 'P'}">공예품</span>
+            <span class="other" th:if="${art.artCategory == 'X'}">기타</span>
+        </td>
         <td>
             <a data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
                data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목(링크 수정 예정)</a>
@@ -71,18 +78,18 @@
         <td data-th-text="${art.artWriter}">홍길동</td>
         <td data-th-text="${#dates.format(art.artRegDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
         <td>
-            <a data-th-href="@{'/admin/artdetail/' + ${art.artNo}}">수정</a>
+            <a class="custom-button" data-th-href="@{'/admin/artdetail/' + ${art.artNo}}">수정</a>
         </td>
         <td>
-            <a data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
+            <a class="custom-button-d" data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
         </td>
     </tr>
     <tr>
-        <td colspan="6"><hr></td>
+        <td colspan="8"><hr></td>
     </tr>
     </tbody>
 </table>
-
+<br><br><br>
 </div>
 </body>
 <div data-th-replace="fragment/footer :: footerFragment"></div>

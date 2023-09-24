@@ -67,7 +67,7 @@ border-collapse: collapse; /* 테이블 셀 경계를 병합하여 여백 없애
         <td data-th-text="${art.artWriter}">홍길동</td>
         <td data-th-text="${#dates.format(art.artRegDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
         <td>
-            <a data-th-href="@{'/admin/artdetail?artNo='} + ${art.artNo}">수정</a>
+            <a data-th-href="@{'/admin/artdetail/' + ${art.artNo}}">수정</a>
         </td>
         <td>
             <a data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>

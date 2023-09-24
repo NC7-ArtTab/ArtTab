@@ -22,14 +22,74 @@ a {
 }
 
 /* 버튼 스타일 */
+/* 수정 */
 .custom-button {
     background-color: #F86338;
     color: #fff;
-    padding: 10px 20px;
+    padding: 5px 15px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
     text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+/*삭제버튼*/
+.custom-button-d {
+    background-color: #A9A9A9;
+    color: #fff;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+/* 추가하기 */
+.custom-button-a {
+    background-color: #F86338;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+/*작품 카테고리*/
+/* 낙찰 완료 상태 스타일 */
+.east {
+  background-color: #C4A69D; /* 배경색: 녹색 */
+  color: 333333; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 진행중 상태 스타일 */
+.west {
+  background-color: #A3C1AD; /* 배경색: 파란색 */
+  color: 333333; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 준비중 상태 스타일 */
+.ppp {
+  background-color: #E6D2A3; /* 배경색: 노란색 */
+  color: 333333; /* 글자색: 검정색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 경매 종료 상태 스타일 */
+.other {
+  background-color: #B0B0B0; /* 배경색: 빨간색 */
+  color: FFFFFF; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
 }
