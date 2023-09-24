@@ -22,7 +22,7 @@
     </li>
     <li style="display: flex; align-items: center;">
       <a th:if="${session.loginUser == null}" href="/form" class="login-button">로그인</a>
-      <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"></span>
+      <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"style="font-size: 30px; font-weight: bold;"></span>></span>
       <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="login-button">로그아웃</a>
       <a data-th-href="@{/mypage/main}"><img style="width: 100px; height: 80px;" src="/static/images/user.jpg"></a>
       <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
