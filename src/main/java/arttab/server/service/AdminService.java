@@ -19,4 +19,5 @@ public interface AdminService {
     Art get(int artNo) throws Exception;
 
     Attach getFile(int fileNo) throws Exception;
+    int deleteFile(int fileNo) throws Exception;
 }

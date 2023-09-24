@@ -17,15 +17,12 @@ import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -181,7 +178,7 @@ public class AdminController {
 
         adminService.update(art);
 
-        return "redirect:/admin/main";
+        return "redirect:/admin/artlist";
     }
 
 
@@ -206,8 +203,34 @@ public class AdminController {
   @GetMapping("delete") //작품삭제
   public String delete(@RequestParam ("artNo") int artNo) throws Exception {
 
-    adminService.delete(artNo);
+        //로그인 정보 받기
+
+     Art art = adminService.get(artNo);
+     adminService.delete(art.getArtNo());
     return "redirect:../admin/artlist";
+  }
+
+  @GetMapping("fileDelete/{attachedFile}")
+  public String fileDelete(
+          @MatrixVariable("no") int no,
+          HttpSession session) throws Exception {
+
+//        Member loginUser = (Member) session.getAttribute("longinUser");
+//        if (loginUser == null) {
+//            return "redirect:/auth/form";
+//        }
+
+        Art art = null;
+
+      Attach attach = adminService.getFile(no);
+      int artNo = attach.getArtNo();
+      art = adminService.get(artNo);
+
+        if (adminService.deleteFile(no) == 0) {
+            throw new Exception("해당 번호의 첨부파일이 없습니다.");
+        } else {
+            return "redirect:/admin/artlist";
+        }
   }
 
     @GetMapping("/searchlist")

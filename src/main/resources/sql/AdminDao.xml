@@ -177,6 +177,20 @@
         art_no=#{artNo}
     </delete>
 
+    <delete id="deleteFile" parameterType="int">
+        delete from attach
+        where
+        file_no=#{fileNo}
+    </delete>
+
+    <delete id="deleteFiles" parameterType="int">
+        delete from attach
+        where
+        art_no=#{artNo}
+    </delete>
+
+
+
 
     <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
         select

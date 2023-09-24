@@ -47,6 +47,7 @@ public class DefaultAdminService implements AdminService {
     @Transactional
     @Override
     public int delete(int artNo) throws Exception {
+        adminDao.deleteFiles(artNo);
         return adminDao.delete(artNo);
     }
 
@@ -66,5 +67,12 @@ public class DefaultAdminService implements AdminService {
     public Attach getFile(int fileNo) throws Exception {
         return adminDao.findAttach(fileNo);
     }
+
+    @Override
+    public int deleteFile(int fileNo) throws Exception {
+        return adminDao.deleteFile(fileNo);
+    }
+
+
 }
 

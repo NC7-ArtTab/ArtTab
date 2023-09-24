@@ -31,4 +31,6 @@ public interface AdminDao {
     List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword) throws Exception;
 
     Art findBy(int artNo);
+    int deleteFile(int fileNo);
+    int deleteFiles(int artNo);
 }
