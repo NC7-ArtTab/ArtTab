@@ -44,11 +44,10 @@ public class MyPageController {
 
     @GetMapping("/profile")
     public String showProfileForm(Model model, HttpSession session) {
-
         Member loginUser = (Member) session.getAttribute("loginUser");
         // 로그인한 사용자 정보를 이용하여 프로필 페이지를 보여줌
         model.addAttribute("loginUser", loginUser);
-        return "mypage/profile";
+        return "redirect:/mypage/profile";
     }
 
     @PostMapping("/update-profile")
