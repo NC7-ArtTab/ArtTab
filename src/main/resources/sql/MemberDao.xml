@@ -22,6 +22,14 @@
         <result column="mem_status" property="memberStatus"/>
     </resultMap>
 
+    <resultMap id="resultBidMap" type="arttab.server.vo.Bid">
+        <id property="bidNo" column="bid_no"/>
+        <result property="artNo" column="art_no"/>
+        <result property="bidPrice" column="bid_price"/>
+        <result property="bidDatetime" column="bid_datetime"/>
+        <result property="memberNo" column="mem_no"/>
+    </resultMap>
+
 
     <!-- updateMember 메서드의 SQL 쿼리 정의 -->
     <update id="updateMember" parameterType="arttab.server.vo.Member">
@@ -39,14 +47,14 @@
     <select id="findBy" parameterType="int" resultType="arttab.server.vo.Member">
         SELECT *
         FROM member
-        WHERE mem_no = #{memberNo}
+        WHERE mem_no = #{memberNo} LIMIT 1
     </select>
 
     <!-- getMemberBids 메서드의 SQL 쿼리 정의 -->
-    <select id="getMemberBids" parameterType="int" resultType="arttab.server.vo.Bid">
-        SELECT bid.bid_no, bid.art_no, bid.mem_no, bid.bid_price, bid.bid_datetime
+    <select id="getMemberBids" parameterType="int" resultMap="resultBidMap">
+        SELECT bid_no, art_no, mem_no, bid_price, bid_datetime
         FROM bid
-        WHERE bid.mem_no = #{memberNo}
+        WHERE mem_no = #{memberNo}
     </select>
 
     <!-- 아래는 현우님 코드 -->
@@ -75,23 +83,23 @@
         mem_no asc
     </select>
 
-<!--    <select id="findBy" parameterType="int" resultMap="memberMap">-->
-<!--        select-->
-<!--        mem_no,-->
-<!--        mem_email,-->
-<!--        mem_name,-->
-<!--        mem_phone,-->
-<!--        mem_zipcode,-->
-<!--        mem_addr,-->
-<!--        mem_detail_addr,-->
-<!--        mem_bank,-->
-<!--        mem_acc,-->
-<!--        mem_datetime-->
-<!--        from-->
-<!--        member-->
-<!--        where-->
-<!--        mem_no=#{memberNo}-->
-<!--    </select>-->
+    <!--    <select id="findBy" parameterType="int" resultMap="memberMap">-->
+    <!--        select-->
+    <!--        mem_no,-->
+    <!--        mem_email,-->
+    <!--        mem_name,-->
+    <!--        mem_phone,-->
+    <!--        mem_zipcode,-->
+    <!--        mem_addr,-->
+    <!--        mem_detail_addr,-->
+    <!--        mem_bank,-->
+    <!--        mem_acc,-->
+    <!--        mem_datetime-->
+    <!--        from-->
+    <!--        member-->
+    <!--        where-->
+    <!--        mem_no=#{memberNo}-->
+    <!--    </select>-->
 
     <select id="findByEmailAndPassword" parameterType="member" resultMap="memberMap">
         select
@@ -105,6 +113,7 @@
         where
         mem_email=#{memberEmail}
         <!--    and mem_pwd=#{memberPwd}-->
+        LIMIT 1
     </select>
 
     <select id="findPasswordByEmail" parameterType="String" resultType="String">
