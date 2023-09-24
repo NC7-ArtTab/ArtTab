@@ -11,7 +11,10 @@
 
 <div class="main">
   <ul>
-    <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">기현님 My page</li>
+    <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">
+      <span th:text="${session.loginUser.memberName} + '님의 My page'"></span>
+    </li>
+
     <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/profile}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
     <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/mybid}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
     <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/mypay}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
@@ -24,28 +27,28 @@
     <!-- 여기에 프로필 수정 폼 요소를 추가하세요 -->
     <div class="form-group">
       <label for="inputName">이름</label>
-      <input type="text" class="form-control" id="inputName" name="memberName" th:value="${member?.memberName}" required>
+      <input type="text" class="form-control" id="inputName" name="memberName" th:value="${session.loginUser.memberName}" required>
     </div>
     <div class="form-group">
       <label for="inputPhone">전화번호</label>
-      <input type="text" class="form-control" id="inputPhone" name="memberPhone" th:value="${member?.memberPhone}" required>
+      <input type="text" class="form-control" id="inputPhone" name="memberPhone" th:value="${session.loginUser.memberPhone}" required>
     </div>
     <!-- 기타 수정이 필요한 회원 정보 항목을 추가하세요. -->
     <div class="form-group">
       <label for="inputAddr">기본주소</label>
-      <input type="text" class="form-control" id="inputAddr" name="memberAddr" th:value="${member?.memberAddr}" required>
+      <input type="text" class="form-control" id="inputAddr" name="memberAddr" th:value="${session.loginUser.memberAddr}" required>
     </div>
     <div class="form-group">
       <label for="inputZipcode">우편번호</label>
-      <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" th:value="${member?.memberZipcode}" required>
+      <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" th:value="${session.loginUser.memberZipcode}" required>
     </div>
     <div class="form-group">
       <label for="inputBank">은행명</label>
-      <input type="text" class="form-control" id="inputBank" name="memberBank" th:value="${member?.memberBank}" required>
+      <input type="text" class="form-control" id="inputBank" name="memberBank" th:value="${session.loginUser.memberBank}" required>
     </div>
     <div class="form-group">
       <label for="inputAcc">계좌번호</label>
-      <input type="text" class="form-control" id="inputAcc" name="memberAcc" th:value="${member?.memberAcc}" required>
+      <input type="text" class="form-control" id="inputAcc" name="memberAcc" th:value="${session.loginUser.memberAcc}" required>
     </div>
 
     <button type="submit" class="btn btn-primary">수정 완료</button>

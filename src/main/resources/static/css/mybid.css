@@ -1,47 +1,46 @@
-/* common.css */
-
-/* 페이지 전체 스타일 */
-body {
-    background-color: #f4f4f4;
-}
-
-/* 헤더 스타일 */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-}
-
-/* 메인 컨텐츠 스타일 */
-.main {
-    text-align: center;
-    margin-top: 20px;
-}
+/* mybid.css */
 
 /* 테이블 스타일 */
-table {
-    background-color: #000; /* 검은색 배경색 */
-    color: #fff; /* 글자색 */
+#myBidTable {
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #fff; /* 배경색을 흰색으로 설정 */
+    color: #333; /* 글자색을 검은색으로 설정 */
+    border: 1px solid #ddd; /* 테두리 설정 */
 }
 
 /* 테이블 헤더 스타일 */
-table thead {
-    background-color: #333; /* 테이블 헤더 배경색 */
+#myBidTable thead {
+    background-color: #333;
+    color: #fff;
 }
 
 /* 테이블 행 스타일 */
-table tbody tr:hover {
-    background-color: #444; /* 마우스 오버 시 배경색 */
+#myBidTable tbody tr:hover {
+    background-color: #f5f5f5; /* 마우스 오버 시 배경색 변경 */
 }
 
 /* 테이블 셀 스타일 */
-table td, table th {
+#myBidTable td, #myBidTable th {
     text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
 }
 
-/* 푸터 스타일 */
-.footer {
-    background-color: #333;
+/* 즉시 구매 버튼 스타일 */
+#myBidTable .btn-warning {
+    background-color: #F86338;
     color: #fff;
-    padding: 20px 0;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 즉시 구매 버튼 아이콘 스타일 */
+#myBidTable .btn-warning i {
+    margin-right: 5px;
 }
