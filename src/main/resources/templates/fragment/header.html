@@ -8,7 +8,7 @@
   <ul style="list-style-type: none; padding: 0; display: flex; justify-content: space-between; align-items: center;">
     <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">진행 중 경매</a></li>
     <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
-    <li style="margin-right: 10px;"  class="about-arttab"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
+    <li style="margin-right: 10px;" class="about-arttab"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
     <li>
       <form action="/admin/searchlist" name="search-form" class="search-form" style="display: flex;">
         <select name="option" class="search-select">
@@ -21,13 +21,12 @@
       </form>
     </li>
     <li style="display: flex; align-items: center;">
-      <a href="/form" class="login-button">로그인</a>
+      <a th:if="${session.loginUser == null}" href="/form" class="login-button">로그인</a>
+      <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"></span>
+      <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="login-button">로그아웃</a>
       <a data-th-href="@{/mypage/main}"><img style="width: 100px; height: 80px;" src="/static/images/user.jpg"></a>
       <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
     </li>
-
   </ul>
-
-
 </header>
 </html>

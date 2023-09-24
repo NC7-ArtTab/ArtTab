@@ -34,14 +34,16 @@
     <!-- updateMember 메서드의 SQL 쿼리 정의 -->
     <update id="updateMember" parameterType="arttab.server.vo.Member">
         UPDATE member
-        SET
-        mem_name = #{memberName},
-        mem_phone = #{memberPhone},
-        mem_addr = #{memberAddr},
-        mem_detail_addr = #{memberDetailAddr},
-        mem_acc = #{memberAcc}
+        <set>
+            <if test="memberName != null">mem_name = #{memberName},</if>
+            <if test="memberPhone != null">mem_phone = #{memberPhone},</if>
+            <if test="memberAddr != null">mem_addr = #{memberAddr},</if>
+            <if test="memberDetailAddr != null">mem_detail_addr = #{memberDetailAddr},</if>
+            <if test="memberAcc != null">mem_acc = #{memberAcc}</if>
+        </set>
         WHERE mem_no = #{memberNo}
     </update>
+
 
     <!-- findBy 메서드의 SQL 쿼리 정의 -->
     <select id="findBy" parameterType="int" resultType="arttab.server.vo.Member">

@@ -8,12 +8,14 @@ import arttab.server.vo.Bid;
 import arttab.server.vo.Pay;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.util.List;
 
@@ -40,29 +42,27 @@ public class MyPageController {
     }
 
     @GetMapping("/profile")
-    public String showProfileForm(Model model) throws Exception {
-        int loggedInMemberNo = 5; // 가정한 멤버 번호
-
-        Member member = memberService.get(loggedInMemberNo);
-
-        model.addAttribute("member", member);
-
+    public String showProfileForm(Model model,  Member loginUser) throws Exception {
+        model.addAttribute("member", loginUser);
         return "mypage/profile";
     }
 
-    // 프로필 수정 폼에서 데이터를 받아서 처리
     @PostMapping("/update-profile")
-    public String updateProfile(@ModelAttribute("member") Member member) {
+    public String updateProfile(@ModelAttribute("member") Member updatedMember,Member loginUser) {
         try {
-            int loggedInMemberNo = 5; // 가정한 멤버 번호
-            member.setMemberNo(loggedInMemberNo);
+            // 로그인한 사용자의 memberNo 설정
+            updatedMember.setMemberNo(loginUser.getMemberNo());
 
-            memberService.updateMember(member);
+            // 멤버 정보 업데이트
+            memberService.updateMember(updatedMember);
+
             return "redirect:/mypage/profile?success=true";
         } catch (Exception e) {
             return "redirect:/mypage/profile?error=true";
         }
     }
+
+
 
     @GetMapping("/mybid")
     public String showMyBids(Model model) {
