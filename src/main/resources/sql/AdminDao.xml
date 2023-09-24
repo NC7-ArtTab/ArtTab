@@ -150,8 +150,8 @@
 
     <select id="findAttach" parameterType="int" resultMap="FileMap">
         select *
-        from Attach
-        where file_no
+        from attach
+        where file_no=#{fileNo}
     </select>
 
     <insert id="update" parameterType="art">
@@ -170,6 +170,7 @@
         where
         art_no=#{artNo}
     </insert>
+
 
     <delete id="delete" parameterType="int">
         delete from art

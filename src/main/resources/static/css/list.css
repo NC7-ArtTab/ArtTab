@@ -20,3 +20,16 @@ a {
     color: inherit;
     font-weight: bold;
 }
+
+/* 버튼 스타일 */
+.custom-button {
+    background-color: #F86338;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}

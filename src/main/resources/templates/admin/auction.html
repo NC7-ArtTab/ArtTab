@@ -5,13 +5,12 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head>
-    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/detail.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
     <title>경매 등록하기</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/list.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
-
 
 <p style='color: #F86338; font-weight: bold;'>작품 관리</p>
 <div class="main">
@@ -22,18 +21,13 @@
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
-
-
 <hr>
 <br>
-
-<div style="text-align: center;">
-
-    <h2>경매 등록하기</h2>
-    <br>
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <h2 style="text-align: center;">작품 등록하기</h2>
     <hr>
     <br>
-
+    <div class="custom-container">
     <form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
         <div>
             <label for="artCategory">작품 카테고리</label>
@@ -44,7 +38,7 @@
             <input type="radio" id="artCategoryP" name="artCategory" value="P" required>
             <label for="artCategoryP">공예품</label>
             <input type="radio" id="artCategoryX" name="artCategory" value="X" required>
-            <label for="artCategoryP">기타</label><br><br><br><br>
+            <label for="artCategoryP">기타</label><br><br>
         </div>
 
         <label for="artTitle">작품명</label>
@@ -69,15 +63,17 @@
         <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
 
         <label for="artContent">작품 설명</label>
-        <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required style="width: 20%;"><br><br>
+        <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
 
         <label for="artDetail">작품 상세 설명</label>
         <textarea id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요"rows="8" cols="60" required></textarea><br><br>
 
         <label for="files">이미지 등록</label>
-        <input type="file" id="files" name="files" multiple><br><br>-->
+        <input type="file" id="files" name="files" multiple><br><br>
 
-        <input type="submit" value="제출">
+        <div class="text-right">
+        <input type="submit" class="custom-button" value="제출">
+        </div>
     </form>
 
 </div>

@@ -4,39 +4,34 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/detail.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
     <title>FAQ List</title>
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
 
 <p style='color: #F86338; font-weight: bold;'>FAQ</p>
-<h1>FAQ List</h1>
+<div class="main">
+    <ul>
+        <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리(수정필요)</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
+    </ul>
+</div>
 <hr>
 <br>
-
-<a data-th-href="@{/admin/faqform}"> 추가하기</a>
-
-
 <div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <h2  style="text-align: center;">FAQ 수정하기</h2>
 <form data-th-if="${faq}" data-th-action="@{/admin/faqupdate}" method='post' enctype="multipart/form-data">
  <hr>
     <br>
+    <div class="custom-container">
         <table>
             <tr>
-                <th>번호</th>
+                <th>관리자번호 사라질 예정</th>
                 <td style="width:300px;"><input type="text" name="faqNo" data-th-value="${faq.faqNo}" readonly></td>
             </tr>
             <tr>
@@ -59,14 +54,17 @@
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="text-right">
+        <button type="submit" class="custom-button">변경</button>
+        <button type="reset" class="custom-button">초기화</button>
+        <a data-th-href="@{/admin/faqlist}" class="custom-link">목록</a>
+    </div>
 
-        <button type="submit">변경</button>
-        <button type="reset">초기화</button>
-        <a data-th-href="@{/admin/faqlist}">목록</a>
     </form>
 </div>
 
-<div class="clear"></div>
+
 
 <br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br>

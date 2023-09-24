@@ -196,6 +196,8 @@ public class AdminController {
 
         model.addAttribute("art", adminService.get(No));
         System.out.println("Received request for art with no: " + No);
+        System.out.printf(adminService.get(No).toString());
+
 
         return "admin/artdetail";
     }
@@ -223,13 +225,12 @@ public class AdminController {
         Art art = null;
 
       Attach attach = adminService.getFile(no);
-      int artNo = attach.getArtNo();
-      art = adminService.get(artNo);
+      art = adminService.get(attach.getArtNo());
 
         if (adminService.deleteFile(no) == 0) {
             throw new Exception("해당 번호의 첨부파일이 없습니다.");
         } else {
-            return "redirect:/admin/artlist";
+            return "redirect:/admin/artdetail/" + art.getArtNo();
         }
   }
 

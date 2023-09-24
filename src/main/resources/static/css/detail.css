@@ -1,23 +1,71 @@
-@charset "utf-8"
 
-.left {
+/*수정하기 박스 */
+/* 커스텀 컨테이너 스타일 */
+.custom-container {
+    margin: 0 auto;
+    width: 80%;
+    font-size: 16px;
+}
+
+/* 테이블 헤더 스타일 */
+.custom-container th {
+    font-size: 18px;
+}
+
+/* 입력 필드 스타일 */
+.custom-container input[type="text"],
+.custom-container textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* 라디오 버튼 스타일 */
+.custom-container input[type="radio"] {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+
+/* 제출 폼*/
+/* 오른쪽 정렬 스타일 */
+.text-right {
+    text-align: right;
+}
+
+/* 버튼 스타일 */
+.custom-button {
+    background-color: #F86338;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+.custom-button:hover {
+    background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
+}
+
+/* 링크 스타일 */
+.custom-link {
+    color: gray;
+    text-decoration: none;
+    font-size: 16px;
+    margin left: 30px;
+}
+
+.custom-link:hover {
+    text-decoration: underline; /* 마우스 호버 시 밑줄 표시 */
 
 }
 
-.right {
-
+.custom-button + .custom-button,
+.custom-button + .custom-link {
+    margin-left: 20px; /* 버튼과 링크 간격을 조절할 마진값 설정 */
 }
-
-.bid {
-
-}
-
-#buy {
-    background-color: #86338;
-}
-
-.content {
-
-}
-
-

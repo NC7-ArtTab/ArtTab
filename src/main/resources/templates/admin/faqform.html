@@ -4,46 +4,43 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../static/css/detail.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
 
-<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<p style='color: #F86338; font-weight: bold;'>FAQ</p>
 <div class="main">
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
-
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리(수정필요)</a></li>
-
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
-
 <hr>
 <br>
-
-<div style="text-align: center;">
-    <h2>FAQ 등록하기</h2>
-    <hr>
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <h2 style="text-align: center;">FAQ 등록하기</h2>
     <form data-th-action="@{/admin/addfaq}" method='post'>
-        <div style="display: flex; flex-direction: column; align-items: center;">
+        <hr>
+        <br>
+        <div class="custom-container">
             <label for="memNo">작성자번호(로그인유저받으면 사라질 예정)</label>
             <input type="text" id="memNo" name="memNo" placeholder="관리자 2번" required><br><br>
-        </div>
 
-        <div style="display: flex; flex-direction: column; align-items: center;">
             <label for="faqTitle">제목</label>
-            <input type="text" id="faqTitle" name="faqTitle" placeholder="제목을 입력하세요" required style="width: 20%;"><br><br>
-        </div>
+            <input type="text" id="faqTitle" name="faqTitle" placeholder="제목을 입력하세요" required><br><br>
 
-        <div style="display: flex; flex-direction: column; align-items: center;">
             <label for="faqContent">내용</label>
             <textarea id="faqContent" name="faqContent" placeholder="내용을 입력하세요" rows="5" cols="50" required></textarea><br><br>
         </div>
 
-        <input type="submit" value="제출">
+        <div class="text-right">
+        <input type="submit" class="custom-button" value="제출">
+        </div>
     </form>
 </div>
 
