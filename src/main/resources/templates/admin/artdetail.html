@@ -81,6 +81,17 @@
         <textarea id="artDetail" name="artDetail" data-th-value="${art.artDetail}" rows="8" cols="60" required></textarea><br><br>
 
         <label for="files">이미지 등록</label>
+            <!--<div data-th-each="file : ${art.artAttaches}">
+                <a data-th-href="|https:kr.object.ncloudstorage.com/arttab-bucket/art/${attach.filePath}|"
+                   data-th-text="${attach.filePath}">ok.gif</a>
+                [<a data-th-href="|/admin/fileDelete/attachedFile;no=${attach.fileNo}"]>삭제</a><br>
+            </div>-->
+        <div data-th-if="${attach != null}">
+            <a data-th-href="|https:kr.object.ncloudstorage.com/arttab-bucket/art/${attach.filePath}|"
+               data-th-text="${attach.filePath}">ok.gif</a>
+            [<a data-th-href="|/admin/fileDelete/attachedFile;no=${attach.fileNo}"|>삭제</a>]<br>
+        </div>
+
         <input type="file" id="files" name="files" multiple><br><br>
 
 
