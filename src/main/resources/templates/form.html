@@ -20,21 +20,14 @@
       <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
     </div>
     <button type="submit" class="btn btn-primary">로그인</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='oauth/kakao'">카카오 로그인</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='signup'">회원 가입</button>
+    <button type="button" class="btn btn-primary mt-3" onclick="location.href='signup'">회원 가입</button>
   </form>
+  <br>
+  <button type="button" class="btn btn-primary mt-3" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=8a9729db8ca9ffc2b1e5568724c65513&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code'">카카오 로그인</button>
 </div>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
