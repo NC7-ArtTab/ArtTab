@@ -61,8 +61,8 @@ public class MyPageController {
             memberService.updateMember(updatedMember);
             return "redirect:/profile?success=true";
         } catch (Exception e) {
-
             return "redirect:/profile?error=true";
+
         }
     }
 

@@ -39,6 +39,10 @@
       <input type="text" class="form-control" id="inputAddr" name="memberAddr" th:value="${session.loginUser.memberAddr}" required>
     </div>
     <div class="form-group">
+      <label for="inputDetailAddr">상세주소</label>
+      <input type="text" class="form-control" id="inputDetailAddr" name="memberDetailAddr" th:value="${session.loginUser.memberDetailAddr}" required>
+    </div>
+    <div class="form-group">
       <label for="inputZipcode">우편번호</label>
       <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" th:value="${session.loginUser.memberZipcode}" required>
     </div>
