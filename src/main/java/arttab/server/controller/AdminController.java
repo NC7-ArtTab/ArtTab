@@ -14,7 +14,6 @@ import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 
 import groovy.util.logging.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 
+
 @Slf4j
 @Controller
 @RequestMapping("/admin")
@@ -55,7 +55,7 @@ public class AdminController {
 
   private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
-  //admin
+    //admin
 
   @GetMapping("/main")
   public String admin() {
@@ -63,7 +63,7 @@ public class AdminController {
     return "/admin/main";
   }
 
-  //faq
+    //faq
 
   @GetMapping("/faqform")
   public String faqform() {
@@ -75,9 +75,9 @@ public class AdminController {
   public String addfaq(FAQ faq) throws Exception {
     log.info("addfaq");
 
-    faqService.add(faq);
-    return "redirect:/admin/main";
-  }
+        faqService.add(faq);
+        return "redirect:/admin/faqlist";
+    }
 
   @GetMapping("faqlist")
   public void faqlist(Model model) throws Exception {
@@ -114,110 +114,166 @@ public class AdminController {
     model.addAttribute("artlist", adminService.list());
   }
 
-
-  @GetMapping("/auction")
-  public String auction() {
-    log.info("Call admin/auction.html");
-    return "/admin/auction";
-  }
-
-  //작품 수정하기 체크
-  @PostMapping("/update")
-  public String update(Art art, @RequestParam("artNo") int artNo) throws Exception {
-    //Member loginUser = (Member) session.getAttribute("loginUser");
-    //    Art a = artService.get(art.getArtNo());
-    //**이미지 업로드
-    art.setArtNo(artNo);
-
-    adminService.update(art);
-    return "redirect:../admin/main";
-  }
-
-
-  //입찰현황
-  @GetMapping("/bidstatus")
-  public String bidstatus(Model model) throws Exception {
-    log.info("Call /admin/bidstatus.html");
-
-    //model.addAttribute("bidstatus", bidService.list());
-
-    List<Bid> bidStatusList = bidService.list();
-    model.addAttribute("bidstatus", bidStatusList);
-
-    log.info("bidstatus data: {}", bidStatusList);
-
-    return "/admin/bidstatus";
-  }
-
-
-  @GetMapping("detail") //작품수정성주
-  public String detail(
-          @RequestParam int artNo,
-          Model model) throws Exception {
-
-    Art art = artService.get(artNo);
-    List<Bid> list = art.getArtBids();
-
-    if (art != null) {
-      model.addAttribute("art", art);
-      model.addAttribute("list", list);
+    @PostMapping("/addart")
+    public String addart(Art art, HttpSession session) throws Exception{
+        log.info("addart");
+        //Member loginUser = (Member) session.getAttribute("loginUser");
+        //**이미지 업로드
+        adminService.add(art);
+        return "redirect:/admin/main";
     }
-    return "admin/detail";
-  }
 
-  @GetMapping("delete") //작품삭제
-  public String delete(Art art, @RequestParam("artNo") int artNo) throws Exception {
+    // art
+    @GetMapping("/auction")
+    public String auction() {
+        log.info("Call admin/auction.html");
+        return "/admin/auction";
+    }
 
-    adminService.delete(artNo);
-    return "redirect:../admin/main";
-  }
-
-
-  @PostMapping("/addart")
-  public String add(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime) throws Exception {
+    @PostMapping("/addart")
+    public String add(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime) throws Exception {
 //    Member loginUser = (Member) session.getAttribute("loginUser");
 //    if (loginUser == null) {
 //      return "redirect:/auth/form";
 //    }
+        // 날짜 및 시간 문자열의 형식을 변경
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedStartDatetime = targetFormat.format(sourceFormat.parse(strStartDatetime));
+        String formattedEndDatetime = targetFormat.format(sourceFormat.parse(strEndDatetime));
 
-    // 날짜 및 시간 문자열의 형식을 변경
-    SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-    SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    String formattedStartDatetime = targetFormat.format(sourceFormat.parse(strStartDatetime));
-    String formattedEndDatetime = targetFormat.format(sourceFormat.parse(strEndDatetime));
 
+        art.setStartDatetime(Timestamp.valueOf(formattedStartDatetime));
+        art.setEndDatetime(Timestamp.valueOf(formattedEndDatetime));
 
-    art.setStartDatetime(Timestamp.valueOf(formattedStartDatetime));
-    art.setEndDatetime(Timestamp.valueOf(formattedEndDatetime));
+        ArrayList<Attach> attaches = new ArrayList<>();
+        for (MultipartFile part : files) {
+            if (part.getSize() > 0) {
+                Attach attach = ncpObjectStorageService.uploadFile(new Attach(),
+                        "arttab-bucket", "art/", part);
+                attaches.add(attach);
+            }
+        }
+        art.setArtAttaches(attaches);
 
-    ArrayList<Attach> attaches = new ArrayList<>();
-    for (MultipartFile part : files) {
-      if (part.getSize() > 0) {
-        Attach attach = ncpObjectStorageService.uploadFile(new Attach(),
-                "arttab-bucket", "art/", part);
-        attaches.add(attach);
-      }
+        adminService.add(art);
+
+        return "redirect:/admin/artlist";
     }
-    art.setArtAttaches(attaches);
-    adminService.add(art);
+    //작품 수정하기
+    @PostMapping("/update")
+    public String update(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime)  throws Exception {
+        //Member loginUser = (Member) session.getAttribute("loginUser");
+        //    Art a = artService.get(art.getArtNo());
+        //**이미지 업로드
+        //기존
+//        art.setArtNo(artNo);
+//        adminService.update(art);
+//        return "redirect:../admin/artlist";
 
-    return "redirect:/admin/main";
-  }
+        // 날짜 및 시간 문자열의 형식을 변경
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedStartDatetime = targetFormat.format(sourceFormat.parse(strStartDatetime));
+        String formattedEndDatetime = targetFormat.format(sourceFormat.parse(strEndDatetime));
 
 
-//  @GetMapping("/searchlist")
-//  public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
-//
-//    model.addAttribute("option", option);
-//    model.addAttribute("keyword", keyword);
-//
-//    System.out.println(option + " " + keyword);
-//
-//    List<Art> searchResult = adminService.searchlist(option, keyword);
-//    model.addAttribute("searchResult", searchResult);
-//    System.out.println("Search List: " + searchResult);
-//
-//    return "admin/searchlist";
-//  }
+        art.setStartDatetime(Timestamp.valueOf(formattedStartDatetime));
+        art.setEndDatetime(Timestamp.valueOf(formattedEndDatetime));
 
+        ArrayList<Attach> attaches = new ArrayList<>();
+        for (MultipartFile part : files) {
+            if (part.getSize() > 0) {
+                Attach attach = ncpObjectStorageService.uploadFile(new Attach(),
+                        "arttab-bucket", "art/", part);
+                attaches.add(attach);
+            }
+        }
+        art.setArtAttaches(attaches);
+
+        adminService.update(art);
+
+        return "redirect:/admin/artlist";
+    }
+
+
+    @GetMapping("/artlist")
+    public void artlist(Model model) throws Exception {
+        model.addAttribute("artlist", adminService.list());
+    }
+
+
+
+    @GetMapping("/artdetail/{No}")
+    public String artdetail(
+            @PathVariable int No,
+            Model model) throws Exception {
+
+        model.addAttribute("art", adminService.get(No));
+        System.out.println("Received request for art with no: " + No);
+        System.out.printf(adminService.get(No).toString());
+
+
+        return "admin/artdetail";
+    }
+
+    @GetMapping("delete") //작품삭제
+    public String delete(@RequestParam ("artNo") int artNo) throws Exception {
+
+        //로그인 정보 받기
+
+        Art art = adminService.get(artNo);
+        adminService.delete(art.getArtNo());
+        return "redirect:../admin/artlist";
+    }
+
+    @GetMapping("fileDelete/{attachedFile}")
+    public String fileDelete(
+            @MatrixVariable("no") int no,
+            HttpSession session) throws Exception {
+
+//        Member loginUser = (Member) session.getAttribute("longinUser");
+//        if (loginUser == null) {
+//            return "redirect:/auth/form";
+//        }
+
+        Art art = null;
+
+        Attach attach = adminService.getFile(no);
+        art = adminService.get(attach.getArtNo());
+
+        if (adminService.deleteFile(no) == 0) {
+            throw new Exception("해당 번호의 첨부파일이 없습니다.");
+        } else {
+            return "redirect:/admin/artdetail/" + art.getArtNo();
+        }
+    }
+
+    @GetMapping("/searchlist")
+    public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
+
+        model.addAttribute("option", option);
+        model.addAttribute("keyword", keyword);
+
+        System.out.println(option + " " + keyword);
+
+        List<Art> searchResult = adminService.searchlist(option, keyword);
+        model.addAttribute("searchResult", searchResult);
+        System.out.println("Search List: " + searchResult);
+
+        return "admin/searchlist";
+    }
+
+    //입찰현황
+    @GetMapping("/bidstatus")
+    public String bidstatus(Model model) throws Exception {
+        log.info("Call /admin/bidstatus.html");
+
+        List<Bid> bidStatusList = bidService.list();
+        model.addAttribute("bidstatus", bidStatusList);
+
+        log.info("bidstatus data: {}", bidStatusList);
+
+        return "/admin/bidstatus";
+    }
 }

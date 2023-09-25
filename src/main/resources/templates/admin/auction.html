@@ -5,78 +5,76 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
 <head th:replace="~{fragment/config :: configFragment}">
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="stylesheet" type="text/css" href="../../static/css/admin-detail.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
+    <title>작품 등록</title>
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
 
-
-<p style='color: #F86338; font-weight: bold;'>작품 관리</p>
+<p style='color: #F86338; font-weight: bold;'>ART</p>
 <div class="main">
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
-        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
-
-
 <hr>
 <br>
-
-<div style="text-align: center;">
-
-<h2>경매 등록하기</h2>
+<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <h2 style="text-align: center;">작품 등록하기</h2>
+    <hr>
     <br>
-<hr>
-    <br>
-<form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
-    <label for="artCategory">카테고리</label>
-    <select id="artCategory" name="artCategory" required>
-    <option value="E">동양화</option>
-    <option value="W">서양화</option>
-    <option value="P">공예품</option>
-    <option value="X">기타</option>
-    </select>
+    <div class="custom-container">
+    <form data-th-action="@{/admin/addart}" method='post' enctype='multipart/form-data'>
+        <div>
+            <label for="artCategory">작품 카테고리</label>
+            <input type="radio" id="artCategoryE" name="artCategory" value="E" required>
+            <label for="artCategoryE">동양화</label>
+            <input type="radio" id="artCategoryW" name="artCategory" value="W" required>
+            <label for="artCategoryW">서양화</label>
+            <input type="radio" id="artCategoryP" name="artCategory" value="P" required>
+            <label for="artCategoryP">공예품</label>
+            <input type="radio" id="artCategoryX" name="artCategory" value="X" required>
+            <label for="artCategoryP">기타</label><br><br>
+        </div>
 
-    <br><br>
+        <label for="artTitle">작품명</label>
+        <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
 
-    <label for="artTitle">작품명</label>
-    <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
+        <label for="artWriter">작가명</label>
+        <input type="text" id="artWriter" name="artWriter" placeholder="작가을 입력하세요" required><br><br>
 
-    <label for="artWriter">작가명</label>
-    <input type="text" id="artWriter" name="artWriter" placeholder="작가을 입력하세요" required><br><br>
+        <label for="bidPricePer">입찰가격단위</label>
+        <input type="text" id="bidPricePer" name="bidPricePer" placeholder="입찰가격단위" required><br><br>
 
-    <label for="bidPricePer">입찰가격단위</label>
-    <input type="text" id="bidPricePer" name="bidPricePer" placeholder="입찰가격단위" required><br><br>
+        <label for="startPrice">경매 시작가</label>
+        <input type="text" id="startPrice" name="startPrice" placeholder="경매 시작가" required><br><br>
 
-    <label for="startPrice">경매 시작가</label>
-    <input type="text" id="startPrice" name="startPrice" placeholder="경매 시작가" required><br><br>
+        <label for="buyNowPrice">즉시 구매가</label>
+        <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
 
-    <label for="buyNowPrice">즉시 구매가</label>
-    <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
+        <label for="startDatetime">경매시작일시</label>
+        <input type="datetime-local" id="startDatetime" name="strStartDatetime" required><br><br>
 
-    <label for="startDatetime">경매시작일시</label>
-    <input type="datetime-local" id="startDatetime" name="strStartDatetime" required><br><br>
+        <label for="endDatetime">경매종료일시</label>
+        <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
 
-    <label for="endDatetime">경매종료일시</label>
-    <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
+        <label for="artContent">작품 설명</label>
+        <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
 
-    <label for="artContent">작품 설명</label>
-    <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
+        <label for="artDetail">작품 상세 설명</label>
+        <textarea id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요"rows="8" cols="60" required></textarea><br><br>
 
-    <label for="artDetail">작품 상세 설명</label>
-    <input type="text" id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요" required><br><br>
+        <label for="files">이미지 등록</label>
+        <input type="file" id="files" name="files" multiple><br><br>
 
-    <label for="files">이미지 등록</label>
-    <input type="file" id="files" name="files" multiple><br><br>-->
-
-    <input type="submit" value="제출">
-</form>
+        <div class="text-right">
+        <input type="submit" class="custom-button" value="제출">
+        </div>
+    </form>
 
 </div>
 

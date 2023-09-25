@@ -3,45 +3,90 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:th="http://www.thymeleaf.org"
 >
-<head th:replace="~{fragment/config :: configFragment}">
+<head>
     <meta charset="UTF-8">
-    <title>검색</title>
+    <title>작품 검색</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/admin-list.css">
+    <script src="../../static/js/admin-list.js"></script>
 </head>
-<body>
+<div data-th-replace="fragment/header :: headerFragment"></div>
 
-<div class="input-group">
-    <form action="/searchlist" name="search-form">
-        <select name="option">
-            <option selected value ="">검색 내용 선택</option>
-            <option value="title">제목</option>
-            <option value="content">내용</option>
-            <option value="writer">작가</option>
-        </select>
-        <input type="text" name="keyword" value="" placeholder="키워드를 입력하세요" />
+<body style="margin-left: 40px;">
 
-        <input type="submit" value="검색">
-    </form>
-</div>
 
-<table>
+    <p style='color: #F86338; font-weight: bold;'>ART</p>
+    <div>
+        <ul>
+            <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
+            <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
+            <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리</a></li>
+            <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
+        </ul>
+    </div>
+    <hr>
+    <br>
+    <div style="text-align: center;">
+        <h2>등록작품 현황 & 추가하기</h2>
 
-    <thead>
-    <tr> <th>제목</th> <th>작가</th></tr>
+        <br>
+
+        <form action="/admin/searchlist" name="search-form" style="display: inline-block;  margin-left: 50px;">
+            <select class="search-select" name="option">
+                <option disabled selected value ="" >선택</option>
+                <option value="title">작품명</option>
+                <option value="writer">작가</option>
+            </select>
+            <input class="search-input " type="text" name="keyword" value="" placeholder="키워드를 입력하세요" />
+            <input class="search-button" type="submit" value="검색">
+        </form>
+
+        <a class="custom-button-a" style="margin-left: 150px;" th:href="@{/admin/auction}">추가하기</a>
+    </div>
+
+    <br>
+    <td colspan="6"><hr></td>
+
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>카테고리</th>
+            <th>작품명</th>
+            <th>작가명</th>
+            <th>작품등록일</th>
+            <th>수정</th>
+            <th>삭제</th>
+    </tr>
     </thead>
-
-    <tr data-th-if="${searchResult == null or searchResult.isEmpty()}">
-        <td colspan="2">검색 결과가 없습니다.</td>
+        <td colspan="8"><hr></td>
+    <tbody>
+    <tr data-th-each="art : ${searchResult}">
+        <td data-th-text="${art.artNo}">100</td>
+        <td>
+            <span class="east" th:if="${art.artCategory == 'E'}">동양화</span>
+            <span class="west" th:if="${art.artCategory == 'W'}">서양화</span>
+            <span class="ppp" th:if="${art.artCategory == 'P'}">공예품</span>
+            <span class="other" th:if="${art.artCategory == 'X'}">기타</span>
+        </td>
+        <td>
+            <a class="table-content" data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
+               data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목(링크 수정 예정)</a>
+        </td>
+        <td class="table-title" data-th-text="${art.artWriter}">홍길동</td>
+        <td data-th-text="${#dates.format(art.artRegDatetime, 'yyyy-MM-dd')}">2021-09-14</td>
+        <td>
+            <a class="custom-button" data-th-href="@{'/admin/artdetail/' + ${art.artNo}}">수정</a>
+        </td>
+        <td>
+            <a class="custom-button-d" data-th-href="@{'/admin/delete?artNo='} + ${art.artNo}">삭제</a>
+        </td>
     </tr>
-    <!-- 검색 결과인 경우 -->
-
-    <tr data-th-each="art : ${searchResult}" style='margin:5px; text-align:center'>
-        <td data-th-text="${art != null ? art.artTitle : 'N/A'}">게시글 제목</td>
-        <td data-th-text="${art != null ? art.artWriter : 'N/A'}">작가</td>
+    <tr>
+        <td colspan="8"><hr></td>
     </tr>
-
-
-
+    </tbody>
 </table>
-
+    </div>
 </body>
 </html>

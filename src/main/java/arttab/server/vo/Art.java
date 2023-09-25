@@ -37,6 +37,6 @@ public class Art implements Serializable {
     //작품 검색
     private SearchParam searchParam;
 
-
-
 }
+
+

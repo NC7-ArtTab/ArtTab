@@ -1,0 +1,21 @@
+/* profile.css */
+
+/* 프로필 수정 폼 컨테이너 스타일 */
+.profile-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 수정 완료 버튼 스타일 */
+.btn-primary {
+    background-color: #FF7A00;
+    color: white;
+    font-weight: bold;
+}
+
+/* 수정 완료 버튼 호버 스타일 */
+.btn-primary:hover {
+    background-color: #FF6000;
+}

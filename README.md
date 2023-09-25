@@ -30,3 +30,4 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 3. 작업내역에 대해서 Fork를 떠간 자신의 Remote Repository에 Push
 4. 회의 전에 Original Repository / Main으로 PR을 작성
 5. 레포장이 PR을 확인하고 Merge
+

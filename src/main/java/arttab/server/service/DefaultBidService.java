@@ -6,22 +6,37 @@ import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import arttab.server.dto.ArtDetailDto;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class DefaultBidService implements BidService {
+  BidDao bidDao;
 
-    BidDao bidDao;
+  @Autowired
+  public DefaultBidService(BidDao bidDao) {
+    this.bidDao = bidDao;
+  }
 
-    public DefaultBidService(BidDao bidDao) {
-        this.bidDao = bidDao;
-    }
-    
+  public List<Bid> list() throws Exception {
+    return bidDao.findAll();
+  }
 
+  @Override
+  public Art findArtInfo(int artNo) {
+    return bidDao.artInfo(artNo);
+  }
 
-    public List<Bid> list() throws Exception {
-        return bidDao.findAll();
-    }
+  @Override
+  public Bid findBidInfo(int artNo) {
+    return bidDao.bidInfo(artNo);
+  }
 
+  @Override
+  public void insertBid(Bid bid) {
+    bidDao.insertBid(bid);
+  }
 }

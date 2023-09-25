@@ -47,14 +47,24 @@
         <result column="file_status" property="fileStatus"/>
     </resultMap>
 
+    <parameterMap type="java.util.Map" id="searchParams">
+        <parameter property="option" />
+        <parameter property="keyword" />
+    </parameterMap>
 
-<!--    <parameterMap type="java.util.Map" id="searchParams">-->
-<!--        <parameter property="option" />-->
-<!--        <parameter property="keyword" />-->
-<!--    </parameterMap>-->
+    <resultMap id="FileMap" type="arttab.server.vo.Attach">
+        <id column="file_no" property="fileNo"/>
+        <id column="art_no" property="artNo"/>
+        <id column="file_path" property="filePath"/>
+        <id column="origin_file_name" property="originFileName"/>
+        <id column="save_file_name" property="saveFileName"/>
+        <id column="file_reg_datetime" property="fileRegDatetime"/>
+        <id column="file_status" property="fileStatus"/>
+    </resultMap>
 
     <select id="findAll" resultMap="artMap" parameterType="int">
         select
+        art_no,
         art_title,
         art_category,
         art_writer,
@@ -64,6 +74,7 @@
         buy_now_price,
         bid_price_per,
         start_datetime,
+        art_reg_datetime,
         end_datetime,
         art_status
         from art
@@ -98,7 +109,8 @@
         f.save_file_name,
         f.file_reg_datetime,
         f.file_status
-        from art a inner join bid b on a.art_no=b.art_no
+        from art a
+        left outer join bid b on a.art_no=b.art_no
         left outer join attach f on a.art_no=f.art_no
         where a.art_no=#{artNo}
         order by b.bid_price desc, file_no;
@@ -136,6 +148,11 @@
 
 
 
+    <select id="findAttach" parameterType="int" resultMap="FileMap">
+        select *
+        from attach
+        where file_no=#{fileNo}
+    </select>
 
     <insert id="update" parameterType="art">
         update art set
@@ -160,27 +177,49 @@
         art_no=#{artNo}
     </delete>
 
+    <delete id="deleteFile" parameterType="int">
+        delete from attach
+        where
+        file_no=#{fileNo}
+    </delete>
 
-<!--    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">-->
-<!--        select-->
-<!--        art_no,-->
-<!--        art_title,-->
-<!--        art_writer,-->
-<!--        art_content-->
-<!--        from-->
-<!--        art-->
-<!--        <where>-->
-<!--            <if test="option != null and option.equals('title')">-->
-<!--                AND art_title LIKE CONCAT('%', #{keyword}, '%')-->
-<!--            </if>-->
-<!--            <if test="option != null and option.equals('content')">-->
-<!--                AND art_content LIKE CONCAT('%', #{keyword}, '%')-->
-<!--            </if>-->
-<!--            <if test="option != null and option.equals('writer')">-->
-<!--                AND art_writer LIKE CONCAT('%', #{keyword}, '%')-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
+    <delete id="deleteFiles" parameterType="int">
+        delete from attach
+        where
+        art_no=#{artNo}
+    </delete>
+
+
+
+
+    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
+        select
+        art_no,
+        art_category,
+        art_title,
+        art_writer,
+        art_content,
+        start_price,
+        buy_now_price,
+        bid_price_per,
+        art_reg_datetime,
+        start_datetime,
+        end_datetime,
+        art_status
+        from
+        art
+        <where>
+            <if test="option != null and option.equals('title')">
+                AND art_title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="option != null and option.equals('content')">
+                AND art_content LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="option != null and option.equals('writer')">
+                AND art_writer LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>
 
 

@@ -1,12 +1,14 @@
 package arttab.server.controller;
 
 import arttab.server.service.MemberService;
+import groovy.transform.AutoImplement;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import arttab.server.vo.Member;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -20,13 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuthController {
 
-    MemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-    public AuthController(MemberService memberService) {
-        this.memberService = memberService;
-    }
-
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/form")
     public void form(@CookieValue(required = false) String memberEmail, Model model) {
@@ -65,6 +65,6 @@ public class AuthController {
     public String logout(HttpSession session) throws Exception {
         session.invalidate();
         log.info("Call logout");
-        return "redirect:/";
+        return "redirect:/form";
     }
 }

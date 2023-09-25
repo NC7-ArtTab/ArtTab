@@ -4,20 +4,11 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
-    <title>FAQ List</title>
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ 목록</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/admin-list.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <body style="margin-left: 40px;">
@@ -27,7 +18,7 @@
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faqlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>
-        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>
+        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/artlist}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">작품 관리</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>
     </ul>
 </div>
@@ -35,35 +26,43 @@
 <br>
 <div style="text-align: center;">
 <h2 style="text-align: center;">FAQ List</h2>
+
+
+
+<a class="custom-button-a" style="margin-left: 800px;" th:href="@{/admin/faqform}">추가하기</a>
+</div>
 <br>
 <hr>
-<br>
-
-<a th:href="@{/admin/faqform}">추가하기</a>
-</div>
 
 
-<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+<div style="margin: 0 auto;
+            width: 80%;">
+    <table style="text-align:center;">
     <thead>
-    <tr><th>번호</th> <th>제목</th> <th>상태</th> </tr>
+    <tr><th>번호</th> <th>제목</th> <th>공개여부</th> <th>관리</th></tr>
     </thead>
     <td colspan="6"><hr></td>
 
     <br>
     <tbody>
     <tr data-th-each="faq : ${faqlist}" style='margin:5px; text-align:center'>
-        <td data-th-text="${faq.faqNo}">번호</td>
-        <td><a data-th-href="@{'/admin/faqdetail/' + ${faq.faqNo}}"
-                data-th-text="${faq.faqTitle}">제목</a> </td>
-        <td data-th-text="${faq.faqStatus}">상태</td>
+        <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqNo}">번호</td>
+        <td style="padding: 10px;  text-align: center; font-weight: bold;" data-th-text="${faq.faqTitle}">제목</td>
+        <td style="padding: 10px;  text-align: center;" data-th-text="${faq.faqStatus}">상태</td>
+
+        </td>
+    <td>
+        <a class="custom-button" data-th-href="@{'/admin/faqdetail/' + ${faq.faqNo}}">수정</a>
+    </td>
+    </tr>
+    <tr>
         <td colspan="6"><hr></td>
     </tr>
-
-
     </tbody>
+    </table>
 </div>
 
-<div class="clear"></div>
+
 
 <br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br>

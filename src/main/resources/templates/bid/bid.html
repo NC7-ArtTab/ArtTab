@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragment/config :: configFragment}">
+    <meta charset="UTF-8">
+    <title>입찰 페이지</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:replace="~{fragment/header :: headerFragment}"></header>
+
+<!-- 경매 상품 정보 표시 -->
+<h5 th:text="${art.artTitle}">작품</h5>
+<img th:src="${art.artAttaches}" alt="경매 상품 이미지" />
+<h5 th:text="${art.artContent}">작품 내용</h5>
+
+</body>
+</html>

@@ -1,4 +1,3 @@
-// DefaultMyBidService.java
 package arttab.server.service;
 
 import arttab.server.dao.MyBidDao;
