@@ -20,22 +20,48 @@
     <header th:replace="~{fragment/header :: headerFragment}"></header>
 
     <div style="margin: 0 0 40px 0;">
-        <a data-th-href="@{/art/list}" data-th-text="${art.artStatus}">상태 </a>
-        <a data-th-href="@{/art/list/동양화}" data-th-text="${art.artCategory}">카테고리 </a>
+        <a class="link" data-th-href="@{/art/list(artStatus=${art.artStatus})}" th:text="${art.artStatus == 'P' ? '진행중 >' : '경매종료 >'}"></a>
+        <a class="link" data-th-href="@{/art/list(artCategory=${art.artCategory})}">
+            <span th:switch="${art.artCategory}">
+                <span th:case="E">동양화 ></span>
+                <span th:case="W">서양화 ></span>
+                <span th:case="P">공예품 ></span>
+                <span th:case="X">기타 ></span>
+            </span>
+        </a>
         <a data-th-text="${art.artTitle}">제목 </a>
 
     </div>
 
     <div layout:fragment="content" class="container">
         <div class="content-left, box">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
+            <div class="main-image" style="text-align: center;">
+                <img id="mainImage" src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179" alt="메인 이미지"
+                >
+            </div>
+            <div class="image-container">
+                <div class="sub-image">
+                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+                         width="80" height="60"
+                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179')">
+
+                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180"
+                         width="80" height="60"
+                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180')">
+
+                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182"
+                         width="80" height="60"
+                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182')">
+                </div>
+
+                <script>
+                    function showImage(imageUrl) {
+                      var mainImage = document.getElementById('mainImage');
+                      mainImage.src = imageUrl;
+                      mainImage.alt = '메인 이미지';
+                    }
+                </script>
+            </div>
         </div>
 
         <div class="content-right, box">
@@ -70,7 +96,7 @@
                     <hr>
                 </div>
                 <div>
-                    <a href="|@{'/bid/bid?artNo=' + ${art.artNo}}|" class="button1">입찰하기 ♡</a>
+                    <a href="|@{'/bid/bid?artNo=' + ${art.artNo}}|" class="button1">입찰하기</a>
                     <a href="|@{'/bid/bid?artNo=' + ${art.artNo}}|" class="button2">즉시구매</a>
                 </div>
 
@@ -93,6 +119,7 @@
         <h1 style="text-align: center">상세 설명</h1>
         <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
     </div>
+    <br>
 
     <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </div>

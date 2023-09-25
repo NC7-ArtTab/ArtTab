@@ -10,6 +10,7 @@
 
     .content-left {
         margin: 0 auto 0 100px;
+
     }
 
     .content-right {
@@ -40,6 +41,7 @@
         min-height: 400px;
          background-color: #f4f7f8;
          padding: 20px;
+         border-radius: 10px;
 
     }
 
@@ -100,5 +102,44 @@
     border-radius: 4px; /* 버튼 둥글게 만들기 */
     text-align: left;
     }
+
+    .image-container {
+          display: flex;
+          flex-wrap: nowrap; /* 가로로 스크롤되도록 설정 */
+          overflow-x: auto; /* 가로 스크롤 활성화 */
+           /* 이미지 간격 설정 */
+          padding: 30px 10px 0 10px; /* 갤러리 주위 여백 설정 */
+          margin: auto;
+          max-width: 400px;
+    }
+
+    .image-container img {
+        flex: 1;
+        max-width: 100%; /* 이미지 크기를 컨테이너에 맞게 조정 */
+        height: auto;
+        padding: 8px;
+    }
+
+    .main-image {
+        padding:
+        height: 400px;
+        width: 500xp;
+
+    }
+    #mainImage {
+        max-height: 500px;
+        max-width: 100%;
+    }
+
+    .sub-image {
+        text-align: center;
+        max-width: 400px;
+    }
+
+    .link {
+        color: black;
+        text-decoration: none;
+    }
+
 
 
