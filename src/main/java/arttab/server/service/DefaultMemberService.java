@@ -5,7 +5,6 @@ import arttab.server.vo.Bid;
 import arttab.server.vo.Member;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,8 @@ public class DefaultMemberService implements MemberService {
       String encryptedPassword = passwordEncoder.encode(member.getMemberPwd());
       member.setMemberPwd(encryptedPassword);  // 한 번만 암호화된 비밀번호를 저장
       member.setMemberDatetime(Timestamp.from(Instant.now().atZone(ZoneOffset.UTC).toInstant()));
+      member.setMemberAuth("M"); // A:관리자 M:일반회원
+      member.setMemberStatus("Y"); // Y:회원  N:탈퇴회원
       memberDao.insertMember(member);
     }
   }

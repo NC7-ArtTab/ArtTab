@@ -24,5 +24,6 @@ public class KakaoLoginController {
         } catch (Exception e) {
             log.error("Exception occurred: {}", e.getMessage(), e);
         }
+
     }
 }
