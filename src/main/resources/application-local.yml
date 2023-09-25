@@ -12,9 +12,15 @@ spring:
 #    username: hyunwook
 #    password: bitcamp!@#123
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/arttabdb
-    username: study
-    password: 1111
+    url: jdbc:mysql://db-inv5u-kr.vpc-pub-cdb.ntruss.com:3306/arttabdb
+    username: seongju
+    password: bitcamp!@#123
+
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/arttabdb
+#    username: root
+#    password: 1111
+
 
 
 server:
