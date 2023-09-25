@@ -1,6 +1,7 @@
 package arttab.server.dao;
 
 import arttab.server.vo.Art;
+import arttab.server.vo.SearchParam;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -21,5 +22,5 @@ public interface ArtDao {
 
   List<Art> findAll(Art art);
 
-
+  List<Art> searchedList(SearchParam searchParam);
 }

@@ -6,121 +6,101 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
 <head th:fragment="configFragment">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>arttab</title>
 
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
-<!--    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />-->
-
 </head>
 <body style="display: flex; justify-content: center;">
 <div id="main" style="width: 1450px; background-color: #ffffff;">
-<div>
-    <header th:replace="~{fragment/header :: headerFragment}"></header>
+    <div>
+        <header th:replace="~{fragment/header :: headerFragment}"></header>
 
-    <div style="margin: 0 0 40px 0;">
-        <a class="link" data-th-href="@{/art/list(artStatus=${art.artStatus})}" th:text="${art.artStatus == 'P' ? '진행중 >' : '경매종료 >'}"></a>
-        <a class="link" data-th-href="@{/art/list(artCategory=${art.artCategory})}">
+        <div style="margin: 0 0 40px 0;">
+            <a class="link" data-th-href="@{/art/list(artStatus=${art.artStatus})}" th:text="${art.artStatus == 'P' ? '진행중 >' : '경매종료 >'}"></a>
+            <a class="link" data-th-href="@{/art/list(artCategory=${art.artCategory})}">
             <span th:switch="${art.artCategory}">
                 <span th:case="E">동양화 ></span>
                 <span th:case="W">서양화 ></span>
                 <span th:case="P">공예품 ></span>
                 <span th:case="X">기타 ></span>
             </span>
-        </a>
-        <a data-th-text="${art.artTitle}">제목 </a>
-
-    </div>
-
-    <div layout:fragment="content" class="container">
-        <div class="content-left, box">
-            <div class="main-image" style="text-align: center;">
-                <div data-th-text="${art.artAttaches[0]}"></div>
-                <img data-th-src="@{${art.artAttaches[0].saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
-<!--                <img id="mainImage" src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/art/' + ${art.artAttaches[0].saveFileName} + 'type=f,w=30,h=40,faceopt=true,ttype=jpg'}" alt="메인 이미지">-->
-            </div>
-            <div class="image-container">
-                <div class="sub-image"
-                data-th-each="file : ${art.artAttaches}">
-                    <img src="|https://ooixvdbufckn19718845.cdn.ntruss.com/art/${file.saveFileName}|"
-                         onclick="showImage('|https://ooixvdbufckn19718845.cdn.ntruss.com/art/${file.saveFileName}|')">
-                    <!--                         width="80" height="60"-->
-
-<!--                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180"-->
-<!--                         width="80" height="60"-->
-<!--                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180')">-->
-
-<!--                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182"-->
-<!--                         width="80" height="60"-->
-<!--                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182')">-->
-                </div>
-
-                <script>
-                    function showImage(imageUrl) {
-                      var mainImage = document.getElementById('mainImage');
-                      mainImage.src = imageUrl;
-                      mainImage.alt = '메인 이미지';
-                    }
-                </script>
-            </div>
+            </a>
+            <a data-th-text="${art.artTitle}">제목 </a>
         </div>
 
-        <div class="content-right, box">
-            <h4 class="title-text" style="margin-bottom: 50px;" th:text="${art.artTitle}">제목</h4>
-            <h4 class="text">경매 시작가 <span class="intext" th:text="${art.startPrice} + ' ￦'">1000</span> </h4>
-
-            <h4 class="text">현재 입찰가 <span class="intext" th:text="${art.artBids[0].bidPrice} + ' ￦'">1000</span> </h4>
-
-
-            <div style="padding: 20px 5px;">
-                <h4 class="text">작품 설명</h4>
-                <p class="content" th:text="${art.artContent}">내용</p>
-<!--            </div>-->
-<!--            <div>-->
-                <h5 class="text">경매 기간 <span class="intext" style="width: 450px;" data-th-text="${art.startDatetime + '  ~  ' + art.endDatetime}"></span> </h5>
-
-                <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
-
-                <div class="sec7-text-box">
-                    <hr>
-                    <p class="time-title">경매 마감까지 남은 시간</p>
-                    <div class="time">
-                        <span id="d-day-hour">00</span>
-                        <span class="col">:</span>
-                        <span id="d-day-min">00</span>
-                        <span class="col">:</span>
-                        <span id="d-day-sec">00</span>
+        <div layout:fragment="content" class="container">
+            <div class="content-left, box">
+                <div style="text-align: center;">
+                    <img id="main_image" data-th-src="@{${art.artAttaches.get(0).saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}"
+                         alt="Thumbnail" class="card-img-top">
+                </div>
+                <div class="image-container">
+                    <div class="sub_image" data-th-each="file : ${art.artAttaches}" style="padding-right: 30px">
+                        <img class="select_image" data-th-src="@{${file.saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + file.filePath +  file.saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
                     </div>
-                    <hr>
                 </div>
-                <div style="padding: 20px 0 0 5px;">
-                    <a href="@{'/bid/bid(artNo=${art.artNo})}" class="button1">입찰하기</a>
-                    <span style="margin: 5px;"></span>
-                    <a href="@{'/bid/bid(artNo=${art.artNo})}" class="button2">즉시구매</a>
+            </div>
+
+            <div class="content-right, box">
+                <input id="artNo" type="hidden" data-th-value="${art.artNo}"/>
+                <h4 class="title-text" style="margin-bottom: 50px;" th:text="${art.artTitle}">제목</h4>
+                <h4 class="text">경매 시작가 <span class="intext" th:text="${art.startPrice} + ' ￦'">1000</span> </h4>
+                <h4 class="text">현재 입찰가 <span class="intext" th:text="${art.artBids[0].bidPrice} + ' ￦'">1000</span> </h4>
+
+
+                <div style="padding: 20px 5px;">
+                    <h4 class="text">작품 설명</h4>
+                    <p class="content" th:text="${art.artContent}">내용</p>
+                    <h5 class="text">경매 기간 <span class="intext" style="width: 450px;" data-th-text="${art.startDatetime + '  ~  ' + art.endDatetime}"></span> </h5>
+
+                    <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
+
+                    <div class="sec7-text-box">
+                        <hr>
+                        <p class="time-title">경매 마감까지 남은 시간</p>
+                        <div class="time">
+                            <span id="d-day-hour">00</span>
+                            <span class="col">:</span>
+                            <span id="d-day-min">00</span>
+                            <span class="col">:</span>
+                            <span id="d-day-sec">00</span>
+                        </div>
+                        <hr>
+                    </div>
+                    <div style="padding: 20px 0 0 5px;">
+                        <a href="@{'/bid/bid(artNo=${art.artNo})}" class="button1">입찰하기</a>
+                        <span style="margin: 5px;"></span>
+                        <a href="@{'/bid/bid(artNo=${art.artNo})}" class="button2">즉시구매</a>
+                    </div>
                 </div>
-
-
-
             </div>
         </div>
+    <div style="text-align: center">
+        <span style="font-size: x-large; color: #F86338; font-weight: bold;">실시간 입찰현황</span>
     </div>
-    <div style="max-height: 100px; overflow-y:scroll; text-align: center;">
-        <table id="bidPriceTable" style="width:100%; border: 1px solid black;">
-            <th style="padding-right: 20px;">입찰가</th><th>입찰일시</th>
-            <!-- 실시간 경매정보 영역 -->
-
-        </table>
+    <div style="text-align: right">
+        <label style="font-weight: bold">입찰기록 기준일시 : </label><span id="baseline_time" style="font-weight: bold"></span><img src="/static/images/refresh.gif" style="height: 24px;">
+        <div style="min-height: 100px; height: 100%; overflow-y:scroll; text-align: center; border: solid 2px black;">
+            <table id="bidPriceTable" style="width:100%;">
+                <tr>
+                    <th style="background-color: #f0f0f0; padding-right: 20px; border: 1px solid black;">입찰가</th>
+                    <th style="background-color: #f0f0f0; border: 1px solid black;">입찰일시</th>
+                </tr>
+                <tr class="artInfo_row" style="width:100%;">
+                    <td colspan="2" style="border: 1px solid black;">해당 경매작품에 대한 입찰기록이 없습니다.</td>
+                </tr>
+            </table>
+        </div>
+        <span style="color: red;">*주의: 실시간 입찰기록은 입찰가 기준 상위 10개의 입찰기록만 제공하고 있습니다.</span>
     </div>
-    <button id="text_btn">Ajax테스트용</button>
+</div>
 
     <br><br><br><br><br><br><br>
     <div class="detail";>
         <h1 style="text-align: center">상세 설명</h1>
-        <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
-        <div data-th-each="file : ${art.artAttaches}">
-            <img src="|https://kr.object.ncloudstorage.com/arttab-bucket/art/${file.saveFileName}|">
+        <div data-th-each="file : ${art.artAttaches}" style="text-align: center; padding: 10px">
+            <img style="width: 60%; height: 60%;" data-th-src="@{${file.saveFileName != null ? 'https://kr.object.ncloudstorage.com/arttab-bucket/' + file.filePath +  file.saveFileName : ''}}">
         </div>
+        <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
     </div>
     <br>
 
@@ -132,6 +112,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
+        $(".select_image").click(function () {
+            $("#main_image").attr("src",this.src);
+        });
+
         var remaindTimeId; // remaindTime()의 setInterval의 ID를 저장할 변수
         var realTimeInfoId; // realTimeInfo()의 setInterval의 ID를 저장할 변수
         var artNo = $("#artNo").val();
@@ -142,7 +126,7 @@
             var now = new Date(); //현재시간을 구한다.
 
             // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 23, 19, 15, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date(2023, 8, 25, 19, 15, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -205,9 +189,10 @@
                 }
             }).always(function () {
                 // 요청이 성공하든 실패하든 작품 리스트로 이동
-                window.location.href = "/art/list";
+                // window.location.href = "/art/list";
             });
         }
+
         realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
         remaindTimeId = setInterval(remaindTime, 1000);
         realTimeInfoId = setInterval(realTimeInfo, 5000);
@@ -233,24 +218,30 @@
                 success: function (data) {
                     console.log(data.art);
                     console.log(data.art.artBids);
-                    console.log(data.art.artBids[0]);
 
                     let newRow;
                     let bidPrice;
                     let bidDatetime;
-                    const bidList = data.art.artBids;
+                    let bidList = data.art.artBids;
+                    const rows = [];
 
-                    if ($(".artInfo_row").length > 0) {
+                    for (let i = 0; i < 10; i++) { // 상위 10개의 입찰기록에 대해서만 데이터 생성
+                        if (!bidList[i] || bidList[i].bidNo === 0) {
+                            continue;
+                        }
+
+                        bidPrice = bidList[i].bidPrice;
+                        bidDatetime = formatDate(bidList[i].bidDatetime);
+                        newRow = $("<tr class='artInfo_row'>").append($("<td style='border: 1px solid black;'>").text(bidPrice.toLocaleString() + " (원)")).append($("<td style='border: 1px solid black;'>").text(bidDatetime));
+                        rows.push(newRow);
+                    }
+
+                    if (rows.length > 0 && $(".artInfo_row").length > 0) {
                         $(".artInfo_row").remove();
+                        $("#bidPriceTable").append(rows);
                     }
-
-                    for (let i = 0; i < bidList.length; i++) {
-                        // bidPrice = bidList.length > 0 ? bidList[i].bidPrice + " (원)" : "현재 입찰없음";
-                        // bidDatetime = bidList.length > 0 ? formatDate(bidList[i].bidDatetime)  : "현재 입찰없음";
-
-                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidPrice)).append($("<td>").text(bidDatetime));
-                        $("#bidPriceTable").append(newRow);
-                    }
+                    console.log(formatDate(new Date()));
+                    $("#baseline_time").text(formatDate(new Date()) + ' ');
                 },
                 error: function () {
                     console.error();

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <header class="main-header" th:fragment="headerFragment">
 
   <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
@@ -27,6 +26,32 @@
       <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
     </li>
   </ul>
+
+
+    <ul style="list-style-type: none; padding-right: 0; display: flex; justify-content: space-between; align-items: center;">
+        <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">진행 중 경매</a></li>
+        <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
+        <li style="margin-right: 10px;" class="about-arttab"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
+        <li>
+            <form action="/art/list" name="search-form" style="display: inline-block; margin-left: 400px;">
+                <select name="searchType">
+                    <option value="all" data-th-selected="${session.searchParam != null &&  session.searchParam.searchType == 'all'}">전체</option>
+                    <option value="title" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'title'}">제목</option>
+                    <option value="writer" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'writer'}">작가</option>
+                </select>
+                <input type="text" name="searchKeyword" style="width: 400px;" placeholder="작품명과 작가명으로 작품을 검색해보세요!" data-th-value="${session.searchParam != null ? session.searchParam.searchKeyword : ''}" />
+                <input id="search_btn" type="submit" value="검색">
+            </form>
+        </li>
+        <li style="display: flex; align-items: center;">
+            <a th:if="${session.loginUser == null}" href="/form" class="login-button">로그인</a>
+            <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"style="font-size: 30px; font-weight: bold;"></span>></span>
+            <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="login-button">로그아웃</a>
+            <a data-th-href="@{/mypage/main}"><img style="width: 100px; height: 80px;" src="/static/images/user.jpg"></a>
+            <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
+        </li>
+    </ul>
+  <hr>
 
 </header>
 </html>
