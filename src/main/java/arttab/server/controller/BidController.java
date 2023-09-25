@@ -38,12 +38,21 @@ public class BidController {
 //  }
 
   @GetMapping("/bid/{artNo}")
-  public String getBidInfo(@PathVariable int artNo, Model model) throws Exception {
-    Art art = bidService.findArtInfo(artNo);
-    model.addAttribute("art", art);
-    Bid bid = bidService.findBidInfo(artNo);
-    model.addAttribute("bid", bid);
-    return "bid/bid";
+  public String getBidInfo(@PathVariable String artNo, Model model) throws Exception {
+    try {
+      // artNo가 숫자로 변환 가능한지 확인
+      int artId = Integer.parseInt(artNo);
+
+      // 숫자로 변환 가능한 경우에만 실행
+      ArtDetailDto artDto = bidService.findArtInfo(artId);
+      model.addAttribute("art", artDto);
+
+      return "bid/bid";
+    } catch (NumberFormatException e) {
+      // artNo가 숫자로 변환 불가능한 경우에 대한 처리 (예: 예외 처리)
+      // 예를 들어, 유효하지 않은 artNo에 대한 오류 페이지를 표시하거나 리디렉션을 수행할 수 있습니다.
+      return "error"; // 또는 다른 적절한 처리 방법을 선택하세요.
+    }
   }
 
   @PostMapping("/insertBid")

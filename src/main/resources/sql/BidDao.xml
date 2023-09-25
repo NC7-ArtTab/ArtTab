@@ -88,6 +88,7 @@
         <result property="artNo" column="art_no"/>
         <result property="bidPrice" column="bid_price"/>
         <result property="bidDatetime" column="bid_datetime"/>
+        <result property="bidPricePer" column="bid_price_per"/>
         <result property="memberNo" column="mem_no"/>
     </resultMap>
 
@@ -105,6 +106,7 @@
         <result property="endDatetime" column="end_datetime"/>
         <result property="artRegDatetime" column="art_reg_datetime"/>
         <result property="artStatus" column="art_status"/>
+        <result property="filePath" column="file_path"/>
         <result property="maxBidPrice" column="max_bid_price"/>
         <result property="nextBidPrice" column="next_bid_price"/>
         <result property="memberNo" column="mem_no"/>
@@ -130,7 +132,7 @@
         a.art_no;
     </select>
 
-    <select id="artInfo" parameterType="int" resultMap="artMap">
+    <select id="artInfo" parameterType="int" resultMap="artDetailMap">
         SELECT
         a.art_title,
         a.art_writer,
@@ -149,16 +151,16 @@
         a.art_no = #{artNo}
     </select>
 
-    <select id="bidInfo" parameterType="int" resultMap="resultBidMap">
+    <select id="bidInfo" parameterType="int" resultMap="artMap">
         SELECT
-        MAX(b.bid_price),
+        MAX(b.bid_price) AS max_bid_price,
         a.bid_price_per
         FROM
-        art a
+        bid b
         LEFT JOIN
-        bid b ON a.art_no = b.art_no
+        art a ON b.art_no = a.art_no
         WHERE
-        a.art_no = #{artNo}
+        b.art_no = #{artNo}
         GROUP BY
         a.art_no, a.bid_price_per
     </select>

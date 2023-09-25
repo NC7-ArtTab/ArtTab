@@ -26,12 +26,12 @@ public class DefaultBidService implements BidService {
   }
 
   @Override
-  public Art findArtInfo(int artNo) {
+  public ArtDetailDto findArtInfo(int artNo) {
     return bidDao.artInfo(artNo);
   }
 
   @Override
-  public Bid findBidInfo(int artNo) {
+  public ArtDetailDto findBidInfo(int artNo) {
     return bidDao.bidInfo(artNo);
   }
 

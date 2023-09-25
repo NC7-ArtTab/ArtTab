@@ -23,7 +23,7 @@ public class ArtDetailDto {
   private Timestamp endDatetime; // 경매종료일시
   private Timestamp artRegDatetime; // 작품등록일시
   private String artStatus; // 작품경매현황 ex) Y:낙찰 건, P:경매진행중인 건, R:경매준비중인 건, F:경매종료 건, D:삭제처리 건
-
+  private String filePath;
   private int maxBidPrice;
   private int nextBidPrice;
   private int memberNo;
