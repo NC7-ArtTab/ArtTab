@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="arttab.server.dao.BidDao">
-<!--sh-->
+    <!--sh-->
     <resultMap type="arttab.server.vo.Bid" id="bidMap">
         <id column="bid_no" property="bidNo"/>
         <result column="bid_price" property="bidPrice"/>
@@ -23,86 +23,86 @@
             <result column="art_status" property="artStatus"/>
         </association>
     </resultMap>
-<!--js-->
+    <!--js-->
     <resultMap id="artMap" type="arttab.server.vo.Art">
-      <id property="artNo" column="art_no"/>
-      <result property="artTitle" column="art_title"/>
-      <result property="artCategory" column="art_category"/>
-      <result property="artWriter" column="art_writer"/>
-      <result property="artContent" column="art_content"/>
-      <result property="artDetail" column="art_detail"/>
-      <result property="startPrice" column="start_price"/>
-      <result property="buyNowPrice" column="buy_now_price"/>
-      <result property="bidPricePer" column="bid_price_per"/>
-      <result property="startDatetime" column="start_datetime"/>
-      <result property="endDatetime" column="end_datetime"/>
-      <result property="artRegDatetime" column="art_reg_datetime"/>
-      <result property="artStatus" column="art_status"/>
+        <id property="artNo" column="art_no"/>
+        <result property="artTitle" column="art_title"/>
+        <result property="artCategory" column="art_category"/>
+        <result property="artWriter" column="art_writer"/>
+        <result property="artContent" column="art_content"/>
+        <result property="artDetail" column="art_detail"/>
+        <result property="startPrice" column="start_price"/>
+        <result property="buyNowPrice" column="buy_now_price"/>
+        <result property="bidPricePer" column="bid_price_per"/>
+        <result property="startDatetime" column="start_datetime"/>
+        <result property="endDatetime" column="end_datetime"/>
+        <result property="artRegDatetime" column="art_reg_datetime"/>
+        <result property="artStatus" column="art_status"/>
 
-      <collection property="artAttaches" ofType="arttab.server.vo.Attach">
-        <result property="fileNo" column="attach_file_no"/>
-        <result property="filePath" column="attach_file_path"/>
-        <result property="originFileName" column="attach_origin_file_name"/>
-        <result property="saveFileName" column="attach_save_file_name"/>
-      </collection>
+        <collection property="artAttaches" ofType="arttab.server.vo.Attach">
+            <result property="fileNo" column="attach_file_no"/>
+            <result property="filePath" column="attach_file_path"/>
+            <result property="originFileName" column="attach_origin_file_name"/>
+            <result property="saveFileName" column="attach_save_file_name"/>
+        </collection>
 
-      <collection property="artBids" ofType="arttab.server.vo.Bid">
-        <id property="bidNo" column="bid_no"/>
-        <result property="bidPrice" column="bid_price"/>
-        <result property="bidDatetime" column="bid_datetime"/>
-        <result property="memberNo" column="mem_no"/>
-      </collection>
+        <collection property="artBids" ofType="arttab.server.vo.Bid">
+            <id property="bidNo" column="bid_no"/>
+            <result property="bidPrice" column="bid_price"/>
+            <result property="bidDatetime" column="bid_datetime"/>
+            <result property="memberNo" column="mem_no"/>
+        </collection>
     </resultMap>
 
     <resultMap id="memberMap" type="arttab.server.vo.Member">
-      <id column="mem_no" property="memberNo"/>
-      <result column="mem_email" property="memberEmail"/>
-      <result column="mem_pwd" property="memberPwd"/>
-      <result column="mem_name" property="memberName"/>
-      <result column="mem_phone" property="memberPhone"/>
-      <result column="mem_zipcode" property="memberZipcode"/>
-      <result column="mem_addr" property="memberAddr"/>
-      <result column="mem_detail_addr" property="memberDetailAddr"/>
-      <result column="mem_bank" property="memberBank"/>
-      <result column="mem_acc" property="memberAcc"/>
-      <result column="mem_detail_addr" property="memberDetailAddr"/>
-      <result column="mem_auth" property="memberAuth"/>
-      <result column="mem_datetime" property="memberDatetime"/>
-      <result column="mem_status" property="memberStatus"/>
+        <id column="mem_no" property="memberNo"/>
+        <result column="mem_email" property="memberEmail"/>
+        <result column="mem_pwd" property="memberPwd"/>
+        <result column="mem_name" property="memberName"/>
+        <result column="mem_phone" property="memberPhone"/>
+        <result column="mem_zipcode" property="memberZipcode"/>
+        <result column="mem_addr" property="memberAddr"/>
+        <result column="mem_detail_addr" property="memberDetailAddr"/>
+        <result column="mem_bank" property="memberBank"/>
+        <result column="mem_acc" property="memberAcc"/>
+        <result column="mem_detail_addr" property="memberDetailAddr"/>
+        <result column="mem_auth" property="memberAuth"/>
+        <result column="mem_datetime" property="memberDatetime"/>
+        <result column="mem_status" property="memberStatus"/>
 
-      <collection property="memberBids" ofType="arttab.server.vo.Bid">
-        <id property="bidNo" column="bid_no"/>
-        <result property="bidPrice" column="bid_price"/>
-        <result property="bidDatetime" column="bid_datetime"/>
-        <result property="artNo" column="art_no"/>
-      </collection>
+        <collection property="memberBids" ofType="arttab.server.vo.Bid">
+            <id property="bidNo" column="bid_no"/>
+            <result property="bidPrice" column="bid_price"/>
+            <result property="bidDatetime" column="bid_datetime"/>
+            <result property="artNo" column="art_no"/>
+        </collection>
     </resultMap>
 
     <resultMap id="resultBidMap" type="arttab.server.vo.Bid">
-      <id property="bidNo" column="bid_no"/>
-      <result property="artNo" column="art_no"/>
-      <result property="bidPrice" column="bid_price"/>
-      <result property="bidDatetime" column="bid_datetime"/>
-      <result property="memberNo" column="mem_no"/>
+        <id property="bidNo" column="bid_no"/>
+        <result property="artNo" column="art_no"/>
+        <result property="bidPrice" column="bid_price"/>
+        <result property="bidDatetime" column="bid_datetime"/>
+        <result property="memberNo" column="mem_no"/>
     </resultMap>
 
     <resultMap id="artDetailMap" type="arttab.server.dto.ArtDetailDto">
-      <id property="artNo" column="art_no"/>
-      <result property="artTitle" column="art_title"/>
-      <result property="artCategory" column="art_category"/>
-      <result property="artWriter" column="art_writer"/>
-      <result property="artContent" column="art_content"/>
-      <result property="artDetail" column="art_detail"/>
-      <result property="startPrice" column="start_price"/>
-      <result property="buyNowPrice" column="buy_now_price"/>
-      <result property="bidPricePer" column="bid_price_per"/>
-      <result property="startDatetime" column="start_datetime"/>
-      <result property="endDatetime" column="end_datetime"/>
-      <result property="artRegDatetime" column="art_reg_datetime"/>
-      <result property="artStatus" column="art_status"/>
-      <result property="maxBidPrice" column="max_bid_price"/>
-      <result property="nextBidPrice" column="next_bid_price"/>
-      <result property="memberNo" column="mem_no"/>
+        <id property="artNo" column="art_no"/>
+        <result property="artTitle" column="art_title"/>
+        <result property="artCategory" column="art_category"/>
+        <result property="artWriter" column="art_writer"/>
+        <result property="artContent" column="art_content"/>
+        <result property="artDetail" column="art_detail"/>
+        <result property="startPrice" column="start_price"/>
+        <result property="buyNowPrice" column="buy_now_price"/>
+        <result property="bidPricePer" column="bid_price_per"/>
+        <result property="startDatetime" column="start_datetime"/>
+        <result property="endDatetime" column="end_datetime"/>
+        <result property="artRegDatetime" column="art_reg_datetime"/>
+        <result property="artStatus" column="art_status"/>
+        <result property="maxBidPrice" column="max_bid_price"/>
+        <result property="nextBidPrice" column="next_bid_price"/>
+        <result property="memberNo" column="mem_no"/>
     </resultMap>
 
     <select id="findAll" resultMap="bidMap">

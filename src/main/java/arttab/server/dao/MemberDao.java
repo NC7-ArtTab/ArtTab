@@ -19,3 +19,4 @@ public interface MemberDao {
     int delete(int memberNo);
     int countByEmail(String email);
 }
+
