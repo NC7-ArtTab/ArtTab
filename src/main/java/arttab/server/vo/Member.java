@@ -27,6 +27,5 @@ public class Member implements Serializable {
     private String memberAuth;
     private Timestamp memberDatetime;  // 회원등록일시
     private String memberStatus;
-    private String memberBack;
     private List<Bid> memberBids;
 }

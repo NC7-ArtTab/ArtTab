@@ -39,6 +39,8 @@
         </collection>
 
     </resultMap>
+
+
 <!--        <collection property="artFiles" ofType="arttab.server.vo.Attach">
             <id column="file_no" property="fileNo"/>
             <result column="file_path" property="filePath"/>
@@ -123,14 +125,35 @@
         from art a left join bid b on a.art_no=b.art_no
             left join attach f on a.art_no=f.art_no
         where a.art_no=#{artNo}
-        order by b.bid_price desc, file_no;
+        order by b.bid_price desc, file_no
     </select>
 
 
 
     <select id="findAll" parameterType="art" resultMap="artMap">
-        select art_no, art_title, art_category, art_writer, art_content, art_detail, start_price, buy_now_price, bid_price_per, start_datetime, end_datetime, art_reg_datetime, art_status
-        from art
+        select a.art_no
+              , a.art_title
+              , a.art_category
+              , a.art_writer
+              , a.art_content
+              , a.art_detail
+              , a.start_price
+              , a.buy_now_price
+              , a.bid_price_per
+              , a.start_datetime
+              , a.end_datetime
+              , a.art_reg_datetime
+              , a.art_status
+              , f.file_no
+              , f.art_no
+              , f.file_path
+              , f.origin_file_name
+              , f.save_file_name
+              , f.file_reg_datetime
+              , f.file_status
+        from art a
+             left join attach f
+        on a.art_no = f.art_no
         <where>
             <if test="artCategory != null and artCategory != ''">
                 and art_category = #{artCategory}
@@ -138,8 +161,22 @@
             <if test="artStatus != null and artStatus != ''">
                 and art_status = #{artStatus}
             </if>
+            <if test="searchParam.searchType != '' and searchParam.searchKeyword != null and searchParam.searchKeyword != ''">
+                and
+                <choose>
+                    <when test="searchParam.searchType == 'title'">
+                        art_title like concat('%', #{searchParam.searchKeyword}, '%')
+                    </when>
+                    <when test="searchParam.searchType == 'writer'">
+                        art_writer like concat('%', #{searchParam.searchKeyword}, '%')
+                    </when>
+                    <otherwise>
+                        (art_title like concat('%', #{searchParam.searchKeyword}, '%') or art_writer like concat('%', #{searchParam.searchKeyword}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
         </where>
-        order by art_no desc
+        order by a.art_no desc, f.file_no
     </select>
 
     <update id="update" parameterType="art">

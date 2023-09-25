@@ -23,14 +23,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import java.util.List;
 
 
@@ -40,72 +38,70 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    ArtService artService;
-    @Autowired
-    AdminService adminService;
-    @Autowired
-    BidService bidService;
-    @Autowired
-    FAQService faqService;
-    @Autowired
-    NcpObjectStorageService ncpObjectStorageService;
+  @Autowired
+  ArtService artService;
+  @Autowired
+  AdminService adminService;
+  @Autowired
+  BidService bidService;
+  @Autowired
+  FAQService faqService;
+  @Autowired
+  NcpObjectStorageService ncpObjectStorageService;
 
-    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
+  private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     //admin
 
-    @GetMapping("/main")
-    public String admin() {
-        log.info("Call main.html");
-        return "/admin/main";
-    }
+  @GetMapping("/main")
+  public String admin() {
+    log.info("Call main.html");
+    return "/admin/main";
+  }
 
     //faq
 
-    @GetMapping("/faqform")
-    public String faqform() {
-        log.info("Call admin/faqform.html");
-        return "/admin/faqform";
-    }
+  @GetMapping("/faqform")
+  public String faqform() {
+    log.info("Call admin/faqform.html");
+    return "/admin/faqform";
+  }
 
-    @PostMapping("/addfaq")
-    public String addfaq(FAQ faq) throws Exception{
-        log.info("addfaq");
+  @PostMapping("/addfaq")
+  public String addfaq(FAQ faq) throws Exception {
+    log.info("addfaq");
 
         faqService.add(faq);
         return "redirect:/admin/faqlist";
     }
 
-    @GetMapping("faqlist")
-    public void faqlist(Model model) throws Exception {
-        model.addAttribute("faqlist", faqService.list());
+  @GetMapping("faqlist")
+  public void faqlist(Model model) throws Exception {
+    model.addAttribute("faqlist", faqService.list());
+  }
+
+  @PostMapping("/faqupdate")
+  public String faqupdate(FAQ faq) throws Exception {
+    log.info("faqupdate");
+
+    faqService.update(faq);
+    return "redirect:/admin/faqlist";
+  }
+
+  @GetMapping("/faqdetail/{no}")
+  public String faqdetail(@PathVariable int no, Model model) throws Exception {
+    model.addAttribute("faq", faqService.get(no));
+    System.out.println("Received request for faq with no: " + no);
+
+    Object faqlistData = model.getAttribute("faqdetail");
+    if (faqlistData != null) {
+      // faqlistData를 로그에 출력하거나 원하는 대로 처리합니다.
+      System.out.println("faq 데이터: " + faqlistData.toString());
+    } else {
+      System.out.println("faq 데이터가 모델에 없습니다.");
     }
-
-    @PostMapping("/faqupdate")
-    public String faqupdate(FAQ faq) throws Exception{
-        log.info("faqupdate");
-
-        faqService.update(faq);
-        return "redirect:/admin/faqlist";
-    }
-
-    @GetMapping("/faqdetail/{no}")
-    public String faqdetail(@PathVariable int no, Model model) throws Exception{
-        model.addAttribute("faq", faqService.get(no));
-        System.out.println("Received request for faq with no: " + no);
-
-        Object faqlistData = model.getAttribute("faqdetail");
-        if (faqlistData != null) {
-            // faqlistData를 로그에 출력하거나 원하는 대로 처리합니다.
-            System.out.println("faq 데이터: " + faqlistData.toString());
-        } else {
-            System.out.println("faq 데이터가 모델에 없습니다.");
-        }
-        return "admin/faqdetail";
-    }
-
-
+    return "admin/faqdetail";
+  }
 
 
     // art
@@ -181,13 +177,10 @@ public class AdminController {
         return "redirect:/admin/artlist";
     }
 
-
     @GetMapping("/artlist")
     public void artlist(Model model) throws Exception {
         model.addAttribute("artlist", adminService.list());
     }
-
-
 
     @GetMapping("/artdetail/{No}")
     public String artdetail(

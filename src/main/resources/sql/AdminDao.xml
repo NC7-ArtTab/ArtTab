@@ -116,13 +116,10 @@
         order by b.bid_price desc, file_no;
     </select>
 
-
-
     <insert id="insert" parameterType="arttab.server.vo.Art"
             useGeneratedKeys="true" keyColumn="art_no" keyProperty="artNo">
         insert into art
-        (
-        art_category,
+        (art_category,
         art_title,
         art_writer,
         bid_price_per,
@@ -135,18 +132,21 @@
         values(#{artCategory},#{artTitle},#{artWriter},#{bidPricePer},#{startPrice},#{buyNowPrice},#{startDatetime},#{endDatetime},#{artContent},#{artDetail})
     </insert>
 
+
     <insert id="insertFiles" parameterType="arttab.server.vo.Attach">
         insert
         into attach( file_no
-        , art_no
-        , file_path
-        , origin_file_name
-        , save_file_name)
+                    , art_no
+                    , file_path
+                    , origin_file_name
+                    , save_file_name)
         values
         <foreach collection="artAttaches" item="attach" separator=",">
             (#{attach.fileNo}, #{artNo},  #{attach.filePath}, #{attach.originFileName}, #{attach.saveFileName})
         </foreach>
     </insert>
+
+
 
     <select id="findAttach" parameterType="int" resultMap="FileMap">
         select *
@@ -170,7 +170,6 @@
         where
         art_no=#{artNo}
     </insert>
-
 
     <delete id="delete" parameterType="int">
         delete from art

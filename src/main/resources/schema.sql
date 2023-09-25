@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `pay`;
 
 CREATE TABLE `member` (
                           `mem_no` INT NOT NULL AUTO_INCREMENT COMMENT '회원번호',
-                          `mem_email` VARCHAR(50) NOT NULL COMMENT '이메일',
+                          `mem_email` VARCHAR(50) NOT NULL UNIQUE COMMENT '이메일',
                           `mem_pwd` VARCHAR(100) NOT NULL COMMENT '비밀번호',
                           `mem_name` VARCHAR(50) NOT NULL COMMENT '이름',
                           `mem_phone` VARCHAR(30) NOT NULL COMMENT '휴대폰',
