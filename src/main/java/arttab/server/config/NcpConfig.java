@@ -22,6 +22,10 @@ public class NcpConfig {
     private String accessKey;
     private String secretKey;
 
+    public NcpConfig() {
+        System.out.println("NcpConfig() 호출됨!");
+    }
+
     public String getEndPoint() {
         return endPoint;
     }
