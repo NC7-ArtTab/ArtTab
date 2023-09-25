@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head th:replace="~{fragment/config :: configFragment}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<body style="margin-left: 40px;">
+
+<p style='color: #F86338; font-weight: bold;'>ArtTab</p>
+<!--<div class="main">-->
+<!--    <ul>-->
+<!--        <li style="display: inline; margin-left: -20px; margin-right: 200px; font-size: 40px; font-weight: bold;">관리자 페이지</li>-->
+<!--        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/faq}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">FAQ 관리</a></li>-->
+<!--        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/auction}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">경매 등록</a></li>-->
+<!--        <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/admin/bidstatus}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰구매 현황</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<hr>
+<br>
+
+<div style="text-align: center;">
+    <h2>경매 수정</h2>
+    <hr>
+    <form data-th-action="@{'/admin/update?artNo='}+${art.artNo}" method='post' enctype='multipart/form-data'>
+        <label for="artCategory">카테고리</label>
+        <p th:text="${art.artCategory}">내용</p>
+        <input type="text" id="artCategory" name="artCategory" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
+
+        <label for="artTitle">작품명</label>
+        <p th:text="${art.artTitle}">내용</p>
+        <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
+
+        <label for="artWriter">작가명</label>
+        <p th:text="${art.artWriter}">내용</p>
+        <input type="text" id="artWriter" name="artWriter" placeholder="작가을 입력하세요" required><br><br>
+
+        <label for="bidPricePer">입찰가격단위</label>
+        <p th:text="${art.bidPricePer}">내용</p>
+        <input type="text" id="bidPricePer" name="bidPricePer" placeholder="입찰가격단위" required><br><br>
+
+        <label for="startPrice">경매 시작가</label>
+        <p th:text="${art.startPrice}">내용</p>
+        <input type="text" id="startPrice" name="startPrice" placeholder="경매 시작가" required><br><br>
+
+        <label for="buyNowPrice">즉시 구매가</label>
+        <p th:text="${art.buyNowPrice}">내용</p>
+        <input type="text" id="buyNowPrice" name="buyNowPrice" placeholder="즉시 구매가" required><br><br>
+
+        <label for="startDatetime">경매시작일시</label>
+        <p th:text="${art.startDatetime}">내용</p>
+        <input type="text" id="startDatetime" name="startDatetime" placeholder="경매시작일시 2023-10-15" required><br><br>
+
+        <label for="endDatetime">경매종료일시</label>
+        <p th:text="${art.endDatetime}">내용</p>
+        <input type="text" id="endDatetime" name="endDatetime" placeholder="경매종료일시" required><br><br>
+
+        <label for="artContent">작품 설명</label>
+        <p th:text="${art.artContent}">내용</p>
+        <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
+
+        <label for="artDetail">작품 상세 설명</label>
+        <p th:text="${art.artDetail}">내용</p>
+        <input type="text" id="artDetail" name="artDetail" placeholder="작품에 대한 상세 설명을 입력하세요" required><br><br>
+
+        <label for="files">이미지 등록</label>
+<!--        <div data-th-each="file : ${art.artAttaches}">-->
+<!--            <a data-th-href="|https://kr.object.ncloudstorage.com/bitcamp-nc7-bucket-06/board/${file.filePath}|"-->
+<!--               data-th-text="${file.filePath}">ohora.gif</a>-->
+<!--            [<a data-th-href="|/board/fileDelete/attachedFile;no=${file.no}|">삭제</a>]<br>-->
+<!--        </div>-->
+        <input type="file" id="files" name="files" multiple><br><br>-->
+
+        <button>수정</button>
+<!--        <input type="submit" value="제출">-->
+    </form>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+
+
+<br><br><br><br><br><br><br><br>
+
+
+
+
+</body>
+
+<div data-th-replace="fragment/footer :: footerFragment"></div>
+</html>

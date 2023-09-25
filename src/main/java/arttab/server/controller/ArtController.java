@@ -1,11 +1,7 @@
 package arttab.server.controller;
 
-
 import arttab.server.service.ArtService;
-import arttab.server.vo.Art;
-import arttab.server.vo.Bid;
-import arttab.server.vo.MailSender;
-import arttab.server.vo.PageNation;
+import arttab.server.vo.*;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 
