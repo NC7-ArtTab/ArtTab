@@ -42,6 +42,7 @@
         WHERE mem_no = #{memberNo}
     </update>
 
+
     <!-- findBy 메서드의 SQL 쿼리 정의 -->
     <select id="findBy" parameterType="int" resultType="arttab.server.vo.Member">
         SELECT *
@@ -82,23 +83,23 @@
         mem_no asc
     </select>
 
-<!--    <select id="findBy" parameterType="int" resultMap="memberMap">-->
-<!--        select-->
-<!--        mem_no,-->
-<!--        mem_email,-->
-<!--        mem_name,-->
-<!--        mem_phone,-->
-<!--        mem_zipcode,-->
-<!--        mem_addr,-->
-<!--        mem_detail_addr,-->
-<!--        mem_bank,-->
-<!--        mem_acc,-->
-<!--        mem_datetime-->
-<!--        from-->
-<!--        member-->
-<!--        where-->
-<!--        mem_no=#{memberNo}-->
-<!--    </select>-->
+    <!--    <select id="findBy" parameterType="int" resultMap="memberMap">-->
+    <!--        select-->
+    <!--        mem_no,-->
+    <!--        mem_email,-->
+    <!--        mem_name,-->
+    <!--        mem_phone,-->
+    <!--        mem_zipcode,-->
+    <!--        mem_addr,-->
+    <!--        mem_detail_addr,-->
+    <!--        mem_bank,-->
+    <!--        mem_acc,-->
+    <!--        mem_datetime-->
+    <!--        from-->
+    <!--        member-->
+    <!--        where-->
+    <!--        mem_no=#{memberNo}-->
+    <!--    </select>-->
 
     <select id="findByEmailAndPassword" parameterType="member" resultMap="memberMap">
         select
