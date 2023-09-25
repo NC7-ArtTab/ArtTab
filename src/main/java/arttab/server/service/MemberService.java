@@ -24,5 +24,4 @@ public interface MemberService {
     Member get(String memberEmail, String memberPwd) throws Exception;
     String findPasswordByEmail(String memberEmail) throws Exception;
     int delete(int memberNo) throws Exception;
-
 }
