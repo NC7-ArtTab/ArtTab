@@ -28,7 +28,7 @@
 <div style="text-align: center;">
     <h2>경매 수정</h2>
     <hr>
-    <form data-th-action="@{'/art/update?artNo='}+${art.artNo}" method='post' enctype='multipart/form-data'>
+    <form data-th-action="@{'/admin/update?artNo='}+${art.artNo}" method='post' enctype='multipart/form-data'>
         <label for="artCategory">카테고리</label>
         <p th:text="${art.artCategory}">내용</p>
         <input type="text" id="artCategory" name="artCategory" placeholder="동양화:E, 서양화:W, 공예품:P" required><br><br>
