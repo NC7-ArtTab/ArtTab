@@ -12,25 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
+@Transactional
 public class DefaultBidService implements BidService {
-    BidDao bidDao;
-    // private final BidDao bidDao;
+  BidDao bidDao;
 
-    // @Autowired
-    public DefaultBidService(BidDao bidDao) {
-        this.bidDao = bidDao;
-    }
-    public List<Bid> list() throws Exception {
-        return bidDao.findAll();
-    }
-  @Override
-  public ArtDetailDto artDetail(int artNo) {
-    return bidDao.artDetail(artNo);
+  @Autowired
+  public DefaultBidService(BidDao bidDao) {
+    this.bidDao = bidDao;
+  }
+
+  public List<Bid> list() throws Exception {
+    return bidDao.findAll();
   }
 
   @Override
-  public List<Bid> bidRank(int artNo) {
-    return bidDao.bidRank(artNo);
+  public Art findArtInfo(int artNo) {
+    return bidDao.artInfo(artNo);
+  }
+
+  @Override
+  public Bid findBidInfo(int artNo) {
+    return bidDao.bidInfo(artNo);
   }
 
   @Override
