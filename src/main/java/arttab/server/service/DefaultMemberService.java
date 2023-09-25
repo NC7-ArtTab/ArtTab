@@ -1,9 +1,12 @@
 package arttab.server.service;
 
-
 import arttab.server.dao.MemberDao;
 import arttab.server.vo.Bid;
 import arttab.server.vo.Member;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,26 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class DefaultMemberService implements MemberService {
 
-
-
-  MemberDao memberDao;
-  PasswordEncoder passwordEncoder;
-
-
-  public DefaultMemberService(MemberDao memberDao, PasswordEncoder passwordEncoder) {
-    this.memberDao = memberDao;
-    this.passwordEncoder = passwordEncoder;
-  }
+  @Autowired
+  private final MemberDao memberDao;
+  @Autowired
+  private final PasswordEncoder passwordEncoder;
 
   @Transactional
   @Override
   public void add(Member member) throws Exception {
     if (!member.getMemberName().equals("") && !member.getMemberEmail().equals("")) {
       // password는 암호화해서 DB에 저장
-      member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
+      String encryptedPassword = passwordEncoder.encode(member.getMemberPwd());
+      member.setMemberPwd(encryptedPassword);  // 한 번만 암호화된 비밀번호를 저장
+      member.setMemberDatetime(Timestamp.valueOf(LocalDateTime.now()));
       memberDao.insertMember(member);
     }
   }
@@ -55,17 +54,15 @@ public class DefaultMemberService implements MemberService {
     return passwordEncoder.encode(password);
   }
 
-
-
   @Transactional
   @Override
   public void updateMember(Member member) throws Exception {
-    member.setMemberPwd(getEncryptPassword(member.getMemberPwd()));
+    member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
     memberDao.updateMember(member);
   }
 
   @Override
-  public String findPasswordByEmail(String memberEmail) throws Exception{
+  public String findPasswordByEmail(String memberEmail) throws Exception {
     return memberDao.findPasswordByEmail(memberEmail);
   }
 
@@ -77,11 +74,11 @@ public class DefaultMemberService implements MemberService {
 
   @Override
   public List<Bid> getMemberBids(int memberNo) throws Exception {
-    return null;
+    return memberDao.getMemberBids(memberNo);
   }
 
   @Override
   public Member findBy(int memberNo) throws Exception {
-    return null;
+    return memberDao.findBy(memberNo);
   }
 }

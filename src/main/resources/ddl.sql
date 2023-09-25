@@ -20,6 +20,7 @@ CREATE TABLE member (
                           mem_auth VARCHAR(1) NULL DEFAULT 'M' COMMENT '회원권한 => A:관리자, M:일반회원',
                           mem_datetime DATETIME NULL DEFAULT NOW() COMMENT '회원등록일시',
                           mem_status VARCHAR(1) NULL DEFAULT 'Y' COMMENT '사용여부 => Y:회원, N:탈퇴회원',
+                          UNIQUE KEY unique_email (mem_email),
                           PRIMARY KEY (mem_no)
 );
 

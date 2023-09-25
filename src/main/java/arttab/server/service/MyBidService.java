@@ -1,4 +1,3 @@
-// MyBidService.java
 package arttab.server.service;
 
 import arttab.server.vo.Bid;
