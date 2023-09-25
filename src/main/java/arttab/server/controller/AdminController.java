@@ -17,16 +17,12 @@ import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
@@ -108,21 +104,6 @@ public class AdminController {
   }
 
 
-  // 작품 관리
-  @GetMapping("/artist")
-  public void artlist(Model model) throws Exception {
-    model.addAttribute("artlist", adminService.list());
-  }
-
-    @PostMapping("/addart")
-    public String addart(Art art, HttpSession session) throws Exception{
-        log.info("addart");
-        //Member loginUser = (Member) session.getAttribute("loginUser");
-        //**이미지 업로드
-        adminService.add(art);
-        return "redirect:/admin/main";
-    }
-
     // art
     @GetMapping("/auction")
     public String auction() {
@@ -196,13 +177,10 @@ public class AdminController {
         return "redirect:/admin/artlist";
     }
 
-
     @GetMapping("/artlist")
     public void artlist(Model model) throws Exception {
         model.addAttribute("artlist", adminService.list());
     }
-
-
 
     @GetMapping("/artdetail/{No}")
     public String artdetail(

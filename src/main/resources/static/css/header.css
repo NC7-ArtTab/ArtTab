@@ -1,3 +1,14 @@
+#search_btn {
+    border: solid 3px #F86338;
+    background-color: white;
+    color: black;
+}
+
+ #search_btn:hover {
+     background-color: #F86338;
+     color: white;
+ }
+
 /* About ArtTab과 검색창 간격 조절 */
 .about-arttab {
     margin-right: 10px; /* 원하는 간격으로 조절 */
