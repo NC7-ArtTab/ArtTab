@@ -19,49 +19,50 @@ import java.util.UUID;
 @Component
 public class NcpObjectStorageService {
 
-    {
-        System.out.println("NcpObjectStorageService 생성됨!");
+  {
+    System.out.println("NcpObjectStorageService 생성됨!");
+  }
+
+  final AmazonS3 s3;
+
+  public NcpObjectStorageService(NcpConfig ncpConfig) {
+    System.out.println("NcpObjectStorageService 호출됨!");
+    s3 = AmazonS3ClientBuilder.standard()
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
+                    ncpConfig.getEndPoint(), ncpConfig.getRegionName()))
+            .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
+                    ncpConfig.getAccessKey(), ncpConfig.getSecretKey())))
+            .build();
+  }
+
+  public Attach uploadFile(Attach attach, String bucketName, String dirPath, MultipartFile part) {
+    if (part.getSize() == 0) {
+      return null;
     }
 
-    final AmazonS3 s3;
+    try (InputStream fileIn = part.getInputStream()) {
+      String originFileName = part.getOriginalFilename();
+      String saveFileName = UUID.randomUUID().toString();
+      attach.setOriginFileName(originFileName);
+      attach.setSaveFileName(saveFileName);
+      attach.setFilePath(dirPath);
 
-    public NcpObjectStorageService(NcpConfig ncpConfig) {
-        System.out.println("NcpObjectStorageService 호출됨!");
-        s3 = AmazonS3ClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
-                        ncpConfig.getEndPoint(), ncpConfig.getRegionName()))
-                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
-                        ncpConfig.getAccessKey(), ncpConfig.getSecretKey())))
-                .build();
+      ObjectMetadata objectMetadata = new ObjectMetadata();
+      objectMetadata.setContentType(part.getContentType());
+
+      PutObjectRequest objectRequest = new PutObjectRequest(
+              bucketName,
+              dirPath + saveFileName,
+              fileIn,
+              objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
+
+      s3.putObject(objectRequest);
+
+      return attach;
+
+    } catch (Exception e) {
+      throw new RuntimeException("파일 업로드 오류", e);
     }
-
-    public Attach uploadFile(Attach attach, String bucketName, String dirPath, MultipartFile part) {
-        if (part.getSize() == 0) {
-            return null;
-        }
-
-        try (InputStream fileIn = part.getInputStream()) {
-            String originFileName = part.getOriginalFilename();
-            String saveFileName = UUID.randomUUID().toString();
-            attach.setOriginFileName(originFileName);
-            attach.setSaveFileName(saveFileName);
-            attach.setFilePath(dirPath);
-
-            ObjectMetadata objectMetadata = new ObjectMetadata();
-            objectMetadata.setContentType(part.getContentType());
-
-            PutObjectRequest objectRequest = new PutObjectRequest(
-                    bucketName,
-                    dirPath + saveFileName,
-                    fileIn,
-                    objectMetadata).withCannedAcl(CannedAccessControlList.PublicRead);
-
-            s3.putObject(objectRequest);
-
-            return attach;
-
-        } catch (Exception e) {
-            throw new RuntimeException("파일 업로드 오류", e);
-        }
-    }
+  }
 }
+

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -21,13 +19,10 @@
           rel="stylesheet">
 
     <!-- 사용자 정의 CSS -->
-    <link rel="stylesheet" type="text/css" data-th-href="@{/static/css/list.css}"/>
+    <link rel="stylesheet" type="text/css" data-th-href="@{/static/css/art-list.css}"/>
 
     <title>ArtTap</title>
-
-
 </head>
-
 <body>
 <header th:replace="~{fragment/header :: headerFragment}"></header>
 
@@ -38,7 +33,7 @@
         <h2 class="display-4" data-th-switch="${artStatus}">전체 경매목록</h2>
 
     </div>
-    <div data-th-if="${artStatus == 'R'}">
+    <div data-th-if="${artStatus == 'P'}">
         <h2 class="display-4" data-th-switch="${artCategory}">진행중인 경매목록</h2>
     </div>
 
@@ -69,7 +64,7 @@
         </div>
         <div class="right-buttons">
             <a class="btn btn-lg btn-secondary" style="background: #F86338; border-color: #F86338;"
-               data-th-href="@{'/art/list?artStatus=R' + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''}}">진행중
+               data-th-href="@{'/art/list?artStatus=P' + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''}}">진행중
                 경매</a>
             <a class="btn btn-lg btn-secondary"
                data-th-href="@{'/art/list?artStatus=F' + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''}}">종료된
@@ -79,14 +74,13 @@
     </p>
 
 </div>
-
 <!-- 앨범 리스트 -->
 <div class="container-fluid  pb-3 album-list">
     <div data-th-if="${not #lists.isEmpty(list)}">
         <div class="row mb-3">
             <div class="col-sm-12 col-md-4 mt-4" data-th-each="art : ${list}">
                 <div class="card" data-th-style="${artStatus == 'F'} ? 'opacity:0.8; cursor:default' : ''">
-                    <img data-th-src="@{${artStatus == 'F' ? '/static/images/logo.png' : 'https://images.unsplash.com/photo-1604515438635-fd331c877a6b?ixid=MXwxMjA3fDB8MHx2aXN1YWwtc2VhcmNofDF8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&q=60'}}"
+                    <img data-th-src="@{${art.artAttaches.get(0).saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}"
                          alt="Thumbnail" class="card-img-top">
                     <div class="card-body">
                         <span data-th-text="${art.artNo}"></span>
@@ -96,9 +90,10 @@
                             <p data-th-case="P">공예품</p>
                             <p data-th-case="X">기타</p>
                         </h3>
-                        <p class="card-text" data-th-text="${art.artTitle}">작품명</p>
-                        <a data-th-href="@{'/art/detail?artNo=' + ${art.artNo}}" class="btn btn-dark btn-md"
+                        <p class="card-text" data-th-text="${art.artTitle.length() <= 15 ? art.artTitle : art.artTitle.substring(0,15) + '. . .'}">작품명</p>
+                        <a data-th-href="${art.artStatus == 'P' ? '/art/detail?artNo=' + art.artNo : '' }" class="btn btn-dark btn-md"
                            style="background-color:#F86338; border: #F86338">➜</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,7 +108,10 @@
                         <a data-th-href="@{'/art/list?pageNo=' + ${(pageNation.pageNo - 5) <= 1 ? 1 : pageNation.pageNo - 5 } + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''} + ${not artStatus.isEmpty() ? '&artStatus=' + artStatus : ''}}">&laquo;
                             이전</a></li>
                     <li data-th-each="pageNo : ${#numbers.sequence(pageNation.startPage, pageNation.endPage)}">
-                        <a data-th-href="@{'/art/list?pageNo=' + ${pageNo} + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''} + ${not artStatus.isEmpty() ? '&artStatus=' + artStatus : ''}}"
+                        <a data-th-href="@{'/art/list?pageNo=' + ${pageNo} + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''}
+                                                               + ${not artStatus.isEmpty() ? '&artStatus=' + artStatus : ''}
+                                                               + ${session.searchParam != null ? '&searchType=' + session.searchParam.searchType : ''}
+                                                               + ${session.searchParam != null ? '&searchKeyword=' + session.searchParam.searchKeyword : ''}}"
                            data-th-text="${pageNo}"
                            data-th-style="${pageNo == pageNation.pageNo} ? 'background-color: #F86338; color:white; font-weight: bold; border: 0px;' : ''">
                             1

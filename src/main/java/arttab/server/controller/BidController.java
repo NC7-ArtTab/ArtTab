@@ -37,14 +37,12 @@ public class BidController {
 //    }
 //  }
 
-  @GetMapping("/bid/{artNo}")
-  public String getBidInfo(@PathVariable String artNo, Model model) throws Exception {
+  @GetMapping("bid/{artNo}")
+  public String getBidInfo(@PathVariable(required = true) int artNo, Model model) throws Exception {
     try {
-      // artNo가 숫자로 변환 가능한지 확인
-      int artId = Integer.parseInt(artNo);
 
       // 숫자로 변환 가능한 경우에만 실행
-      ArtDetailDto artDto = bidService.findArtInfo(artId);
+      ArtDetailDto artDto = bidService.findArtInfo(artNo);
       model.addAttribute("art", artDto);
 
       return "bid/bid";

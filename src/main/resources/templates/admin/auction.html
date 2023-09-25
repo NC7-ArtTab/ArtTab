@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head>
+<head th:replace="~{fragment/config :: configFragment}">
     <link rel="stylesheet" type="text/css" href="../../static/css/admin-detail.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
     <title>작품 등록</title>
