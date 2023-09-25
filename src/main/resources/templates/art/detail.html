@@ -6,69 +6,105 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragment/config :: configFragment}">
+    <style>
+        /* 테이블 스타일 */
+        #bidPriceTable {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+
+        /* th 스타일 */
+        #bidPriceTable th {
+            border: 2px solid black;
+            padding-right: 20px;
+        }
+
+        /* td 스타일 */
+        #bidPriceTable td {
+            border: 2px solid black;
+        }
+
+        /* 스크롤 박스 스타일 */
+        .scroll-box {
+            max-height: 100px;
+            overflow-y: scroll;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-    <header th:replace="~{fragment/header :: headerFragment}"></header>
+<header th:replace="~{fragment/header :: headerFragment}"></header>
 
 
+<div>
+    <a data-th-href="@{/art/list}" data-th-text="${art.artStatus}">상태 </a>
+    <a data-th-href="@{/art/list/동양화}" data-th-text="${art.artCategory}">카테고리 </a>
+    <a data-th-text="${art.artTitle}">제목 </a>
+
+</div>
+
+<div layout:fragment="content">
     <div>
-        <a data-th-href="@{/art/list}" data-th-text="${art.artStatus}">상태 </a>
-        <a data-th-href="@{/art/list/동양화}" data-th-text="${art.artCategory}">카테고리 </a>
-        <a data-th-text="${art.artTitle}">제목 </a>
-
+        <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+             width="50" height="70">
+        <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+             width="50" height="70">
+        <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+             width="50" height="70">
+        <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
+             width="50" height="70">
     </div>
 
-    <div layout:fragment="content">
+    <div>
+        <input id="artNo" type='text' data-th-value="${art.artNo}"/>
+        <input id="artTitle" type='text' data-th-value="${art.artTitle}"/>
+        <input id="bidPrice" type='text' value="10000"/>
+        <h2 th:text="${art.artTitle}">제목</h2>
+        <h4>경매 시작가</h4>
+        <h4 th:text="${art.startPrice}">시작가</h4>
+        <h4>현재 입찰 최고가 </h4>
+        <h4 th:text="${list[0].bidPrice}">현재 입찰 최고가</h4>
+        <h4>작품 설명</h4>
+        <p th:text="${art.artContent}">내용</p>
         <div>
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-            <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko1_1024x1024.jpg?v=1447104179"
-                 width="50" height="70">
-        </div>
+            <h5>경매 기간</h5>
+            <span data-th-text="${art.startDatetime + '~' + art.endDatetime}"></span>
+            <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
 
-        <div>
-            <input id="artNo" type='text' data-th-value="${art.artNo}"/>
-            <input id="artTitle" type='text' data-th-value="${art.artTitle}"/>
-            <input id="bidPrice" type='text' value="10000"/>
-            <h2 th:text="${art.artTitle}">제목</h2>
-            <h4>경매 시작가</h4>
-            <h4 th:text="${art.startPrice}">시작가</h4>
-            <h4>현재 입찰 최고가 </h4>
-            <h4 th:text="${list[0].bidPrice}">현재 입찰 최고가</h4>
-            <h4>작품 설명</h4>
-            <p th:text="${art.artContent}">내용</p>
-            <div>
-                <h5>경매 기간</h5>
-                <span data-th-text="${art.startDatetime + '~' + art.endDatetime}"></span>
-                <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
-
-                <div class="sec7-text-box">
-                    <hr>
-                    <p class="time-title">경매 마감까지 남은 시간</p>
-                    <div class="time">
-                        <span id="d-day-hour">00</span>
-                        <span class="col">:</span>
-                        <span id="d-day-min">00</span>
-                        <span class="col">:</span>
-                        <span id="d-day-sec">00</span>
-                    </div>
+            <div class="sec7-text-box">
+                <hr>
+                <p class="time-title">경매 마감까지 남은 시간</p>
+                <div class="time">
+                    <span id="d-day-hour">00</span>
+                    <span class="col">:</span>
+                    <span id="d-day-min">00</span>
+                    <span class="col">:</span>
+                    <span id="d-day-sec">00</span>
                 </div>
             </div>
         </div>
     </div>
-    <div style="max-height: 100px; overflow-y:scroll; text-align: center;">
-        <table id="bidPriceTable" style="width:100%; border: 1px solid black;">
-            <th style="padding-right: 20px;">입찰가</th><th>입찰일시</th>
-            <!-- 실시간 경매정보 영역 -->
-
+</div>
+<div style="text-align: center">
+      <span style="font-size: x-large; color: #F86338; font-weight: bold;">실시간 입찰현황</span>
+</div>
+<div style="text-align: right">
+    <label style="font-weight: bold">입찰기록 기준일시 : </label><span id="baseline_time" style="font-weight: bold"></span><img src="/static/images/refresh.gif" style="height: 24px;">
+    <div style="min-height: 100px; height: 100%; overflow-y:scroll; text-align: center; border: solid 2px black;">
+        <table id="bidPriceTable" style="width:100%;">
+            <tr>
+                <th style="background-color: #f0f0f0; padding-right: 20px; border: 1px solid black;">입찰가</th>
+                <th style="background-color: #f0f0f0; border: 1px solid black;">입찰일시</th>
+            </tr>
+            <tr class="artInfo_row" style="width:100%;">
+                <td colspan="2" style="border: 1px solid black;">해당 경매작품에 대한 입찰기록이 없습니다.</td>
+            </tr>
         </table>
     </div>
-    <button id="text_btn">Ajax테스트용</button>
+    <span style="color: red;">*주의: 실시간 입찰기록은 입찰가 기준 상위 10개의 입찰기록만 제공하고 있습니다.</span>
+</div>
 
 <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
@@ -85,7 +121,7 @@
             var now = new Date(); //현재시간을 구한다.
 
             // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 23, 19, 15, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date(2023, 8, 25, 19, 15, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -148,9 +184,10 @@
                 }
             }).always(function () {
                 // 요청이 성공하든 실패하든 작품 리스트로 이동
-                window.location.href = "/art/list";
+                // window.location.href = "/art/list";
             });
         }
+
         realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
         remaindTimeId = setInterval(remaindTime, 1000);
         realTimeInfoId = setInterval(realTimeInfo, 5000);
@@ -176,30 +213,34 @@
                 success: function (data) {
                     console.log(data.art);
                     console.log(data.art.artBids);
-                    console.log(data.art.artBids[0]);
 
                     let newRow;
                     let bidPrice;
                     let bidDatetime;
-                    const bidList = data.art.artBids;
+                    let bidList = data.art.artBids;
+                    const rows = [];
 
-                    if ($(".artInfo_row").length > 0) {
+                    for (let i = 0; i < 10; i++) { // 상위 10개의 입찰기록에 대해서만 데이터 생성
+                        if (!bidList[i] || bidList[i].bidNo === 0) {
+                            continue;
+                        }
+
+                        bidPrice = bidList[i].bidPrice;
+                        bidDatetime = formatDate(bidList[i].bidDatetime);
+                        newRow = $("<tr class='artInfo_row'>").append($("<td style='border: 1px solid black;'>").text(bidPrice + " (원)")).append($("<td style='border: 1px solid black;'>").text(bidDatetime));
+                        rows.push(newRow);
+                    }
+
+                    if (rows.length > 0 && $(".artInfo_row").length > 0) {
                         $(".artInfo_row").remove();
+                        $("#bidPriceTable").append(rows);
                     }
-
-                    for (let i = 0; i < bidList.length; i++) {
-                        // bidPrice = bidList.length > 0 ? bidList[i].bidPrice + " (원)" : "현재 입찰없음";
-                        // bidDatetime = bidList.length > 0 ? formatDate(bidList[i].bidDatetime)  : "현재 입찰없음";
-
-                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidPrice)).append($("<td>").text(bidDatetime));
-                        $("#bidPriceTable").append(newRow);
-                    }
+                    $("#baseline_time").text(formatDate(new Date()) + ' ');
                 },
                 error: function () {
                     console.error();
                 }
             });
-            clearInterval(realTimeInfoId);
         }
     });
 </script>

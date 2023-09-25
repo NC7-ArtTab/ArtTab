@@ -21,10 +21,10 @@ public class DefaultAdminService implements AdminService {
         return adminDao.update(art);
     }
 
-    @Override
-    public List<Art> searchlist(String option, String keyword) throws Exception {
-        return adminDao.searchlist(option, keyword);
-    }
+//    @Override
+//    public List<Art> searchlist(String option, String keyword) throws Exception {
+//        return adminDao.searchlist(option, keyword);
+//    }
 
     @Transactional
     @Override

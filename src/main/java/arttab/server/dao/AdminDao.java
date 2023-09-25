@@ -26,6 +26,6 @@ public interface AdminDao {
 
     List<Art> findAll();
 
-    List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword) throws Exception;
+//    List<Art> searchlist(@Param("option") String option, @Param("keyword") String keyword) throws Exception;
 
 }

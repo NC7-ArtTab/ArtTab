@@ -48,10 +48,10 @@
     </resultMap>
 
 
-    <parameterMap type="java.util.Map" id="searchParams">
-        <parameter property="option" />
-        <parameter property="keyword" />
-    </parameterMap>
+<!--    <parameterMap type="java.util.Map" id="searchParams">-->
+<!--        <parameter property="option" />-->
+<!--        <parameter property="keyword" />-->
+<!--    </parameterMap>-->
 
     <select id="findAll" resultMap="artMap" parameterType="int">
         select
@@ -161,26 +161,26 @@
     </delete>
 
 
-    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">
-        select
-        art_no,
-        art_title,
-        art_writer,
-        art_content
-        from
-        art
-        <where>
-            <if test="option != null and option.equals('title')">
-                AND art_title LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="option != null and option.equals('content')">
-                AND art_content LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-            <if test="option != null and option.equals('writer')">
-                AND art_writer LIKE CONCAT('%', #{keyword}, '%')
-            </if>
-        </where>
-    </select>
+<!--    <select id="searchlist" resultMap="artMap" parameterMap="searchParams">-->
+<!--        select-->
+<!--        art_no,-->
+<!--        art_title,-->
+<!--        art_writer,-->
+<!--        art_content-->
+<!--        from-->
+<!--        art-->
+<!--        <where>-->
+<!--            <if test="option != null and option.equals('title')">-->
+<!--                AND art_title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--            </if>-->
+<!--            <if test="option != null and option.equals('content')">-->
+<!--                AND art_content LIKE CONCAT('%', #{keyword}, '%')-->
+<!--            </if>-->
+<!--            <if test="option != null and option.equals('writer')">-->
+<!--                AND art_writer LIKE CONCAT('%', #{keyword}, '%')-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
 </mapper>
 
 

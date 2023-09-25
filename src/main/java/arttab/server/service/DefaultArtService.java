@@ -4,6 +4,7 @@ import arttab.server.dao.ArtDao;
 import arttab.server.vo.Art;
 
 
+import arttab.server.vo.SearchParam;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
@@ -23,7 +24,12 @@ public class DefaultArtService implements ArtService {
 
   public List<Art> list(Art art) throws Exception {
       return artDao.findAll(art);
-    }
+  }
+
+  @Override
+  public List<Art> searchedList(SearchParam searchParam) throws Exception {
+    return artDao.searchedList(searchParam);
+  }
 
   @Override
   public Art get(int artNo) throws Exception {

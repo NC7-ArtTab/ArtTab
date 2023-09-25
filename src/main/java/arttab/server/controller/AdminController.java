@@ -205,19 +205,19 @@ public class AdminController {
   }
 
 
-  @GetMapping("/searchlist")
-  public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
-
-    model.addAttribute("option", option);
-    model.addAttribute("keyword", keyword);
-
-    System.out.println(option + " " + keyword);
-
-    List<Art> searchResult = adminService.searchlist(option, keyword);
-    model.addAttribute("searchResult", searchResult);
-    System.out.println("Search List: " + searchResult);
-
-    return "admin/searchlist";
-  }
+//  @GetMapping("/searchlist")
+//  public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
+//
+//    model.addAttribute("option", option);
+//    model.addAttribute("keyword", keyword);
+//
+//    System.out.println(option + " " + keyword);
+//
+//    List<Art> searchResult = adminService.searchlist(option, keyword);
+//    model.addAttribute("searchResult", searchResult);
+//    System.out.println("Search List: " + searchResult);
+//
+//    return "admin/searchlist";
+//  }
 
 }

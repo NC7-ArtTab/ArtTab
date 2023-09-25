@@ -2,10 +2,7 @@ package arttab.server.controller;
 
 
 import arttab.server.service.ArtService;
-import arttab.server.vo.Art;
-import arttab.server.vo.Bid;
-import arttab.server.vo.MailSender;
-import arttab.server.vo.PageNation;
+import arttab.server.vo.*;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 
@@ -55,21 +52,31 @@ public class ArtController {
 
 
     @GetMapping("list")
-    public String list(Model model,
+    public String list(Model model, HttpSession session,
                        @RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
                        @RequestParam(name = "artStatus", defaultValue = "") String artStatus,
-                       @RequestParam(name = "artCategory", defaultValue = "") String artCategory) throws Exception {
+                       @RequestParam(name = "artCategory", defaultValue = "") String artCategory,
+                       @RequestParam(name = "searchType", defaultValue = "") String searchType,
+                       @RequestParam(name = "searchKeyword", defaultValue = "") String searchKeyword) throws Exception {
 
         try {
             Art art = new Art();
+            SearchParam searchParam = new SearchParam(searchType, searchKeyword);
             art.setArtCategory(artCategory);
             art.setArtStatus(artStatus);
+            art.setSearchParam(searchParam);
 
             List<Art> artList = artService.list(art); // artCategory와 artStatus를 담아 넘김
+
+            System.out.println("============경매작품 전체 리스트===========");
+            System.out.println(artList);
 
             if (artList != null && artList.size() > 0) { // 조회된 전체 경매작품이 0 개 이상이면
                 PageNation pageNation = new PageNation(pageNo);
                 List<Art> subList = pageNation.toSubList(artList, pageNo);  // 현재 요청된 페이지에 보여줄 게시글만 subList로 추출
+
+                System.out.println("============경매작품 서브 리스트===========");
+                System.out.println(subList);
 
                 int totalPages = pageNation.setGetTotalPages(artList.size());
                 int startPage = pageNation.setGetStartPage(pageNo);
@@ -80,12 +87,30 @@ public class ArtController {
             }
             model.addAttribute("artCategory", art.getArtCategory());
             model.addAttribute("artStatus", art.getArtStatus());
+            session.setAttribute("searchParam", searchParam);
             return "art/list";
 
         } catch (Exception e) {
             throw e;
         }
     }
+
+
+    @GetMapping("/searchList")
+    public String searchlist(Model model, SearchParam searchParam) throws Exception {
+
+        System.out.println(searchParam.toString() + "------------------");
+
+        model.addAttribute("searchParam", searchParam);
+
+        List<Art> searchedList = artService.searchedList(searchParam);
+        System.out.println("Search List: " + searchedList.toString());
+
+        model.addAttribute("searchedList", searchedList);
+
+        return "admin/searchlist";
+    }
+
 
     @PostMapping("/update")
     @ResponseBody
