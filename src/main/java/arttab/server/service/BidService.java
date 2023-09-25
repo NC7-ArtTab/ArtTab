@@ -1,6 +1,7 @@
 package arttab.server.service;
 
 import arttab.server.dto.ArtDetailDto;
+import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 import java.util.List;
 
@@ -8,11 +9,13 @@ public interface BidService {
 
     List<Bid> list() throws Exception;
 
-    // 경매 상품 상세 정보 조회
-    ArtDetailDto artDetail(int artNo);
+    // 작품 정보 조회
+    Art findArtInfo(int artNo) throws Exception;
 
-    // 현재까지의 입찰 순위 조회
-    List<Bid> bidRank(int artNo);
+    // 특정 작품에 대한 입찰 정보 조회
+    Bid findBidInfo(int artNo) throws Exception;
 
-    void insertBid(Bid bid);
+    // 입찰하기
+    void insertBid(Bid bid) throws Exception;
+
 }

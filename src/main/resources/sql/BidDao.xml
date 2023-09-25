@@ -28,7 +28,7 @@
             <result column="art_status" property="artStatus"/>
         </association>
     </resultMap>
-    <!--js-->
+  
     <resultMap id="artMap" type="arttab.server.vo.Art">
         <id property="artNo" column="art_no"/>
         <result property="artTitle" column="art_title"/>
@@ -45,10 +45,10 @@
         <result property="artStatus" column="art_status"/>
 
         <collection property="artAttaches" ofType="arttab.server.vo.Attach">
-            <result property="fileNo" column="attach_file_no"/>
-            <result property="filePath" column="attach_file_path"/>
-            <result property="originFileName" column="attach_origin_file_name"/>
-            <result property="saveFileName" column="attach_save_file_name"/>
+            <result property="fileNo" column="file_no"/>
+            <result property="filePath" column="file_path"/>
+            <result property="originFileName" column="origin_file_name"/>
+            <result property="saveFileName" column="save_file_name"/>
         </collection>
 
         <collection property="artBids" ofType="arttab.server.vo.Bid">
@@ -130,33 +130,45 @@
         a.art_no;
     </select>
 
-    <!-- 경매 상품 상세 정보 조회 -->
-    <select id="artDetail" resultMap="artDetailMap">
-        SELECT a.*,
-        (SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}) AS max_bid_price,
-        COALESCE((SELECT MAX(b.bid_price) FROM bid b WHERE b.art_no = #{artNo}), a.start_price) +
-        a.bid_price_per AS next_bid_price,
-        m.mem_no
-        FROM art a
-        LEFT JOIN bid b ON a.art_no = b.art_no
-        LEFT JOIN member m ON b.mem_no = m.mem_no
-        WHERE a.art_no = #{artNo}
-        GROUP BY a.art_no, m.mem_no;
+    <select id="artInfo" parameterType="int" resultMap="artMap">
+        SELECT
+        a.art_title,
+        a.art_writer,
+        a.art_content,
+        a.start_datetime,
+        a.end_datetime,
+        at.file_no,
+        at.file_path,
+        at.origin_file_name,
+        at.save_file_name
+        FROM
+        art a
+        LEFT JOIN
+        attach at ON a.art_no = at.art_no
+        WHERE
+        a.art_no = #{artNo}
     </select>
 
-    <!-- 현재까지의 입찰 순위 조회 -->
-    <select id="bidRank" resultMap="resultBidMap">
-        SELECT b.bid_no, b.mem_no, b.bid_price, b.bid_datetime, m.mem_name
-        FROM bid b
-        INNER JOIN member m ON b.mem_no = m.mem_no
-        WHERE b.art_no = #{artNo}
-        ORDER BY b.bid_price DESC, b.bid_datetime ASC;
+    <select id="bidInfo" parameterType="int" resultMap="resultBidMap">
+        SELECT
+        MAX(b.bid_price),
+        a.bid_price_per
+        FROM
+        art a
+        LEFT JOIN
+        bid b ON a.art_no = b.art_no
+        WHERE
+        a.art_no = #{artNo}
+        GROUP BY
+        a.art_no, a.bid_price_per
     </select>
 
-    <!-- 입찰하기 -->
-    <insert id="insertBid" parameterType="arttab.server.vo.Bid">
-        INSERT INTO bid (art_no, mem_no, bid_price, bid_datetime)
-        VALUES (#{artNo}, #{memberNo}, #{bidPrice}, NOW());
+    <insert id="insertBid">
+        INSERT INTO bid (art_no, bid_price, bid_datetime, mem_no)
+        VALUES (#{artNo},
+        (SELECT MAX(bid_price) + #{bidPricePer} FROM bid WHERE art_no = #{artNo}),
+        NOW(),
+        #{memNo})
     </insert>
 
 </mapper>
