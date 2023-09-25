@@ -6,14 +6,19 @@
     <!--sh-->
     <resultMap type="arttab.server.vo.Bid" id="bidMap">
         <id column="bid_no" property="bidNo"/>
+        <result column="art_no" property="artNo"/>
+        <result column="mem_no" property="memNo"/>
         <result column="bid_price" property="bidPrice"/>
         <result column="bid_datetime" property="bidDatetime"/>
 
-        <association property="artNo" javaType="arttab.server.vo.Art">
+        <!-- art 객체에 대한 resultMap 설정 -->
+        <association property="art" javaType="arttab.server.vo.Art">
             <id column="art_no" property="artNo"/>
             <result column="art_title" property="artTitle"/>
+            <result column="art_category" property="artCategory"/>
             <result column="art_writer" property="artWriter"/>
             <result column="art_content" property="artContent"/>
+            <result column="art_detail" property="artDetail"/>
             <result column="start_price" property="startPrice"/>
             <result column="buy_now_price" property="buyNowPrice"/>
             <result column="bid_price_per" property="bidPricePer"/>
@@ -107,6 +112,7 @@
 
     <select id="findAll" resultMap="bidMap">
         SELECT
+        a.art_no,
         a.art_writer,
         a.art_title,
         a.start_datetime,

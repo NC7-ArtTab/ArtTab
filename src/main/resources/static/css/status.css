@@ -1,0 +1,66 @@
+/* 낙찰 완료 상태 스타일 */
+.won {
+  background-color: #4CAF50; /* 배경색: 녹색 */
+  color: white; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 진행중 상태 스타일 */
+.in-progress {
+  background-color: #2196F3; /* 배경색: 파란색 */
+  color: white; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 준비중 상태 스타일 */
+.preparation {
+  background-color: #FFC107; /* 배경색: 노란색 */
+  color: black; /* 글자색: 검정색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+/* 경매 종료 상태 스타일 */
+.finished {
+  background-color: #F44336; /* 배경색: 빨간색 */
+  color: white; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+
+/* 삭제 상태 스타일 */
+.deleted {
+  background-color: #9E9E9E; /* 배경색: 회색 */
+  color: white; /* 글자색: 흰색 */
+  padding: 5px 10px; /* 내부 여백 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+}
+
+
+
+/*faq 상태 */
+
+.Y {
+    background-color: #2196F3; /* 배경색: 파란색 */
+      color: white; /* 글자색: 흰색 */
+      padding: 5px 10px; /* 내부 여백 설정 */
+      border-radius: 5px; /* 둥근 모서리 설정 */
+      padding: 10px;
+      text-align: center;
+}
+
+/* 빨간색 박스 스타일 (미사용 상태) */
+.N {
+    background-color: #9E9E9E; /* 배경색: 회색 */
+      color: white; /* 글자색: 흰색 */
+      padding: 5px 10px; /* 내부 여백 설정 */
+      border-radius: 5px; /* 둥근 모서리 설정 */
+      padding: 10px;
+      text-align: center;
+}
+
+
+
