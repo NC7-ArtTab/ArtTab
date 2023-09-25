@@ -8,7 +8,7 @@
 <head th:replace="~{fragment/config :: configFragment}">
 </head>
 <body>
-<div class="container">
+
     <header th:replace="~{fragment/header :: headerFragment}"></header>
 
 
@@ -68,9 +68,9 @@
 
         </table>
     </div>
-    <button id="text_btn" ;>Ajax테스트용</button>
-    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
-</div>
+    <button id="text_btn">Ajax테스트용</button>
+
+<footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -85,7 +85,7 @@
             var now = new Date(); //현재시간을 구한다.
 
             // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 22, 19, 15, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date(2023, 8, 23, 19, 15, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -148,7 +148,7 @@
                 }
             }).always(function () {
                 // 요청이 성공하든 실패하든 작품 리스트로 이동
-                // window.location.href = "/art/list";
+                window.location.href = "/art/list";
             });
         }
         realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
@@ -179,6 +179,8 @@
                     console.log(data.art.artBids[0]);
 
                     let newRow;
+                    let bidPrice;
+                    let bidDatetime;
                     const bidList = data.art.artBids;
 
                     if ($(".artInfo_row").length > 0) {
@@ -186,7 +188,10 @@
                     }
 
                     for (let i = 0; i < bidList.length; i++) {
-                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidList[i].bidPrice + " (원)")).append($("<td>").text(formatDate(bidList[i].bidDatetime)));
+                        // bidPrice = bidList.length > 0 ? bidList[i].bidPrice + " (원)" : "현재 입찰없음";
+                        // bidDatetime = bidList.length > 0 ? formatDate(bidList[i].bidDatetime)  : "현재 입찰없음";
+
+                        newRow = $("<tr class='artInfo_row'>").append($("<td>").text(bidPrice)).append($("<td>").text(bidDatetime));
                         $("#bidPriceTable").append(newRow);
                     }
                 },

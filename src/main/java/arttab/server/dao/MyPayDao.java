@@ -1,11 +1,10 @@
 package arttab.server.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import java.util.List;
 import arttab.server.vo.Pay;
+import org.apache.ibatis.annotations.Param;
 
-@Mapper
+import java.util.List;
+
 public interface MyPayDao {
-    List<Pay> getPurchaseHistory(@Param("memNo") int memNo);
+    List<Pay> getPurchaseHistory(@Param("memberNo") int memberNo);
 }

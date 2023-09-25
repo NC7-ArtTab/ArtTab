@@ -14,7 +14,7 @@ import java.util.List;
 public class FAQController {
     private final FAQService faqService;
 
-    @Autowired
+//    @Autowired
     public FAQController(FAQService faqService) {
         this.faqService = faqService;
     }

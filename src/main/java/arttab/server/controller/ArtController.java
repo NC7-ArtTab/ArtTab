@@ -26,19 +26,24 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequestMapping("/art")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ArtController {
     private final ArtService artService;
     private final MailSender mailSender;
 
+    public ArtController(ArtService artService, MailSender mailSender) {
+        this.artService = artService;
+        this.mailSender = mailSender;
+    }
 
     @GetMapping("detail")
     public String detail(
-            @RequestParam int artNo,
+            @RequestParam(name="artNo") int artNo,
             Model model) throws Exception {
 
 
         Art art = artService.get(artNo);
+
         List<Bid> list = art.getArtBids();
 
         if (art != null) {
@@ -82,7 +87,7 @@ public class ArtController {
         }
     }
 
-    @PostMapping("/statusUpdate")
+    @PostMapping("/update")
     @ResponseBody
     public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo) throws Exception {
         try {

@@ -4,6 +4,7 @@ import arttab.server.dao.MyPayDao;
 import arttab.server.vo.Pay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -16,7 +17,7 @@ public class DefaultMyPayService implements MyPayService {
     }
 
     @Override
-    public List<Pay> getPurchaseHistory(int memNo) {
-        return myPayDao.getPurchaseHistory(memNo);
+    public List<Pay> getPurchaseHistory(int memberNo) {
+        return myPayDao.getPurchaseHistory(memberNo);
     }
 }

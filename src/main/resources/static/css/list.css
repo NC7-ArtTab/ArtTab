@@ -1,0 +1,215 @@
+
+.jumbotron {
+    text-align: center;
+    background-color: #dce0d9;
+}
+
+.jumbotron__container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.jumbotron h2 {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+}
+
+.lead {
+    margin-top: 15px;
+    font-size: 1.5rem;
+    color: black;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.lead btn {
+    font-family: 'Oswald', sans-serif;
+}
+
+.row {
+
+}
+
+.card {
+    cursor: pointer;
+    background-color: #dce0d9;
+    border: 1px solid lightblue;
+}
+
+.card h3 {
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-family: "Oswald";
+    color: black;
+
+}
+
+.card p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+}
+
+.card btn {
+    font-size: 2em;
+}
+
+.pt-2 {
+    font-size: 1rem;
+}
+
+/* 사용자 지정 CSS */
+.album-list {
+    padding: 9%;
+    background: white;
+
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬 */
+    margin-top: 12%;
+    margin-bottom: 3%;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination ul li {
+    display: inline;
+    margin-right: 10px; /* 각 버튼 사이의 간격 조정 */
+}
+
+.pagination ul li a {
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px 10px; /* 버튼의 패딩 조정 */
+    background-color: white; /* 버튼 배경색 */
+    color: black; /* 텍스트 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    transition: background-color 0.3s, color 0.3s; /* 변화를 부드럽게 애니메이션화 */
+}
+
+.pagination ul li a:hover {
+    border: 0px;
+    color: white; /* 마우스 오버 시 텍스트 색상 변경 (흰색으로) */
+    background-color: #F86338; /* 마우스 오버 시 배경색 변경 */
+}
+
+.button-group {
+    padding-left: 9%;
+    padding-right: 9%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* 버튼을 수직 중앙에 정렬 */
+}
+
+.left-buttons a {
+    background: white;
+    color: black;
+    border: 0px;
+    margin-right: 10px; /* 각 버튼 사이의 오른쪽 여백 조정 */
+}
+
+.left-buttons a:hover {
+    border: 0px;
+    background-color: #F86338;
+    color:white;
+    margin-right: 10px; /* 각 버튼 사이의 오른쪽 여백 조정 */
+}
+
+.right-buttons a:hover {
+    opacity: 0.8;
+}
+
+
+/* 빈 게시글 CSS */
+.empty-icon-container{
+    margin:1em auto;
+    text-align:center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Dosis', sans-serif;
+
+}
+.animation-container{
+    position:relative;
+    display:block;
+    text-align: center;
+    height:100px;
+    width:100px;
+    border-bottom: solid 2px #333;
+    overflow:hidden;
+}
+.bounce{
+    display: inline-block;
+    position:absolute;
+    bottom:0;
+    left:50%;
+    width:40px;
+    height:40px;
+    margin-left: -20px;
+    background-size: contain;
+    animation: bounceAnim 1s cubic-bezier(.63,.09,.75,.46) infinite alternate,
+    spinAnim 3s linear infinite;
+}
+
+@keyframes bounceAnim{
+    0%, 10% { bottom: 50%; }
+
+    100% { bottom: 0%; }
+}
+@keyframes spinAnim{
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.pebble1{
+    position:absolute;
+    top:95%;
+    background-color:#333;
+    width:10px;
+    height:10px;
+    border-radius: 20px 20px 0px 0px;
+    animation: pebblesAnim 1s linear infinite;
+}
+.pebble2{
+    position:absolute;
+    top:97%;
+    background-color:#333;
+    width:5px;
+    height:5px;
+    border-radius: 10px 10px 0px 0px;
+    animation: pebblesAnim 2s linear infinite;
+}
+.pebble3{
+    position:absolute;
+    top:98%;
+    background-color:#333;
+    width:3px;
+    height:3px;
+    border-radius: 20px 20px 0px 0px;
+    animation: pebblesAnim 3s linear infinite;
+}
+
+@keyframes pebblesAnim{
+    0% { right: -20%; }
+    100% { right: 110%; }
+}

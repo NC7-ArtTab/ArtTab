@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-<head th:replace="~{fragment/config :: configFragment}"></head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="../../static/css/mybid.css"> <!-- CSS 파일 연결 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- 부트스트랩 CSS 연결 -->
+</head>
+<body>
 <div data-th-replace="fragment/header :: headerFragment"></div>
-<body style="margin-left: 40px;">
 
-<p style='color: #F86338; font-weight: bold; text-align: center;'>ArtTab</p>
 <div class="main">
     <ul>
-        <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold; text-align: center;">기현님 My page</li>
+        <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold; text-align: center;">
+            <span th:text="${session.loginUser.memberName} + '님의 입찰정보'"></span>
+        </li>
         <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypage/profile}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
-        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mybid}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
-        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypay}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
+        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypage/mybid}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
+        <li style="display: inline; margin-right: 150px;"><a data-th-href="@{/mypage/mypay}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
     </ul>
 </div>
 
-<hr>
-<br>
-
-<div style="text-align: center;">
-    <h2 style="color: #333; font-size: 24px; font-weight: bold;">입찰정보</h2>
-    <table style="margin: 0 auto; width: 50%; border-collapse: collapse; text-align: center;">
-        <thead>
-        <tr>
-            <th style="padding: 10px; background-color: #FF7A00; color: #FFF;">작품 번호</th>
-            <th style="padding: 10px; background-color: #9932CC; color: #FFF;">입찰 가격</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- 입찰 현황 데이터를 반복해서 출력 -->
-        <tr th:each="myBid : ${getMyBidList}">
-            <td style="padding: 10px; border: 1px solid #CCC; background-color: #FF7A00; color: #FFF;" th:text="${myBid.artNo}"></td>
-            <td style="padding: 10px; border: 1px solid #CCC; background-color: #9932CC; color: #FFF;"th:text="${myBid.bidPrice}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="text-center mt-4">
+    <h3>입찰정보</h3>
 </div>
 
-<br><br><br><br><br><br><br><br><br>
-
-
-<br><br><br><br><br><br><br><br>
-
-</body>
+<table id="myBidTable" class="table table-bordered table-hover mx-auto">
+    <thead>
+    <tr class="table-primary">
+        <th class="text-center">작품 번호</th>
+        <th class="text-center">입찰 가격</th>
+        <th class="text-center">입찰 일시</th>
+        <th class="text-center">즉시 구매</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 입찰 현황 데이터를 반복해서 출력 -->
+    <tr th:each="myBid : ${myBidList}">
+        <td class="text-center" th:text="${myBid.artNo}"></td>
+        <td class="text-center" th:text="${myBid.bidPrice}"></td>
+        <td class="text-center" th:text="${myBid.bidDatetime}"></td>
+        <td class="text-center"><a href="#" class="btn btn-warning"><i class="fas fa-shopping-cart"></i> 즉시 구매</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
 
 <div data-th-replace="fragment/footer :: footerFragment"></div>
+
+<script type="text/javascript" src="/static/js/mybid.js"></script> <!-- JavaScript 파일 연결 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- 부트스트랩 JavaScript 연결 -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Font Awesome 아이콘 라이브러리 연결 -->
+</body>
 </html>

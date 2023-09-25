@@ -5,10 +5,10 @@
 <mapper namespace="arttab.server.dao.MyBidDao">
 
     <!-- getMyBidList 메서드의 SQL 쿼리 정의 -->
-    <select id="getMyBidList"  resultType="arttab.server.vo.Bid">
-        SELECT art_no, bid_price
+    <select id="getMyBidList" resultType="arttab.server.vo.Bid">
+        SELECT art_no, bid_price, bid_datetime
         FROM bid
-        WHERE mem_no = #{memNo}
+        WHERE mem_no = #{memberNo}
     </select>
 
 </mapper>

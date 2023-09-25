@@ -50,7 +50,7 @@ public class AdminController {
     FAQService faqService;
     @Autowired
     NcpObjectStorageService ncpObjectStorageService;
-  
+
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     //admin
@@ -148,8 +148,8 @@ public class AdminController {
     //작품 수정하기
     @PostMapping("/update")
     public String update(Art art, MultipartFile[] files, HttpSession session, @RequestParam("strStartDatetime") String strStartDatetime, @RequestParam("strEndDatetime") String strEndDatetime)  throws Exception {
-    //Member loginUser = (Member) session.getAttribute("loginUser");
-    //    Art a = artService.get(art.getArtNo());
+        //Member loginUser = (Member) session.getAttribute("loginUser");
+        //    Art a = artService.get(art.getArtNo());
         //**이미지 업로드
         //기존
 //        art.setArtNo(artNo);
@@ -182,10 +182,10 @@ public class AdminController {
     }
 
 
-      @GetMapping("/artlist")
-      public void artlist(Model model) throws Exception {
-          model.addAttribute("artlist", adminService.list());
-      }
+    @GetMapping("/artlist")
+    public void artlist(Model model) throws Exception {
+        model.addAttribute("artlist", adminService.list());
+    }
 
 
 
@@ -202,20 +202,20 @@ public class AdminController {
         return "admin/artdetail";
     }
 
-  @GetMapping("delete") //작품삭제
-  public String delete(@RequestParam ("artNo") int artNo) throws Exception {
+    @GetMapping("delete") //작품삭제
+    public String delete(@RequestParam ("artNo") int artNo) throws Exception {
 
         //로그인 정보 받기
 
-     Art art = adminService.get(artNo);
-     adminService.delete(art.getArtNo());
-    return "redirect:../admin/artlist";
-  }
+        Art art = adminService.get(artNo);
+        adminService.delete(art.getArtNo());
+        return "redirect:../admin/artlist";
+    }
 
-  @GetMapping("fileDelete/{attachedFile}")
-  public String fileDelete(
-          @MatrixVariable("no") int no,
-          HttpSession session) throws Exception {
+    @GetMapping("fileDelete/{attachedFile}")
+    public String fileDelete(
+            @MatrixVariable("no") int no,
+            HttpSession session) throws Exception {
 
 //        Member loginUser = (Member) session.getAttribute("longinUser");
 //        if (loginUser == null) {
@@ -224,15 +224,15 @@ public class AdminController {
 
         Art art = null;
 
-      Attach attach = adminService.getFile(no);
-      art = adminService.get(attach.getArtNo());
+        Attach attach = adminService.getFile(no);
+        art = adminService.get(attach.getArtNo());
 
         if (adminService.deleteFile(no) == 0) {
             throw new Exception("해당 번호의 첨부파일이 없습니다.");
         } else {
             return "redirect:/admin/artdetail/" + art.getArtNo();
         }
-  }
+    }
 
     @GetMapping("/searchlist")
     public String searchlist(Model model, HttpSession session, @RequestParam String option, @RequestParam String keyword) throws Exception {
