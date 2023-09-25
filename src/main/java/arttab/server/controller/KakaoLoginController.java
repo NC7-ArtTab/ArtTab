@@ -15,13 +15,14 @@ public class KakaoLoginController {
     @ResponseBody
     @GetMapping("/oauth/kakao")
     public void kakaoCallback(@RequestParam String code) {
-        try {
-            String access_Token = KakaoLoginService.getKaKaoAccessToken(code);
-            KakaoLoginService.createKakaoUser(access_Token);
-            log.info("Kakao callback code: {}", code);
-
-        } catch (Exception e) {
-            log.error("Exception occurred: {}", e.getMessage(), e);
-        }
+        log.info(code);
+//        try {
+//            String access_Token = KakaoLoginService.getKaKaoAccessToken(code);
+//            KakaoLoginService.createKakaoUser(access_Token);
+//            log.info("Kakao callback code: {}", code);
+//
+//        } catch (Exception e) {
+//            log.error("Exception occurred: {}", e.getMessage(), e);
+//        }
     }
 }
