@@ -22,10 +22,7 @@
     <link rel="stylesheet" type="text/css" data-th-href="@{/static/css/art-list.css}"/>
 
     <title>ArtTap</title>
-
-
 </head>
-
 <body>
 <header th:replace="~{fragment/header :: headerFragment}"></header>
 
@@ -83,7 +80,7 @@
         <div class="row mb-3">
             <div class="col-sm-12 col-md-4 mt-4" data-th-each="art : ${list}">
                 <div class="card" data-th-style="${artStatus == 'F'} ? 'opacity:0.8; cursor:default' : ''">
-                    <img data-th-src="@{${art.artAttaches.get(0).saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=100&h=100&quality=100&sharp_amt=10.0&ttype=jpg' : '/static/images/logo.png'}}"
+                    <img data-th-src="@{${art.artAttaches.get(0).saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}"
                          alt="Thumbnail" class="card-img-top">
                     <div class="card-body">
                         <span data-th-text="${art.artNo}"></span>
@@ -93,9 +90,10 @@
                             <p data-th-case="P">공예품</p>
                             <p data-th-case="X">기타</p>
                         </h3>
-                        <p class="card-text" data-th-text="${art.artTitle.length() <= 18 ? art.artTitle : art.artTitle.substring(0,18) + '. . .'}">작품명</p>
-                        <a data-th-href="@{'/art/detail?artNo=' + ${art.artNo}}" class="btn btn-dark btn-md"
+                        <p class="card-text" data-th-text="${art.artTitle.length() <= 15 ? art.artTitle : art.artTitle.substring(0,15) + '. . .'}">작품명</p>
+                        <a data-th-href="${art.artStatus == 'P' ? '/art/detail?artNo=' + art.artNo : '' }" class="btn btn-dark btn-md"
                            style="background-color:#F86338; border: #F86338">➜</a>
+                        </div>
                     </div>
                 </div>
             </div>

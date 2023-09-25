@@ -5,34 +5,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        /* 테이블 스타일 */
-        #bidPriceTable {
-            width: 100%;
-            border-collapse: collapse;
-            border: 2px solid black;
-        }
-
-        /* th 스타일 */
-        #bidPriceTable th {
-            border: 2px solid black;
-            padding-right: 20px;
-        }
-
-        /* td 스타일 */
-        #bidPriceTable td {
-            border: 2px solid black;
-        }
-
-        /* 스크롤 박스 스타일 */
-        .scroll-box {
-            max-height: 100px;
-            overflow-y: scroll;
-            text-align: center;
-        }
-    </style>
-</head>
+<head th:replace="~{fragment/config :: configFragment}"></head>
 <body>
 
 <header th:replace="~{fragment/header :: headerFragment}"></header>
@@ -227,7 +200,7 @@
 
                         bidPrice = bidList[i].bidPrice;
                         bidDatetime = formatDate(bidList[i].bidDatetime);
-                        newRow = $("<tr class='artInfo_row'>").append($("<td style='border: 1px solid black;'>").text(bidPrice + " (원)")).append($("<td style='border: 1px solid black;'>").text(bidDatetime));
+                        newRow = $("<tr class='artInfo_row'>").append($("<td style='border: 1px solid black;'>").text(bidPrice.toLocaleString() + " (원)")).append($("<td style='border: 1px solid black;'>").text(bidDatetime));
                         rows.push(newRow);
                     }
 
