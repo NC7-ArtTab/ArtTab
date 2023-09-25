@@ -6,13 +6,8 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
 <head th:fragment="configFragment">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>arttab</title>
 
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
-    <!--    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />-->
-
 </head>
 <body style="display: flex; justify-content: center;">
 <div id="main" style="width: 1450px; background-color: #ffffff;">
@@ -35,34 +30,14 @@
 
         <div layout:fragment="content" class="container">
             <div class="content-left, box">
-                <div class="main-image" style="text-align: center;">
-                    <div data-th-text="${art.artAttaches[0]}"></div>
-                    <img data-th-src="@{${art.artAttaches[0].saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
-                    <!--                <img id="mainImage" src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/art/' + ${art.artAttaches[0].saveFileName} + 'type=f,w=30,h=40,faceopt=true,ttype=jpg'}" alt="메인 이미지">-->
+                <div style="text-align: center;">
+                    <img id="main_image" data-th-src="@{${art.artAttaches.get(0).saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches.get(0).filePath +  art.artAttaches.get(0).saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}"
+                         alt="Thumbnail" class="card-img-top">
                 </div>
                 <div class="image-container">
-                    <div class="sub-image"
-                         data-th-each="file : ${art.artAttaches}">
-                        <img src="|https://ooixvdbufckn19718845.cdn.ntruss.com/art/${file.saveFileName}|"
-                             onclick="showImage('|https://ooixvdbufckn19718845.cdn.ntruss.com/art/${file.saveFileName}|')">
-                        <!--                         width="80" height="60"-->
-
-                        <!--                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180"-->
-                        <!--                         width="80" height="60"-->
-                        <!--                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko2_1024x1024.jpg?v=1447104180')">-->
-
-                        <!--                    <img src="https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182"-->
-                        <!--                         width="80" height="60"-->
-                        <!--                         onclick="showImage('https://cdn.shopify.com/s/files/1/1047/6452/products/tricko3_1024x1024.jpg?v=1447104182')">-->
+                    <div class="sub_image" data-th-each="file : ${art.artAttaches}" style="padding-right: 30px">
+                        <img class="select_image" data-th-src="@{${file.saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + file.filePath +  file.saveFileName + '?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
                     </div>
-
-                    <script>
-                        function showImage(imageUrl) {
-                            var mainImage = document.getElementById('mainImage');
-                            mainImage.src = imageUrl;
-                            mainImage.alt = '메인 이미지';
-                        }
-                    </script>
                 </div>
             </div>
 
@@ -99,9 +74,6 @@
                         <span style="margin: 5px;"></span>
                         <a href="@{'/bid/bid(artNo=${art.artNo})}" class="button2">즉시구매</a>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -130,7 +102,7 @@
         <h1 style="text-align: center">상세 설명</h1>
         <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
         <div data-th-each="file : ${art.artAttaches}">
-            <img src="|https://kr.object.ncloudstorage.com/arttab-bucket/art/${file.saveFileName}|">
+<!--            <img src="|https://kr.object.ncloudstorage.com/arttab-bucket/art/${file.saveFileName}|">-->
         </div>
     </div>
     <br>
@@ -143,6 +115,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function () {
+        $(".select_image").click(function () {
+            $("#main_image").attr("src",this.src);
+        });
+
         var remaindTimeId; // remaindTime()의 setInterval의 ID를 저장할 변수
         var realTimeInfoId; // realTimeInfo()의 setInterval의 ID를 저장할 변수
         var artNo = $("#artNo").val();
