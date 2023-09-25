@@ -1,7 +1,6 @@
 package arttab.server.controller;
 
 import arttab.server.service.MemberService;
-import groovy.transform.AutoImplement;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,8 +28,14 @@ public class AuthController {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @GetMapping("/form")
-    public void form(@CookieValue(required = false) String memberEmail, Model model) {
+    public String form(@CookieValue(required = false) String memberEmail, Model model) {
         model.addAttribute("memberEmail", memberEmail);
+        return "/form";
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
     }
 
     @PostMapping("/login")
@@ -58,13 +63,13 @@ public class AuthController {
 
         session.setAttribute("loginUser", loginUser);
         log.info("Call login");
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) throws Exception {
         session.invalidate();
         log.info("Call logout");
-        return "redirect:/form";
+        return "redirect:/";
     }
 }

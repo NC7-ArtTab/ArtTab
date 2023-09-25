@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.net.URL;
 
+// http%3A%2F%2Flocalhost%3A8080%2Foauth%2Fkakao
+
 @Slf4j
 @Service
 public class KakaoLoginService {
