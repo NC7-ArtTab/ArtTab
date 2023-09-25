@@ -12,6 +12,7 @@ import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
 
 import groovy.util.logging.Slf4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,16 +35,19 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
     ArtService artService;
 
-    @Autowired
     AdminService adminService;
-    @Autowired
     BidService bidService;
-    @Autowired
     FAQService faqService;
-  
+
+    public AdminController(ArtService artService, AdminService adminService, BidService bidService, FAQService faqService) {
+        this.artService = artService;
+        this.adminService = adminService;
+        this.bidService = bidService;
+        this.faqService = faqService;
+    }
+
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     //admin

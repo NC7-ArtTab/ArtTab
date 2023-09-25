@@ -6,28 +6,27 @@ spring:
     livereload:
       enabled: true
 
-  #  h2:
-  #    console:
-  #      enabled: true
-  #      path: /h2-console
-  #      settings:
-  #        web-allow-others: true
   datasource:
-    #    driver-class-name: org.h2.Driver
-    #    url: jdbc:h2:mem:arttab;MODE=MYSQL;DATABASE_TO_LOWER=TRUE
-    #    username: sa
-    #    password:
-
-
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://db-inv5u-kr.vpc-pub-cdb.ntruss.com:3306/arttabdb
+#    username: hyunwook
+#    password: bitcamp!@#123
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/arttabdb
-    username: root
+    username: study
     password: 1111
 
-#  sql:
-#    init:
-#      mode: always
 
 server:
   port: 8080
   shutdown: graceful
+
+#ncp:
+#  end:
+#    point: https://kr.object.ncloudstorage.com
+#  region:
+#    name: kr-standard
+#  access:
+#    key: 76nZbCgEGrJWIt72Sduf
+#  secret:
+#    key: NuGLWQXQW9t69dCfRHwvuo5nsvGitpcE2BbufNMr

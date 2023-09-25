@@ -1,0 +1,47 @@
+/* common.css */
+
+/* 페이지 전체 스타일 */
+body {
+    background-color: #f4f4f4;
+}
+
+/* 헤더 스타일 */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+/* 메인 컨텐츠 스타일 */
+.main {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 테이블 스타일 */
+table {
+    background-color: #000; /* 검은색 배경색 */
+    color: #fff; /* 글자색 */
+}
+
+/* 테이블 헤더 스타일 */
+table thead {
+    background-color: #333; /* 테이블 헤더 배경색 */
+}
+
+/* 테이블 행 스타일 */
+table tbody tr:hover {
+    background-color: #444; /* 마우스 오버 시 배경색 */
+}
+
+/* 테이블 셀 스타일 */
+table td, table th {
+    text-align: center;
+}
+
+/* 푸터 스타일 */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
