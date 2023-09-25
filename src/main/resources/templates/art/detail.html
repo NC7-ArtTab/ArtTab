@@ -25,7 +25,6 @@
             </span>
             </a>
             <a data-th-text="${art.artTitle}">제목 </a>
-
         </div>
 
         <div layout:fragment="content" class="container">
@@ -42,17 +41,15 @@
             </div>
 
             <div class="content-right, box">
+                <input id="artNo" type="hidden" data-th-value="${art.artNo}"/>
                 <h4 class="title-text" style="margin-bottom: 50px;" th:text="${art.artTitle}">제목</h4>
                 <h4 class="text">경매 시작가 <span class="intext" th:text="${art.startPrice} + ' ￦'">1000</span> </h4>
-
                 <h4 class="text">현재 입찰가 <span class="intext" th:text="${art.artBids[0].bidPrice} + ' ￦'">1000</span> </h4>
 
 
                 <div style="padding: 20px 5px;">
                     <h4 class="text">작품 설명</h4>
                     <p class="content" th:text="${art.artContent}">내용</p>
-                    <!--            </div>-->
-                    <!--            <div>-->
                     <h5 class="text">경매 기간 <span class="intext" style="width: 450px;" data-th-text="${art.startDatetime + '  ~  ' + art.endDatetime}"></span> </h5>
 
                     <input id="end_datetime" type="hidden" data-th-value="${art.endDatetime}">
@@ -100,10 +97,10 @@
     <br><br><br><br><br><br><br>
     <div class="detail";>
         <h1 style="text-align: center">상세 설명</h1>
-        <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
-        <div data-th-each="file : ${art.artAttaches}">
-<!--            <img src="|https://kr.object.ncloudstorage.com/arttab-bucket/art/${file.saveFileName}|">-->
+        <div data-th-each="file : ${art.artAttaches}" style="text-align: center; padding: 10px">
+            <img style="width: 60%; height: 60%;" data-th-src="@{${file.saveFileName != null ? 'https://kr.object.ncloudstorage.com/arttab-bucket/' + file.filePath +  file.saveFileName : ''}}">
         </div>
+        <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
     </div>
     <br>
 
@@ -243,6 +240,7 @@
                         $(".artInfo_row").remove();
                         $("#bidPriceTable").append(rows);
                     }
+                    console.log(formatDate(new Date()));
                     $("#baseline_time").text(formatDate(new Date()) + ' ');
                 },
                 error: function () {
