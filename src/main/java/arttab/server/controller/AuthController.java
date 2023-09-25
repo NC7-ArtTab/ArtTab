@@ -65,6 +65,6 @@ public class AuthController {
     public String logout(HttpSession session) throws Exception {
         session.invalidate();
         log.info("Call logout");
-        return "redirect:/";
+        return "redirect:/form";
     }
 }
