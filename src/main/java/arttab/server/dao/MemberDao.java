@@ -3,7 +3,6 @@ package arttab.server.dao;
 import java.util.List;
 import arttab.server.vo.Member;
 import arttab.server.vo.Bid;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.RequestParam;
 

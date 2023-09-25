@@ -22,6 +22,7 @@ public class SecurityConfig {
         http.csrf().disable(); //CSRF Token 비활성화
 
         http.authorizeRequests().anyRequest().permitAll();
+        http.logout().disable();
         //        http.apply(filterConfig);
         return http.build();
     }
