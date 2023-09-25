@@ -1,43 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
+
+<head th:replace="~{fragment/config :: configFragment}">
     <meta charset="UTF-8">
     <title>입찰 페이지</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<header th:replace="~{fragment/header :: headerFragment}"></header>
+
 <!-- 경매 상품 정보 표시 -->
-<h2 th:text="${artDetail.artTitle}"></h2>
-<img th:src="${artDetail.imagePath}" alt="경매 상품 이미지">
-<p th:text="${artDetail.artContent}"></p>
-<p th:text="'남은 시간: ' + ${artDetail.remainingTime} + ' 시간'"></p>
+<h5 th:text="${art.artTitle}">작품</h5>
+<img th:src="${art.artAttaches}" alt="경매 상품 이미지" />
+<h5 th:text="${art.artContent}">작품 내용</h5>
 
-<!-- 현재 입찰 정보 표시 -->
-<p th:text="'현재 최고 입찰가: ' + ${artDetail.maxBidPrice}"></p>
-<p th:text="'입찰가 증가 단위: ' + ${artDetail.bidPricePer}"></p>
-
-<!-- 입찰 양식 표시 -->
-<form method="post" action="/bid">
-    <input type="hidden" name="artNo" th:value="${artDetail.artNo}">
-    <label for="bidPrice">입찰 가격:</label>
-    <input type="number" id="bidPrice" name="bidPrice" required>
-    <button type="submit">입찰하기</button>
-</form>
-
-<!-- 입찰 순위 표시 -->
-<h3>입찰 순위</h3>
-<table>
-    <thead>
-    <tr>
-        <th>순위</th>
-        <th>회원 이름</th>
-        <th>입찰 가격</th>
-        <th>입찰 일시</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- 여기에 입찰 순위 데이터를 표시하도록 Thymeleaf를 사용하여 추가하세요. -->
-    </tbody>
-</table>
 </body>
 </html>
