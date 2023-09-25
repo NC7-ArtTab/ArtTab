@@ -14,8 +14,133 @@
 
 <!-- 경매 상품 정보 표시 -->
 <h5 th:text="${art.artTitle}">작품</h5>
-<img th:src="${art.artAttaches}" alt="경매 상품 이미지" />
+<img th:src="${art.artAttaches}" alt="경매 상품 이미지"/>
 <h5 th:text="${art.artContent}">작품 내용</h5>
+
+
+
+
+
+
+<form action="/bids" method="post">
+    <input type="hidden" name="artNo" th:value="${art.artNo}">
+    <input type="hidden" name="memNo" th:value="${member.memNo}">
+    <label for="bidPrice">입찰 가격:</label>
+    <input type="text" id="bidPrice" name="bidPrice" required>
+    <!-- 입찰하기 버튼 -->
+    <button id="openModalButton" class="btn btn-primary">입찰하기</button>
+
+
+    <!-- 모달 창 -->
+    <div class="modal fade" id="bidModal" tabindex="-1" role="dialog"
+         aria-labelledby="bidModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bidModalLabel">입찰 확인</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- 모달 내용 -->
+                    <p>입찰 금액: <span id="modalBidAmount">0</span></p>
+                    <!-- 다른 입찰 정보 표시 -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" id="confirmBidButton">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery 및 부트스트랩 JavaScript 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 입찰하기 버튼 클릭 이벤트 처리
+            $('#openModalButton').click(function () {
+                const bidAmount = $('#bidAmount').val();
+                if (bidAmount === '') {
+                    alert('입찰금액을 입력하세요.');
+                    return;
+                }
+
+                // 모달 창에 입찰 정보 표시
+                $('#modalBidAmount').text(bidAmount);
+
+                // 모달 창 열기
+                $('#bidModal').modal('show');
+            });
+
+            // 모달 확인 버튼 클릭 이벤트 처리
+            $('#confirmBidButton').click(function () {
+                const bidAmount = $('#bidAmount').val();
+
+                // 서버로 입찰 정보 전송 및 처리
+                $.ajax({
+                    url: '/bids', // 경매 번호에 맞게 URL을 수정하세요.
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        bidPrice: bidAmount,
+                        // 다른 필요한 데이터를 추가하세요.
+                    }),
+                    success: function () {
+                        alert('입찰이 성공적으로 등록되었습니다.');
+                        // 입찰 성공 후 페이지 리로드
+                        location.reload();
+                    },
+                    error: function () {
+                        alert('입찰을 등록하는 중 오류가 발생했습니다.');
+                    }
+                });
+
+                // 모달 창 닫기
+                $('#bidModal').modal('hide');
+            });
+        });
+    </script>
+</form>
+
+<!-- 남은 시간 계산 및 표시 -->
+<p>남은 시간: <span id="countdown"></span></p>
+
+<!-- 작품의 startDatetime 값 -->
+<input type="hidden" id="startDatetime" th:value="${art.startDatetime}"/>
+<!-- 작품의 endDatetime 값 -->
+<input type="hidden" id="endDatetime" th:value="${art.endDatetime}"/>
+
+<script>
+    var startDatetimeStr = document.getElementById('startDatetime').value;
+    var endDatetimeStr = document.getElementById('endDatetime').value;
+    var startDatetime = new Date(startDatetimeStr);
+    var endDatetime = new Date(endDatetimeStr);
+    var countdownElement = document.getElementById('countdown');
+
+    function updateCountdown() {
+        var now = new Date();
+        var timeLeft = endDatetime - now;
+
+        if (timeLeft <= 0) {
+            countdownElement.innerText = '입찰이 종료되었습니다.';
+        } else {
+            var hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            countdownElement.innerText = hours + '시간 ' + minutes + '분 ' + seconds + '초 남음';
+        }
+    }
+
+    // 1초마다 업데이트
+    setInterval(updateCountdown, 1000);
+</script>
+
 
 </body>
 </html>

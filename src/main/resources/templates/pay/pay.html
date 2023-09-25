@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+<head>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript"
+            src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        // HTML 요소 찾기
+        var memberNoElement = document.getElementById('memberNo');
+        var artNoElement = document.getElementById('artNo');
+        var buyNowPriceElement = document.getElementById('buyNowPrice');
+
+        // 가져온 정보에서 필요한 값을 추출
+        var memberNo = parseInt(memberNoElement.textContent);
+        var artNo = parseInt(artNoElement.textContent);
+        var buyNowPrice = parseInt(buyNowPriceElement.textContent);
+
+
+
+        var IMP = window.IMP;
+        IMP.init("imp38107620");
+
+        var today = new Date();
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours + minutes + seconds + milliseconds;
+
+
+        function requestPay() {
+            IMP.request_pay({
+                pg: 'html5_inicis',
+                pay_method: 'card',
+                merchant_uid: "IMP" + makeMerchantUid,
+                name: '미술물품 결제',
+                amount: buyNowPrice,
+                buyer_email: 'Iamport@chai.finance',
+                buyer_name: '아임포트 기술지원팀',
+                buyer_tel: '010-1234-5678',
+                buyer_addr: '서울특별시 강남구 삼성동',
+                buyer_postcode: '123-456'
+            }, function (response) {
+                if (response.success) {
+                    $.ajax({
+                        url: '/pay/insertPay', // 포인트 업데이트 API 엔드포인트 URL
+                        method: 'POST',
+                        data: {
+                            memberNo: memberNo, // 사용자 번호
+                            artNo: artNo, // 게시글 번호
+                            buyNowPrice: buyNowPrice // 입찰 금액
+                        },
+                        async: false, // 동기적으로 서버응답을 처리
+                        success: function (data) {
+                            console.log(data);
+                            try {
+                                var resultData = JSON.parse(JSON.stringify(data));
+                                alert('입찰 포인트: ' + resultData.buyNowPrice);
+                                location.reload();
+                            } catch (e) {
+                                console.error('JSON 파싱 오류:', e);
+                            }
+                        },
+                        error: function (error) {
+                            console.error('포인트 업데이트 실패', error);
+                        }
+                    });
+                } else {
+                    alert('현재가격보다 높은 금액을 입찰해주세요');
+                    location.reload();
+                }
+                console.log("d");
+            });
+        }
+
+    </script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<header th:replace="~{fragment/header :: headerFragment}"></header>-->
+<button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
+<!--<footer th:replace="~{fragment/footer:: footerFragment}"></footer>-->
+
+<div id="memberNo" data-th-if="${session.loginUser}" data-th-text="${session.loginUser.memberNo}"
+     style="display: none;"></div>
+<div id="artNo" data-th-if="${art.artNo}" data-th-text="${art.artNo}" style="display: none;"></div>
+<div id="buyNowPrice" data-th-if="${art.buyNowPrice}" data-th-text="${art.buyNowPrice}"
+     style="display: none;"></div>
+</body>
+</html>
