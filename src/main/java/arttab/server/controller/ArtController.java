@@ -1,6 +1,5 @@
 package arttab.server.controller;
 
-
 import arttab.server.service.ArtService;
 import arttab.server.vo.Art;
 import arttab.server.vo.Bid;
