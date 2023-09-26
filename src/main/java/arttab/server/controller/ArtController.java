@@ -1,6 +1,7 @@
 package arttab.server.controller;
 
 import arttab.server.service.ArtService;
+import arttab.server.service.MemberService;
 import arttab.server.vo.*;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,12 @@ import javax.servlet.http.HttpSession;
 //@RequiredArgsConstructor
 public class ArtController {
     private final ArtService artService;
+    private final MemberService memberService;;
     private final MailSender mailSender;
 
-    public ArtController(ArtService artService, MailSender mailSender) {
+    public ArtController(ArtService artService, MemberService memberService, MailSender mailSender) {
         this.artService = artService;
+        this.memberService = memberService;
         this.mailSender = mailSender;
     }
 
@@ -116,13 +119,13 @@ public class ArtController {
     public void update(HttpServletResponse response, @RequestParam(name = "artNo") int artNo) throws Exception {
         try {
             int bidMaxPirce = 0;
-            Art art = artService.get(artNo);  // 경매작품 데이터 한번 더
+            Art art = artService.get(artNo);  // 경매작품 데이터 한번 더 조회
 
             if (art.getArtBids() != null && art.getArtBids().size() > 0) { // 해당 경매작품의 입찰기록이 1개 이상 존재하면
                 bidMaxPirce = art.getArtBids().get(0).getBidPrice(); // 가격을 최신화
             }
 
-            if (!"P".equals(art.getArtStatus())) { // 작품의 상태가 이미 취소인 상태이면 에러페이지로 이동
+            if (!"P".equals(art.getArtStatus())) { // 작품의 상태가 진행중인 경매품이 아니면
                 throw new Exception();
             }
 
@@ -131,13 +134,10 @@ public class ArtController {
                 art.setArtStatus("F"); // 그냥 종료로 변경
                 artService.update(art);
             } else if ("P".equals(art.getArtStatus()) && bidMaxPirce > 0) { // 진행중인 경매건이면서 현재 입찰가(최고입찰가)가 있으면
+                String recipientEmail = memberService.get(art.getArtBids().get(0).getMemberNo()).getMemberEmail();
                 art.setArtStatus("Y"); // 낙찰 처리
                 artService.update(art);
-
-                // 최고 입찰자의 메일로 낙찰 메일 전송<수정해야함!!!>
-                mailSender.sendMail(art, "itkw87@naver.com");
-
-                System.out.println(mailSender.toString());
+                mailSender.sendMail(art, recipientEmail);
             }
 
             Gson gson = new Gson();
