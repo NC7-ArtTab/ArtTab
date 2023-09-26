@@ -23,7 +23,8 @@ public class BidController {
   }
 
   @GetMapping("/bid/{artNo}")
-  public String getBidInfo(@PathVariable int artNo, Model model) throws Exception {
+  public String getBidInfo(@PathVariable(name="artNo") int artNo, Model model) throws Exception {
+    System.out.println(artNo + "불러옴");
     Art art = bidService.findArtInfo(artNo);
     model.addAttribute("art", art);
     Bid bid = bidService.findBidInfo(artNo);

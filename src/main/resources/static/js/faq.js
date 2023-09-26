@@ -14,24 +14,29 @@ function loadFAQList() {
             data.forEach(faq => {
                 const faqItem = document.createElement("li");
                 faqItem.classList.add("faq-item");
-                faqItem.textContent = faq.faqTitle;
-                faqItem.dataset.content = faq.faqContent;
 
-                // FAQ 항목을 클릭할 때 이벤트 리스너를 추가합니다.
-                faqItem.addEventListener("click", function () {
-                    const content = this.dataset.content;
+                const titleElement = document.createElement("div");
+                titleElement.classList.add("faq-title");
+                titleElement.textContent = faq.faqTitle;
 
-                    // FAQ 내용이 이미 생성되어 있는 경우에는 숨깁니다.
-                    if (this.classList.contains("active")) {
-                        hideContent();
+                const contentElement = document.createElement("div");
+                contentElement.classList.add("faq-content");
+                contentElement.textContent = ">>" + faq.faqContent;
+                contentElement.style.display = "none"; // 초기에는 숨깁니다.
+
+                // FAQ 제목을 클릭할 때 이벤트 리스너를 추가합니다.
+                titleElement.addEventListener("click", function () {
+                    if (contentElement.style.display === "none") {
+                        contentElement.style.display = "block"; // FAQ 내용을 보여줍니다.
+                        titleElement.style.color = "red"; // FAQ 제목 색상 변경 (예시: 빨간색)
                     } else {
-                        // FAQ 내용을 보여줍니다.
-                        showContent(content);
+                        contentElement.style.display = "none"; // FAQ 내용을 숨깁니다.
+                        titleElement.style.color = "black"; // FAQ 제목 색상 원래대로 변경
                     }
-
-                    // FAQ 항목의 활성 상태를 토글합니다.
-                    this.classList.toggle("active");
                 });
+
+                faqItem.appendChild(titleElement);
+                faqItem.appendChild(contentElement);
 
                 faqList.appendChild(faqItem);
             });
@@ -40,6 +45,9 @@ function loadFAQList() {
             console.error("FAQ 데이터를 가져오는 중 오류 발생:", error);
         });
 }
+
+
+
 
 function showContent(content) {
     // FAQ 내용을 생성하고 표시합니다.
