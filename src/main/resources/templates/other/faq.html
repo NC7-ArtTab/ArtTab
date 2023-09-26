@@ -3,12 +3,13 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../../static/css/faq.css">
 </head>
-<body style="margin-left: 40px; margin-right:40px;">
+<body style="width: 1800px; margin: 0 auto;">
 <div data-th-replace="fragment/header :: headerFragment"></div>
 
 <p style='font-size: 17px; color: #F86338; font-weight: bold;'>ArtTab</p>
 <ul>
-    <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">FAQ
+    <li style="display: inline; margin-left: 50px; margin-right: 150px; font-size: 40px; font-weight: bold;">
+        FAQ
     </li>
 </ul>
 <hr>
@@ -18,22 +19,23 @@
 <div class="content" style="font-weight: bold; width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
     <br>
     <ul id="faq-list" style="font-weight: normal;">
-        <!-- FAQ 목록은 JavaScript로 동적으로 생성됩니다. -->
+        <!— FAQ 목록은 JavaScript로 동적으로 생성됩니다. —>
     </ul>
 </div>
 
 <div class="clear"></div>
 <br><br><br><br><br><br><br>
 
-<p style="width: 50%; margin: 0 auto;">
-    원하시는 답변을 찾지 못하셨다면 고객센터로 문의해 주세요.<br>
-    대표전화: 1577-8888<br>
-    E-mail: arttab@gmail.com
+<p class="centered-text">
+    If you couldn't find the answer, please contact us!<br>
+    <br>
+    <strong>E-mail: <a href="mailto:arttab@gmail.com" style="color: blue; text-decoration: underline;">arttab@gmail.com</a></strong>
 </p>
+
 
 <br><br><br><br><br><br><br><br>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
-<!-- JavaScript 파일 스크립트 -->
+<!— JavaScript 파일 스크립트 —>
 <script src="/static/js/faq.js"></script>
 </body>
 </html>

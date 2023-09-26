@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:https="http://www.w3.org/1999/xhtml">
+<head th:fragment="configFragment">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- style -->
+    <!--  <link rel="stylesheet" type="text/css" href="/static/css/admin-detail.css" />-->
+    <!--  <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />-->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
+    <title>arttab</title>
+
+</head>
+</head>
+<body style="width: 1800px; margin: 0 auto;">
+<header class="main-header" th:fragment="headerFragment">
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
+    <div style="width: 1800px; ">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style='color: #F86338;'><a href="/" style="text-decoration: none; color: inherit;">ArtTab</a></h1>
+            <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="logout-button" style="font-weight:bold;">로그아웃</a>
+        </div>
+        <ul style="list-style-type: none; padding-right: 0; display: flex; justify-content: space-between; align-items: center;">
+            <li style="display: inline; margin-left: -40px; margin-right: 0;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">Ongoing Auctions</a></li>
+            <li style="display: inline; margin-left: -200px; margin-right: 0;" ><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
+            <li style="display: inline; margin-left: -200px; margin-right: 0;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
+            <li>
+                <form action="/art/list" name="search-form" class="search-form" style="display: flex; margin-left:-60px;">
+
+                    <select name="searchType" class="search-select">
+                        <option value="all" data-th-selected="${session.searchParam != null &&  session.searchParam.searchType == 'all'}">전체</option>
+                        <option value="title" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'title'}">제목</option>
+                        <option value="writer" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'writer'}">작가</option>
+                    </select>
+                    <input type="text" style="width: 400px;" name="searchKeyword" class="search-input" placeholder="작품명과 작가명으로 작품을 검색해보세요!" data-th-value="${session.searchParam != null ? session.searchParam.searchKeyword : ''}" />
+                    <input id="search_btn" style="margin-left:10px;" class="search-select" type="submit" value="검색">
+                </form>
+            </li>
+
+            <li style="display: flex; align-items: center; margin-left:-50px;">
+                <img th:if="${session.loginUser == null}" style="width: 40px; height: 30px;" src="/static/images/user.jpg">
+                <a th:if="${session.loginUser == null}" href="/form" class="login">ArtTab Sign in </a>
+                <h3 th:if="${session.loginUser == null}" style="margin-right:10px; margin-left:10px;"> | </h3>
+                <a th:if="${session.loginUser == null}" href="/signup" class="login" style="margin-right:20px;"> Sign up </a>
+
+
+                <span th:if="${session.loginUser != null}" th:text="' ' + ${session.loginUser.memberName} + '님 My page '"style="font-size: 20px; font-weight: bold;"></span>
+
+                <a th:if="${session.loginUser != null && session.loginUser.memberAuth == 'M'}" th:href="@{/mypage/main}">
+                    <img style="width: 80px; height: 60px;" src="/static/images/pic.jpg">
+                </a>
+
+                <a th:if="${session.loginUser != null && session.loginUser.memberAuth == 'A'}" th:href="@{/admin/main}">
+                    <img style="width: 60px; height: 60px; margin-right:30px; margin-left:10px;" src="/static/images/pic.jpg">
+                </a>
+
+
+
+            </li>
+        </ul>
+        <hr>
+    </div>
+
+
+</header>
+<div>
+
+</div>
+
+    <div style="display: flex; gap: 100px; padding: 70px; align-items: center; justify-content: center;
+     width: 1600px; height: auto; margin: 0 auto; background-color: #fdfdfd;">
+        <div style="flex: 1; padding-left: 100px">
+            <div style="width: 540px; height: 320px; background-color: #161717; margin: 20px auto; border-radius: 15px;">
+                <img style="width: 100px; margin: 45px;" src="/static/images/chip.png">
+                <p style="margin-left: 50px; color: white; text-align: left; font-size: 20px;">
+                    000000-00-000000</p>
+                <p style="margin-left: 50px; color: #fff; font-size: 30px;">홍길동</p>
+            </div>
+            <div style="width: 530px; margin: 0 auto; border: 4px dotted #e2e2ea; border-radius: 10px;">
+                <p style="padding: 0 17px 17px 17px; font-size: 17px; margin: 0;">즉시 구매 가격</p>
+            </div>
+            <div style="margin: 0 70px;">
+                <p style="padding-left: 20px;">가격 디테일</p>
+                <div style="background-color: #fff; border: 10px; padding: 10px; border-radius: 7px;">
+                    <p style="padding-left: 10px;">
+                        <span>총액</span> <span style="display: inline-block; float: right; width: 150px;">100￦</span>
+                    </p>
+                    <p style="padding-left: 10px;">
+                        <span>예술인 발전기금 목적 세금</span> <span style="display: inline-block; float: right; width: 150px;">10￦</span>
+                    </p>
+                </div>
+                <div style="margin: 20px;">
+                    <span>Total</span>
+                    <span style="text-align: right; font-size: 20px; font-color: #f1000f">10000</span>
+                </div>
+                    <button class="button3"
+                            style="width:540px; height: 50px; text-align: center; border-radius: 20px;
+                            font-weight: bold; font-size: 18px;">즉시 구매</button>
+            </div>
+        </div>
+
+
+        <div style="flex: 1; padding-right: 100px">
+            <div class="cropped_image">
+                <img style="border-radius: 20px;" src="/static/images/logo.png">
+            </div>
+            <div class="buy_info" style="width: 530px;">
+                <h2>구매 정보</h2>
+                <p >서양화1</p>
+                <p >콘텐츠?</p>
+                <p>세부정보</p>
+                <p >사이즈?</p>
+                <p >김성주</p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+</body>
+</html>
