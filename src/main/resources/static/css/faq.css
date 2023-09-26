@@ -6,7 +6,7 @@
 
 .faq-item {
     cursor: pointer;
-    margin-bottom: 10px; /* 각 FAQ 항목 간의 간격 조정 */
+    margin-bottom: 30px; /* 각 FAQ 항목 간의 간격 조정 */
     margin-left: -200px;
     padding: 10px; /* FAQ 항목의 패딩 추가 */
     background-color: #fff; /* FAQ 항목 배경색 추가 */
