@@ -25,11 +25,11 @@
             <div style="width: 540px; height: 320px; background-color: #161717; margin: 20px auto; border-radius: 15px;">
                 <img style="width: 100px; margin: 45px;" src="/static/images/chip.png">
                 <p style="margin-left: 50px; color: white; text-align: left; font-size: 20px;">
-                    000000-00-000000</p>
-                <p style="margin-left: 50px; color: #fff; font-size: 30px;">홍길동</p>
+                    001-733637-01-010</p>
+                <p style="margin-left: 50px; color: #fff; font-size: 30px;" th:text="${session.loginUser.memberName}">홍길동</p>
             </div>
             <div style="width: 530px; margin: 0 auto; border: 4px dotted #e2e2ea; border-radius: 10px;">
-                <p style="padding: 0 17px 17px 17px; font-size: 17px; margin: 0;">즉시 구매 가격</p>
+                <p style="padding: 0 17px 17px 17px; font-size: 17px; margin: 0;" th:text="${pay.buyNowPrice}">즉시 구매 가격</p>
             </div>
             <div style="margin: 0 70px;">
                 <p style="padding-left: 20px;">가격 디테일</p>
@@ -43,7 +43,7 @@
                 </div>
                 <div style="margin: 20px;">
                     <span>Total</span>
-                    <span style="text-align: right; font-size: 20px; font-color: #f1000f">10000</span>
+                    <span style="text-align: right; font-size: 20px; font-color: #f1000f"th:text="${pay.buyNowPrice}">10000</span>
                 </div>
                 <button class="button3"
                         style="width:540px; height: 50px; text-align: center; border-radius: 20px;
@@ -57,18 +57,17 @@
             </div>
             <div class="buy_info" style="width: 530px;">
                 <h2>구매 정보</h2>
-                <p >서양화1</p>
-                <p >콘텐츠?</p>
-                <p>세부정보</p>
-                <p >사이즈?</p>
-                <p >김성주</p>
+                <p th:text="${pay.artTitle}">서양화1</p>
+                <p th:text="${pay.artContent}">콘텐츠</p>
+                <p th:text="${pay.artDetail}">세부정보</p>
+                <p th:text="${pay.artWriter}">김성주</p>
             </div>
         </div>
     </div>
     <div id="memberNo" data-th-if="${session.loginUser}" data-th-text="${session.loginUser.memberNo}"
          style="display: none;"></div>
     <div id="artNo" data-th-text="${pay.artNo}" style="display: none;"></div>
-    <div id="buyNowPrice" data-th-text="${pay.art.buyNowPrice}"
+    <div id="buyNowPrice" data-th-text="${pay.buyNowPrice}"
          style="display: none;"></div>
 
     <!-- jQuery -->
