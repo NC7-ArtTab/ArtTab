@@ -6,8 +6,8 @@
 
 .faq-item {
     cursor: pointer;
-    margin-bottom: 10px; /* 각 FAQ 항목 간의 간격 조정 */
-    margin-left: -200px;
+    margin-bottom: 30px; /* 각 FAQ 항목 간의 간격 조정 */
+    margin-left: -50px;
     padding: 10px; /* FAQ 항목의 패딩 추가 */
     background-color: #fff; /* FAQ 항목 배경색 추가 */
     border-radius: 5px; /* FAQ 항목 모서리 둥글게 만듦 */
@@ -49,7 +49,7 @@
 .centered-text {
     text-align: center; /* 텍스트를 가운데 정렬합니다. */
     position: absolute; /* 절대 위치 지정 */
-    top: 80%; /* 화면 상단에서 50% 위치로 이동합니다. */
+    top: 100%; /* 화면 상단에서 50% 위치로 이동합니다. */
     left: 50%; /* 화면 왼쪽에서 50% 위치로 이동합니다. */
     transform: translate(-50%, -50%); /* 요소를 수평 및 수직으로 가운데 정렬합니다. */
 }
