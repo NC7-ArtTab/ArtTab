@@ -2,7 +2,7 @@
 <header class="main-header" th:fragment="headerFragment">
 
     <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
-
+    <div style="width: 1800px;">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1 style='color: #F86338;'><a href="/" style="text-decoration: none; color: inherit;">ArtTab</a></h1>
         <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="logout-button" style="font-weight:bold;">로그아웃</a>
@@ -46,6 +46,7 @@
         </li>
     </ul>
     <hr>
+    </div>
 
 
 </header>
