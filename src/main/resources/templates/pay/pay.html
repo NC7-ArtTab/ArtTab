@@ -5,8 +5,6 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +12,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
-  
+
 </head>
 <body style="width: 1800px; margin: 0 auto;">
     <header th:replace="~{fragment/header :: headerFragment}"></header>
@@ -52,7 +50,7 @@
                             font-weight: bold; font-size: 18px;" onclick="requestPay()">결제 하기</button>
             </div>
         </div>
-      
+
         <div style="flex: 1; padding-right: 100px">
             <div class="cropped_image">
                 <img style="border-radius: 20px;" src="/static/images/logo.png">
@@ -66,14 +64,13 @@
                 <p >김성주</p>
             </div>
         </div>
-
     </div>
     <div id="memberNo" data-th-if="${session.loginUser}" data-th-text="${session.loginUser.memberNo}"
          style="display: none;"></div>
     <div id="artNo" data-th-text="${pay.artNo}" style="display: none;"></div>
     <div id="buyNowPrice" data-th-text="${pay.art.buyNowPrice}"
          style="display: none;"></div>
-    
+
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- iamport.payment.js -->
