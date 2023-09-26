@@ -95,7 +95,8 @@
             mem_detail_addr,
             mem_bank,
             mem_acc,
-            mem_datetime
+            mem_datetime,
+            mem_auth
             from
             member
             where

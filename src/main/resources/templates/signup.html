@@ -19,12 +19,10 @@
 
 <br>
 <body style="width: 1800px; margin: 0 auto;">
-
 <div data-th-replace="fragment/header :: headerFragment"></div>
-
 <div style="text-align: center;">
 <form method="post" action="/signup">
-
+  <div class="container">
     <p style=" text-align: center; font-size: 40px; font-weight: bold;"> ArtTab Sign up </p>
   <br><br>
     <div class="form-group">
@@ -63,8 +61,6 @@
       <label for="inputAcc" style="margin-right: 20px;">계좌번호</label>
       <input type="text" class="form-control" id="inputAcc" name="memberAcc" style="color: rgba(105, 105, 105, 0.8)" placeholder="">
     </div>
-
-
     <!-- 개인정보제공동의 버튼 -->
   <h4 style="margin-left:40px;">ArtTab 정보 수신 동의</h4>
   <div class="center-label">
@@ -72,12 +68,10 @@
       </div>
   <br>
   <button type="submit" style="font-weight:bold;" class="button2">확인 및 가입</button>
-
-
+    </div>
 </form>
   <br><br><br><br><br><br><br><br>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
-
 </div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
