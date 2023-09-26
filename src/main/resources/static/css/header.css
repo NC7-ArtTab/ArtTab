@@ -1,3 +1,7 @@
+body {
+    font-size: 100%; /* 화면 배율을 100%로 고정 */
+}
+
 #search_btn {
     border-radius: 10%;
     border: solid 3px #F86338;
@@ -12,14 +16,14 @@
 
 /* About ArtTab과 검색창 간격 조절 */
 .about-arttab {
-    margin-right: 10px; /* 원하는 간격으로 조절 */
+    margin-right: 50px; /* 원하는 간격으로 조절 */
 }
 
 /* 검색 폼 스타일 */
 .search-form {
     display: flex;
     align-items: center;
-    margin-right: 400px; /* 간격을 조절할 값 */
+    margin-right: 20px; /* 간격을 조절할 값 */
 }
 
 .search-select {
@@ -51,16 +55,15 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-
 }
 
 .login-button {
   display: inline-block;
-  padding: 30px 30px;
+  padding: 10px 20px;
   background-color:#F86338;
   color: #fff;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 14px;
   text-decoration: none;
   margin-right: 50px; /* 원하는 간격으로 조절 */
   transition: background-color 0.5s ease; /* 버튼 색상 변화 효과 */

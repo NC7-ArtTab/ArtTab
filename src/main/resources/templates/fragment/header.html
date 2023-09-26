@@ -1,57 +1,31 @@
 <!DOCTYPE html>
 <header class="main-header" th:fragment="headerFragment">
 
-  <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
-  <h1 style='color: #F86338;'><a href="/" style="text-decoration: none; color: inherit;">ArtTab</a></h1>
-  <ul style="list-style-type: none; padding: 0; display: flex; justify-content: space-between; align-items: center;">
-    <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">진행 중 경매</a></li>
-    <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
-    <li style="margin-right: 10px;" class="about-arttab"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
-    <li>
-      <form action="/admin/searchlist" name="search-form" class="search-form" style="display: flex;">
-        <select name="option" class="search-select">
-          <option disabled selected value="">선택</option>
-          <option value="title">제목</option>
-          <option value="writer">작가</option>
-        </select>
-        <input type="text" name="keyword" class="search-input" value="" placeholder="키워드를 입력하세요" />
-        <input type="submit" class="search-select" value="검색">
-      </form>
-    </li>
-    <li style="display: flex; align-items: center;">
-      <a th:if="${session.loginUser == null}" href="/form" class="login-button">로그인</a>
-      <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"style="font-size: 30px; font-weight: bold;"></span>></span>
-      <a th:if="${session.loginUser != null}" data-th-href="@{/logout}" class="login-button">로그아웃</a>
-      <a data-th-href="@{/mypage/main}"><img style="width: 100px; height: 80px;" src="/static/images/user.jpg"></a>
-      <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
-    </li>
-  </ul>
-
-
+    <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
+    <h1  style='color: #F86338;'><a href="/" style="text-decoration: none; color: inherit;">ArtTab</a></h1>
     <ul style="list-style-type: none; padding-right: 0; display: flex; justify-content: space-between; align-items: center;">
-        <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">진행 중 경매</a></li>
-        <li style="margin-right: -200px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
-        <li style="margin-right: 10px;" class="about-arttab"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
+        <li style="display: inline; margin-left: -40px; margin-right: 20px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/art/list}">진행 중 경매</a></li>
+        <li style="display: inline; margin-right: 20px;" ><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/faq}">FAQ</a></li>
+        <li style="display: inline; margin-right: 30px;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
         <li>
-            <form action="/art/list" name="search-form" style="display: inline-block; margin-left: 400px;">
-                <select name="searchType">
+            <form action="/art/list" name="search-form" class="search-form" style="display: flex;">
+                <select name="searchType" class="search-select">
                     <option value="all" data-th-selected="${session.searchParam != null &&  session.searchParam.searchType == 'all'}">전체</option>
                     <option value="title" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'title'}">제목</option>
                     <option value="writer" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'writer'}">작가</option>
                 </select>
-                <input type="text" name="searchKeyword" style="width: 400px;" placeholder="작품명과 작가명으로 작품을 검색해보세요!" data-th-value="${session.searchParam != null ? session.searchParam.searchKeyword : ''}" />
-                <input id="search_btn" type="submit" value="검색">
+                <input type="text" style="width: 400px;" name="searchKeyword" class="search-input" placeholder="작품명과 작가명으로 작품을 검색해보세요!" data-th-value="${session.searchParam != null ? session.searchParam.searchKeyword : ''}" />
+                <input id="search_btn" style="margin-left:10px;" class="search-select" type="submit" value="검색">
             </form>
         </li>
         <li style="display: flex; align-items: center;">
             <a th:if="${session.loginUser == null}" href="/form" class="login-button">로그인</a>
-            <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"style="font-size: 30px; font-weight: bold;"></span>></span>
+            <span th:if="${session.loginUser != null}" th:text="'~' + ${session.loginUser.memberName} + '님 안녕하세요'"style="font-size: 30px; font-weight: bold;"></span>>
             <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="login-button">로그아웃</a>
             <a data-th-href="@{/mypage/main}"><img style="width: 100px; height: 80px;" src="/static/images/user.jpg"></a>
             <a data-th-href="@{/admin/main}"><img style="width: 100px; height: 80px;" src="/static/images/bell.jpg"></a>
         </li>
     </ul>
-  <hr>
 
 </header>
 </html>
