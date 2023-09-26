@@ -1,66 +1,84 @@
 <!--signup.html-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../static/css/profile.css">
+  <title>ArtTab Singup</title>
+  <style>
+    .center-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }</style>
 </head>
+
 <br>
 <body style="width: 1800px; margin: 0 auto;">
+
 <div data-th-replace="fragment/header :: headerFragment"></div>
+
+<div style="text-align: center;">
 <form method="post" action="/signup">
-  <div class="container">
-    <h1>회원가입</h1>
+
+    <p style=" text-align: center; font-size: 40px; font-weight: bold;"> ArtTab Sign up </p>
+  <br><br>
     <div class="form-group">
-      <label for="inputEmail4">이메일</label>
-      <input type="text" class="form-control" id="inputEmail4" name="memberEmail" placeholder="이메일">
+      <label for="inputEmail4" style="margin-right: 20px;">이메일</label>
+      <input type="text" class="form-control" id="inputEmail4" name="memberEmail" style="color: rgba(105, 105, 105, 0.8)" placeholder="arttab@arttab.com">
     </div>
     <div class="form-group">
-      <label for="inputPassword4">비밀번호</label>
-      <input type="password" class="form-control" id="inputPassword4" name="memberPwd" placeholder="비밀번호">
+      <label for="inputPassword4" style="margin-right: 20px;">비밀번호</label>
+      <input type="password" class="form-control" id="inputPassword4" name="memberPwd" style="color: rgba(105, 105, 105, 0.8)" placeholder="****">
     </div>
     <div class="form-group">
-      <label for="inputName">이름</label>
-      <input type="text" class="form-control" id="inputName" name="memberName" placeholder="이름">
+      <label for="inputName" style="margin-right: 20px;">이름</label>
+      <input type="text" class="form-control" id="inputName" name="memberName" style="color: rgba(105, 105, 105, 0.8)" placeholder="Arttab">
     </div>
     <div class="form-group">
-      <label for="inputPhone4">전화번호</label>
-      <input type="text" class="form-control" id="inputPhone4" name="memberPhone" placeholder="휴대폰">
+      <label for="inputPhone4" style="margin-right: 20px;">전화번호</label>
+      <input type="text" class="form-control" id="inputPhone4" name="memberPhone" style="color: rgba(105, 105, 105, 0.8)" placeholder="010 0000 0000">
     </div>
     <div class="form-group">
-      <label for="inputAddr">기본주소</label>
-      <input type="text" class="form-control" id="inputAddr" name="memberAddr" placeholder="기본주소" readonly>
+      <label for="inputAddr" style="margin-right: 20px;">기본주소</label>
+      <input type="text" class="form-control" id="inputAddr" name="memberAddr" style="color: rgba(105, 105, 105, 0.8)" placeholder="검색" readonly>
     </div>
     <div class="form-group">
-      <label for="inputDetailAddr">상세주소</label>
-      <input type="text" class="form-control" id="inputDetailAddr" name="memberDetailAddr" placeholder="상세주소">
+      <label for="inputDetailAddr" style="margin-right: 20px;">상세주소</label>
+      <input type="text" class="form-control" id="inputDetailAddr" name="memberDetailAddr" style="color: rgba(105, 105, 105, 0.8)" placeholder="상세주소">
     </div>
     <div class="form-group">
-      <label for="inputZipcode">우편번호</label>
-      <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" placeholder="우편번호" readonly>
+      <label for="inputZipcode" style="margin-right: 20px;">우편번호</label>
+      <input type="text" class="form-control" id="inputZipcode" name="memberZipcode" style="color: rgba(105, 105, 105, 0.8)" placeholder="10587" readonly>
     </div>
     <div class="form-group">
-      <label for="inputBank">은행명</label>
-      <input type="text" class="form-control" id="inputBank" name="memberBank" placeholder="은행명">
+      <label for="inputBank" style="margin-right: 20px;">은행명</label>
+      <input type="text" class="form-control" id="inputBank" name="memberBank" style="color: rgba(105, 105, 105, 0.8)" placeholder="">
     </div>
     <div class="form-group">
-      <label for="inputAcc">계좌번호</label>
-      <input type="text" class="form-control" id="inputAcc" name="memberAcc" placeholder="계좌번호">
+      <label for="inputAcc" style="margin-right: 20px;">계좌번호</label>
+      <input type="text" class="form-control" id="inputAcc" name="memberAcc" style="color: rgba(105, 105, 105, 0.8)" placeholder="">
     </div>
+
+
     <!-- 개인정보제공동의 버튼 -->
-    <div class="form-group">
-      <div class="input__check">
-        <input type="checkbox" name="personalInfoAgreement" id="personalInfoAgreement" required/>
-        <label for="personalInfoAgreement" class="required" data-th-replace="termsofuse.html">개인정보 제공에 동의합니다</label>
+  <h4 style="margin-left:40px;">ArtTab 정보 수신 동의</h4>
+  <div class="center-label">
+        <label data-th-replace="termsofuse.html">개인정보 제공에 동의합니다</label>
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">가입 완료</button>
-  </div>
+  <br>
+  <button type="submit" style="font-weight:bold;" class="button2">확인 및 가입</button>
+
+
 </form>
+  <br><br><br><br><br><br><br><br>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
-<br><br><br><br><br><br><br><br>
+
+</div>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
