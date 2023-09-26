@@ -54,6 +54,10 @@
       <label for="inputAcc">계좌번호</label>
       <input type="text" class="form-control" id="inputAcc" name="memberAcc" th:value="${session.loginUser.memberAcc}" required>
     </div>
+    <div class="form-group">
+    <label for="inputAuth">회원 권한</label>
+    <input type="hidden" class="form-control" id="inputAuth" name="memberAuth" th:value="${session.loginUser.memberAuth}" readonly>
+    </div>
 
     <button type="submit" class="btn btn-primary">수정 완료</button>
   </form>
