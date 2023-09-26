@@ -26,6 +26,7 @@
   <br>
 
   <hr style=" width: 50%;">
+  <div style="background-color: rgba(95, 95, 95, 0.07); border: 30px solid #fff; border-radius: 100px; width :50%; height:100; margin-left: auto;   margin-right: auto;">
   <form method="post" th:action="@{/mypage/update-profile}">
     <!-- 여기에 프로필 수정 폼 요소를 추가하세요 -->
     <div class="form-group" style="margin-top: 40px">
@@ -65,10 +66,9 @@
     <input type="text" class="form-control" id="inputAcc" name="memberAcc" th:value="${session.loginUser.memberAcc}" required>
 
     <div class="form-group">
-    <label for="inputAuth">회원 권한</label>
+    <label for="inputAuth" style="font-size: 18px; font-weight:bold;">회원 권한</label>
     <input type="hidden" class="form-control" id="inputAuth" name="memberAuth" th:value="${session.loginUser.memberAuth}" readonly>
     </div>
-
     <br><br>
     <button type="submit" class="btn btn-primary">submit</button>
   </form>
