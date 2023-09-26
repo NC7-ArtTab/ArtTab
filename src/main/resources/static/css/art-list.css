@@ -4,11 +4,12 @@
 
 .jumbotron {
     text-align: center;
-    background-color: #dce0d9;
+    background-color: rgba(95, 95, 95, 0.3);
+    margin-left: -90px
 }
 
 .jumbotron__container {
-    max-width: 80%;
+    max-width: auto;
     margin: 0 auto;
 }
 
@@ -36,8 +37,8 @@
 
 .card {
     cursor: pointer;
-    background-color: #dce0d9;
-    border: 1px solid lightblue;
+    background-color: rgba(95, 95, 95, 0.3);
+    border: 5px solid black;
 }
 
 .card h3 {

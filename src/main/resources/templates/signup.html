@@ -7,7 +7,8 @@
 <head>
   <meta charset="UTF-8">
 </head>
-<body>
+<br>
+<body style="margin-left: 40px;">
 <div data-th-replace="fragment/header :: headerFragment"></div>
 <form method="post" action="/signup">
   <div class="container">
@@ -48,10 +49,18 @@
       <label for="inputAcc">계좌번호</label>
       <input type="text" class="form-control" id="inputAcc" name="memberAcc" placeholder="계좌번호">
     </div>
+    <!-- 개인정보제공동의 버튼 -->
+    <div class="form-group">
+      <div class="input__check">
+        <input type="checkbox" name="personalInfoAgreement" id="personalInfoAgreement" required/>
+        <label for="personalInfoAgreement" class="required" data-th-replace="termsofuse.html">개인정보 제공에 동의합니다</label>
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary">가입 완료</button>
   </div>
 </form>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
+<br><br><br><br><br><br><br><br>
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

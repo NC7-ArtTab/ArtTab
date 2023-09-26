@@ -39,6 +39,7 @@
         mem_addr = #{memberAddr},
         mem_detail_addr = #{memberDetailAddr},
         mem_acc = #{memberAcc}
+        mem_auth = #{memberAuth}
         WHERE mem_no = #{memberNo}
     </update>
 
@@ -83,23 +84,23 @@
         mem_no asc
     </select>
 
-    <!--    <select id="findBy" parameterType="int" resultMap="memberMap">-->
-    <!--        select-->
-    <!--        mem_no,-->
-    <!--        mem_email,-->
-    <!--        mem_name,-->
-    <!--        mem_phone,-->
-    <!--        mem_zipcode,-->
-    <!--        mem_addr,-->
-    <!--        mem_detail_addr,-->
-    <!--        mem_bank,-->
-    <!--        mem_acc,-->
-    <!--        mem_datetime-->
-    <!--        from-->
-    <!--        member-->
-    <!--        where-->
-    <!--        mem_no=#{memberNo}-->
-    <!--    </select>-->
+        <select id="findByEmail" parameterType="String" resultMap="memberMap">
+            select
+            mem_no,
+            mem_email,
+            mem_name,
+            mem_phone,
+            mem_zipcode,
+            mem_addr,
+            mem_detail_addr,
+            mem_bank,
+            mem_acc,
+            mem_datetime
+            from
+            member
+            where
+            mem_email=#{memberEmail}
+        </select>
 
     <select id="findByEmailAndPassword" parameterType="member" resultMap="memberMap">
         select

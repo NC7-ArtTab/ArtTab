@@ -30,7 +30,8 @@
 
         <br>
 
-        <form action="/admin/searchlist" name="search-form" style="display: inline-block;  margin-left: 50px;">
+            <form action="/admin/searchlist" name="search-form" style="display: inline-block; width: 400px; margin-left: 50px;">
+
             <select class="search-select" name="option">
                 <option disabled selected value ="" >선택</option>
                 <option value="title">작품명</option>
@@ -40,7 +41,7 @@
             <input class="search-button" type="submit" value="검색">
         </form>
 
-        <a class="custom-button-a" style="margin-left: 150px;" th:href="@{/admin/auction}">추가하기</a>
+        <a class="custom-button-a"  th:href="@{/admin/auction}">추가하기</a>
     </div>
 
     <br>

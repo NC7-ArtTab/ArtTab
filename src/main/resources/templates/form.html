@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <style>
+    /* 주황색 배경색 스타일 */
+    .orange-button {
+      background-color: #F86338;
+      border-color: #F86338;
+      color: #fff; /* 버튼 텍스트 색상을 흰색으로 설정 */
+    }
+  </style>
   <title>로그인</title>
 </head>
 <body>
@@ -19,23 +27,16 @@
       <label for="memberPwd">비밀번호</label>
       <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="비밀번호를 입력해주세요">
     </div>
-    <button type="submit" class="btn btn-primary">로그인</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='oauth/kakao'">카카오 로그인</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='signup'">회원 가입</button>
+    <!— 주황색 버튼으로 변 경 —>
+    <button type="submit" class="btn orange-button">로그인</button>
+    <!— 주황색 버튼으로 변 경 —>
+    <button type="button" class="btn orange-button mt-3" onclick="location.href='signup'">회원 가입</button>
   </form>
+  <br>
+  <a href="https://kauth.kakao.com/oauth/authorize?client_id=8a9729db8ca9ffc2b1e5568724c65513&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code">
+    <img src="https://developers.kakao.com/assets/img/about/logos/login/kr/kakao_account_login_btn_medium_narrow.png" alt="카카오계정으로 로그인">
+  </a>
 </div>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

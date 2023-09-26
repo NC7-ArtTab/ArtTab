@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>작품 목록</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/admin-list.css">
     <script src="../../static/js/admin-list.js"></script>
 </head>
-
+<body style="margin-left: 40px; margin-right:40px;">
 <div data-th-replace="fragment/header :: headerFragment"></div>
-
-<body style="margin-left: 40px;">
 
 
 <p style='color: #F86338; font-weight: bold;'>ART</p>
@@ -30,9 +25,6 @@
     <h2>등록작품 현황 & 추가하기</h2>
     <br>
 
-
-
-
     <form action="/admin/searchlist" name="search-form" style="display: inline-block;  margin-left: 50px;">
         <select class="search-select" name="option">
             <option disabled selected value ="" >선택</option>
@@ -43,7 +35,7 @@
         <input class="search-button" type="submit" value="검색">
     </form>
 
-    <a class="custom-button-a" style="margin-left: 150px;" th:href="@{/admin/auction}">추가하기</a>
+    <a class="custom-button-a" style="margin-right: 0px;" th:href="@{/admin/auction}">추가하기</a>
 </div>
 
 <br>
@@ -66,6 +58,7 @@
     <tbody>
     <tr data-th-each="art : ${artlist}">
         <td data-th-text="${art.artNo}">100</td>
+        <th:block th:with="artNo=${art.artNo}">
         <td>
             <span class="east" th:if="${art.artCategory == 'E'}">동양화</span>
             <span class="west" th:if="${art.artCategory == 'W'}">서양화</span>
@@ -73,7 +66,7 @@
             <span class="other" th:if="${art.artCategory == 'X'}">기타</span>
         </td>
         <td>
-            <a class="table-content" data-th-href="@{'/art/detail/' + ${art.artCategory} + '/' + ${art.artNo}}"
+            <a class="table-content" data-th-href="@{'/art/detail?artNo=' + ${artNo}}"
                data-th-text="${art.artTitle} ?: '제목없음'">게시글 제목(링크 수정 예정)</a>
         </td>
         <td class="table-title" data-th-text="${art.artWriter}">홍길동</td>

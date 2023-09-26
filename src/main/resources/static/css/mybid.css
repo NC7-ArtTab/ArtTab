@@ -44,3 +44,18 @@
 #myBidTable .btn-warning i {
     margin-right: 5px;
 }
+
+.custom-button {
+    background-color: #F86338;
+    color: #fff;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+.table-primary,.table-primary>td,.table-primary>th{background-color:#b8daff}.table-primary tbody+tbody,.table-primary td,.table-primary th,.table-primary thead th{border-color:#7abaff}.table-hover .table-primary:hover{background-color:#9fcdff}.table-hover .table-primary:hover>td,
+.table-hover .table-primary:hover>th{background-color:#9fcdff}
