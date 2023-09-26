@@ -39,6 +39,7 @@
         mem_addr = #{memberAddr},
         mem_detail_addr = #{memberDetailAddr},
         mem_acc = #{memberAcc}
+        mem_auth = #{memberAuth}
         WHERE mem_no = #{memberNo}
     </update>
 
