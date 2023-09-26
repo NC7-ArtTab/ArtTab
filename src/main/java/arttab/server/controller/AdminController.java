@@ -206,9 +206,9 @@ public class AdminController {
         return "redirect:../admin/artlist";
     }
 
-    @GetMapping("fileDelete")
+    @GetMapping("fileDelete/{attachedFile}")
     public String fileDelete(
-            @RequestParam("no") int no,
+            @MatrixVariable("no") int no,
             HttpSession session) throws Exception {
 
 //        Member loginUser = (Member) session.getAttribute("longinUser");
