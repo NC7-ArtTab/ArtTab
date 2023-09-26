@@ -59,7 +59,7 @@ public class DefaultMemberService implements MemberService {
   @Transactional
   @Override
   public void updateMember(Member member) throws Exception {
-    member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
+    //member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
     memberDao.updateMember(member);
   }
 
