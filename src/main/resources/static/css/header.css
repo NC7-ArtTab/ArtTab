@@ -1,3 +1,7 @@
+body {
+    font-size: 100%; /* 화면 배율을 100%로 고정 */
+}
+
 #search_btn {
     border-radius: 10%;
     border: solid 3px #F86338;
@@ -12,19 +16,19 @@
 
 /* About ArtTab과 검색창 간격 조절 */
 .about-arttab {
-    margin-right: 10px; /* 원하는 간격으로 조절 */
+    margin-right: 50px; /* 원하는 간격으로 조절 */
 }
 
 /* 검색 폼 스타일 */
 .search-form {
     display: flex;
     align-items: center;
-    margin-right: 400px; /* 간격을 조절할 값 */
+    margin-right: 20px; /* 간격을 조절할 값 */
 }
 
 .search-select {
     width: 100px; /* 선택 상자의 너비 조절 */
-    padding: 10px;
+    padding: 7px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -33,14 +37,12 @@
 }
 
 .search-input {
-    flex-grow: 1; /* 입력 상자가 남은 공간을 채우도록 설정 */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    width: 900px; /* 가로 크기 조절 */
-
-
+    width: 100%; /* 가로 크기 조절 */
+    max-width: 400px;
 }
 
 .search-button {
@@ -51,21 +53,41 @@
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-
 }
 
 .login-button {
   display: inline-block;
-  padding: 30px 30px;
+  padding: 10px 20px;
   background-color:#F86338;
   color: #fff;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 14px;
   text-decoration: none;
   margin-right: 50px; /* 원하는 간격으로 조절 */
+  transition: background-color 0.5s ease; /* 버튼 색상 변화 효과 */
+  margin-left: 10px;
+}
+
+.login {
+    font-color: #3E4052;
+    text-decoration: none;
+    color: #3E4052;
+    font-weight: bold;
+}
+
+.logout-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: white;
+  color: #F86338;
+  border-radius: 5px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-right: 30px; /* 원하는 간격으로 조절 */
   transition: background-color 0.5s ease; /* 버튼 색상 변화 효과 */
 }
 
 .login-button:hover {
-  background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+   background-color: white;
+   color: #F86338;
 }

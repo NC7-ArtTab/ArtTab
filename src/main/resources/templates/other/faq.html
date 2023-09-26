@@ -3,24 +3,21 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../../static/css/faq.css">
 </head>
-<body>
+<body style="width: 1800px; margin: 0 auto;">
 <div data-th-replace="fragment/header :: headerFragment"></div>
-<!--<p style="color: #F86338; font-weight: bold; cursor: pointer;" onclick="window.location.href='/'">ArtTab</p>-->
-<!--<h1>FAQ</h1>-->
-<!--<hr>-->
+
+<p style='font-size: 17px; color: #F86338; font-weight: bold;'>ArtTab</p>
+<ul>
+    <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">FAQ
+    </li>
+</ul>
+<hr>
 <br>
 
-<div class="category" style="float:left; margin-left: 50px; margin-top: 30px; margin-bottom: 30px;">
-    <li style="display: inline-block; color: #F86338; margin-bottom: 15px;">전체</li><br>
-    <li style="display: inline-block; margin-bottom: 15px;">이용 정책</li><br>
-    <li style="display: inline-block; margin-bottom: 15px;">작품 판매/리셀</li><br>
-    <li style="display: inline-block; margin-bottom: 15px;">작품 구매</li><br>
-</div>
-
 <!-- FAQ 목록을 표시할 위치 -->
-<div class="content" style="width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
-    <h2>목록</h2>
-    <ul id="faq-list">
+<div class="content" style="font-weight: bold; width: 50%; margin: 0 auto; margin-top: 30px; margin-bottom: 30px;">
+    <br>
+    <ul id="faq-list" style="font-weight: normal;">
         <!-- FAQ 목록은 JavaScript로 동적으로 생성됩니다. -->
     </ul>
 </div>

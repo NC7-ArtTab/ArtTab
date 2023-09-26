@@ -1,25 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="ko"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:https="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <head>
-
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
+  
 </head>
-<body>
-<header th:replace="~{fragment/header :: headerFragment}"></header>
-<button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
-<footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+<body style="width: 1800px; margin: 0 auto;">
+    <header th:replace="~{fragment/header :: headerFragment}"></header>
+    <div>
 
-<div id="memberNo" data-th-if="${session.loginUser}" data-th-text="${session.loginUser.memberNo}"
-     style="display: none;"></div>
-<div id="artNo" data-th-text="${pay.artNo}" style="display: none;"></div>
-<div id="buyNowPrice" data-th-text="${pay.art.buyNowPrice}"
-     style="display: none;"></div>
-</body>
+    </div>
+    <div style="display: flex; gap: 100px; padding: 70px; align-items: center; justify-content: center;
+     width: 1600px; height: auto; margin: 0 auto; background-color: #fdfdfd;">
+        <div style="flex: 1; padding-left: 100px">
+            <div style="width: 540px; height: 320px; background-color: #161717; margin: 20px auto; border-radius: 15px;">
+                <img style="width: 100px; margin: 45px;" src="/static/images/chip.png">
+                <p style="margin-left: 50px; color: white; text-align: left; font-size: 20px;">
+                    000000-00-000000</p>
+                <p style="margin-left: 50px; color: #fff; font-size: 30px;">홍길동</p>
+            </div>
+            <div style="width: 530px; margin: 0 auto; border: 4px dotted #e2e2ea; border-radius: 10px;">
+                <p style="padding: 0 17px 17px 17px; font-size: 17px; margin: 0;">즉시 구매 가격</p>
+            </div>
+            <div style="margin: 0 70px;">
+                <p style="padding-left: 20px;">가격 디테일</p>
+                <div style="background-color: #fff; border: 10px; padding: 10px; border-radius: 7px;">
+                    <p style="padding-left: 10px;">
+                        <span>총액</span> <span style="display: inline-block; float: right; width: 150px;">100￦</span>
+                    </p>
+                    <p style="padding-left: 10px;">
+                        <span>예술인 발전기금 목적 세금</span> <span style="display: inline-block; float: right; width: 150px;">10￦</span>
+                    </p>
+                </div>
+                <div style="margin: 20px;">
+                    <span>Total</span>
+                    <span style="text-align: right; font-size: 20px; font-color: #f1000f">10000</span>
+                </div>
+                <button class="button3"
+                        style="width:540px; height: 50px; text-align: center; border-radius: 20px;
+                            font-weight: bold; font-size: 18px;" onclick="requestPay()">결제 하기</button>
+            </div>
+        </div>
+      
+        <div style="flex: 1; padding-right: 100px">
+            <div class="cropped_image">
+                <img style="border-radius: 20px;" src="/static/images/logo.png">
+            </div>
+            <div class="buy_info" style="width: 530px;">
+                <h2>구매 정보</h2>
+                <p >서양화1</p>
+                <p >콘텐츠?</p>
+                <p>세부정보</p>
+                <p >사이즈?</p>
+                <p >김성주</p>
+            </div>
+        </div>
+
+    </div>
+    <div id="memberNo" data-th-if="${session.loginUser}" data-th-text="${session.loginUser.memberNo}"
+         style="display: none;"></div>
+    <div id="artNo" data-th-text="${pay.artNo}" style="display: none;"></div>
+    <div id="buyNowPrice" data-th-text="${pay.art.buyNowPrice}"
+         style="display: none;"></div>
+    
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- iamport.payment.js -->
@@ -96,4 +150,6 @@
         }
 
     </script>
+    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+</body>
 </html>

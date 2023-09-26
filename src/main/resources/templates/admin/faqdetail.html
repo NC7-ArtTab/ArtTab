@@ -10,7 +10,7 @@
     <title>FAQ 수정</title>
 </head>
 <div data-th-replace="fragment/header :: headerFragment"></div>
-<body style="margin-left: 40px;">
+<body style="width: 1800px; margin: 0 auto;">
 
 <p style='color: #F86338; font-weight: bold;'>FAQ</p>
 <div class="main">
@@ -31,8 +31,7 @@
     <div class="custom-container">
         <table>
             <tr>
-                <th>관리자번호 사라질 예정</th>
-                <td style="width:300px;"><input type="text" name="faqNo" data-th-value="${faq.faqNo}" readonly></td>
+                <td style="width:300px;"><input type="hidden" name="faqNo" data-th-value="${faq.faqNo}"></td>
             </tr>
             <tr>
                 <th>제목</th>

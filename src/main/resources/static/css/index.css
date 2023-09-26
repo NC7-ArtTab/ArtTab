@@ -1,0 +1,22 @@
+/* 슬라이드 이미지 액자 스타일 */
+.carousel-inner {
+    border: 30px solid #fff;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+    left:0;
+    right: 0;
+}

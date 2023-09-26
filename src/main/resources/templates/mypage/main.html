@@ -4,48 +4,33 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
-    <style>
-        .clear {
-            clear: both;
-        }
-        body {
-            width: 100%; /* 너비를 100%로 설정하여 화면 너비에 맞게 확장됩니다. */
-            height: 100vh; /* 높이를 100vh로 설정하여 화면 높이에 맞게 확장됩니다. */
-            margin: 0; /* 기본 마진을 제거합니다. */
-            padding: 0; /* 기본 패딩을 제거합니다. */
-            background-color: #F4F7F8; /* 배경색을 설정합니다. */
-        }
-    </style>
-</head>
-<div data-th-replace="fragment/header :: headerFragment"></div>
-<body style="margin-left: 40px;">
+<head>
 
-<!--<p style='color: #F86338; font-weight: bold;'>ArtTab</p>-->
-<div class="main">
+</head>
+<body style="margin-left: 40px; margin-right:40px;">
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<!--<body style="margin-left: 40px;">-->
+<body style="width: 1800px; margin: 0 auto;">
+
+<p style='font-size: 17px; color: #F86338; font-weight: bold;'>My page</p>
+<div>
     <ul>
         <li style="display: inline; margin-left: -20px; margin-right: 150px; font-size: 40px; font-weight: bold;">
-            <span th:text="${session.loginUser?.memberName} + '님의 My page'"></span>
+            <span th:text="${session.loginUser.memberName} + '님의 My page'"></span>
         </li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/profile}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">회원 정보 수정</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/mybid}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">입찰 정보</a></li>
         <li style="display: inline; margin-right: 200px;"><a data-th-href="@{/mypage/mypay}" style="text-decoration: none; color: #FF7A00; font-size: 20px; font-weight: bold;">구매 현황</a></li>
     </ul>
 </div>
-
-<!--<hr>-->
+<hr>
 <br>
+<img style="filter: saturate(70%); max-width: 100%; /* 이미지의 최대 가로 너비를 100%로 설정합니다. */
+    height: auto; /* 이미지의 높이를 자동으로 조절합니다. */
+    display: block; /* 이미지를 블록 요소로 표시하여 텍스트 흐름을 변경합니다. */
+    margin: 0 auto; /* 이미지를 가로 중앙으로 정렬합니다. */" src="/static/images/art4.jpg">
 
-
-<img style="filter: saturate(70%);" src="/static/images/art4.jpg">
-
-<br><br><br><br><br><br><br><br><br>
-
-
-<br><br><br><br><br><br><br><br>
-
-
-
+<br><br><br><br>
 
 <div data-th-replace="fragment/footer :: footerFragment"></div>
 </body>
