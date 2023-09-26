@@ -29,8 +29,7 @@
         <hr>
         <br>
         <div class="custom-container">
-            <label for="memNo">작성자번호(로그인유저받으면 사라질 예정)</label>
-            <input type="text" id="memNo" name="memNo" placeholder="관리자 2번" required><br><br>
+            <input type="hidden" id="memberNo" name="memberNo" placeholder="관리자 2번" required data-th-value="${session.loginUser.memberNo}">
 
             <label for="faqTitle">제목</label>
             <input type="text" id="faqTitle" name="faqTitle" placeholder="제목을 입력하세요" required><br><br>

@@ -47,8 +47,14 @@
         <br>
         <tbody>
         <tr data-th-each="bid : ${bidstatus}" style='margin:5px; text-align:center'>
+            <th:block th:with="artNo=${bid.art.artNo}">
             <td class="table-title" data-th-text="${bid.art.artWriter}">작가명</td>
-            <td style="font-weight: bold;" class="table-content" data-th-text="${bid.art.artTitle} ?: '제목없음'">작품명</td>
+
+            <td>
+                <a class="table-content" style="font-weight: bold;" data-th-href="@{'/art/detail?artNo=' + ${artNo}}"
+                   data-th-text="${bid.art.artTitle} ?: '제목없음'">게시글 제목(링크 수정 예정)</a>
+            </td>
+
             <td data-th-text="${#dates.format(bid.art.startDatetime, 'yyyy-MM-dd')}">경매시작</td>
             <td style="text-decoration: underline; " data-th-text="${#dates.format(bid.art.endDatetime, 'yyyy-MM-dd')}">경매마감</td>
             <td data-th-text="${bid.bidPrice}" style="font-weight: bold; color: #F86338;">현재최고입찰가</td>

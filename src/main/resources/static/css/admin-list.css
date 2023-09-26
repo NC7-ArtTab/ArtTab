@@ -112,7 +112,7 @@ a {
 }
 
 .search-select {
-    width: 100px; /* 선택 상자의 너비 조절 */
+    width: 50px; /* 선택 상자의 너비 조절 */
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
@@ -127,10 +127,9 @@ a {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    width: 400px; /* 가로 크기 조절 */
+    width: 100px; /* 가로 크기 조절 */
     margin-right: 10px;
-
-
+    max-width: 600px;
 }
 
 .search-button {
