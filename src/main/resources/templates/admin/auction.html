@@ -4,7 +4,7 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head th:replace="~{fragment/config :: configFragment}">
+<head>
     <link rel="stylesheet" type="text/css" href="../../static/css/admin-detail.css">
     <link rel="stylesheet" type="text/css" href="../../static/css/status.css">
     <title>작품 등록</title>
@@ -41,7 +41,8 @@
             <label for="artCategoryP">기타</label><br><br>
         </div>
 
-        <label for="artTitle">작품명</label>
+        <div style="margin-bottom: 30px;">
+        <label for="artTitle" >작품명</label>
         <input type="text" id="artTitle" name="artTitle" placeholder="제목을 입력하세요" required><br><br>
 
         <label for="artWriter">작가명</label>
@@ -60,7 +61,7 @@
         <input type="datetime-local" id="startDatetime" name="strStartDatetime" required><br><br>
 
         <label for="endDatetime">경매종료일시</label>
-        <input type="datetime-local" id="endDatetime" name="strEndDatetime"  required><br><br>
+        <input type="datetime-local" id="endDatetime" name="strEndDatetime" required><br><br>
 
         <label for="artContent">작품 설명</label>
         <input type="text" id="artContent" name="artContent" placeholder="작품에 대한 설명을 입력하세요" required><br><br>
@@ -71,20 +72,19 @@
         <label for="files">이미지 등록</label>
         <input type="file" id="files" name="files" multiple><br><br>
 
-        <div class="text-right">
+        <div style="text-align: center">
         <input type="submit" class="custom-button" value="제출">
+        </div>
         </div>
     </form>
 
-</div>
+
 
 <br><br><br><br><br><br><br><br><br>
-
-
 <br><br><br><br><br><br><br><br>
 
 
-
+    </div>
 
 </body>
 
