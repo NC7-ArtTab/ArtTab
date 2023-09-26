@@ -1,5 +1,6 @@
 package arttab.server.service;
 
+import arttab.server.vo.Member;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
@@ -8,11 +9,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.util.Random;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.net.URL;
-
-// http%3A%2F%2Flocalhost%3A8080%2Foauth%2Fkakao
 
 @Slf4j
 @Service
@@ -70,11 +72,10 @@ public class KakaoLoginService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return access_Token;
     }
 
-    public static void createKakaoUser(String token) throws Exception {
+    public static void createKakaoUser(String token, HttpServletRequest request, MemberService memberService) throws Exception {
 
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -114,14 +115,57 @@ public class KakaoLoginService {
                 email = element.getAsJsonObject().get("kakao_account").getAsJsonObject()
                         .get("email").getAsString();
             }
+            Member member = memberService.findByEmail(email);
 
-            System.out.println("id : " + id);
-            System.out.println("email : " + email);
-
+            if (member == null) {
+                Random random = new Random();
+                member = new Member();
+                    member.setMemberEmail(email);
+                    member.setMemberPwd(createRandomPassword(12));
+                    member.setMemberName("소셜유저");
+                    member.setMemberPhone("010-0000-0000");
+                    member.setMemberZipcode("우편번호");
+                    member.setMemberAddr("기본주소");
+                    member.setMemberDetailAddr("상세주소");
+                    member.setMemberBank("은행명");
+                    member.setMemberAcc("계좌명");
+                try {
+                    memberService.add(member);
+                } catch (Exception e) {
+                    throw e;
+                }
+            }
+            log.info(member.getMemberEmail());
+            // Check if the email from token matches the email in session
+            HttpSession session = request.getSession();
+            String sessionEmail = (String) session.getAttribute("email");
+            session.setAttribute("loginUser", member);
+            if (sessionEmail != null && email.equals(sessionEmail)) {
+                // Email from token matches the email in session, consider it a successful login
+                log.info("Successful login for email: {}", email);
+            } else {
+                log.error("Email from token does not match the email in session. Invalid login.");
+                // Handle invalid login
+            }
+//            System.out.println("id : " + id);
+//            System.out.println("email : " + email);
             br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static String createRandomPassword(int length) {
+        String charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder randomString = new StringBuilder();
+        // 랜덤 객체 생성
+        Random random = new Random();
+        // 문자열 길이만큼 반복하여 랜덤 문자열 생성
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(charset.length());
+            char randomChar = charset.charAt(randomIndex);
+            randomString.append(randomChar);
+        }
+        return randomString.toString();
     }
 }

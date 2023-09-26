@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arttab.server.dao.PayDao">
+
+    <resultMap id="payMap" type="arttab.server.vo.Pay">
+        <id property="memberNo" column="mem_no"/>
+        <result property="artNo" column="art_no"/>
+        <result property="payPrice" column="pay_price"/>
+        <result property="payDatetime" column="pay_datetime"/>
+        <result property="payStatus" column="pay_status"/>
+
+        <association property="art" javaType="arttab.server.vo.Art">
+            <id property="artNo" column="art_no"/>
+            <result property="artTitle" column="art_title"/>
+            <result property="artCategory" column="art_category"/>
+            <result property="artWriter" column="art_writer"/>
+            <result property="artContent" column="art_content"/>
+            <result property="artDetail" column="art_detail"/>
+            <result property="startPrice" column="start_price"/>
+            <result property="buyNowPrice" column="buy_now_price"/>
+            <result property="bidPricePer" column="bid_price_per"/>
+            <result property="startDatetime" column="start_datetime"/>
+            <result property="endDatetime" column="end_datetime"/>
+            <result property="artRegDatetime" column="art_reg_datetime"/>
+            <result property="artStatus" column="art_status"/>
+
+            <collection property="artAttaches" ofType="arttab.server.vo.Attach">
+                <id property="fileNo" column="file_no"/>
+                <result property="filePath" column="file_path"/>
+                <result property="originFileName" column="origin_file_name"/>
+                <result property="saveFileName" column="save_file_name"/>
+                <result property="fileRegDatetime" column="file_reg_datetime"/>
+                <result property="fileStatus" column="file_status"/>
+            </collection>
+
+            <collection property="artBids" ofType="arttab.server.vo.Bid">
+                <id property="bidNo" column="bid_no"/>
+                <result property="memberNo" column="mem_no"/>
+                <result property="bidPrice" column="bid_price"/>
+                <result property="bidDatetime" column="bid_datetime"/>
+            </collection>
+        </association>
+
+        <association property="member" javaType="arttab.server.vo.Member">
+            <id property="memberNo" column="mem_no"/>
+            <result property="memberEmail" column="mem_email"/>
+            <result property="memberPwd" column="mem_pwd"/>
+            <result property="memberName" column="mem_name"/>
+            <result property="memberPhone" column="mem_phone"/>
+            <result property="memberZipcode" column="mem_zipcode"/>
+            <result property="memberAddr" column="mem_addr"/>
+            <result property="memberDetailAddr" column="mem_detail_addr"/>
+            <result property="memberBank" column="mem_bank"/>
+            <result property="memberAcc" column="mem_acc"/>
+            <result property="memberAuth" column="mem_auth"/>
+            <result property="memberDatetime" column="mem_datetime"/>
+            <result property="memberStatus" column="mem_status"/>
+        </association>
+    </resultMap>
+
+<!--    <select id="payDetail" resultMap="payDtoMap">-->
+<!--        SELECT-->
+<!--            a.artTitle,-->
+<!--            a.artContent,-->
+<!--            a.artWriter,-->
+<!--            a.buyNowPrice,-->
+<!--            a.startDatetime,-->
+<!--            a.endDatetime,-->
+<!--            at.*,-->
+<!--            b.bid_price AS bidPrice-->
+<!--        FROM-->
+<!--            art a-->
+<!--        LEFT JOIN-->
+<!--            attach at ON a.art_no = at.art_no-->
+<!--        AND-->
+<!--            at.file_status = 'ACTIVE'-->
+<!--        WHERE a.art_no = #{artNo}-->
+<!--        AND-->
+<!--            a.art_status = 'ACTIVE'-->
+<!--    </select>-->
+
+    <insert id="insertPay" parameterType="arttab.server.vo.Pay">
+        INSERT INTO pay (mem_no, art_no, pay_price, pay_datetime, pay_status)
+        VALUES (#{member.memberNo}, #{art.artNo}, #{payPrice}, #{payDatetime}, #{payStatus})
+    </insert>
+
+    <select id="findAll" resultMap="payMap">
+        SELECT
+        p.*,
+        a.*,
+        m.*,
+        at.*,
+        b.*
+        FROM Pay p
+        LEFT JOIN Art a ON p.art_no = a.art_no
+        LEFT JOIN Member m ON p.mem_no = m.mem_no
+        LEFT JOIN Attach at ON a.art_no = at.art_no
+        LEFT JOIN Bid b ON a.art_no = b.art_no
+        WHERE p.some_column = #{someValue}
+    </select>
+</mapper>

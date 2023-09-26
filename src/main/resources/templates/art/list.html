@@ -30,20 +30,20 @@
 <div class="jumbotron pb-4 pt-2">
     <p class="jumbotron__container">
     <div data-th-if="${artStatus.isEmpty()}">
-        <h2 class="display-4" data-th-switch="${artStatus}">전체 경매목록</h2>
+        <h2 class="display-4" data-th-switch="${artStatus}"style="color: black; font-weight: bold; margin-top: 40px;">Auctions</h2>
 
     </div>
     <div data-th-if="${artStatus == 'P'}">
-        <h2 class="display-4" data-th-switch="${artCategory}">진행중인 경매목록</h2>
+        <h2 class="display-4" data-th-switch="${artCategory}" style="color: black; font-weight: bold; margin-top: 40px;">Ongoing Auctions</h2>
     </div>
 
     <div data-th-if="${artStatus == 'F'}">
-        <h2 class="display-4" data-th-switch="${artCategory}">종료된 경매목록</h2>
+        <h2 class="display-4" data-th-switch="${artCategory}" style="color: black; font-weight: bold; margin-top: 40px;">Closed Auction</h2>
     </div>
 
     <hr class="my-4">
-    <p class="lead">카테고리별로 구분하여 경매목록을 확인해보세요!</p>
-    <div class="button-group">
+    <p class="lead" style="color: black; font-weight: bold;">Look up auction lists by category!</p>
+    <div class="button-group" style="margin-left: -99px">
         <div class="left-buttons">
 
             <a data-th-href="@{'/art/list' + ${not artStatus.isEmpty() ? '?artStatus=' + artStatus : ''}}"
@@ -62,7 +62,7 @@
                data-th-style="${not artCategory.isEmpty() && artCategory == 'X'} ? 'background-color: #F86338; color:white; font-weight: bold; border: 0px;' : ''"
                class="btn btn-warning btn-lg">기타</a>
         </div>
-        <div class="right-buttons">
+        <div class="right-buttons" style="margin-right:-99px;">
             <a class="btn btn-lg btn-secondary" style="background: #F86338; border-color: #F86338;"
                data-th-href="@{'/art/list?artStatus=P' + ${not artCategory.isEmpty() ? '&artCategory=' + artCategory : ''}}">진행중
                 경매</a>
@@ -91,7 +91,7 @@
                             <p data-th-case="X">기타</p>
                         </h3>
                         <p class="card-text" data-th-text="${art.artTitle.length() <= 15 ? art.artTitle : art.artTitle.substring(0,15) + '. . .'}">작품명</p>
-                        <a data-th-href="${art.artStatus == 'P' ? '/art/detail?artNo=' + art.artNo : '' }" class="btn btn-dark btn-md"
+                        <a data-th-href="@{/art/detail(artNo=${art.artNo})}" class="btn btn-dark btn-md"
                            style="background-color:#F86338; border: #F86338">➜</a>
                         </div>
                     </div>

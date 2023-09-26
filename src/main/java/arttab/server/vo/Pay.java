@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,5 +19,8 @@ public class Pay implements Serializable {
   private int payPrice;  //  결제가격
   private Timestamp payDatetime;  // 결제일시
   private char payStatus;  //  결제상태 =>  R:입금대기중 Y:결제완료
+
+  private Art art;
+  private Member member;
 
 }
