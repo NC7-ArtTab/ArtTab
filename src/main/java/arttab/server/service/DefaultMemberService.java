@@ -83,4 +83,9 @@ public class DefaultMemberService implements MemberService {
   public Member findBy(int memberNo) throws Exception {
     return memberDao.findBy(memberNo);
   }
+  @Override
+  public Member findByEmail(String memberEmail) throws Exception {
+    return memberDao.findByEmail(memberEmail);
+  }
+
 }

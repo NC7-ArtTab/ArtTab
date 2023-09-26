@@ -64,6 +64,10 @@
     </div>
     <input type="text" class="form-control" id="inputAcc" name="memberAcc" th:value="${session.loginUser.memberAcc}" required>
 
+    <div class="form-group">
+    <label for="inputAuth">회원 권한</label>
+    <input type="hidden" class="form-control" id="inputAuth" name="memberAuth" th:value="${session.loginUser.memberAuth}" readonly>
+    </div>
 
     <br><br>
     <button type="submit" class="btn btn-primary">submit</button>

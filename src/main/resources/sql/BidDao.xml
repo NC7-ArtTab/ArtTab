@@ -132,21 +132,29 @@
 
     <select id="artInfo" parameterType="int" resultMap="artMap">
         SELECT
-        a.art_title,
-        a.art_writer,
-        a.art_content,
-        a.start_datetime,
-        a.end_datetime,
-        at.file_no,
-        at.file_path,
-        at.origin_file_name,
-        at.save_file_name
+            a.art_no,
+            a.art_title,
+            a.art_category,
+            a.art_writer,
+            a.art_content,
+            a.art_detail,
+            a.start_price,
+            a.buy_now_price,
+            a.bid_price_per,
+            a.start_datetime,
+            a.end_datetime,
+            a.art_reg_datetime,
+            a.art_status,
+            at.file_no,
+            at.file_path,
+            at.origin_file_name,
+            at.save_file_name
         FROM
-        art a
+            art a
         LEFT JOIN
-        attach at ON a.art_no = at.art_no
+            attach at ON a.art_no = at.art_no
         WHERE
-        a.art_no = #{artNo}
+            a.art_no = #{artNo}
     </select>
 
     <select id="bidInfo" parameterType="int" resultMap="resultBidMap">

@@ -1,0 +1,308 @@
+.container {
+    display: flex;
+    background-color: rgba(200, 200, 200, 0.4);
+}
+
+.left-div {
+    text-align: left;
+}
+
+.left-div,
+.right-div {
+    flex: 1;
+}
+
+.left-div {
+    background-color: #F8F8F8;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: solid 1px darkgrey;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.right-div {
+    margin-left: 10px;
+    text-align:center;
+}
+
+.font-weight-bolder {
+    font-weight: bolder;
+}
+
+.title-size-16 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.title-size-18 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.title-size-21 {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.color-personal {
+    color: #f86338;
+}
+
+.color-white {
+    color: white;
+}
+
+.background-color-personal {
+    background-color: #f86338;
+}
+
+#bid_art_image{
+    border-radius: 10px;
+    border: solid 2px black;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.width-per-100 {
+    width: 100%;
+}
+
+.card {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    border: solid 1px darkgrey;
+    margin: auto;
+    width: 80%;
+    background: #F8F8F8;
+    border-radius: 10px;
+}
+
+.height-per-40 {
+    height: 40%;
+}
+
+.height-per-50 {
+    height: 50%;
+}
+
+.height-250 {
+    height: 250px;
+}
+
+.height-300 {
+    height: 300px;
+}
+
+.height-350 {
+    height: 350px;
+}
+
+.height-400 {
+    height: 400px;
+}
+
+.height-500 {
+    height: 500px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.margin-top-80 {
+    margin-top: 80px;
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
+
+.margin-top-120 {
+    margin-top: 120px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
+
+.padding-top-50 {
+    padding-top: 50px;
+}
+
+.padding-bottom-50 {
+    padding-bottom: 50px;
+}
+
+
+.input-180-25 {
+    width: 180px;
+    height: 25px;
+}
+
+.btn-personal {
+    border: #F86338;
+    background: #F86338;
+    color: white;
+}
+
+.btn-personal:hover {
+    font-weight: bold;
+    cursor: pointer;
+    border: solid 1px #F86338;
+    background: white;
+    color: #F86338;
+}
+
+.width-100 {
+    width: 100px;
+}
+
+.width-120 {
+    width: 120px;
+}
+
+.height-20 {
+    height: 20px;
+}
+
+.height-25 {
+    height: 25px;
+}
+
+.height-30 {
+    height: 30px;
+}
+
+.height-40 {
+    height: 40px;
+}
+
+.height-50 {
+    height: 50px;
+}
+
+.font-size-16{
+    font-size: 16px;
+}
+
+.font-size-17{
+    font-size: 17px;
+}
+
+.radius-5 {
+    border-radius: 5px;
+}
+
+.radius-10 {
+    border-radius: 10px;
+}
+
+.btn-personal:disabled {
+    cursor: default;
+    background-color: #ccc;
+}
+
+.cursor-pointer {
+    cursor:pointer;
+}
+
+.bid-info-table {
+    overflow-y:scroll;
+    text-align: center;
+}
+
+.max-height-per-100 {
+    max-height: 100%;
+}
+
+.height-per-70 {
+    height: 70%;
+}
+
+.border-solid-1px {
+    border: 1px solid black;
+}
+
+.padding-right-30 {
+    padding-right: 30px;
+}
+
+.padding-right-40 {
+    padding-right: 40px;
+}
+
+.left-table th {
+    width: 25%;
+    padding-top: 25px;
+    padding-right: 30px;
+    text-align: left;
+}
+
+.left-table td {
+    padding-top: 25px;
+    text-align: left;
+}
+
+.warning-text-small {
+    color: red;
+    font-size: small;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.warning-text-medium {
+    color: red;
+    font-size: medium;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.text-color-red{
+    color:red;
+}
+
+.font-style-italic {
+    font-style: italic;
+}
