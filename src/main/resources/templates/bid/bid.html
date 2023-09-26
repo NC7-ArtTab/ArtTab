@@ -12,12 +12,12 @@
         <h2 class="color-personal">작품명</h2>
         <hr>
         <div class="title-size-16 font-weight-bolder" data-th-text="${art.artTitle}">작품명</div>
-        <img id="bid_art_image" class="margin-top-30 margin-bottom-30" data-th-src="@{${art.artAttaches[0].saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches[0].filePath +  art.artAttaches[0].saveFileName + '?type=f_sh&w=360&h=240&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
-<!--        <div>-->
-<!--            <img id="bid_art_subImage1" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
-<!--            <img id="bid_art_subImage2" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
-<!--            <img id="bid_art_subImage3" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
-<!--        </div>-->
+        <img id="bid_art_image" class="margin-top-30 margin-bottom-30" data-th-src="@{${art.artAttaches != null &&  art.artAttaches.size() > 0 ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches[0].filePath +  art.artAttaches[0].saveFileName + '?type=f_sh&w=360&h=240&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=360&h=240&quality=100&sharp_amt=3.0&ttype=jpg'}}">
+        <!--        <div>-->
+        <!--            <img id="bid_art_subImage1" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
+        <!--            <img id="bid_art_subImage2" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
+        <!--            <img id="bid_art_subImage3" class="sub-image" data-th-src="@{'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}">-->
+        <!--        </div>-->
         <div>
             <hr>
             <table class="left-table margin-top-20">
@@ -29,7 +29,7 @@
                     <th class="color-personal">작가명 </th><td data-th-text="${art.artWriter}">작품명</td>
                 </tr>
                 <tr>
-                    <th class="color-personal">작품 설명 </th><td data-th-text="${art.artContent.isEmpty() ? '작품설명 미기재' : art.artContent}">작품명</td>
+                    <th class="color-personal">작품 설명 </th><td data-th-text="${art.artContent == null || art.artContent.isEmpty() ? '작품설명 미기재' : art.artContent}">작품명</td>
                 </tr>
                 <tr data-th-switch="${art.artCategory}">
                     <th class="color-personal">작품 구분 </th><td data-th-case="E">동양화</td>
@@ -60,6 +60,7 @@
             <hr>
             <h3 class="color-personal font-style-italic">Auction Period</h3>
             <span data-th-text="${#dates.format(art.startDatetime, 'yyyy년 MM월 dd일  HH시 mm분')} + ' ~ ' +  ${#dates.format(art.endDatetime, 'yyyy년 MM월 dd일  HH시 mm분')}"></span>
+            <input data-th-value="${art.endDatetime}" id="end_datetime" type="hidden"/>
             <br>
             <br>
             <hr>
@@ -109,7 +110,7 @@
         </div>
     </div>
 </div>
-    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
+<footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -148,9 +149,8 @@
 
         function remaindTime() {
             var now = new Date(); //현재시간을 구한다.
-
-            // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 26, 17, 40, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date($("#end_datetime").val());
+            // var open = new Date(2023, 8, 26, 17, 40, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -278,10 +278,10 @@
         }
 
         $("#bid_btn").click(function() {
-           if(confirm('정말로 <' + artTitle + '> 작품에 대해 ' + selectedPrice.toLocaleString() + '(원) 에 입찰을 진행 하시겠습니까?')) {
+            if(confirm('정말로 <' + artTitle + '> 작품에 대해 ' + selectedPrice.toLocaleString() + '(원) 에 입찰을 진행 하시겠습니까?')) {
 
 
-           }
+            }
         });
     });
 </script>

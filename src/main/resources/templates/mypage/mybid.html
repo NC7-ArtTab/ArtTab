@@ -38,7 +38,7 @@
         <td class="text-center" th:text="${myBid.artNo}"></td>
         <td class="text-center" th:text="${myBid.bidPrice}"></td>
         <td class="text-center" th:text="${myBid.bidDatetime}"></td>
-        <td class="text-center"><a href="#" class="btn btn-warning">즉시 구매</a></td>
+        <td class="text-center"><a data-th-href="@{/pay/pay/{artNo}(artNo=${myBid.artNo})}" class="btn btn-warning">즉시 구매</a></td>
     </tr>
     </tbody>
 </table>

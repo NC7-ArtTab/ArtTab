@@ -99,9 +99,11 @@ public class PayController {
   @GetMapping("/pay/{artNo}")
   public String getPayList(@PathVariable int artNo, Model model) {
     try {
-      Pay pay = payService.list(artNo); // 서비스 호출
-      if (pay != null) {
-        model.addAttribute("pay", pay); // Model 객체에 Pay 객체를 추가
+      Art art = artService.get(artNo);
+//      Pay pay = payService.list(artNo); // 서비스 호출
+      System.out.println(art.toString() + "-----------------------------");
+      if (art != null) {
+        model.addAttribute("pay", art); // Model 객체에 Pay 객체를 추가
       }
       // 데이터가 없더라도 pay.html로 이동.
       // pay.html에서는 th:if="${pay != null}"와 같은 조건을 사용하여 데이터가 없을 때의 화면을 처리할 수 있습니다.
@@ -112,5 +114,6 @@ public class PayController {
     }
     return "pay/pay"; // pay.html로 이동
   }
+
 
 }
