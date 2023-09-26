@@ -5,16 +5,26 @@
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         xmlns:https="http://www.w3.org/1999/xhtml">
-<head th:fragment="configFragment">
+<head>
     <link rel="stylesheet" type="text/css" href="/static/css/detail.css" />
 </head>
-<body style="display: flex; justify-content: center;">
-<div id="main" style="width: 1800px; background-color: #ffffff;">
+
+<body style="width: 1800px; margin: 0 auto;">
+<div data-th-replace="fragment/header :: headerFragment"></div>
+<p style='font-size: 17px; color: #F86338; font-weight: bold;'>ArtTab</p>
+<ul>
+    <li style="display: inline; margin-left: 50px; margin-right: 150px; font-size: 40px; font-weight: bold;">
+        Ongoing Auction
+    </li>
+</ul>
+
+<br>
+
     <div>
-        <header th:replace="~{fragment/header :: headerFragment}"></header>
+
 
         <div style="margin: 0 0 40px 0;">
-            <a class="link" data-th-href="@{/art/list(artStatus=${art.artStatus})}" th:text="${art.artStatus == 'P' ? '진행중 >' : '경매종료 >'}"></a>
+            <a style="margin-left: 100px;" class="link" data-th-href="@{/art/list(artStatus=${art.artStatus})}" th:text="${art.artStatus == 'P' ? '진행중 >' : '경매종료 >'}"></a>
             <a class="link" data-th-href="@{/art/list(artCategory=${art.artCategory})}">
             <span th:switch="${art.artCategory}">
                 <span th:case="E">동양화 ></span>
@@ -81,7 +91,7 @@
     <div style="text-align: right">
         <label style="font-weight: bold">입찰기록 기준일시 : </label><span id="baseline_time" style="font-weight: bold"></span><img src="/static/images/refresh.gif" style="height: 30px;">
         <div style="min-height: 100px; height: 100%; overflow-y:scroll; text-align: center; border: solid 2px black;">
-            <table id="bidPriceTable" style="width:100%;">
+<!--            <table id="bidPriceTable" style="width:100%;">
                 <tr>
                     <th style="background-color: #f0f0f0; padding-right: 20px; border: 1px solid black;">입찰가</th>
                     <th style="background-color: #f0f0f0; border: 1px solid black;">입찰일시</th>
@@ -89,7 +99,21 @@
                 <tr class="artInfo_row" style="width:100%;">
                     <td colspan="2" style="border: 1px solid black;">해당 경매작품에 대한 입찰기록이 없습니다.</td>
                 </tr>
+            </table>-->
+            <table id="bidPriceTable" style="width:100%; border-collapse: collapse; border: 1px solid #ccc;">
+                <thead>
+                <tr style="background-color: #f0f0f0;">
+                    <th style="padding: 10px; border: 1px solid #ccc;">입찰가</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">입찰일시</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="artInfo_row">
+                    <td colspan="2" style="padding: 10px; border: 1px solid #ccc; text-align: center;">해당 경매작품에 대한 입찰기록이 없습니다.</td>
+                </tr>
+                </tbody>
             </table>
+
         </div>
         <span style="color: red;">*주의: 실시간 입찰기록은 입찰가 기준 상위 10개의 입찰기록만 제공하고 있습니다.</span>
     </div>
