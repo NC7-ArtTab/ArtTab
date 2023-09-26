@@ -30,6 +30,11 @@ public class DefaultPayService implements PayService {
   }
 
   @Override
+  public Pay list(int artNo) throws Exception {
+    return payDao.findAll(artNo);
+  }
+
+  @Override
   public Art payArtList(int artNo) throws Exception {
     return payDao.findArt(artNo);
   }
