@@ -7,6 +7,7 @@
 .faq-item {
     cursor: pointer;
     margin-bottom: 10px; /* 각 FAQ 항목 간의 간격 조정 */
+    margin-left: -200px;
     padding: 10px; /* FAQ 항목의 패딩 추가 */
     background-color: #fff; /* FAQ 항목 배경색 추가 */
     border-radius: 5px; /* FAQ 항목 모서리 둥글게 만듦 */
@@ -14,7 +15,7 @@
 }
 
 .faq-item:hover {
-    background-color: #ffff; /* FAQ 항목을 호버할 때 배경색 변경 */
+    background-color: #f89b00; /* FAQ 항목을 호버할 때 배경색 변경 */
     color: black; /* 글자색 변경 */
 }
 
@@ -24,7 +25,7 @@
 }
 
 .faq-content-container .faq-content-active {
-    margin-top: 30px;
+    margin-top: 100px;
     display: block; /* FAQ 내용이 나타남 */
     background-color: #cccccc /* 원하는 배경색을 지정하세요 */
     padding: 10px; /* 내용 주변에 여백 추가 (선택 사항) */
@@ -32,4 +33,23 @@
 
 .faq-content-container .faq-title {
     margin-bottom: 20px; /* 제목과 내용 간격을 늘립니다. */
+}
+
+.faq-title {
+    font-weight: bold; /* 텍스트를 굵게 표시 */
+    font-size: 30px; /* 텍스트 크기 조정 */
+}
+
+/* FAQ 내용 스타일 */
+.faq-content {
+    font-weight: bold; /* 텍스트를 굵게 표시 */
+    font-size: 20px; /* 텍스트 크기 조정 */
+}
+
+.centered-text {
+    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    position: absolute; /* 절대 위치 지정 */
+    top: 80%; /* 화면 상단에서 50% 위치로 이동합니다. */
+    left: 50%; /* 화면 왼쪽에서 50% 위치로 이동합니다. */
+    transform: translate(-50%, -50%); /* 요소를 수평 및 수직으로 가운데 정렬합니다. */
 }

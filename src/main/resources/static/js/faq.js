@@ -21,7 +21,7 @@ function loadFAQList() {
 
                 const contentElement = document.createElement("div");
                 contentElement.classList.add("faq-content");
-                contentElement.textContent = faq.faqContent;
+                contentElement.textContent = ">>" + faq.faqContent;
                 contentElement.style.display = "none"; // 초기에는 숨깁니다.
 
                 // FAQ 제목을 클릭할 때 이벤트 리스너를 추가합니다.
