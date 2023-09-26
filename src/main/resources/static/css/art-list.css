@@ -39,6 +39,7 @@
     cursor: pointer;
     background-color: rgba(95, 95, 95, 0.3);
     border: 5px solid black;
+    box-shadow: 10px 10px grey
 }
 
 .card h3 {
