@@ -38,8 +38,12 @@ public class ArtController {
     @GetMapping("detail")
     public String detail(
             @RequestParam(name="artNo") int artNo,
-            Model model) throws Exception {
+            Model model, HttpSession session) throws Exception {
 
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser != null) {
+            model.addAttribute("loginUser", loginUser);
+        }
 
         Art art = artService.get(artNo);
 
