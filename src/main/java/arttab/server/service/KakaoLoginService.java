@@ -129,6 +129,7 @@ public class KakaoLoginService {
                     member.setMemberDetailAddr("상세주소");
                     member.setMemberBank("은행명");
                     member.setMemberAcc("계좌명");
+                    member.setMemberAuth("M");
                 try {
                     memberService.add(member);
                 } catch (Exception e) {
