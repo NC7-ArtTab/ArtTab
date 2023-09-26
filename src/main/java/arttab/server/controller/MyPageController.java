@@ -44,11 +44,20 @@ public class MyPageController {
 
     @GetMapping("/profile")
     public String showProfileForm(Model model, HttpSession session) {
+        // 세션에서 로그인한 사용자 정보를 가져옴
         Member loginUser = (Member) session.getAttribute("loginUser");
-        // 로그인한 사용자 정보를 이용하여 프로필 페이지를 보여줌
-        model.addAttribute("loginUser", loginUser);
-        return "mypage/profile";
+
+        if (loginUser != null) {
+            // 가져온 사용자 정보를 모델에 추가하여 프로필 페이지로 전달
+            model.addAttribute("loginUser", loginUser);
+            return "mypage/profile";
+        } else {
+            // 세션에 로그인 정보가 없을 경우 처리할 로직
+            // 예: 로그인 페이지로 리다이렉트하거나 다른 처리를 수행
+            return "redirect:/login"; // 로그인 페이지로 리다이렉트하는 예시
+        }
     }
+
 
     @PostMapping("/update-profile")
     public String updateProfile(@ModelAttribute("member") Member updatedMember, HttpSession session) {
@@ -59,12 +68,16 @@ public class MyPageController {
             updatedMember.setMemberNo(loginUser.getMemberNo());
             // 멤버 정보 업데이트
             memberService.updateMember(updatedMember);
-            return "redirect:/profile?success=true";
-        } catch (Exception e) {
 
+            session.setAttribute("loginUser", updatedMember);
+
+            return "redirect:/";
+        } catch (Exception e) {
+            e.printStackTrace();
             return "redirect:/profile?error=true";
         }
     }
+
 
 
     @GetMapping("/mybid")

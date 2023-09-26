@@ -2,6 +2,7 @@
 <header class="main-header" th:fragment="headerFragment">
 
     <link rel="stylesheet" type="text/css" href="../../static/css/header.css">
+
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <h1 style='color: #F86338;'><a href="/" style="text-decoration: none; color: inherit;">ArtTab</a></h1>
         <a th:if="${session.loginUser != null}" th:href="@{/logout}" class="logout-button" style="font-weight:bold;">로그아웃</a>
@@ -12,6 +13,7 @@
         <li style="display: inline; margin-left: -200px; margin-right: 0;"><a style="text-decoration: none; color: inherit; font-weight: bold;" data-th-href="@{/other/intro}">About ArtTab</a></li>
         <li>
             <form action="/art/list" name="search-form" class="search-form" style="display: flex; margin-left:-60px;">
+
                 <select name="searchType" class="search-select">
                     <option value="all" data-th-selected="${session.searchParam != null &&  session.searchParam.searchType == 'all'}">전체</option>
                     <option value="title" data-th-selected="${session.searchParam != null && session.searchParam.searchType == 'title'}">제목</option>
@@ -21,6 +23,7 @@
                 <input id="search_btn" style="margin-left:10px;" class="search-select" type="submit" value="검색">
             </form>
         </li>
+
         <li style="display: flex; align-items: center; margin-left:-50px;">
             <img th:if="${session.loginUser == null}" style="width: 40px; height: 30px;" src="/static/images/user.jpg">
             <a th:if="${session.loginUser == null}" href="/form" class="login">ArtTab Sign in </a>
@@ -43,6 +46,7 @@
         </li>
     </ul>
     <hr>
+
 
 </header>
 </html>
