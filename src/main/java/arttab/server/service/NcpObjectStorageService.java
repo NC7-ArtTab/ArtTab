@@ -19,14 +19,9 @@ import java.util.UUID;
 @Component
 public class NcpObjectStorageService {
 
-  {
-    System.out.println("NcpObjectStorageService 생성됨!");
-  }
-
   final AmazonS3 s3;
 
   public NcpObjectStorageService(NcpConfig ncpConfig) {
-    System.out.println("NcpObjectStorageService 호출됨!");
     s3 = AmazonS3ClientBuilder.standard()
             .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
                     ncpConfig.getEndPoint(), ncpConfig.getRegionName()))
@@ -34,7 +29,6 @@ public class NcpObjectStorageService {
                     ncpConfig.getAccessKey(), ncpConfig.getSecretKey())))
             .build();
   }
-
   public Attach uploadFile(Attach attach, String bucketName, String dirPath, MultipartFile part) {
     if (part.getSize() == 0) {
       return null;
