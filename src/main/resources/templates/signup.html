@@ -1,4 +1,3 @@
-<!--signup.html-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <!-- Latest compiled and minified CSS -->
@@ -13,20 +12,20 @@
   <div class="container">
     <h1>회원가입</h1>
     <div class="form-group">
-      <label for="inputEmail4">이메일</label>
-      <input type="text" class="form-control" id="inputEmail4" name="memberEmail" placeholder="이메일">
+      <label for="inputEmail">이메일</label>
+      <input type="text" class="form-control" id="inputEmail" name="memberEmail" placeholder="이메일">
     </div>
     <div class="form-group">
-      <label for="inputPassword4">비밀번호</label>
-      <input type="password" class="form-control" id="inputPassword4" name="memberPwd" placeholder="비밀번호">
+      <label for="inputPassword">비밀번호</label>
+      <input type="password" class="form-control" id="inputPassword" name="memberPwd" placeholder="비밀번호">
     </div>
     <div class="form-group">
       <label for="inputName">이름</label>
       <input type="text" class="form-control" id="inputName" name="memberName" placeholder="이름">
     </div>
     <div class="form-group">
-      <label for="inputPhone4">전화번호</label>
-      <input type="text" class="form-control" id="inputPhone4" name="memberPhone" placeholder="휴대폰">
+      <label for="inputPhone">전화번호</label>
+      <input type="text" class="form-control" id="inputPhone" name="memberPhone" placeholder="휴대폰">
     </div>
     <div class="form-group">
       <label for="inputAddr">기본주소</label>
@@ -48,7 +47,7 @@
       <label for="inputAcc">계좌번호</label>
       <input type="text" class="form-control" id="inputAcc" name="memberAcc" placeholder="계좌번호">
     </div>
-    <button type="submit" class="btn btn-primary">가입 완료</button>
+    <button type="submit" class="btn btn-primary" style="background-color: #F86338; border-color: #F86338;">가입 완료</button>
   </div>
 </form>
 <div data-th-replace="fragment/footer :: footerFragment"></div>
@@ -56,13 +55,12 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
   window.onload = function(){
-      document.getElementById("inputAddr").addEventListener("click", function(){ //주소입력칸을 클릭하면
-          //카카오 지도 발생
+      document.getElementById("inputAddr").addEventListener("click", function(){
           new daum.Postcode({
-              oncomplete: function(data) { //선택시 입력값 세팅
+              oncomplete: function(data) {
                   document.getElementById("inputZipcode").value = data.zonecode;
-                  document.getElementById("inputAddr").value = data.address; // 주소 넣기
-                  document.querySelector("input[name=memberDetailAddr]").focus(); //상세입력 포커싱
+                  document.getElementById("inputAddr").value = data.address;
+                  document.querySelector("input[name=memberDetailAddr]").focus();
               }
           }).open();
       });

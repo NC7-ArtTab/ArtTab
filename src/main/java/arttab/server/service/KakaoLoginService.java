@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.net.URL;
-
-// http%3A%2F%2Flocalhost%3A8080%2Foauth%2Fkakao
 
 @Slf4j
 @Service
@@ -74,7 +74,7 @@ public class KakaoLoginService {
         return access_Token;
     }
 
-    public static void createKakaoUser(String token) throws Exception {
+    public static void createKakaoUser(String token, HttpServletRequest request) throws Exception {
 
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
@@ -114,10 +114,18 @@ public class KakaoLoginService {
                 email = element.getAsJsonObject().get("kakao_account").getAsJsonObject()
                         .get("email").getAsString();
             }
-
-            System.out.println("id : " + id);
-            System.out.println("email : " + email);
-
+            // Check if the email from token matches the email in session
+            HttpSession session = request.getSession();
+            String sessionEmail = (String) session.getAttribute("email");
+            if (sessionEmail != null && email.equals(sessionEmail)) {
+                // Email from token matches the email in session, consider it a successful login
+                log.info("Successful login for email: {}", email);
+            } else {
+                log.error("Email from token does not match the email in session. Invalid login.");
+                // Handle invalid login
+            }
+//            System.out.println("id : " + id);
+//            System.out.println("email : " + email);
             br.close();
 
         } catch (IOException e) {
