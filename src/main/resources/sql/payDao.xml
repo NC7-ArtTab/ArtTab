@@ -88,16 +88,17 @@
 
     <select id="findAll" resultMap="payMap">
         SELECT
-        p.*,
-        a.*,
-        m.*,
+        a.art_title,
+        a.art_content,
+        a.art_writer,
+        a.buy_now_price,
+        a.start_datetime,
+        a.end_datetime,
         at.*,
-        b.*
-        FROM Pay p
-        LEFT JOIN Art a ON p.art_no = a.art_no
-        LEFT JOIN Member m ON p.mem_no = m.mem_no
-        LEFT JOIN Attach at ON a.art_no = at.art_no
-        LEFT JOIN Bid b ON a.art_no = b.art_no
-        WHERE p.some_column = #{someValue}
+        b.bid_price
+        FROM art a
+        LEFT JOIN attach at ON a.art_no = at.art_no
+        LEFT JOIN bid b ON a.art_no = b.art_no
+        WHERE a.art_no = #{art_no}
     </select>
 </mapper>

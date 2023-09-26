@@ -9,6 +9,8 @@ public interface PayService {
 
   Pay list(int memberNo, int artNo) throws Exception;
 
+  Pay list(int artNo) throws Exception;
+
   Art payArtList(int artNo) throws Exception;
 
   PayDto payList(int memberNo, int artNo) throws Exception;

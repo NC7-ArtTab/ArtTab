@@ -13,6 +13,8 @@ public interface PayDao {
   // memberNo와 artNo를 기반으로 Pay 객체를 조회하는 메서드
   Pay findAll(int memberNo, int artNo);
 
+  Pay findAll(int artNo);
+
   Art findArt(int artNo);
 
   PayDto payDetail(int memberNo, int artNo);

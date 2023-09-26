@@ -68,7 +68,7 @@
                     <div style="padding: 20px 0 0 5px;">
                         <a th:href="@{/bid/bid/{artNo}(artNo=${art.artNo})}" class="button1">입찰하기</a>
                         <span style="margin: 5px;"></span>
-                        <a th:href="@{/pay/pay.html}" class="button2">즉시구매</a>
+                        <a th:href="@{/pay/pay/{artNo}(artNo=${art.artNo})}" class="button2">즉시구매</a>
                     </div>
                 </div>
             </div>
