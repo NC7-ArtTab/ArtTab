@@ -4,143 +4,272 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{fragment/config :: configFragment}">
-    <meta charset="UTF-8">
-    <title>입찰 페이지</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
+<body style="">
 <header th:replace="~{fragment/header :: headerFragment}"></header>
+<div class="container padding-top-50 padding-bottom-50">
+    <div class="left-div text-align-center">
+        <h2 class="color-personal">작품명</h2>
+        <hr>
+        <div class="title-size-16 font-weight-bolder" data-th-text="${art.artTitle}">작품명</div>
+        <img id="bid_art_image" class="margin-top-30 margin-bottom-30" data-th-src="@{${art.artAttaches[0].saveFileName != null ? 'http://ooixvdbufckn19718845.cdn.ntruss.com/' + art.artAttaches[0].filePath +  art.artAttaches[0].saveFileName + '?type=f_sh&w=360&h=240&quality=100&sharp_amt=3.0&ttype=jpg' : 'http://ooixvdbufckn19718845.cdn.ntruss.com/common/logo.png?type=f_sh&w=210&h=210&quality=100&sharp_amt=3.0&ttype=jpg'}}">
 
-<!-- 경매 상품 정보 표시 -->
-<h5 th:text="${art.artTitle}">작품</h5>
-<img th:src="${art.artAttaches}" alt="경매 상품 이미지"/>
-<h5 th:text="${art.artContent}">작품 내용</h5>
+        <div>
+            <hr>
+            <table class="left-table margin-top-20">
+                <tr>
+                    <input id="artNo" data-th-value="${art.artNo}" type="hidden"/>
+                    <input id="artTitle" data-th-value="${art.artTitle}" type="hidden"/>
+                </tr>
+                <tr>
+                    <th class="color-personal">작가명 </th><td data-th-text="${art.artWriter}">작품명</td>
+                </tr>
+                <tr>
+                    <th class="color-personal">작품 설명 </th><td data-th-text="${art.artContent.isEmpty() ? '작품설명 미기재' : art.artContent}">작품명</td>
+                </tr>
+                <tr data-th-switch="${art.artCategory}">
+                    <th class="color-personal">작품 구분 </th><td data-th-case="E">동양화</td>
+                    <td data-th-case="W">서양화</td>
+                    <td data-th-case="P">공예품</td>
+                    <td data-th-case="X">기타</td>
+                </tr>
+                <tr>
+                    <th class="color-personal"s>입찰 단위 </th><td data-th-value="${art.bidPricePer}" data-th-text="${art.bidPricePer + ' (원)'}">1,000 (원)</td>
+                    <input id="bid_price_per" type="hidden" data-th-value="${art.bidPricePer}"/>
+                </tr>
+                <tr>
+                    <th class="color-personal">경매 시작가 </th><td data-th-text="${art.startPrice + ' (원)'}">10,000,000 (원)</td>
+                </tr>
+                <tr>
+                    <th class="color-personal">즉시 구매가 </th><td data-th-text="${art.buyNowPrice + ' (원)'}">10,000,000 (원)</td>
+                </tr>
+                <tr>
+                    <th class="color-personal">작품 등록일시 </th><td data-th-text="${#dates.format(art.artRegDatetime, 'yyyy년 MM월 dd일  HH시 mm분')}">2024-02-03 09:23:33</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
+    <div class="right-div">
+        <div class="card padding-top-20 height-300">
+            <span class="title-size-21">현재 최고 입찰가 : </span><span id="max_price_span" class="title-size-21 color-personal" data-th-text="${art.artBids != null && art.artBids.size() > 0 ? art.artBids[0].bidPrice + ' (원)' : '0 (원)'}">1,000 (원)</span>
+            <br>
+            <br>
+            <hr>
+            <div class="margin-top-30">
+                <label class="margin-right-10 title-size-16">입찰금액</label><input id="bid_price_input" class="input-180-25 cursor-pointer" type=range value="0">
+                <p>선택한 금액 : <span id="selectedPrice" class="color-personal title-size-16">0 (원)</span></p>
+            </div>
+            <p class="margin-top-30 warning-text-small" hidden>*현재 최고 입찰가 보다 높은 가격으로만 입찰이 가능합니다.</p>
+            <button id="bid_btn" class="margin-top-20 btn-personal radius-5 width-100 height-40 font-size-16" disabled>입찰하기</button>
+        </div>
 
-
-
-
-
-<form action="/bids" method="post">
-    <input type="hidden" name="artNo" th:value="${art.artNo}">
-    <input type="hidden" name="memNo" th:value="${member.memNo}">
-    <label for="bidPrice">입찰 가격:</label>
-    <input type="text" id="bidPrice" name="bidPrice" required>
-    <!-- 입찰하기 버튼 -->
-    <button id="openModalButton" class="btn btn-primary">입찰하기</button>
-
-
-    <!-- 모달 창 -->
-    <div class="modal fade" id="bidModal" tabindex="-1" role="dialog"
-         aria-labelledby="bidModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="bidModalLabel">입찰 확인</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="card padding-top-10 margin-top-50 height-600">
+            <h3>실시간 입찰현황</h3>
+            <hr>
+            <h3 class="color-personal font-style-italic">Auction Period</h3>
+            <span data-th-text="${#dates.format(art.startDatetime, 'yyyy년 MM월 dd일  HH시 mm분')} + ' ~ ' +  ${#dates.format(art.endDatetime, 'yyyy년 MM월 dd일  HH시 mm분')}"></span>
+            <br>
+            <br>
+            <hr>
+            <div >
+                <div>
+                    <p class="time-title margin-top-30 title-size-16">경매 마감까지 남은 시간</p>
+                    <div class="time margin">
+                        <span id="d-day-hour" class="color-personal title-size-16">00</span>
+                        <span class="col">시간</span>
+                        <span id="d-day-min" class="color-personal title-size-16">00</span>
+                        <span class="col">분</span>
+                        <span id="d-day-sec" class="color-personal title-size-16">00</span>
+                        <span class="col">초</span> 후
+                    </div>
+                    <div class="title-size-16 color-personal margin-top-20">경매가 종료됩니다!</div>
                 </div>
-                <div class="modal-body">
-                    <!-- 모달 내용 -->
-                    <p>입찰 금액: <span id="modalBidAmount">0</span></p>
-                    <!-- 다른 입찰 정보 표시 -->
-
+                <br>
+                <hr>
+                <br>
+                <div class="text-align-right title-size-16 margin-top-40">
+                    <label>입찰기록 기준일시 : </label><span id="baseline_time" style="font-weight: bold"></span><img src="/static/images/refresh.gif" class="height-25">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" id="confirmBidButton">확인</button>
+                <div class="bid-info-table">
+                    <table id="bidPriceTable" class="text-align-center width-per-100 border-solid-1px radius-10">
+                        <tr>
+                            <th class="background-color-personal color-white">입찰가</th>
+                            <th class="background-color-personal color-white">입찰일시</th>
+                        </tr>
+                        <tr class="artInfo_row">
+                            <td colspan="2" class="border-solid-1px">해당 경매작품에 대한 입찰기록이 없습니다.</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- jQuery 및 부트스트랩 JavaScript 추가 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // 입찰하기 버튼 클릭 이벤트 처리
-            $('#openModalButton').click(function () {
-                const bidAmount = $('#bidAmount').val();
-                if (bidAmount === '') {
-                    alert('입찰금액을 입력하세요.');
-                    return;
-                }
-
-                // 모달 창에 입찰 정보 표시
-                $('#modalBidAmount').text(bidAmount);
-
-                // 모달 창 열기
-                $('#bidModal').modal('show');
-            });
-
-            // 모달 확인 버튼 클릭 이벤트 처리
-            $('#confirmBidButton').click(function () {
-                const bidAmount = $('#bidAmount').val();
-
-                // 서버로 입찰 정보 전송 및 처리
-                $.ajax({
-                    url: '/bids', // 경매 번호에 맞게 URL을 수정하세요.
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        bidPrice: bidAmount,
-                        // 다른 필요한 데이터를 추가하세요.
-                    }),
-                    success: function () {
-                        alert('입찰이 성공적으로 등록되었습니다.');
-                        // 입찰 성공 후 페이지 리로드
-                        location.reload();
-                    },
-                    error: function () {
-                        alert('입찰을 등록하는 중 오류가 발생했습니다.');
-                    }
-                });
-
-                // 모달 창 닫기
-                $('#bidModal').modal('hide');
-            });
-        });
-    </script>
-</form>
-
-<!-- 남은 시간 계산 및 표시 -->
-<p>남은 시간: <span id="countdown"></span></p>
-
-<!-- 작품의 startDatetime 값 -->
-<input type="hidden" id="startDatetime" th:value="${art.startDatetime}"/>
-<!-- 작품의 endDatetime 값 -->
-<input type="hidden" id="endDatetime" th:value="${art.endDatetime}"/>
-
-<script>
-    var startDatetimeStr = document.getElementById('startDatetime').value;
-    var endDatetimeStr = document.getElementById('endDatetime').value;
-    var startDatetime = new Date(startDatetimeStr);
-    var endDatetime = new Date(endDatetimeStr);
-    var countdownElement = document.getElementById('countdown');
-
-    function updateCountdown() {
-        var now = new Date();
-        var timeLeft = endDatetime - now;
-
-        if (timeLeft <= 0) {
-            countdownElement.innerText = '입찰이 종료되었습니다.';
-        } else {
-            var hours = Math.floor(timeLeft / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            countdownElement.innerText = hours + '시간 ' + minutes + '분 ' + seconds + '초 남음';
-        }
-    }
-
-    // 1초마다 업데이트
-    setInterval(updateCountdown, 1000);
-</script>
-
-
+</div>
+    <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        // HTML 요소 가져오기
+        let maxBidPrice;
+        let bidPriceInput = $("#bid_price_input");
+        const selectedPriceDisplay = $("#selectedPrice");
+        const bidButton = $("#bid_btn");
+
+        // 슬라이더 값 변경 이벤트에 대한 리스너 추가
+        bidPriceInput.on("input", function() {
+            const selectedPrice =  maxBidPrice + (bidPriceInput.val() * $("#bid_price_per").val());
+            selectedPriceDisplay.text(selectedPrice + ' (원)');
+
+            // 선택한 금액이 0이면 버튼을 비활성화
+            console.log(selectedPrice + "선택가");
+            console.log(maxBidPrice + "현재최고 입찰가");
+            if (selectedPrice <= maxBidPrice) {
+                bidButton.prop("disabled", true);
+                $(".warning-text-small").attr("hidden", false);
+            } else {
+                bidButton.prop("disabled", false);
+                $(".warning-text-small").attr("hidden", true);
+            }
+        });
+
+
+        var remaindTimeId; // remaindTime()의 setInterval의 ID를 저장할 변수
+        var realTimeInfoId; // realTimeInfo()의 setInterval의 ID를 저장할 변수
+        var artNo = $("#artNo").val();
+        var artTitle = $("#artTitle").val();
+        var bidPrice = $("#bidPrice").val();
+
+        function remaindTime() {
+            var now = new Date(); //현재시간을 구한다.
+
+            // var open = new Date($("#end_datetime").val());
+            var open = new Date(2023, 9, 25, 19, 15, 0); // 테스트용 경매 마감시간 설정
+
+            var nowTime = now.getTime(); // 현재의 시간만 가져온다
+            var finishTime = open.getTime(); // 경매마감 시간만 가져온다
+
+            if (nowTime < finishTime) { //현재시간이 경매마감시간 보다 이르면 오픈시간까지의 남은 시간을 구한다.
+                sec = parseInt(finishTime - nowTime) / 1000;
+                hour = parseInt(sec / 60 / 60);
+                sec = (sec - (hour * 60 * 60));
+                min = parseInt(sec / 60);
+                sec = parseInt(sec - (min * 60));
+
+                if (hour < 10) {
+                    hour = "0" + hour;
+                }
+                if (min < 10) {
+                    min = "0" + min;
+                }
+                if (sec < 10) {
+                    sec = "0" + sec;
+                }
+                $("#d-day-hour").html(hour);
+                $("#d-day-min").html(min);
+                $("#d-day-sec").html(sec);
+
+            } else { //현재시간이 종료시간보다 크면
+                $("#d-day-hour").html('00');
+                $("#d-day-min").html('00');
+                $("#d-day-sec").html('00');
+
+                // 남은 시간이 0초면 Ajax호출
+                endTheAuction();
+
+                // setInterval 종료
+                clearInterval(remaindTimeId);
+                clearInterval(realTimeInfoId);
+            }
+        }
+
+        function endTheAuction() {
+            // AJAX 요청 생성
+            $.ajax({
+                url: "/art/update", // 데이터를 가져올 URL
+                method: "POST",
+                data: {artNo: artNo, artTitle: artTitle, bidPrice: bidPrice},
+                success: function (data) {
+                    // 요청이 성공했을 때 실행할 코드
+                    console.log(data)
+                    console.log("요청 성공:", data.artTitle);
+                    alert("<" + data.artTitle + "> 작품의 경매가 종료 되었습니다!");
+                },
+                error: function (xhr, status, error) {
+                    // 요청이 실패했을 때 실행할 코드
+                    if (xhr.status === 400) { // 유효하지 않은 경매품에 대해서는 상태코드 400으로 응답
+                        alert("종료된 경매건 입니다!");
+                        console.log("정상 오류!");
+                    } else {
+                        console.log("의도하지 않은 다른 오류 발생!:", error);
+                    }
+
+                }
+            }).always(function () {
+                // 요청이 성공하든 실패하든 작품 리스트로 이동
+                // window.location.href = "/art/list";
+            });
+        }
+
+        realTimeInfo(); // 최초 1회는 5초 기다릴 필요없이 호출
+        remaindTimeId = setInterval(remaindTime, 1000);
+        realTimeInfoId = setInterval(realTimeInfo, 5000);
+
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        function realTimeInfo() {
+            // AJAX 요청 생성
+            $.ajax({
+                url: "/art/realTimeInfo", // 데이터를 가져올 URL
+                method: "POST",
+                data: {artNo: artNo},
+                success: function (data) {
+                    console.log(data.art);
+                    console.log(data.art.artBids);
+
+                    let newRow;
+                    let bidPrice;
+                    let bidDatetime;
+                    let bidList = data.art.artBids;
+                    const rows = [];
+
+                    for (let i = 0; i < 10; i++) { // 상위 10개의 입찰기록에 대해서만 데이터 생성
+                        if (!bidList[i] || bidList[i].bidNo === 0) {
+                            continue;
+                        }
+
+                        bidPrice = bidList[i].bidPrice;
+                        bidDatetime = formatDate(bidList[i].bidDatetime);
+                        newRow = $("<tr class='artInfo_row'>").append($("<td '>").text(bidPrice.toLocaleString() + " (원)")).append($("<td>").text(bidDatetime));
+                        rows.push(newRow);
+                    }
+
+                    if (rows.length > 0 && $(".artInfo_row").length > 0) {
+                        maxBidPrice = bidList[0].bidPrice;
+                        $("#max_price_span").text(maxBidPrice + ' (원)');
+                        $(".artInfo_row").remove();
+                        $("#bidPriceTable").append(rows);
+                    }
+                    console.log(formatDate(new Date()));
+                    $("#baseline_time").text(formatDate(new Date()) + ' ');
+                },
+                error: function () {
+                    console.error();
+                }
+            });
+        }
+    });
+</script>
 </html>

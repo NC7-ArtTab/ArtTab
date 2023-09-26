@@ -23,7 +23,7 @@
 
     <title>ArtTap</title>
 </head>
-<body>
+<body style="margin-left: 40px;">
 <header th:replace="~{fragment/header :: headerFragment}"></header>
 
 <!-- 앨범  -->
@@ -91,7 +91,7 @@
                             <p data-th-case="X">기타</p>
                         </h3>
                         <p class="card-text" data-th-text="${art.artTitle.length() <= 15 ? art.artTitle : art.artTitle.substring(0,15) + '. . .'}">작품명</p>
-                        <a data-th-href="${art.artStatus == 'P' ? '/art/detail?artNo=' + art.artNo : '' }" class="btn btn-dark btn-md"
+                        <a data-th-href="@{/art/detail(artNo=${art.artNo})}" class="btn btn-dark btn-md"
                            style="background-color:#F86338; border: #F86338">➜</a>
                         </div>
                     </div>

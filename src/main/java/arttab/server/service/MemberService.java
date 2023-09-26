@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public interface MemberService {
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
@@ -17,6 +16,7 @@ public interface MemberService {
     List<Bid> getMemberBids(int memberNo) throws Exception;
     void updateMember(Member member) throws Exception;
     Member findBy(int memberNo) throws Exception; // 멤버 번호로 멤버 정보 조회!
+    Member findByEmail(String memberEmail) throws Exception;
     String getEncryptPassword(String password);
     void add(Member member) throws Exception;
     List<Member> list() throws Exception;

@@ -6,12 +6,9 @@ import arttab.server.service.BidService;
 import arttab.server.service.FAQService;
 import arttab.server.service.NcpObjectStorageService;
 
-import arttab.server.vo.Attach;
-import arttab.server.vo.FAQ;
+import arttab.server.vo.*;
 
 import arttab.server.service.ArtService;
-import arttab.server.vo.Art;
-import arttab.server.vo.Bid;
 
 import groovy.util.logging.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +59,18 @@ public class AdminController {
     //faq
 
   @GetMapping("/faqform")
-  public String faqform() {
+  public String faqform(Model model, HttpSession session) {
     log.info("Call admin/faqform.html");
+      Member loginUser = (Member) session.getAttribute("loginUser");
+      model.addAttribute("loginUser", loginUser);
     return "/admin/faqform";
   }
 
   @PostMapping("/addfaq")
-  public String addfaq(FAQ faq) throws Exception {
+  public String addfaq(FAQ faq, Model model, HttpSession session) throws Exception {
     log.info("addfaq");
-
+      Member loginUser = (Member) session.getAttribute("loginUser");
+      model.addAttribute("loginUser", loginUser);
         faqService.add(faq);
         return "redirect:/admin/faqlist";
     }
@@ -81,9 +81,10 @@ public class AdminController {
   }
 
   @PostMapping("/faqupdate")
-  public String faqupdate(FAQ faq) throws Exception {
+  public String faqupdate(FAQ faq, Model model, HttpSession session) throws Exception {
     log.info("faqupdate");
-
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    model.addAttribute("loginUser", loginUser);
     faqService.update(faq);
     return "redirect:/admin/faqlist";
   }
