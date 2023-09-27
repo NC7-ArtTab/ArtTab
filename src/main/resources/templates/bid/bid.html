@@ -60,6 +60,7 @@
             <hr>
             <h3 class="color-personal font-style-italic">Auction Period</h3>
             <span data-th-text="${#dates.format(art.startDatetime, 'yyyy년 MM월 dd일  HH시 mm분')} + ' ~ ' +  ${#dates.format(art.endDatetime, 'yyyy년 MM월 dd일  HH시 mm분')}"></span>
+            <input data-th-value="${art.endDatetime}" id="end_datetime" type="hidden">
             <br>
             <br>
             <hr>
@@ -149,8 +150,8 @@
         function remaindTime() {
             var now = new Date(); //현재시간을 구한다.
 
-            // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 8, 26, 17, 40, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date($("#end_datetime").val()); // 실제 경매 마감시간 설정
+            // var open = new Date(2023, 8, 26, 17, 40, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
@@ -277,10 +278,26 @@
             });
         }
 
+        function bidInsert() {
+            // AJAX 요청 생성
+            $.ajax({
+                url: "/bid/insertBid", // 데이터를 가져올 URL
+                method: "POST",
+                data: {artNo: artNo, bidPrice: selectedPrice},
+                success: function (data) {
+                    // 요청이 성공했을 때 실행할 코드
+                    alert(data.msg);
+                    location.reload();
+                },
+                error: function () {
+                    // 요청이 실패했을 때 실행할 코드
+                    console.error();
+                }
+            });
+        }
         $("#bid_btn").click(function() {
            if(confirm('정말로 <' + artTitle + '> 작품에 대해 ' + selectedPrice.toLocaleString() + '(원) 에 입찰을 진행 하시겠습니까?')) {
-
-
+               bidInsert();
            }
         });
     });
