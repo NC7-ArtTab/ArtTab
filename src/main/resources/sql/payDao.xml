@@ -99,6 +99,6 @@
         FROM art a
         LEFT JOIN attach at ON a.art_no = at.art_no
         LEFT JOIN bid b ON a.art_no = b.art_no
-        WHERE a.art_no = #{art_no}
+        WHERE a.art_no = #{artNo}
     </select>
 </mapper>

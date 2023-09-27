@@ -73,8 +73,8 @@
         <label for="files">이미지 등록</label>
             <div data-th-each="attach : ${art.artAttaches}">
                 <a data-th-href="|https:kr.object.ncloudstorage.com/arttab-bucket/art/${attach.filePath}|"
-                   data-th-text="${attach.filePath}">ok.gif</a>
-                [<a data-th-href="|/admin/fileDelete/attachedFile;no=${attach.fileNo}|">삭제</a>]<br>
+                   data-th-text="${attach.originFileName}">ok.gif</a>
+                [<a data-th-href="|/admin/fileDelete?fileNo=${attach.fileNo}|">삭제</a>]<br>
             </div>
         <input type="file" id="files" name="files" multiple><br><br>
 

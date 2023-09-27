@@ -12,8 +12,9 @@ function loadFAQList() {
 
             // FAQ 목록을 순회하며 각 항목을 생성합니다.
             data.forEach(faq => {
-                const faqItem = document.createElement("li");
-                faqItem.classList.add("faq-item");
+                if (faq.faqStatus == 'Y') {
+                    const faqItem = document.createElement("li");
+                    faqItem.classList.add("faq-item");
 
                 const titleElement = document.createElement("div");
                 titleElement.classList.add("faq-title");
@@ -23,6 +24,7 @@ function loadFAQList() {
                 contentElement.classList.add("faq-content");
                 contentElement.textContent = ">>" + faq.faqContent;
                 contentElement.style.display = "none"; // 초기에는 숨깁니다.
+
 
                 // FAQ 제목을 클릭할 때 이벤트 리스너를 추가합니다.
                 titleElement.addEventListener("click", function () {
@@ -39,6 +41,7 @@ function loadFAQList() {
                 faqItem.appendChild(contentElement);
 
                 faqList.appendChild(faqItem);
+                }
             });
         })
         .catch(error => {
@@ -47,7 +50,7 @@ function loadFAQList() {
 }
 
 
-
+showContent
 
 function showContent(content) {
     // FAQ 내용을 생성하고 표시합니다.

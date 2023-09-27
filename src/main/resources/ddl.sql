@@ -37,7 +37,7 @@ CREATE TABLE art (
                        start_datetime DATETIME NOT NULL COMMENT '경매시작일시',
                        end_datetime DATETIME NOT NULL COMMENT '경매종료일시',
                        art_reg_datetime DATETIME NULL DEFAULT NOW() COMMENT '작품등록일시',
-                       art_status VARCHAR(1) NULL DEFAULT 'R' COMMENT '작품경매현황 => Y:낙찰 건, P:경매진행중인 건, R:경매준비중인 건, F:경매종료 건 D:삭제 건',
+                       art_status VARCHAR(1) NULL DEFAULT 'R' COMMENT '작품경매현황 => Y:낙찰 건, P:경매진행중인 건, F:경매종료 건',
                        PRIMARY KEY (art_no)
 );
 
