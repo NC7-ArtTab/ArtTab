@@ -45,7 +45,7 @@
 
 
     <!-- findBy 메서드의 SQL 쿼리 정의 -->
-    <select id="findBy" parameterType="int" resultType="arttab.server.vo.Member">
+    <select id="findBy" parameterType="int" resultMap="memberMap">
         SELECT *
         FROM member
         WHERE mem_no = #{memberNo} LIMIT 1

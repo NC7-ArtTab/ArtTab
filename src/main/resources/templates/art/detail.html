@@ -124,7 +124,7 @@
     <div class="detail">
         <h1 style="text-align: center">상세 설명</h1>
         <div data-th-each="file : ${art.artAttaches}" style="text-align: center; padding: 10px;">
-            <img style="width: 60%; height: 60%;" data-th-src="@{${file.saveFileName != null ? 'https://kr.object.ncloudstorage.com/arttab-bucket/' + file.filePath +  file.saveFileName : ''}}">
+            <img style="width: 60%; height: 60%;" data-th-src="@{${file.saveFileName != null ? 'https://kr.object.ncloudstorage.com/arttab-bucket/' + file.filePath +  file.saveFileName : 'https://kr.object.ncloudstorage.com/arttab-bucket/common/logo.png'}}">
         </div>
         <pre class="detail-box" data-th-text="${art.artDetail}">내용</pre>
     </div>
@@ -151,8 +151,8 @@
         function remaindTime() {
             var now = new Date(); //현재시간을 구한다.
 
-            // var open = new Date($("#end_datetime").val());
-            var open = new Date(2023, 9, 25, 19, 15, 0); // 테스트용 경매 마감시간 설정
+            var open = new Date($("#end_datetime").val());
+            // var open = new Date(2023, 9, 25, 19, 15, 0); // 테스트용 경매 마감시간 설정
 
             var nowTime = now.getTime(); // 현재의 시간만 가져온다
             var finishTime = open.getTime(); // 경매마감 시간만 가져온다
