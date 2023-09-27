@@ -20,6 +20,8 @@ public interface ArtDao {
 
   int update(Art art);
 
+  void updateStatus(@Param("artNo") int artNo);
+
   List<Art> findAll(Art art);
 
   List<Art> searchedList(SearchParam searchParam);

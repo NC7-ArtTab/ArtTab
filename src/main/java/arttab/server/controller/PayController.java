@@ -49,11 +49,11 @@ public class PayController {
 
     Art art = artService.get(artNo);
 
-    Member updateMember = memberService.get(memberNo);
+//    Member updateMember = memberService.get(memberNo);
 
     Member loginUser = (Member) session.getAttribute("loginUser");
 
-    session.setAttribute("loginUser", updateMember);
+//    session.setAttribute("loginUser", updateMember);
     session.setAttribute("art", art);
 
     Timestamp payDatetime = new Timestamp(System.currentTimeMillis()); // 현재 시간을 Timestamp로 생성
@@ -65,7 +65,7 @@ public class PayController {
     pay.setPayDatetime(payDatetime); // payDatetime 설정
     pay.setPayStatus(payStatus);
     payService.add(pay);
-    System.out.println("##############pay =   " + pay);
+    artService.updateStatus(artNo);
 
     // 응답 데이터 생성 및 반환
     Map<String, Object> response = new HashMap<>();
@@ -108,7 +108,6 @@ public class PayController {
   public String getPayList(@PathVariable int artNo, Model model) {
     try {
       Art art = artService.get(artNo);
-//      Pay pay = payService.list(artNo); // 서비스 호출
       System.out.println(art.toString() + "-----------------------------");
       if (art != null) {
         model.addAttribute("pay", art); // Model 객체에 Pay 객체를 추가

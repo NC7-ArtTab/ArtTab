@@ -35,11 +35,11 @@
                 <p style="padding-left: 20px;">가격 디테일</p>
                 <div style="background-color: #fff; border: 10px; padding: 10px; border-radius: 7px;">
                     <p style="padding-left: 10px;">
-                        <span>총액</span> <span style="display: inline-block; float: right; width: 150px;">100￦</span>
+                        <span>총액</span> <span style="display: inline-block; float: right; width: 150px;" th:text="${pay.buyNowPrice}">100￦</span>
                     </p>
-                    <p style="padding-left: 10px;">
-                        <span>예술인 발전기금 목적 세금</span> <span style="display: inline-block; float: right; width: 150px;">10￦</span>
-                    </p>
+<!--                    <p style="padding-left: 10px;">-->
+<!--                        <span>예술인 발전기금 목적 세금</span> <span style="display: inline-block; float: right; width: 150px;">10￦</span>-->
+<!--                    </p>-->
                 </div>
                 <div style="margin: 20px;">
                     <span>Total</span>
@@ -76,28 +76,6 @@
     <script type="text/javascript"
             src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
-        $(document).ready(function () {
-            function endTheAuction() {
-                // AJAX 요청 생성
-                $.ajax({
-                    url: "/art/update", // 데이터를 가져올 URL
-                    method: "POST",
-                    data: {artNo: artNo,
-                    },
-                    success: function (data) {
-                        // 요청이 성공했을 때 실행할 코드
-                        console.log(data)
-
-                    },
-                    error: function (xhr, status, error) {
-
-                    }
-                }).always(function () {
-                    // 요청이 성공하든 실패하든 작품 리스트로 이동
-                    window.location.href = "/art/list";
-                });
-            }
-        });
         console.log("시작");
         // HTML 요소 찾기
         var memberNoElement = document.getElementById('memberNo');
@@ -119,7 +97,6 @@
 
         var IMP = window.IMP;
         IMP.init("imp38107620");
-
 
 
         function requestPay() {
@@ -151,17 +128,17 @@
                         success: function (data) {
                             console.log(data);
                             alert('결제에 성공하였습니다.');
-                            endTheAuction();
+                            window.location.href = "/art/detail?artNo=" + artNo + "&memberNo=" + memberNo;
                         },
                         error: function (error) {
                             console.error('결제 정보 기록 실패', error);
                             alert('서버 오류로 인해 결제 정보를 기록하지 못했습니다. 다시 시도해 주세요.');
-                            window.location.href = "/art/detail?artNo=" + artNo;
+                            window.location.href = "/art/detail?artNo=" + artNo + "&memberNo=" + memberNo;
                         }
                     });
                 } else {
                     alert('결제에 실패하였습니다.');
-                    window.location.href = "/art/detail?artNo=" + artNo;
+                    window.location.href = "/art/detail?artNo=" + artNo + "&memberNo=" + memberNo;
                 }
             });
         }
