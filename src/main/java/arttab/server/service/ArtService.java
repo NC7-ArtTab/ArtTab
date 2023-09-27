@@ -11,5 +11,6 @@ public interface ArtService {
   List<Art> list(Art art) throws Exception;
   List<Art> searchedList(SearchParam searchParam) throws  Exception;
   int update(Art art) throws Exception;
+  void updateStatus(int artNo) throws Exception;
 }
 

@@ -183,6 +183,13 @@
         update art set art_status = #{artStatus}
         where art_status = 'P' and art_no= #{artNo}
     </update>
+
+    <update id="updateStatus" parameterType="art">
+        update art
+        set art_status = 'Y'
+        where art_status = 'P'
+        and art_no= #{artNo}
+    </update>
 </mapper>
 
 

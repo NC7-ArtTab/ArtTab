@@ -65,6 +65,11 @@ public class ArtController {
                        @RequestParam(name = "searchType", defaultValue = "") String searchType,
                        @RequestParam(name = "searchKeyword", defaultValue = "") String searchKeyword) throws Exception {
 
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser != null) {
+            model.addAttribute("loginUser", loginUser);
+        }
+
         try {
             Art art = new Art();
             SearchParam searchParam = new SearchParam(searchType, searchKeyword);

@@ -123,10 +123,10 @@
     <br><br><br><br><br><br><br>
     <div class="detail">
         <h1 style="text-align: center">상세 설명</h1>
-        <div data-th-each="file : ${art.artAttaches}" style="text-align: center; padding: 10px">
+        <div data-th-each="file : ${art.artAttaches}" style="text-align: center; padding: 10px;">
             <img style="width: 60%; height: 60%;" data-th-src="@{${file.saveFileName != null ? 'https://kr.object.ncloudstorage.com/arttab-bucket/' + file.filePath +  file.saveFileName : ''}}">
         </div>
-        <p class="detail-box" data-th-text="${art.artDetail}">내용</p>
+        <pre class="detail-box" data-th-text="${art.artDetail}">내용</pre>
     </div>
     <br>
 
