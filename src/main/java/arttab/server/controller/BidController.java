@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,12 +24,18 @@ public class BidController {
   }
 
   @GetMapping("/bid/{artNo}")
-  public String getBidInfo(@PathVariable(value = "artNo") int artNo, Model model) throws Exception {
+  public String getBidInfo(HttpSession session, @PathVariable int artNo, Model model) throws Exception {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
     System.out.println(artNo + "불러옴");
     Art art = bidService.findArtInfo(artNo);
     model.addAttribute("art", art);
     Bid bid = bidService.findBidInfo(artNo);
     model.addAttribute("bid", bid);
+
+    if (loginUser != null) {
+      model.addAttribute("loginUser", loginUser);
+    }
     return "bid/bid";
   }
 

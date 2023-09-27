@@ -206,9 +206,9 @@ public class AdminController {
         return "redirect:../admin/artlist";
     }
 
-    @GetMapping("fileDelete/{attachedFile}")
+    @GetMapping("fileDelete")
     public String fileDelete(
-            @MatrixVariable("no") int no,
+            @RequestParam("fileNo") int fileNo,
             HttpSession session) throws Exception {
 
 //        Member loginUser = (Member) session.getAttribute("longinUser");
@@ -218,10 +218,10 @@ public class AdminController {
 
         Art art = null;
 
-        Attach attach = adminService.getFile(no);
+        Attach attach = adminService.getFile(fileNo);
         art = adminService.get(attach.getArtNo());
 
-        if (adminService.deleteFile(no) == 0) {
+        if (adminService.deleteFile(fileNo) == 0) {
             throw new Exception("해당 번호의 첨부파일이 없습니다.");
         } else {
             return "redirect:/admin/artdetail/" + art.getArtNo();
