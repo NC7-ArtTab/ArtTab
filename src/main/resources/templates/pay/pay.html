@@ -76,6 +76,28 @@
     <script type="text/javascript"
             src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
+        $(document).ready(function () {
+            function endTheAuction() {
+                // AJAX 요청 생성
+                $.ajax({
+                    url: "/art/update", // 데이터를 가져올 URL
+                    method: "POST",
+                    data: {artNo: artNo,
+                    },
+                    success: function (data) {
+                        // 요청이 성공했을 때 실행할 코드
+                        console.log(data)
+
+                    },
+                    error: function (xhr, status, error) {
+
+                    }
+                }).always(function () {
+                    // 요청이 성공하든 실패하든 작품 리스트로 이동
+                    window.location.href = "/art/list";
+                });
+            }
+        });
         console.log("시작");
         // HTML 요소 찾기
         var memberNoElement = document.getElementById('memberNo');
@@ -98,6 +120,8 @@
         var IMP = window.IMP;
         IMP.init("imp38107620");
 
+
+
         function requestPay() {
             return IMP.request_pay({
                 pg: 'html5_inicis',
@@ -105,46 +129,42 @@
                 merchant_uid: "IMP" + makeMerchantUid,
                 name: '경매품 결제',
                 amount: buyNowPrice,
-                buyer_email: 'Iamport@chai.finance',
-                buyer_name: '아임포트 기술지원팀'
-                // buyer_tel: '010-1234-5678',
-                // buyer_addr: '서울특별시 강남구 삼성동',
-                // buyer_postcode: '123-456'
+                buyer_email: 'ArtTab@chai.finance',
+                buyer_name: 'ArtTab'
             }, function (response) {
                 console.log(response);
                 if (response.success) {
+                    var payDatetime = new Date().toISOString();
+                    var payStatus = 'Y';
+
                     $.ajax({
                         url: '/pay/insertPay', // 포인트 업데이트 API 엔드포인트 URL
                         method: 'POST',
                         data: {
                             memberNo: memberNo, // 사용자 번호
                             artNo: artNo, // 게시글 번호
-                            buyNowPrice: buyNowPrice // 입찰 금액
+                            buyNowPrice: buyNowPrice, // 입찰 금액
+                            payDatetime: payDatetime, // 현재 시간을 payDatetime으로 설정
+                            payStatus: payStatus // 결제 상태를 payStatus로 설정
                         },
-                        async: false, // 동기적으로 서버응답을 처리
+                        async: false,
                         success: function (data) {
                             console.log(data);
-                            try {
-                                var resultData = JSON.parse(JSON.stringify(data));
-                                alert('입찰 포인트: ' + resultData.buyNowPrice);
-                                location.reload();
-                            } catch (e) {
-                                console.error('JSON 파싱 오류:', e);
-                            }
+                            alert('결제에 성공하였습니다.');
+                            endTheAuction();
                         },
                         error: function (error) {
-                            console.error('포인트 업데이트 실패', error);
+                            console.error('결제 정보 기록 실패', error);
+                            alert('서버 오류로 인해 결제 정보를 기록하지 못했습니다. 다시 시도해 주세요.');
+                            window.location.href = "/art/detail?artNo=" + artNo;
                         }
                     });
                 } else {
-                    console.log(response);
-                    alert('현재가격보다 높은 금액을 입찰해주세요');
-                    location.reload();
+                    alert('결제에 실패하였습니다.');
+                    window.location.href = "/art/detail?artNo=" + artNo;
                 }
-                console.log("d");
             });
         }
-
     </script>
     <footer th:replace="~{fragment/footer:: footerFragment}"></footer>
 </body>
