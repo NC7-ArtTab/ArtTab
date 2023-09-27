@@ -41,5 +41,8 @@ public class DefaultArtService implements ArtService {
     return artDao.update(art);
   }
 
-
+  @Override
+  public void updateStatus(int artNo) throws Exception {
+    artDao.updateStatus(artNo);
+  }
 }

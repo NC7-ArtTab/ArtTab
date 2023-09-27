@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,31 +42,38 @@ public class PayController {
           @RequestParam("memberNo") int memberNo,
           @RequestParam("artNo") int artNo,
           @RequestParam("buyNowPrice") int buyNowPrice,
+          @RequestParam("payStatus") char payStatus,
 
           HttpSession session
   ) throws Exception {
 
     Art art = artService.get(artNo);
 
-    Member updateMember = memberService.get(memberNo);
+//    Member updateMember = memberService.get(memberNo);
 
     Member loginUser = (Member) session.getAttribute("loginUser");
 
-    session.setAttribute("loginUser", updateMember);
+//    session.setAttribute("loginUser", updateMember);
     session.setAttribute("art", art);
+
+    Timestamp payDatetime = new Timestamp(System.currentTimeMillis()); // 현재 시간을 Timestamp로 생성
 
     Pay pay = new Pay();
     pay.setMember(loginUser);
     pay.setArt(art);
     pay.setPayPrice(buyNowPrice);
+    pay.setPayDatetime(payDatetime); // payDatetime 설정
+    pay.setPayStatus(payStatus);
     payService.add(pay);
-    System.out.println("##############pay =   " + pay);
+    artService.updateStatus(artNo);
 
     // 응답 데이터 생성 및 반환
     Map<String, Object> response = new HashMap<>();
     response.put("memberNo", memberNo);
     response.put("artNo", artNo);
     response.put("buyNowPrice", buyNowPrice);
+    response.put("payDatetime", payDatetime); // 응답에 payDatetime 추가
+    response.put("payStatus", payStatus);
 
     return ResponseEntity.ok(response);
   }
@@ -100,7 +108,6 @@ public class PayController {
   public String getPayList(@PathVariable int artNo, Model model) {
     try {
       Art art = artService.get(artNo);
-//      Pay pay = payService.list(artNo); // 서비스 호출
       System.out.println(art.toString() + "-----------------------------");
       if (art != null) {
         model.addAttribute("pay", art); // Model 객체에 Pay 객체를 추가
