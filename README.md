@@ -31,3 +31,34 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 4. 회의 전에 Original Repository / Main으로 PR을 작성
 5. 레포장이 PR을 확인하고 Merge
 
+
+## TechStack
+### FrontEnd
+![Thymeleaf](https://img.shields.io/badge/Bootstrap-v.5-7952B3?style=flat&logo=bootstrap&logoColor=white)
+![HTML5](https://img.shields.io/badge/html-5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css-3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-E7DF1E?style=flat&logo=javascript&logoColor=white)
+![Jquery](https://img.shields.io/badge/jQuery-v.3.7-0769AD?style=flat&logo=jquery&logoColor=white)
+
+### BackEnd
+![JDK17](https://img.shields.io/badge/Java-v.17-CC0000?style=flat&logo=OpenJDK&logoColor=white)
+![Gradle](https://img.shields.io/badge/Gradle-v.8-02303A?style=flat&logo=Gradle&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring-Boot_v.3-6DB33F?style=flat&logo=Spring-Boot&logoColor=white)
+![MyBatis](https://img.shields.io/badge/MyBatis-v.X.X-6A5796?style=flat&logo=mybatis&logoColor=white)
+
+### Database
+![MySQL](https://img.shields.io/badge/MySQL-v.8.0.33-4479A1?style=flat&logo=MySQL&logoColor=white)
+![H2](https://img.shields.io/badge/H2-v.2.1-4479A1?style=flat&logo=h2&logoColor=white)
+
+### Tool
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ-000000?style=flat&logo=IntelliJ-IDEA&logoColor=white)
+![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=Visual-Studio-Code&logoColor=white)
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white)
+
+---
+## Architecture
+![Architecture Image](doc/Architecture.png)
+
+
