@@ -31,7 +31,6 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 4. 회의 전에 Original Repository / Main으로 PR을 작성
 5. 레포장이 PR을 확인하고 Merge
 
-
 ## TechStack
 ### FrontEnd
 ![Thymeleaf](https://img.shields.io/badge/Bootstrap-v.5-7952B3?style=flat&logo=bootstrap&logoColor=white)
@@ -44,7 +43,7 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 ![JDK17](https://img.shields.io/badge/Java-v.17-CC0000?style=flat&logo=OpenJDK&logoColor=white)
 ![Gradle](https://img.shields.io/badge/Gradle-v.8-02303A?style=flat&logo=Gradle&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring-Boot_v.3-6DB33F?style=flat&logo=Spring-Boot&logoColor=white)
-![MyBatis](https://img.shields.io/badge/MyBatis-v.X.X-6A5796?style=flat&logo=mybatis&logoColor=white)
+![Spring MyBatis](https://img.shields.io/badge/Spring_MyBatis-v.X.X-6A5796?style=flat&logo=mybatis&logoColor=white)
 
 ### Database
 ![MySQL](https://img.shields.io/badge/MySQL-v.8.0.33-4479A1?style=flat&logo=MySQL&logoColor=white)
@@ -57,16 +56,19 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white)
 ![Naver Cloud](https://img.shields.io/badge/Naver_Cloud-03C75A?style=flat&logo=Naver&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=Postman&logoColor=white)
+![Kakao Developers](https://img.shields.io/badge/Kakao_Developers-FFCD00?style=flat&logo=Kakao&logoColor=white)
 
 ## Security
 ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat&logo=Spring&logoColor=white)
 
----
 ## Architecture
 ![Architecture Image](doc/Architecture.png)
 
 ## ProtoType(MainPage)
 ![1](doc/ArtTab1.png)
+
+## Use Case
+![Use Case Diagram](doc/usecase.png)
 
 ## 주요 구현 기능
 - 자체 로그인 기능
@@ -77,5 +79,3 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 - 즉시 구매(회원)
 - 결제 기능
 - 관리자 결제 취소 기능
-
-
