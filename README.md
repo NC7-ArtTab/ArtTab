@@ -65,13 +65,8 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 ## Architecture
 ![Architecture Image](doc/Architecture.png)
 
-## ProtoType Wire Frame
+## ProtoType(MainPage)
 ![1](doc/ArtTab1.png)
-![2](doc/ArtTab2.png)
-![3](doc/ArtTab3.png)
-![4](doc/ArtTab4.png)
-![5](doc/ArtTab5.png)
-
 
 ## 주요 구현 기능
 - 자체 로그인 기능
