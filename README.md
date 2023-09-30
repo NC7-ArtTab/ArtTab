@@ -52,13 +52,35 @@ iml, .vscode, .idea 등의 설정파일이 레포에 업로드 되지 않도록 
 
 ### Tool
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat&logo=Github-Actions&logoColor=white)
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ-000000?style=flat&logo=IntelliJ-IDEA&logoColor=white)
 ![VSCode](https://img.shields.io/badge/VSCode-007ACC?style=flat&logo=Visual-Studio-Code&logoColor=white)
 ![Slack](https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white)
+![Naver Cloud](https://img.shields.io/badge/Naver_Cloud-03C75A?style=flat&logo=Naver&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=Postman&logoColor=white)
+
+## Security
+![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat&logo=Spring&logoColor=white)
 
 ---
 ## Architecture
 ![Architecture Image](doc/Architecture.png)
+
+## ProtoType Wire Frame
+![1](doc/ArtTab1.png)
+![2](doc/ArtTab2.png)
+![3](doc/ArtTab3.png)
+![4](doc/ArtTab4.png)
+![5](doc/ArtTab5.png)
+
+
+## 주요 구현 기능
+- 자체 로그인 기능
+- SNS 연동 로그인 기능
+- 입찰 및 낙찰 확인 기능
+- 작품 등록/조회/수정/삭제
+- 입찰(회원)
+- 즉시 구매(회원)
+- 결제 기능
+- 관리자 결제 취소 기능
 
 
