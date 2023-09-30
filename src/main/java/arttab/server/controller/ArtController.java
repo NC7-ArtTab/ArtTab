@@ -143,10 +143,11 @@ public class ArtController {
                 art.setArtStatus("F"); // 그냥 종료로 변경
                 artService.update(art);
             } else if ("P".equals(art.getArtStatus()) && bidMaxPirce > 0) { // 진행중인 경매건이면서 현재 입찰가(최고입찰가)가 있으면
-                String recipientEmail = memberService.get(art.getArtBids().get(0).getMemberNo()).getMemberEmail();
+                Member member = (Member)memberService.get(art.getArtBids().get(0).getMemberNo());
+                String recipientEmail = member.getMemberEmail();
                 art.setArtStatus("Y"); // 낙찰 처리
                 artService.update(art);
-                mailSender.sendMail(art, recipientEmail);
+                mailSender.sendMail(art, recipientEmail, art.getArtAttaches());
             }
 
             Gson gson = new Gson();
@@ -159,6 +160,7 @@ public class ArtController {
             throw e;
         }
     }
+
 
     @PostMapping("/realTimeInfo")
     @ResponseBody

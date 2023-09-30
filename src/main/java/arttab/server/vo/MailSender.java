@@ -12,6 +12,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -24,7 +25,7 @@ import java.util.Properties;
 public class MailSender {
   private final SenderProperties senderProperties;
 
-  public void sendMail(Art art, String recipient) {
+  public void sendMail(Art art, String recipient, List<Attach> attachList) {
      // SMTP 서버 정보 설정
     // TLSv1.2 추가하여 신뢰성 확보
     Properties prop = new Properties();
@@ -53,6 +54,17 @@ public class MailSender {
       // 메일 제목
       message.setSubject("경매에 낙찰되셨습니다."); //메일 제목을 입력
 
+      // 메일 이미지 태그 생성
+      // 기본 이미지
+      String defaultImageUrl = "https://kr.object.ncloudstorage.com/arttab-bucket/common/logo.png";
+      // 이미지 URL 조합
+      String imageUrl = attachList != null && attachList.size() > 0
+              ? "https://kr.object.ncloudstorage.com/arttab-bucket/" + attachList.get(0).getFilePath() + attachList.get(0).getOriginFileName()
+              : defaultImageUrl;
+
+      // HTML 이미지 태그 생성
+      String imageTag = "<img style='width: 100%;' src='" + imageUrl + "'>";
+
       // 메일 내용
       // HTML 문자열을 빌드하기 위한 StringBuilder 생성
       StringBuilder htmlContent = new StringBuilder();
@@ -65,7 +77,7 @@ public class MailSender {
       htmlContent.append("<div style='border: 10px double gold; padding: 10px; display: inline-block;'>"); // 이중액자 테두리 스타일
       htmlContent.append("<a href='http://localhost:8080'>ArtTab 방문하기</a>");
       htmlContent.append("<br>"); // 줄 바꿈
-      htmlContent.append("<img src='https://i.namu.wiki/i/50YwMBj6uGsRxdbGd2LBLp1WyLqntJ7u6XI4NgNoSRQTnZiRTbc_c7CEuYShyBhZyhAonB8bVDIO18gRO3jx3Q.jpg' alt='작품 이미지' style='max-width: 100%;'>");
+      htmlContent.append(imageTag);
       htmlContent.append("</div>");
       htmlContent.append("</div>");
       htmlContent.append("</div>");

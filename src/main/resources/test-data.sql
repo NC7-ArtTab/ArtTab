@@ -137,6 +137,8 @@ INSERT INTO attach (art_no, file_path, origin_file_name, save_file_name, file_st
 (27, 'art/', 'image27.jpg', '4f88a62b-bd13-48a0-87bc-16eeb8d88e63', 'Y'),
 (28, 'art/', 'image28.jpg', '2b964886-1d05-4cb6-8b4d-0a2d409b3bae', 'Y'),
 (29, 'art/', 'image29.jpg', '8d4b218b-002c-4aae-8a2c-81e4883bda28', 'Y'),
+(29, 'art/', 'image31.jpg', '550e8400-e29b-41d4-a716-446655440000', 'Y'),
+(29, 'art/', 'image32.jpg', 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Y'),
 -- (30, 'art/', 'image30.jpg', '0d0b403e-6fcb-4ac8-8cfc-2c8f4061cb7f', 'Y');
 
 INSERT INTO faq (mem_no, faq_title, faq_content, faq_status)
